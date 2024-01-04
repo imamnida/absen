@@ -186,6 +186,105 @@ class M_admin extends CI_Model {
         return TRUE;
     }
 
+    public function find_rfid($id_rfid)
+    {
+        $this->db->select('*');
+        $this->db->from('rfid');
+        $this->db->where('id_rfid',$id_rfid);
+        
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->row();
+        }else{
+            return false;
+        }
+
+
+    }
+
+    public function get_jam_masuk($id_rfid, $tanggal)
+    {
+        $this->db->select('*');
+        $this->db->from('absensi');
+        $this->db->where('id_rfid', $id_rfid);
+        $this->db->where('keterangan','masuk');
+        $this->db->where("created_at >=", $tanggal);
+        $this->db->where("created_at <", $tanggal + 86400);
+
+        $query = $this->db->get();
+
+        return $query;
+    }
+
+    function get_murid($id_kelas){
+        $this->db->select('*');
+        $this->db->from('rfid');
+        $this->db->where('id_kelas',$id_kelas);
+        $this->db->order_by("nama", "ASC");
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        }else{
+            return false;
+        }
+    } 
+
+    function insert_kelas($data){
+        $this->db->insert('kelas', $data);
+        return TRUE;
+    }
+
+    public function hapus_kelas($id_kelas)
+    {
+        $this->db->where('id',$id_kelas);
+        $this->db->delete('kelas');
+
+        if ($this->db->affected_rows() == 1) {
+            return TRUE;
+        }
+        return FALSE;
+
+    }
+
+    function get_kelas(){
+        $this->db->select('*');
+        $this->db->from('kelas');
+        $this->db->order_by("id", "desc");
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        }
+
+    }
+
+    function find_kelas($id){
+        $this->db->select('*');
+        $this->db->from('kelas');
+        $this->db->where('id',$id);
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->row();
+        }
+    }
+
+    function count_murid($id_kelas){
+        $this->db->select('*');
+        $this->db->from('rfid');
+        $this->db->where('id_kelas',$id_kelas);
+
+        $query = $this->db->get();
+
+        return $query->num_rows(); 
+    }
+
+
 
 }
 

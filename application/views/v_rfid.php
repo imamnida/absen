@@ -34,9 +34,9 @@ if ($set=="rfid") {
                   <th style="text-align:center">No</th>
                   <th style="text-align:center">UID RFID</th>
                   <th style="text-align:center">Nama</th>
+                  <th style="text-align:center">Kelas</th>
                   <th style="text-align:center">Telp</th>
                   <th style="text-align:center">Gender</th>
-                  <th style="text-align:center">Jabatan</th>
                   <th style="text-align:center">Alamat</th>
                   <th style="text-align:center">#</th>
                 </tr>
@@ -62,9 +62,20 @@ if ($set=="rfid") {
                   <td style="text-align:center"><?php echo $no;?></td>
                   <td style="text-align:center"><b class="text-success"><?php echo $row->uid;?></b></td>
                   <td style="text-align:center"><?php echo $row->nama;?></td>
+                  <?php
+                    $kelas = "-";
+                      if ($row->id_kelas != null) {
+                        $kelas = $m_admin->find_kelas($row->id_kelas);
+                        $kelas = $kelas->kelas;
+                        ?>
+                        <?php
+                      }
+                    ?>
+                  <td style="text-align:center"><?php echo $kelas;?></td>
+
                   <td style="text-align:center"><?php echo $row->telp;?></td>
                   <td style="text-align:center"><?php echo $row->gender;?></td>
-                  <td style="text-align:center"><?php echo $row->jabatan;?></td>
+
                   <td style="text-align:center"><?php echo $row->alamat;?></td>
                   <td style="text-align:center">
                    <a href="<?=base_url()?>/admin/edit_rfid/<?=$row->id_rfid?>" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
@@ -132,8 +143,16 @@ if ($set=="rfid") {
                   <input type="text" name="gender" class="form-control" placeholder="gender" value="<?php if(isset($gender)){echo $gender;}?>" required>
                 </div>
                 <div class="form-group">
-                  <label>Jabatan</label>
-                  <input type="text" name="jabatan" class="form-control" placeholder="jabatan" value="<?php if(isset($jabatan)){echo $jabatan;}?>" required>
+                  <label>Kelas</label>
+                  <select name="kelas_id" class="form-control">
+                    <?php
+                      foreach ($list_kelas as $kls) {
+                    ?>
+                        <option <?php if($kelas != null && $kls->id == $kelas->id){ ?> selected <?php } ?> value="<?php echo $kls->id; ?>"><?php echo $kls->kelas; ?></option>
+                    <?php
+                      }
+                    ?>
+                  </select>
                 </div>
                 <div class="form-group">
                   <label>Alamat</label>
@@ -188,9 +207,10 @@ if ($set=="rfid") {
                   <th style="text-align:center">No</th>
                   <th style="text-align:center">UID RFID</th>
                   <th style="text-align:center">Nama</th>
+                  <th style="text-align:center">Kelas</th>
+
                   <th style="text-align:center">Telp</th>
                   <th style="text-align:center">Gender</th>
-                  <th style="text-align:center">Jabatan</th>
                   <th style="text-align:center">Alamat</th>
                   <th style="text-align:center">#</th>
                 </tr>
@@ -217,9 +237,19 @@ if ($set=="rfid") {
                   <td style="text-align:center"><?php echo $no;?></td>
                   <td style="text-align:center"><b class="text-success"><?php echo $row->uid;?></b></td>
                   <td style="text-align:center"><?php echo $row->nama;?></td>
+                  <?php
+                    $kelas = "-";
+                      if ($row->id_kelas != null) {
+                        $kelas = $m_admin->find_kelas($row->id_kelas);
+                        $kelas = $kelas->kelas;
+                        ?>
+                        <?php
+                      }
+                    ?>
+                  <td style="text-align:center"><?php echo $kelas;?></td>
+
                   <td style="text-align:center"><?php echo $row->telp;?></td>
                   <td style="text-align:center"><?php echo $row->gender;?></td>
-                  <td style="text-align:center"><?php echo $row->jabatan;?></td>
                   <td style="text-align:center"><?php echo $row->alamat;?></td>
                   <td style="text-align:center">
                    <a href="<?=base_url()?>admin/edit_rfid/<?=$row->id_rfid?>" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>

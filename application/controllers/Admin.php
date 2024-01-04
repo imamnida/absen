@@ -380,13 +380,14 @@ class Admin extends CI_Controller {
 	public function datarfid(){
 		$data['set'] = "rfid";
 		$data['rfid'] = $this->m_admin->get_rfid();
-
+		$data['m_admin'] = $this->m_admin;
 		$this->load->view('v_rfid', $data);
 	}
 
 	public function rfidnew(){
 		$data['set'] = "new";
 		$data['rfid'] = $this->m_admin->get_rfid();
+		$data['m_admin'] = $this->m_admin;
 
 		$this->load->view('v_rfid', $data);
 	}
@@ -402,9 +403,12 @@ class Admin extends CI_Controller {
 						$data['nama'] = $value->nama;
 						$data['telp'] = $value->telp;
 						$data['jabatan'] = $value->jabatan;
+						$data['kelas'] = $value->id_kelas != null ? $this->m_admin->find_kelas($value->id_kelas) : null;
 						$data['gender'] = $value->gender;
 						$data['alamat'] = $value->alamat;
 					}
+
+					$data['list_kelas'] = $this->m_admin->get_kelas();
 					$data['set'] = "edit-rfid";
 					$this->load->view('v_rfid', $data);
 				}else{
@@ -423,13 +427,13 @@ class Admin extends CI_Controller {
 				$nama = $this->input->post('nama');
 				$telp = $this->input->post('telp');
 				$gender = $this->input->post('gender');
-				$jabatan = $this->input->post('jabatan');
+				$kelas_id = $this->input->post('kelas_id');
 				$alamat = $this->input->post('alamat');
 
 				$data = array('nama' => $nama,
 								'telp' => $telp,
 								'gender' => $gender,
-								'jabatan' => $jabatan,
+								'id_kelas' => $kelas_id,
 								'alamat' => $alamat,
 			 				);
 				//echo $id;
@@ -454,7 +458,6 @@ class Admin extends CI_Controller {
 			}else{
 				$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data gagal di hapus</div>");
 			}
-			
 			redirect(base_url().'admin/rfid/datarfid');
 		}
 	}
@@ -467,7 +470,7 @@ class Admin extends CI_Controller {
 
 		$data['absensimasuk'] = $this->m_admin->get_absensi("masuk",$today,$tomorrow);
 		$data['absensikeluar'] = $this->m_admin->get_absensi("keluar",$today,$tomorrow);
-
+		$data['m_admin'] = $this->m_admin;
 		$this->load->view('v_absensi', $data);
 	}
 
@@ -495,13 +498,16 @@ class Admin extends CI_Controller {
 				// $data['tgl1'] = $tgl1;
 				// $data['tgl2'] = $tgl2;
 
-				if ($x==2) {		
+				if ($x==2) {
 					$data['datamasuk'] = $this->m_admin->get_absensi("masuk",$ts1,$ts2);
 					$data['datakeluar'] = $this->m_admin->get_absensi("keluar",$ts1,$ts2);
 					$data['tanggal'] = $tgl1 . " - " . $tgl2;
 					$data['waktuabsensi'] = $tgl1 . "_" . $tgl2;
 
 					$data['set'] = "last-absensi";
+					
+					$data['m_admin'] = $this->m_admin;
+
 					$this->load->view('v_absensi', $data);
 				}else{
 					redirect(base_url().'admin/absensi');
@@ -510,6 +516,169 @@ class Admin extends CI_Controller {
 				redirect(base_url().'admin/absensi');
 			}
 		}
+	}
+
+	public function kelas(){
+		if(!$this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
+		{
+			return ;
+		}
+
+		if(isset($_POST['kelas'])){
+			$kelas = [
+				'kelas' => $_POST['kelas']
+			];
+
+			$this->m_admin->insert_kelas($kelas);
+
+			$data['message'] = "Berhasil menambahkan kelas"; 
+			
+		}
+
+		$data['kelas'] = $this->m_admin->get_kelas();
+
+		$data['m_admin'] = $this->m_admin;
+
+		$this->load->view('v_kelas', $data);
+
+	}
+
+	public function tambah_kelas(){
+		if(!$this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
+		{
+			return ;
+		}
+
+	}
+
+
+	public function lihat_kelas(){
+		if(!$this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
+		{
+			return ;
+		}
+
+		if(!isset($_GET['id_kelas'])){
+			echo "insert id kelas";
+			return;
+		}
+
+		$id_kelas = $_GET['id_kelas'];
+
+		$kelas = $this->m_admin->find_kelas($id_kelas);
+		$data['kelas'] = $kelas;
+		
+		$this->load->view('v_kelas_detail',$data);
+		
+		
+	}
+	public function hapus_kelas(){
+		if(!$this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
+		{
+			return ;
+		}
+
+		if(!isset($_GET['id_kelas'])){
+			echo "insert id kelas";
+			return;
+		}
+
+		$id_kelas = $_GET['id_kelas'];
+
+		$kelas = $this->m_admin->hapus_kelas($id_kelas);
+		
+		
+		redirect(base_url().'admin/kelas');
+		
+	}
+
+
+	public function rekapAbsen2excel(Type $var = null)
+	{
+		if(!$this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
+		{
+			return ;
+		}
+
+		if(!isset($_GET['id_kelas'])){
+			echo "insert id kelas";
+			return;
+		}
+		$tanggal = $this->input->get('tanggal');
+		
+		$split = explode("-", $tanggal);
+
+		$x = 0;
+
+		foreach ($split as $key => $value) {
+			$date[$x] = $value;
+			$x++;
+		}
+
+		$alphabet = range('A','Z');
+
+		$begin = new DateTime($date[0]);
+		$end   = new DateTime($date[1]);
+
+		$diff = $begin->diff($end)->format("%a");
+
+		if($diff > 13){
+			echo  "maksimal 14 hari";
+			return;
+		}
+
+
+		$id_kelas = $_GET['id_kelas'];
+
+		$kelas = $this->m_admin->find_kelas($id_kelas);
+
+		$murid = $this->m_admin->get_murid($id_kelas);
+
+		if(!$murid){
+			echo "murid untiuk kelas ini kosong";
+			return;
+		}
+
+
+		$spreadsheet = new Spreadsheet;
+
+		$spreadsheet->setActiveSheetIndex(0)
+					->setCellValue('A1', 'Nama');
+
+		$k = 2;
+		foreach ($murid as $mrd) {
+			$spreadsheet->setActiveSheetIndex(0)->setCellValue("A".$k,$mrd->nama);
+			$k++;
+		}
+		
+		$j = 1;
+		for($i = $begin; $i <= $end; $i->modify('+1 day')){
+			$spreadsheet->setActiveSheetIndex(0)->setCellValue($alphabet[$j]."1",$i->format("D"));
+			$k = 2;
+			foreach ($murid as $mrd) {
+				$jam_masuk = $this->m_admin->get_jam_masuk($mrd->id_rfid,strtotime($i->format('Y-m-d')));
+				if($jam_masuk->num_rows() > 0 ){
+					$masuk = $jam_masuk->row();
+					$waktu = date("H:i:s d M Y", $masuk->created_at);
+				}else{
+					$waktu = "-";
+				}
+				$spreadsheet->setActiveSheetIndex(0)->setCellValue($alphabet[$j].$k,$waktu);
+				$k++;
+			}
+			$j++;
+		}
+			
+		// return;
+		$writer = new Xlsx($spreadsheet);
+
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="Absensi_KELAS_'.$kelas->kelas.'_'.$tanggal.'.xlsx"');
+		header('Cache-Control: max-age=0');
+
+		$writer->save('php://output');
+
+		// echo $tanggal;
 	}
 
 
@@ -541,7 +710,7 @@ class Admin extends CI_Controller {
 				          ->setCellValue('A1', 'No')
 				          ->setCellValue('B1', 'Alat Absensi')
 				          ->setCellValue('C1', 'Nama')
-				          ->setCellValue('D1', 'Jabatan/Kelas')
+				          ->setCellValue('D1', 'Kelas')
 				          ->setCellValue('E1', 'Keterangan')
 				          ->setCellValue('F1', 'Waktu');
 
@@ -550,17 +719,24 @@ class Admin extends CI_Controller {
 				               ->setCellValue('A' . $baris, "ABSENSI MASUK");
 				$baris++;
 				$nomor = 1;
-				
+
 				if (isset($datamasuk)){
 					foreach($datamasuk as $masuk) {
 
 						$waktu = date("H:i:s d M Y", $masuk->created_at);
 
+						$kelas = "-"; 
+
+						if($masuk->id_kelas != null){
+							$kelas = $this->m_admin->find_kelas($masuk->id_kelas);
+							$kelas = $kelas->kelas;
+						}
+
 						$spreadsheet->setActiveSheetIndex(0)
-								   ->setCellValue('A' . $baris, $nomor)
+								   ->setCellValue('A' . $baris, $nomor."")
 								   ->setCellValue('B' . $baris, $masuk->nama_devices)
 								   ->setCellValue('C' . $baris, $masuk->nama)
-								   ->setCellValue('D' . $baris, $masuk->jabatan)
+								   ->setCellValue('D' . $baris, $kelas)
 								   ->setCellValue('E' . $baris, $masuk->keterangan)
 								   ->setCellValue('F' . $baris, $waktu);
 
@@ -569,6 +745,7 @@ class Admin extends CI_Controller {
 
 					}
 				}
+
 
 				$baris ++;
 				$spreadsheet->setActiveSheetIndex(0)
@@ -581,11 +758,18 @@ class Admin extends CI_Controller {
 
 						$waktu = date("H:i:s d M Y", $keluar->created_at);
 
+						$kelas = "-"; 
+
+						if($masuk->id_kelas != null){
+							$kelas = $this->m_admin->find_kelas($masuk->id_kelas);
+							$kelas = $kelas->kelas;
+						}
+
 						$spreadsheet->setActiveSheetIndex(0)
-								   ->setCellValue('A' . $baris, $nomor)
+								   ->setCellValue('A' . $baris, $nomor."")
 								   ->setCellValue('B' . $baris, $keluar->nama_devices)
 								   ->setCellValue('C' . $baris, $keluar->nama)
-								   ->setCellValue('D' . $baris, $keluar->jabatan)
+								   ->setCellValue('D' . $baris, $kelas)
 								   ->setCellValue('E' . $baris, $keluar->keterangan)
 								   ->setCellValue('F' . $baris, $waktu);
 

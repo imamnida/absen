@@ -51,7 +51,7 @@ if ($set=="absensi") {
                   <th style="text-align:center">No</th>
                   <th style="text-align:center">Alat</th>
                   <th style="text-align:center">Nama</th>
-                  <th style="text-align:center">Jabatan/Kelas</th>
+                  <th style="text-align:center">Kelas</th>
                   <th style="text-align:center">Keterangan</th>
                   <th style="text-align:center">Waktu</th>
                   <th style="text-align:center">Foto</th>
@@ -75,7 +75,15 @@ if ($set=="absensi") {
                   <td style="text-align:center"><b class="text-success"><?php echo $no;?></b></td>
                   <td style="text-align:center"><?php echo $row->nama_devices;?> (<?php echo $row->id_devices;?>)</td>
                   <td style="text-align:center"><?php echo $row->nama;?></td>
-                  <td style="text-align:center"><?php echo $row->jabatan;?></td>
+                  <?php
+                    if($row->id_kelas != null){ 
+                    $kelas = $m_admin->find_kelas($row->id_kelas);
+                    }else{
+                      $kelas = ["kelas" => "-"];
+                    }
+                  ?>
+                  <td style="text-align:center"><?php echo $kelas->kelas;?></td>
+
                   <td style="text-align:center"><?php echo $row->keterangan;?></td>
                   <td style="text-align:center"><?php echo date("H:i:s - d M Y",$row->created_at);?></td>
                   <td style="text-align:center"><img src="<?php echo $row->foto;?>" width="150" height="auto" alt="img not found" /></td>
@@ -112,7 +120,7 @@ if ($set=="absensi") {
                   <th style="text-align:center">No</th>
                   <th style="text-align:center">Alat</th>
                   <th style="text-align:center">Nama</th>
-                  <th style="text-align:center">Jabatan/Kelas</th>
+                  <th style="text-align:center">Kelas</th>
                   <th style="text-align:center">Keterangan</th>
                   <th style="text-align:center">Waktu</th>
                   <th style="text-align:center">Foto</th>
@@ -136,7 +144,15 @@ if ($set=="absensi") {
                   <td style="text-align:center"><b class="text-success"><?php echo $no;?></b></td>
                   <td style="text-align:center"><?php echo $row->nama_devices;?> (<?php echo $row->id_devices;?>)</td>
                   <td style="text-align:center"><?php echo $row->nama;?></td>
-                  <td style="text-align:center"><?php echo $row->jabatan;?></td>
+                  <?php
+                    if($row->id_kelas != null){ 
+                    $kelas = $m_admin->find_kelas($row->id_kelas);
+                    }else{
+                      $kelas = ["kelas" => "-"];
+                    }
+                  ?>
+                  <td style="text-align:center"><?php echo $kelas->kelas;?></td>
+
                   <td style="text-align:center"><?php echo $row->keterangan;?></td>
                   <td style="text-align:center"><?php echo date("H:i:s - d M Y",$row->created_at);?></td>
                   <td style="text-align:center"><img src="<?php echo $row->foto;?>" width="150" height="auto" alt="img not found" /></td>
@@ -203,7 +219,7 @@ if ($set=="absensi") {
                   <th style="text-align:center">No</th>
                   <th style="text-align:center">Alat</th>
                   <th style="text-align:center">Nama</th>
-                  <th style="text-align:center">Jabatan/Kelas</th>
+                  <th style="text-align:center">Kelas</th>
                   <th style="text-align:center">Keterangan</th>
                   <th style="text-align:center">Waktu</th>
                   <th style="text-align:center">Foto</th>
@@ -227,7 +243,14 @@ if ($set=="absensi") {
                   <td style="text-align:center"><b class="text-success"><?php echo $no;?></b></td>
                   <td style="text-align:center"><?php echo $row->nama_devices;?> (<?php echo $row->id_devices;?>)</td>
                   <td style="text-align:center"><?php echo $row->nama;?></td>
-                  <td style="text-align:center"><?php echo $row->jabatan;?></td>
+                  <?php
+                    if($row->id_kelas != null){ 
+                    $kelas = $m_admin->find_kelas($row->id_kelas);
+                    }else{
+                      $kelas = ["kelas" => "-"];
+                    }
+                  ?>
+                  <td style="text-align:center"><?php echo $kelas->kelas;?></td>
                   <td style="text-align:center"><?php echo $row->keterangan;?></td>
                   <td style="text-align:center"><?php echo date("H:i:s - d M Y",$row->created_at);?></td>
                   <td style="text-align:center"><img src="<?php echo $row->foto;?>" width="150" height="auto" alt="img not found" /></td>
@@ -264,7 +287,7 @@ if ($set=="absensi") {
                   <th style="text-align:center">No</th>
                   <th style="text-align:center">Alat</th>
                   <th style="text-align:center">Nama</th>
-                  <th style="text-align:center">Jabatan/Kelas</th>
+                  <th style="text-align:center">Kelas</th>
                   <th style="text-align:center">Keterangan</th>
                   <th style="text-align:center">Waktu</th>
                   <th style="text-align:center">Foto</th>
@@ -288,7 +311,15 @@ if ($set=="absensi") {
                   <td style="text-align:center"><b class="text-success"><?php echo $no;?></b></td>
                   <td style="text-align:center"><?php echo $row->nama_devices;?> (<?php echo $row->id_devices;?>)</td>
                   <td style="text-align:center"><?php echo $row->nama;?></td>
-                  <td style="text-align:center"><?php echo $row->jabatan;?></td>
+                  <?php
+                    if($row->id_kelas != null){ 
+                    $kelas = $m_admin->find_kelas($row->id_kelas);
+                    }else{
+                      $kelas = ["kelas" => "-"];
+                    }
+                  ?>
+                  <td style="text-align:center"><?php echo $kelas->kelas;?></td>
+
                   <td style="text-align:center"><?php echo $row->keterangan;?></td>
                   <td style="text-align:center"><?php echo date("H:i:s - d M Y",$row->created_at);?></td>
                   <td style="text-align:center"><img src="<?php echo $row->foto;?>" width="150" height="auto" alt="img not found" /></td>
