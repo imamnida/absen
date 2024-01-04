@@ -95,7 +95,7 @@ INSERT INTO `histori` (`id_histori`, `id_rfid`, `id_devices`, `keterangan`, `wak
 CREATE TABLE `kelas` (
   `id` int NOT NULL,
   `kelas` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `kelas`
