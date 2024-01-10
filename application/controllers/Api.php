@@ -261,7 +261,7 @@ class Api extends CI_Controller {
 								if (time() >= $masuk1 && time() <= $masuk2) {
 									$absen = true;
 									$ket = "masuk";
-									$respon = "*masuk-tepat-waktu*";
+									$respon = "*MASUK-TEPAT-WAKTU*";
 								}
 								if (time() > $masuk2 && time() <= $masuk2 + 3600) {			//3600 = 1 jam
 									$absen = true;
@@ -274,10 +274,10 @@ class Api extends CI_Controller {
 								if (time() >= $keluar1 && time() <= $keluar2 + 3600) {
 									$absen = true;
 									$ket = "keluar";
-									$respon = "*keluar*";
+									$respon = "*KELUAR*";
 								}
 								if (time() > $keluar2 + 3600) {
-									echo "*absensi-diluar-waktu*";
+									echo "*ABSENSI-DILUAR-WAKTU*";
 								}
 
 								if ($absen) {
