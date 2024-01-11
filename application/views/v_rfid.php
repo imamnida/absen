@@ -32,12 +32,14 @@ if ($set=="rfid") {
                 <thead>
                 <tr>
                   <th style="text-align:center">No</th>
+                  <th style="text-align:center">Nis</th>
                   <th style="text-align:center">UID RFID</th>
                   <th style="text-align:center">Nama</th>
                   <th style="text-align:center">Kelas</th>
                   <th style="text-align:center">Telp</th>
                   <th style="text-align:center">Gender</th>
                   <th style="text-align:center">Alamat</th>
+                  <th style="text-align:center">Foto</th>
                   <th style="text-align:center">#</th>
                 </tr>
                 </thead>
@@ -60,6 +62,8 @@ if ($set=="rfid") {
                     $no++;?>
                 <tr>
                   <td style="text-align:center"><?php echo $no;?></td>
+                  <td style="text-align:center"><?php echo $row->nis;?></td>
+                  
                   <td style="text-align:center"><b class="text-success"><?php echo $row->uid;?></b></td>
                   <td style="text-align:center"><?php echo $row->nama;?></td>
                   <?php
@@ -77,6 +81,15 @@ if ($set=="rfid") {
                   <td style="text-align:center"><?php echo $row->gender;?></td>
 
                   <td style="text-align:center"><?php echo $row->alamat;?></td>
+                  <td style="text-align:center">
+            <?php
+            if (!empty($row->foto)) {
+                echo '<img src="' . $row->foto . '" alt="Foto Siswa" style="width: 100px; height: auto;">';
+            } else {
+                echo 'Tidak ada foto';
+            }
+            ?>
+        </td>
                   <td style="text-align:center">
                    <a href="<?=base_url()?>/admin/edit_rfid/<?=$row->id_rfid?>" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
                    <!-- <a href="<?php site_url()?>/admin/hapus_rfid/<?=$row->id_rfid?>" class="btn btn-danger btn-sm" onclick="return confirm('Anda Yakin menghapus data ini?')"><i class="glyphicon glyphicon-trash"></i></a> -->
@@ -133,6 +146,10 @@ if ($set=="rfid") {
                 <div class="form-group">
                   <label>Nama</label>
                   <input type="text" name="nama" class="form-control" placeholder="nama" value="<?php if(isset($nama)){echo $nama;}?>" required>
+                  <div class="form-group">
+                  <label>Nis</label>
+                  <input type="text" name="nis" class="form-control" placeholder="Nis" value="<?php if(isset($nis)){echo $nis;}?>" required>
+                </div>
                 </div>
                 <div class="form-group">
                   <label>Telp</label>
