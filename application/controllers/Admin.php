@@ -32,18 +32,18 @@ class Admin extends CI_Controller {
 		$data['masuk'] = $this->m_admin->get_absensi("masuk",$today,$tomorrow);
 		$data['keluar'] = $this->m_admin->get_absensi("keluar",$today,$tomorrow);
 
-		$this->load->view('v_dashboard', $data);
+		$this->load->view('dashboard', $data);
 	}
 
 	public function list_users(){
 		$data['set'] = "list-users";
 		$data['data'] = $this->m_admin->get_users();
-		$this->load->view('v_users', $data);
+		$this->load->view('users', $data);
 	}
 
 	public function add_users(){
 		$data['set'] = "add-users";
-		$this->load->view('v_users', $data);
+		$this->load->view('users', $data);
 	}
 
 
@@ -58,7 +58,7 @@ class Admin extends CI_Controller {
 	        $type = explode('.', $_FILES["image"]["name"]);
 			$type = strtolower($type[count($type)-1]);
 			$imgname = uniqid(rand()).'.'.$type;
-			$url = "components/dist/img/".$imgname;
+			$url = "imam/assets/img/".$imgname;
 			if(in_array($type, array("jpg", "jpeg", "gif", "png"))){
 				if(is_uploaded_file($_FILES["image"]["tmp_name"])){
 					if(move_uploaded_file($_FILES["image"]["tmp_name"],$url)){
@@ -89,7 +89,7 @@ class Admin extends CI_Controller {
 			$filename = $this->m_admin->get_user_byid($id);
 			foreach ($filename as $key) {
 				$file = $key->avatar;
-				$path = "components/dist/img/".$file;
+				$path = "imam/assets/img/".$file;
 			}
 			
 			//echo $path;
@@ -128,7 +128,7 @@ class Admin extends CI_Controller {
 					$data['avatar'] = $value->avatar;
 				}
 				$data['set'] = "edit-users";
-				$this->load->view('v_users', $data);
+				$this->load->view('users', $data);
 
 			}else{
 				redirect(base_url().'admin/list_users');
@@ -150,7 +150,7 @@ class Admin extends CI_Controller {
 				$type = explode('.', $_FILES["image"]["name"]);
 				$type = strtolower($type[count($type)-1]);
 				$imgname = uniqid(rand()).'.'.$type;
-				$url = "components/dist/img/".$imgname;
+				$url = "imam/assets/img/".$imgname;
 				if(in_array($type, array("jpg", "jpeg", "gif", "png"))){
 					if(is_uploaded_file($_FILES["image"]["tmp_name"])){
 						if(move_uploaded_file($_FILES["image"]["tmp_name"],$url)){
@@ -161,7 +161,7 @@ class Admin extends CI_Controller {
 					                'avatar'  => $imgname,
 					        );
 					        $file = $this->input->post('img');
-							$path = "components/dist/img/".$file;
+							$path = "imam/assets/img/".$file;
 
 							if(file_exists($path)){
 								unlink($path);
@@ -207,12 +207,12 @@ class Admin extends CI_Controller {
 		$data['set'] = "devices";
 		$data['devices'] = $this->m_admin->get_devices();
 
-		$this->load->view('v_devices', $data);
+		$this->load->view('devices', $data);
 	}
 
 	public function add_devices(){
 		$data['set'] = "add-devices";
-		$this->load->view('v_devices', $data);
+		$this->load->view('devices', $data);
 	}
 
 	public function save_devices(){
@@ -268,7 +268,7 @@ class Admin extends CI_Controller {
 						$data['nama_devices'] = $value->nama_devices;
 					}
 					$data['set'] = "edit-devices";
-					$this->load->view('v_devices', $data);
+					$this->load->view('devices', $data);
 				}
 				
 			}else{
@@ -289,7 +289,7 @@ class Admin extends CI_Controller {
 						$data['mode'] = $value->mode;
 					}
 					$data['set'] = "edit-devices-mode";
-					$this->load->view('v_devices', $data);
+					$this->load->view('devices', $data);
 				}
 				
 			}else{
@@ -344,7 +344,7 @@ class Admin extends CI_Controller {
 		$data['set'] = "histori";
 		$data['histori'] = $this->m_admin->get_history();
 
-		$this->load->view('v_histori', $data);
+		$this->load->view('histori', $data);
 
 	}
 
@@ -381,7 +381,7 @@ class Admin extends CI_Controller {
 		$data['set'] = "rfid";
 		$data['rfid'] = $this->m_admin->get_rfid();
 		$data['m_admin'] = $this->m_admin;
-		$this->load->view('v_rfid', $data);
+		$this->load->view('rfid', $data);
 	}
 
 	public function rfidnew(){
@@ -389,7 +389,7 @@ class Admin extends CI_Controller {
 		$data['rfid'] = $this->m_admin->get_rfid();
 		$data['m_admin'] = $this->m_admin;
 
-		$this->load->view('v_rfid', $data);
+		$this->load->view('rfid', $data);
 	}
 
 	public function edit_rfid($id=null){
@@ -410,7 +410,7 @@ class Admin extends CI_Controller {
 
 					$data['list_kelas'] = $this->m_admin->get_kelas();
 					$data['set'] = "edit-rfid";
-					$this->load->view('v_rfid', $data);
+					$this->load->view('rfid', $data);
 				}else{
 					redirect(base_url().'admin/rfid/datarfid');
 				}
@@ -471,7 +471,7 @@ class Admin extends CI_Controller {
 		$data['absensimasuk'] = $this->m_admin->get_absensi("masuk",$today,$tomorrow);
 		$data['absensikeluar'] = $this->m_admin->get_absensi("keluar",$today,$tomorrow);
 		$data['m_admin'] = $this->m_admin;
-		$this->load->view('v_absensi', $data);
+		$this->load->view('absensi', $data);
 	}
 
 	public function lastabsensi(){
@@ -539,7 +539,7 @@ class Admin extends CI_Controller {
 
 		$data['m_admin'] = $this->m_admin;
 
-		$this->load->view('v_kelas', $data);
+		$this->load->view('kelas', $data);
 
 	}
 
@@ -568,7 +568,7 @@ class Admin extends CI_Controller {
 		$kelas = $this->m_admin->find_kelas($id_kelas);
 		$data['kelas'] = $kelas;
 		
-		$this->load->view('v_kelas_detail',$data);
+		$this->load->view('kelas_detail',$data);
 		
 		
 	}
@@ -799,7 +799,7 @@ class Admin extends CI_Controller {
 		$data['key'] = $this->m_admin->getkey();
 		$data['waktuoperasional'] = $this->m_admin->waktuoperasional();
 		//print_r($data);
-		$this->load->view('v_setting', $data);
+		$this->load->view('setting', $data);
 	
 	}
 

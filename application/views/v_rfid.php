@@ -4,29 +4,22 @@ $this->load->View('include/header.php');
 if ($set=="rfid") {
 ?>
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Data RFID
-        <small></small>
-      </h1>
+      <h1>Data RFID<small></small></h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-credit-card"></i> RFID</a></li>
         <li class="active">Data RFID</li>
       </ol>
     </section>
 
-        <!-- Main content -->
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
               <?php echo "<br>"; echo $this->session->flashdata('pesan');?>
-
               <h1 class="box-title"></h1>
             </div>
-            <!-- /.box-header -->
             <div class="box-body table-responsive">
               <table id="t1" class="table table-bordered table-striped">
                 <thead>
@@ -45,88 +38,65 @@ if ($set=="rfid") {
                 </thead>
                 <tbody>
                 <?php if(empty($rfid)){?>
-                <tr>
-                  <td>Data tidak ditemukan</td>
-                  <td>Data tidak ditemukan</td>
-                  <td>Data tidak ditemukan</td>
-                  <td>Data tidak ditemukan</td>
-                  <td>Data tidak ditemukan</td>
-                  <td>Data tidak ditemukan</td>
-                  <td>Data tidak ditemukan</td>
-                  <td>Data tidak ditemukan</td>
-                </tr>
-                <?php } else{
-                $no=0;
-                foreach($rfid as $row){ 
-                  if ($row->nama != "") {
-                    $no++;?>
+                  <tr>
+                    <td colspan="9">Data tidak ditemukan</td>
+                  </tr>
+                <?php } else {
+                  $no = 0;
+                  foreach($rfid as $row){ 
+                    if ($row->nama != "") {
+                      $no++;
+                ?>
                 <tr>
                   <td style="text-align:center"><?php echo $no;?></td>
                   <td style="text-align:center"><?php echo $row->nis;?></td>
-                  
                   <td style="text-align:center"><b class="text-success"><?php echo $row->uid;?></b></td>
                   <td style="text-align:center"><?php echo $row->nama;?></td>
                   <?php
                     $kelas = "-";
-                      if ($row->id_kelas != null) {
-                        $kelas = $m_admin->find_kelas($row->id_kelas);
-                        $kelas = $kelas->kelas;
-                        ?>
-                        <?php
-                      }
-                    ?>
+                    if ($row->id_kelas != null) {
+                      $kelas = $m_admin->find_kelas($row->id_kelas);
+                      $kelas = $kelas->kelas;
+                    }
+                  ?>
                   <td style="text-align:center"><?php echo $kelas;?></td>
-
                   <td style="text-align:center"><?php echo $row->telp;?></td>
                   <td style="text-align:center"><?php echo $row->gender;?></td>
-
                   <td style="text-align:center"><?php echo $row->alamat;?></td>
                   <td style="text-align:center">
-            <?php
-            if (!empty($row->foto)) {
-                echo '<img src="' . $row->foto . '" alt="Foto Siswa" style="width: 100px; height: auto;">';
-            } else {
-                echo 'Tidak ada foto';
-            }
-            ?>
-        </td>
+                    <?php
+                      if (!empty($row->foto)) {
+                        echo '<img src="' . $row->foto . '" alt="Foto Siswa" style="width: 100px; height: auto;">';
+                      } else {
+                        echo 'Tidak ada foto';
+                      }
+                    ?>
+                  </td>
                   <td style="text-align:center">
-                   <a href="<?=base_url()?>/admin/edit_rfid/<?=$row->id_rfid?>" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
-                   <!-- <a href="<?php site_url()?>/admin/hapus_rfid/<?=$row->id_rfid?>" class="btn btn-danger btn-sm" onclick="return confirm('Anda Yakin menghapus data ini?')"><i class="glyphicon glyphicon-trash"></i></a> -->
+                    <a href="<?=base_url()?>/admin/edit_rfid/<?=$row->id_rfid?>" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
                   </td>
                 </tr>
                 <?php }}}?>
-                
                 </tbody>
               </table>
             </div>
-            <!-- /.box-body -->
           </div>
-          <!-- /.box -->
         </div>
-        <!-- /.col -->
       </div>
-      <!-- /.row -->
     </section>
-    <!-- /.content -->
   </div>
 <?php
 } else if ($set=="edit-rfid") {
 ?>
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Edit Data RFID
-        <small></small>
-      </h1>
+      <h1>Edit Data RFID<small></small></h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-credit-card"></i> Data RFID</a></li>
         <li class="active">Edit Data RFID</li>
       </ol>
     </section>
 
-        <!-- Main content -->
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
@@ -135,21 +105,18 @@ if ($set=="rfid") {
               <?php echo $this->session->flashdata('pesan');?>
               <h1 class="box-title"></h1>
             </div>
-            <!-- /.box-header -->
             <form role="form" action="<?=base_url();?>admin/save_edit_rfid" method="post">              
               <div class="box-body">
                 <div class="form-group">
                   <input type="hidden" name="id" value="<?php if(isset($id)){echo $id;}?>">
-                  <!-- <label>ID Device</label>
-                  <input type="number" name="id" class="form-control" placeholder="Enter id" required> -->
                 </div>
                 <div class="form-group">
                   <label>Nama</label>
                   <input type="text" name="nama" class="form-control" placeholder="nama" value="<?php if(isset($nama)){echo $nama;}?>" required>
-                  <div class="form-group">
+                </div>
+                <div class="form-group">
                   <label>Nis</label>
                   <input type="text" name="nis" class="form-control" placeholder="Nis" value="<?php if(isset($nis)){echo $nis;}?>" required>
-                </div>
                 </div>
                 <div class="form-group">
                   <label>Telp</label>
@@ -165,7 +132,7 @@ if ($set=="rfid") {
                     <?php
                       foreach ($list_kelas as $kls) {
                     ?>
-                        <option <?php if($kelas != null && $kls->id == $kelas->id){ ?> selected <?php } ?> value="<?php echo $kls->id; ?>"><?php echo $kls->kelas; ?></option>
+                      <option <?php if($kelas != null && $kls->id == $kelas->id){ ?> selected <?php } ?> value="<?php echo $kls->id; ?>"><?php echo $kls->kelas; ?></option>
                     <?php
                       }
                     ?>
@@ -180,43 +147,31 @@ if ($set=="rfid") {
                 <button type="submit" class="btn btn-primary">Simpan</button>
               </div>              
             </form>
-            <!-- /.box-body -->
           </div>
-          <!-- /.box -->
         </div>
-        <!-- /.col -->
       </div>
-      <!-- /.row -->
     </section>
-    <!-- /.content -->
   </div>
 <?php
 } else if ($set=="new") {
 ?>
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Kartu RFID Baru
-        <small></small>
-      </h1>
+      <h1>Kartu RFID Baru<small></small></h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-credit-card"></i> RFID</a></li>
         <li class="active">Kartu RFID Baru</li>
       </ol>
     </section>
 
-        <!-- Main content -->
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
               <?php echo "<br>"; echo $this->session->flashdata('pesan');?>
-
               <h1 class="box-title"></h1>
             </div>
-            <!-- /.box-header -->
             <div class="box-body table-responsive">
               <table id="t1" class="table table-bordered table-striped">
                 <thead>
@@ -225,7 +180,6 @@ if ($set=="rfid") {
                   <th style="text-align:center">UID RFID</th>
                   <th style="text-align:center">Nama</th>
                   <th style="text-align:center">Kelas</th>
-
                   <th style="text-align:center">Telp</th>
                   <th style="text-align:center">Gender</th>
                   <th style="text-align:center">Alamat</th>
@@ -234,21 +188,14 @@ if ($set=="rfid") {
                 </thead>
                 <tbody>
                 <?php if(empty($rfid)){?>
-                <tr>
-                  <td>Data tidak ditemukan</td>
-                  <td>Data tidak ditemukan</td>
-                  <td>Data tidak ditemukan</td>
-                  <td>Data tidak ditemukan</td>
-                  <td>Data tidak ditemukan</td>
-                  <td>Data tidak ditemukan</td>
-                  <td>Data tidak ditemukan</td>
-                  <td>Data tidak ditemukan</td>
-                </tr>
-                <?php } else{
-                $no=0;
-                foreach($rfid as $row){ 
-                  if ($row->nama == "") {
-                    $no++;
+                  <tr>
+                    <td colspan="8">Data tidak ditemukan</td>
+                  </tr>
+                <?php } else {
+                  $no = 0;
+                  foreach($rfid as $row){ 
+                    if ($row->nama == "") {
+                      $no++;
                 ?>
                 <tr>
                   <td style="text-align:center"><?php echo $no;?></td>
@@ -256,37 +203,28 @@ if ($set=="rfid") {
                   <td style="text-align:center"><?php echo $row->nama;?></td>
                   <?php
                     $kelas = "-";
-                      if ($row->id_kelas != null) {
-                        $kelas = $m_admin->find_kelas($row->id_kelas);
-                        $kelas = $kelas->kelas;
-                        ?>
-                        <?php
-                      }
-                    ?>
+                    if ($row->id_kelas != null) {
+                      $kelas = $m_admin->find_kelas($row->id_kelas);
+                      $kelas = $kelas->kelas;
+                    }
+                  ?>
                   <td style="text-align:center"><?php echo $kelas;?></td>
-
                   <td style="text-align:center"><?php echo $row->telp;?></td>
                   <td style="text-align:center"><?php echo $row->gender;?></td>
                   <td style="text-align:center"><?php echo $row->alamat;?></td>
                   <td style="text-align:center">
-                   <a href="<?=base_url()?>admin/edit_rfid/<?=$row->id_rfid?>" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
-                   <a href="<?=base_url()?>admin/hapus_rfid/<?=$row->id_rfid?>" class="btn btn-danger btn-sm" onclick="return confirm('Anda Yakin menghapus data ini?')"><i class="glyphicon glyphicon-trash"></i></a>
+                    <a href="<?=base_url()?>admin/edit_rfid/<?=$row->id_rfid?>" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
+                    <a href="<?=base_url()?>admin/hapus_rfid/<?=$row->id_rfid?>" class="btn btn-danger btn-sm" onclick="return confirm('Anda Yakin menghapus data ini?')"><i class="glyphicon glyphicon-trash"></i></a>
                   </td>
                 </tr>
                 <?php }}}?>
-                
                 </tbody>
               </table>
             </div>
-            <!-- /.box-body -->
           </div>
-          <!-- /.box -->
         </div>
-        <!-- /.col -->
       </div>
-      <!-- /.row -->
     </section>
-    <!-- /.content -->
   </div>
 <?php
 }
@@ -294,7 +232,8 @@ if ($set=="rfid") {
 $this->load->view('include/footer.php');
 ?>
 
-</div>  <!-- penutup header -->
+</div>
+
 
 <!-- jQuery 3 -->
 <script src="<?=base_url();?>components/bower_components/jquery/dist/jquery.min.js"></script>

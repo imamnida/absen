@@ -100,6 +100,7 @@ class M_admin extends CI_Model {
             return $query->result();
         }
     }
+    
 
     function get_rfid_byid($id) {
         $query = $this->db->where('id_rfid',$id);

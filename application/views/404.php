@@ -1,58 +1,80 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>404 Page not found</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="<?=base_url();?>components/bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?=base_url();?>components/bower_components/font-awesome/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="<?=base_url();?>components/bower_components/Ionicons/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?=base_url();?>components/dist/css/AdminLTE.min.css">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <title>Not Found 404</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="<?=base_url();?>imam/assets/img/favicon.png" rel="icon">
+  <link href="<?=base_url();?>imam/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="<?=base_url();?>imam/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?=base_url();?>imam/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="<?=base_url();?>imam/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="<?=base_url();?>imam/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="<?=base_url();?>imam/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="<?=base_url();?>imam/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="<?=base_url();?>imam/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="<?=base_url();?>imam/assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Updated: Jan 09 2024 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
-<body class="">
 
+<body>
 
-<!-- Main content -->
-<section class="content">
-  <div class="error-page">
-    <h2 class="headline text-yellow"> 404</h2>
+  <main>
+    <div class="container">
 
-    <div class="error-content">
-      <h3><i class="fa fa-warning text-yellow"></i> Oops! Page not found.</h3>
-
-      <p>
-        We could not find the page you were looking for.
-        Meanwhile, you may <a href="<?=base_url();?>">return to main web</a>.
-      </p>
+      <section class="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center">
+        <h1>404</h1>
+        <h2>The page you are looking for doesn't exist.</h2>
+        <a class="btn" href="index.html">Back to home</a>
+        <img src="<?=base_url();?>imam/assets/img/not-found.svg" class="img-fluid py-5" alt="Page Not Found">
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+          Designed by <a>Imam Dienul</a>
+        </div>
+      </section>
 
     </div>
-    <!-- /.error-content -->
-  </div>
-  <!-- /.error-page -->
-</section>
+  </main><!-- End #main -->
 
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-<!-- jQuery 3 -->
-<script src="<?=base_url();?>components/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="<?=base_url();?>components/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- FastClick -->
-<script src="<?=base_url();?>components/bower_components/fastclick/lib/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="<?=base_url();?>components/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?=base_url();?>components/dist/js/demo.js"></script>
+  <!-- Vendor JS Files -->
+  <script src="<?=base_url();?>imam/assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="<?=base_url();?>imam/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<?=base_url();?>imam/assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="<?=base_url();?>imam/assets/vendor/echarts/echarts.min.js"></script>
+  <script src="<?=base_url();?>imam/assets/vendor/quill/quill.min.js"></script>
+  <script src="<?=base_url();?>imam/assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="<?=base_url();?>imam/assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="<?=base_url();?>imam/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="<?=base_url();?>imam/assets/js/main.js"></script>
+
 </body>
+
 </html>
