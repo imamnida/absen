@@ -596,7 +596,7 @@ class Admin extends CI_Controller {
 
 	public function rekapAbsen2excel(Type $var = null)
 	{
-		if(!$this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
+		if(!$this->session->userdata('userlogin'))  
 		{
 			return ;
 		}
@@ -605,21 +605,15 @@ class Admin extends CI_Controller {
 			echo "insert id kelas";
 			return;
 		}
-		$tanggal = $this->input->get('tanggal');
 		
-		$split = explode("-", $tanggal);
-
-		$x = 0;
-
-		foreach ($split as $key => $value) {
-			$date[$x] = $value;
-			$x++;
-		}
+		$tanggal_mulai = $this->input->get('tanggalMulai');
+		$tanggal_selesai = $this->input->get('tanggalSelesai');
+		
 
 		$alphabet = range('A','Z');
 
-		$begin = new DateTime($date[0]);
-		$end   = new DateTime($date[1]);
+		$begin = new DateTime($tanggal_mulai);
+		$end   = new DateTime($tanggal_selesai);
 
 		$diff = $begin->diff($end)->format("%a");
 
@@ -674,7 +668,7 @@ class Admin extends CI_Controller {
 		$writer = new Xlsx($spreadsheet);
 
 		header('Content-Type: application/vnd.ms-excel');
-		header('Content-Disposition: attachment;filename="Absensi_KELAS_'.$kelas->kelas.'_'.$tanggal.'.xlsx"');
+		header('Content-Disposition: attachment;filename="Absensi_KELAS_'.$kelas->kelas.'_'.$tanggal_mulai.'_'.$tanggal_selesai.'.xlsx"');
 		header('Cache-Control: max-age=0');
 
 		$writer->save('php://output');

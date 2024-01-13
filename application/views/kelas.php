@@ -18,7 +18,24 @@ $this->load->View('include/atas.php');
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
-
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Tambah Data Kelas</h5>
+              <div class="row">
+                <form action="" method="POST">
+                    <label for="">Nama Kelas</label>
+                    <input type="text" name="kelas" required placeholder="Nama Kelas" class="form-control">
+                    <div style="margin-top:10px">
+                        <button class="btn btn-primary" type="submit">Tambah</button>
+                    </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Data Kelas</h5>

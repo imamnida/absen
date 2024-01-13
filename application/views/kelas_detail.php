@@ -22,8 +22,8 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Rekapitulasi Absensi Kelas : <?php echo $kelas->kelas; ?></h5>
-
+                        <h5 class="card-title mb-0 pb-0">Rekapitulasi Absensi Kelas : <?php echo $kelas->kelas; ?></h5>
+                        <p>*Maksimal 14 hari</p>
                         <!-- General Form Elements -->
                         <form action="<?php site_url()?>rekapAbsen2excel" method="get">
                             <div class="row mb-3">
@@ -37,7 +37,6 @@
                                     <input type="date" name="tanggalSelesai" class="form-control" required>
                                 </div>
                             </div>
-
                             <div class="row mb-3">
                                 <input type="hidden" name="id_kelas" value="<?php echo $kelas->id; ?>">
                                 <label class="col-sm-2 col-form-label"></label>
