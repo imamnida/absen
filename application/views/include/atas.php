@@ -73,13 +73,13 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
       <ul class="d-flex align-items-center">
 
         <li class="nav-item d-block d-lg-none">
-          <a class=" nav-icon search-bar-toggle " href="#">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
             <i class="bi bi-search"></i>
           </a>
         </li><!-- End Search Icon-->
         <li class="nav-item dropdown">
 
-<a class=" nav-icon" href="<?=base_url();?>admin/setting">
+<a class="nav-link nav-icon" href="<?=base_url();?>admin/setting">
   <i class="bi bi-gear"></i>
   
 </a><!-- End Notification Icon -->
@@ -89,7 +89,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
        
         <li class="nav-item dropdown pe-3">
 
-          <a class=" nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="<?=base_url();?>components/dist/img/<?=$avatar;?>" class="img-circle" alt="User Image">
             <span class="d-none d-md-block dropdown-toggle ps-2"> <?=$this->session->userdata('userlogin');?></span>
           </a><!-- End Profile Iamge Icon -->
@@ -129,7 +129,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class=" " href="<?=base_url();?>admin/dashboard">
+        <a class="nav-link " href="<?=base_url();?>admin/dashboard">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -138,28 +138,28 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
       
 
       <li class="nav-item">
-        <a class=" collapsed" href="<?=base_url();?>admin/list_users">
+        <a class="nav-link " href="<?=base_url();?>admin/list_users">
           <i class="bi bi-person"></i>
           <span>Daftar User</span>
         </a>
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class=" collapsed" href="<?=base_url();?>admin/devices">
+        <a class="nav-link " href="<?=base_url();?>admin/devices">
           <i class="ri-equalizer-line"></i>
           <span>Data Alat</span>
         </a>
       </li><!-- End F.A.Q Page Nav -->
 
       <li class="nav-item">
-        <a class=" collapsed" href="<?=base_url();?>admin/kelas">
+        <a class="nav-link " href="<?=base_url();?>admin/kelas">
           <i class="ri-building-2-line"></i>
           <span>Daftar Kelas</span>
         </a>
       </li><!-- End Contact Page Nav -->
 
       <li class="nav-item">
-        <a class=" collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link " data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-journal-text"></i><span>Data RFID</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -177,15 +177,15 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
         </ul>
       </li><!-- End Forms Nav -->
 
-      <li  <?php if($this->uri->segment(2)=="absensi"){echo 'class="nav-item"';}?>">
-        <a class=" collapsed" href="<?=base_url();?>admin/absensi">
+      <li class="nav-item">
+        <a class="nav-link " href="<?=base_url();?>admin/absensi">
           <i class="bi bi-box-arrow-in-right"></i>
           <span>Absensi</span>
         </a>
       </li><!-- End Login Page Nav -->
 
       <li class="nav-item">
-        <a class=" collapsed" href="<?=base_url();?>admin/histori">
+        <a class="nav-link " href="<?=base_url();?>admin/histori">
           <i class="ri-compass-2-line"></i>
           <span>Histori Alat</span>
         </a>
