@@ -177,7 +177,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
         </ul>
       </li><!-- End Forms Nav -->
 
-      <li  <?php if($this->uri->segment(2)=="absensi"){echo 'class="active"';}?>">
+      <li  <?php if($this->uri->segment(2)=="absensi"){echo 'class="nav-item"';}?>">
         <a class="nav-link collapsed" href="<?=base_url();?>admin/absensi">
           <i class="bi bi-box-arrow-in-right"></i>
           <span>Absensi</span>
