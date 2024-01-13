@@ -25,6 +25,15 @@ class Admin extends CI_Controller {
 		$data['set'] = "dashboard";
 		$data['rfid'] = $this->m_admin->get_rfid();
 		$data['devices'] = $this->m_admin->get_devices();
+		$data['set'] = "absensi";
+
+		$today = strtotime("today");
+		$tomorrow = strtotime("tomorrow");
+
+		$data['absensimasuk'] = $this->m_admin->get_absensi("masuk",$today,$tomorrow);
+		$data['absensikeluar'] = $this->m_admin->get_absensi("keluar",$today,$tomorrow);
+		$data['m_admin'] = $this->m_admin;
+		$this->load->view('absensi', $data);
 
 		$today = strtotime("today");
 		$tomorrow = strtotime("tomorrow");
