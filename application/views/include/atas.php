@@ -138,28 +138,28 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
       
 
       <li class="nav-item">
-        <a class="nav-link " href="<?=base_url();?>admin/list_users">
+        <a class="nav-link collapsed" href="<?=base_url();?>admin/list_users">
           <i class="bi bi-person"></i>
           <span>Daftar User</span>
         </a>
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link " href="<?=base_url();?>admin/devices">
+        <a class="nav-link collapsed" href="<?=base_url();?>admin/devices">
           <i class="ri-equalizer-line"></i>
           <span>Data Alat</span>
         </a>
       </li><!-- End F.A.Q Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link " href="<?=base_url();?>admin/kelas">
+        <a class="nav-link collapsed" href="<?=base_url();?>admin/kelas">
           <i class="ri-building-2-line"></i>
           <span>Daftar Kelas</span>
         </a>
       </li><!-- End Contact Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link " data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-journal-text"></i><span>Data RFID</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -178,14 +178,14 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
       </li><!-- End Forms Nav -->
 
       <li class="nav-item">
-        <a class="nav-link " href="<?=base_url();?>admin/absensi">
+        <a class="nav-link collapsed" href="<?=base_url();?>admin/absensi">
           <i class="bi bi-box-arrow-in-right"></i>
           <span>Absensi</span>
         </a>
       </li><!-- End Login Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link " href="<?=base_url();?>admin/histori">
+        <a class="nav-link collapsed" href="<?=base_url();?>admin/histori">
           <i class="ri-compass-2-line"></i>
           <span>Histori Alat</span>
         </a>
