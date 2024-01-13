@@ -77,6 +77,13 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
             <i class="bi bi-search"></i>
           </a>
         </li><!-- End Search Icon-->
+        <li class="nav-item dropdown">
+
+<a class="nav-link nav-icon" href="<?=base_url();?>admin/setting">
+  <i class="bi bi-gear"></i>
+  
+</a><!-- End Notification Icon -->
+</li><!-- End Notification Nav -->
 
        
        
@@ -184,12 +191,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
         </a>
       </li><!-- End Error 404 Page Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="<?=base_url();?>admin/setting">
-          <i class="ri-code-s-slash-line"></i>
-          <span>Setting</span>
-        </a>
-      </li><!-- End Blank Page Nav -->
+      
 
     </ul>
 
