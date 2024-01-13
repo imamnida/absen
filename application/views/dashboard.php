@@ -207,35 +207,52 @@ if ($set == "dashboard") {
 
             <!-- Recent Sales -->
            
+<!-- Recent Sales -->
 <div class="col-12">
   <div class="card recent-sales overflow-auto">
     <div class="card-body">
-      <h5 class="card-title">Absensi Masuk Hari Ini<h5>
+      <h5 class="card-title">Absensi Masuk Hari Ini</h5>
 
       <table class="table table-borderless datatable">
         <thead>
           <tr>
             <th scope="col">No</th>
             <th scope="col">Alat</th>
+            <th scope="col">Nama</th>
             <th scope="col">Kelas</th>
             <th scope="col">Keterangan</th>
             <th scope="col">Waktu</th>
+            <th scope="col">Foto</th>
           </tr>
         </thead>
         <tbody>
-         <td>imam</td>
-         <td>imam</td>
-         <td>imam</td>
-         <td>imam</td>
-         <td>imam</td>
-         
+          <?php if(empty($absensimasuk)): ?>
+            <tr>
+              <td colspan="7">Data absensi masuk tidak ditemukan</td>
+            </tr>
+          <?php else: ?>
+            <?php foreach($absensimasuk as $key => $row): ?>
+              <tr>
+                <td><?= $key + 1; ?></td>
+                <td><?= $row->nama_devices; ?> (<?= $row->id_devices; ?>)</td>
+                <td><?= $row->nama; ?></td>
+                <?php
+                $kelas = ($row->id_kelas != null) ? $m_admin->find_kelas($row->id_kelas) : ["kelas" => "-"];
+                ?>
+                <td><?= $kelas->kelas; ?></td>
+                <td><?= $row->keterangan; ?></td>
+                <td><?= date("H:i:s - d M Y", $row->created_at); ?></td>
+                <td><img src="<?= $row->foto; ?>" width="150" height="auto" alt="img not found" /></td>
+              </tr>
+            <?php endforeach; ?>
+          <?php endif; ?>
         </tbody>
       </table>
 
     </div>
-
   </div>
 </div><!-- End Recent Sales -->
+
 
 
             
