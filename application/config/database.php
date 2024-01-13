@@ -83,6 +83,10 @@ $db['default'] = array(
 	//'username' => 'root',
 	//'password' => 'abhiasa123',
 	//'database' => 'absensi2',
+	
+	//'username' => 'root',
+	//'password' => '',
+	//'database' => 'haha',
 
 
 	'dbdriver' => 'mysqli',
