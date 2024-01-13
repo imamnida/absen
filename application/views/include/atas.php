@@ -129,7 +129,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="<?=base_url();?>admin/dashboard">
+        <a <?php if($this->uri->segment(2)=="dashboard"){echo 'class="nav-link"';}?>" href="<?=base_url();?>admin/dashboard">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
