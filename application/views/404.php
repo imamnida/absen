@@ -1,80 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+        <title>Urora - Responsive Bootstrap 4 Admin Dashboard</title>
+        <meta content="Admin Dashboard" name="description" />
+        <meta content="Mannatthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <link rel="shortcut icon" href="<?=base_url();?>vertical/assets/images/favicon.ico">
 
-  <title>Not Found 404</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+        <link href="<?=base_url();?>vertical/assets/plugins/animate/animate.css" rel="stylesheet" type="text/css">
+        <link href="<?=base_url();?>vertical/assets/css/bootstrap-material-design.min.css" rel="stylesheet" type="text/css">
+        <link href="<?=base_url();?>vertical/assets/css/icons.css" rel="stylesheet" type="text/css">
+        <link href="<?=base_url();?>vertical/assets/css/style.css" rel="stylesheet" type="text/css">
 
-  <!-- Favicons -->
-  <link href="<?=base_url();?>imam/assets/img/favicon.png" rel="icon">
-  <link href="<?=base_url();?>imam/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    </head>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="<?=base_url();?>imam/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="<?=base_url();?>imam/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="<?=base_url();?>imam/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="<?=base_url();?>imam/assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="<?=base_url();?>imam/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="<?=base_url();?>imam/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="<?=base_url();?>imam/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <body class="fixed-left">
 
-  <!-- Template Main CSS File -->
-  <link href="<?=base_url();?>imam/assets/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Updated: Jan 09 2024 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-</head>
-
-<body>
-
-  <main>
-    <div class="container">
-
-      <section class="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center">
-        <h1>404</h1>
-        <h2>The page you are looking for doesn't exist.</h2>
-        <a class="btn" href="index.html">Back to home</a>
-        <img src="<?=base_url();?>imam/assets/img/not-found.svg" class="img-fluid py-5" alt="Page Not Found">
-        <div class="credits">
-          <!-- All the links in the footer should remain intact. -->
-          <!-- You can delete the links only if you purchased the pro version. -->
-          <!-- Licensing information: https://bootstrapmade.com/license/ -->
-          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-          Designed by <a>Imam Dienul</a>
+        <!-- Begin page -->
+        <div class="accountbg"></div>
+        <div class="wrapper-page">
+            <div class="display-table">
+                <div class="display-table-cell">
+                    <diV class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="<?=base_url();?>vertical/assets/images/extra.png" alt="" class="img-fluid">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-block">
+                    
+                                        <div class="ex-page-content text-center">
+                                            <h1 class="">404!</h1>
+                                            <h3 class="text-primary">Sorry, page not found</h3><br>
+                    
+                                            <a class="btn btn-raised btn-primary mb-5 waves-effect waves-light" href="index.html">Back to Dashboard</a>
+                                        </div>
+                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </diV>
+                </div>
+            </div>
         </div>
-      </section>
 
-    </div>
-  </main><!-- End #main -->
+        <!-- jQuery  -->
+        <script src="<?=base_url();?>vertical/assets/js/jquery.min.js"></script>
+        <script src="<?=base_url();?>vertical/assets/js/popper.min.js"></script>
+        <script src="<?=base_url();?>vertical/assets/js/bootstrap-material-design.js"></script>
+        <script src="<?=base_url();?>vertical/assets/js/modernizr.min.js"></script>
+        <script src="<?=base_url();?>vertical/assets/js/detect.js"></script>
+        <script src="<?=base_url();?>vertical/assets/js/fastclick.js"></script>
+        <script src="<?=base_url();?>vertical/assets/js/jquery.slimscroll.js"></script>
+        <script src="<?=base_url();?>vertical/assets/js/jquery.blockUI.js"></script>
+        <script src="<?=base_url();?>vertical/assets/js/waves.js"></script>
+        <script src="<?=base_url();?>vertical/assets/js/jquery.nicescroll.js"></script>
+        <script src="<?=base_url();?>vertical/assets/js/jquery.scrollTo.min.js"></script>
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Vendor JS Files -->
-  <script src="<?=base_url();?>imam/assets/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="<?=base_url();?>imam/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="<?=base_url();?>imam/assets/vendor/chart.js/chart.umd.js"></script>
-  <script src="<?=base_url();?>imam/assets/vendor/echarts/echarts.min.js"></script>
-  <script src="<?=base_url();?>imam/assets/vendor/quill/quill.min.js"></script>
-  <script src="<?=base_url();?>imam/assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="<?=base_url();?>imam/assets/vendor/tinymce/tinymce.min.js"></script>
-  <script src="<?=base_url();?>imam/assets/vendor/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="<?=base_url();?>imam/assets/js/main.js"></script>
-
-</body>
-
+        <!-- App js -->
+        <script src="<?=base_url();?>vertical/assets/js/app.js"></script>
+        
+    </body>
 </html>

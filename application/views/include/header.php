@@ -1,4 +1,5 @@
 <?php
+
 if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
 { 
   $users = $this->session->userdata('userlogin');
@@ -9,160 +10,199 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
   redirect(base_url().'login');
 }
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Admin Dashboard</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="<?=base_url();?>components/bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?=base_url();?>components/bower_components/font-awesome/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="<?=base_url();?>components/bower_components/Ionicons/css/ionicons.min.css">
-  <!-- jvectormap -->
-  <link rel="stylesheet" href="<?=base_url();?>components/bower_components/jvectormap/jquery-jvectormap.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?=base_url();?>components/dist/css/AdminLTE.min.css">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="<?=base_url();?>components/dist/css/skins/_all-skins.min.css">
-  <!-- daterange picker -->
-  <link rel="stylesheet" href="<?=base_url();?>components/bower_components/bootstrap-daterangepicker/daterangepicker.css">
-    <!-- bootstrap datepicker -->
-  <link rel="stylesheet" href="<?=base_url();?>components/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+        <title>Admin Dashboard</title>
+        <meta content="Admin Dashboard" name="description" />
+        <meta content="Mannatthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+        <link rel="shortcut icon" href="<?=base_url();?>vertical/assets/images/logo.png">
 
-  <!-- Google Font -->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-  
-</head>
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+        <!--Morris Chart CSS -->
+        <link rel="stylesheet" href="<?=base_url();?>vertical/assets/plugins/fullcalendar/vanillaCalendar.css"/>
+        <link rel="stylesheet" href="<?=base_url();?>vertical/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css">
+        <link rel="stylesheet" href="<?=base_url();?>vertical/assets/plugins/chartist/css/chartist.min.css">
+        <link rel="stylesheet" href="<?=base_url();?>vertical/assets/plugins/morris/morris.css">
+        <link rel="stylesheet" href="<?=base_url();?>vertical/assets/plugins/metro/MetroJs.min.css">
 
-  <header class="main-header">
+        <link rel="stylesheet" href="<?=base_url();?>vertical/assets/plugins/carousel/owl.carousel.min.css">
+        <link rel="stylesheet" href="<?=base_url();?>vertical/assets/plugins/carousel/owl.theme.default.min.css">
 
-    <!-- Logo -->
-    <a href="#" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>D</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin Dashboard</b></span>
-    </a>
+        <link rel="stylesheet" href="<?=base_url();?>vertical/assets/plugins/animate/animate.css" type="text/css">
+        <link rel="stylesheet" href="<?=base_url();?>vertical/assets/css/bootstrap-material-design.min.css" type="text/css">
+        <link rel="stylesheet" href="<?=base_url();?>vertical/assets/css/icons.css" type="text/css">
+        <link rel="stylesheet" href="<?=base_url();?>vertical/assets/css/style.css" type="text/css">
 
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
-      </a>
-      <!-- Navbar Right Menu -->
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?=base_url();?>components/dist/img/<?=$avatar;?>" class="user-image" alt="User Image">
-              <span class="hidden-xs"><?=$this->session->userdata('userlogin');?></span>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-                <img src="<?=base_url();?>components/dist/img/<?=$avatar;?>" class="img-circle" alt="User Image">
+    </head>
 
-                <p>
-                  <?=$this->session->userdata('userlogin');?>
-                  <small></small>
-                </p>
-              </li>
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <!-- <a href="#" class="btn btn-default btn-flat">Profil</a> -->
-                </div>
-                <div class="pull-right">
-                  <a href="<?=base_url();?>login/logout" class="btn btn-default btn-flat">Keluar</a>
-                </div>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
 
-    </nav>
-  </header>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="<?=base_url();?>components/dist/img/<?=$avatar;?>" class="img-circle" alt="User Image">
+    <body class="fixed-left">
+
+        <!-- Loader -->
+        <div id="preloader">
+            <div id="status">
+                <div class="spinner"></div>
+            </div>
         </div>
-        <div class="pull-left info">
-          <p style="white-space: nowrap; width: 12em; overflow: hidden;	text-overflow: ellipsis;"><?=$this->session->userdata('userlogin');?></p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-        </div>
-      </div>
 
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MAIN NAVIGATION</li>
-        <li <?php if($this->uri->segment(2)=="dashboard"){echo 'class="active"';}?>>
-        	<a href="<?=base_url();?>admin/dashboard"><i class="fa fa-dashboard"></i> Beranda</a>
-        </li>
+        <!-- Begin page -->
+        <div id="wrapper">
 
-        <li <?php if($this->uri->segment(2)=="list_users"){echo 'class="active"';}?>>
-        	<a href="<?=base_url();?>admin/list_users"><i class="fa fa-users"></i> Daftar User</a>
-        </li>
-        <li <?php if($this->uri->segment(2)=="devices"){echo 'class="active"';}?>>
-          <a href="<?=base_url();?>admin/devices"><i class="fa fa-gears"></i> Data Alat</a>
-        </li>
+            <!-- ========== Left Sidebar Start ========== -->
+            <div class="left side-menu">
+                <button type="button" class="button-menu-mobile button-menu-mobile-topbar open-left waves-effect">
+                    <i class="mdi mdi-close"></i>
+                </button>
 
-        <li <?php if($this->uri->segment(2)=="kelas"){echo 'class="active"';}?>>
-          <a href="<?=base_url();?>admin/kelas"><i class="fa fa-building"></i> Daftar Kelas</a>
-        </li>
+                <!-- LOGO -->
+                <div class="topbar-left">
+                    <div class="text-center">
+                        <!--<a href="index.html" class="logo"><i class="mdi mdi-assistant"></i> Urora</a>-->
+                        <a href="<?=base_url();?>admin/dashboard" class="logo">
+                            <img src="<?=base_url();?>vertical/assets/images/logo-lg.png" alt="" class="logo-large">
+                        </a>
+                    </div>
+                </div>
 
-        
+                <div class="sidebar-inner slimscrollleft" id="sidebar-main">
 
-        
+                    <div id="sidebar-menu">
+                        <ul>
+                            <li class="menu-title">Main</li>
 
-        <li class="treeview <?php if($this->uri->segment(2)=="rfid"){echo 'active';}?>">
-          <a href="#">
-            <i class="fa fa-credit-card"></i>
-            <span>Data RFID</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li <?php if($this->uri->segment(3)=="rfidnew"){echo 'class="active"';}?>><a href="<?=base_url();?>admin/rfid/rfidnew"><i class="fa fa-credit-card"></i> Kartu RFID Baru</a></li>
-            <li <?php if($this->uri->segment(3)=="datarfid"){echo 'class="active"';}?>><a href="<?=base_url();?>admin/rfid/datarfid"><i class="fa fa-credit-card"></i> Data RFID</a></li>
-          </ul>
-        </li>
-        <li <?php if($this->uri->segment(2)=="absensi"){echo 'class="active"';}?>>
-          <a href="<?=base_url();?>admin/absensi"><i class="fa fa-book"></i> Absensi</a>
-        </li>
+                            <li>
+                                <a href="<?=base_url();?>admin/dashboard" class="waves-effect">
+                                    <i class="mdi mdi-view-dashboard"></i>
+                                    <span> Dashboard</span>
+                                </a>
+                            </li>
 
-        <li <?php if($this->uri->segment(2)=="histori"){echo 'class="active"';}?>>
-          <a href="<?=base_url();?>admin/histori"><i class="fa fa-retweet"></i> Histori Alat</a>
-        </li>
+                            
+                            <li>
+                                <a href="<?=base_url();?>admin/list_users" class="waves-effect">
+                                    <i class="mdi mdi-account-multiple"></i>
+                                    <span> Daftar User </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?=base_url();?>admin/devices" class="waves-effect">
+                                    <i class="mdi mdi-engine-outline"></i>
+                                    <span> Data Alat </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?=base_url();?>admin/kelas" class="waves-effect">
+                                    <i class="mdi mdi-city"></i>
+                                    <span> Daftar Kelas </span>
+                                </a>
+                            </li>
 
-        <li <?php if($this->uri->segment(2)=="setting"){echo 'class="active"';}?>>
-          <a href="<?=base_url();?>admin/setting"><i class="fa fa-gear"></i> Setting</a>
-        </li>
-      </ul>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
+                            <li>
+                                <a href="<?=base_url();?>admin/rfidnew" class="waves-effect">
+                                    <i class="mdi mdi-credit-card-multiple"></i>
+                                    <span> New RFID </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?=base_url();?>admin/datarfid" class="waves-effect">
+                                    <i class="mdi mdi-credit-card"></i>
+                                    <span> Data RFID </span>
+                                </a>
+                            </li>
+
+
+                            <li>
+                                <a href="<?=base_url();?>admin/absensi" class="waves-effect">
+                                    <i class="mdi mdi-presentation-play"></i>
+                                    <span> Absensi </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?=base_url();?>admin/histori" class="waves-effect">
+                                    <i class="mdi mdi-history"></i>
+                                    <span> Histori Alat </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?=base_url();?>admin/setting" class="waves-effect">
+                                    <i class="mdi mdi-camera-timer"></i>
+                                    <span> Setting </span>
+                                </a>
+                            </li>
+                            
+
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <!-- end sidebarinner -->
+            </div>
+            <!-- Left Sidebar End -->
+            
+
+            <!-- Start right Content here -->
+
+            <div class="content-page">
+                <!-- Start content -->
+                <div class="content">
+
+                    <!-- Top Bar Start -->
+                    <div class="topbar">
+
+                        <nav class="navbar-custom">
+                            <div class="dropdown notification-list nav-pro-img">
+
+                                <div class="list-inline-item hide-phone app-search">
+                                    <form role="search" class="">
+                                        <div class="form-group pt-1">
+                                            <input type="text" class="form-control" placeholder="Search..">
+                                            <a href="">
+                                                <i class="fa fa-search"></i>
+                                            </a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <ul class="list-inline float-right mb-0 mr-3">
+                                <!-- language-->
+                               
+                                   
+
+                                <li class="list-inline-item dropdown notification-list">
+                                    <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
+                                        aria-expanded="false">
+                                        <img src="<?=base_url();?>vertical/assets/images/<?=$avatar;?>" alt="user" >
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                                        <!-- item-->
+                                        <div class="dropdown-item noti-title">
+                                            <h5><?=$this->session->userdata('userlogin');?></h5>
+                                        </div>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="<?=base_url();?>login/logout">
+                                            <i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <ul class="list-inline menu-left mb-0">
+                                <li class="float-left">
+                                    <button class="button-menu-mobile open-left waves-light waves-effect">
+                                        <i class="mdi mdi-menu"></i>
+                                    </button>
+                                </li>
+                            </ul>
+
+                           
+
+                        </nav>
+
+                    </div>
+                    <!-- Top Bar End -->
