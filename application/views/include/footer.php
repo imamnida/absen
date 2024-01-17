@@ -1,5 +1,5 @@
 <footer class="footer">
-                    © 2018 Urora by Salma Aisya Zahra.
+                    © 2018 Urora by Imam Dienul.
                 </footer>
 
             </div>
@@ -38,17 +38,6 @@
         <!-- App js -->
         <script src="<?=base_url();?>vertical/assets/js/app.js"></script>
         <script src="<?=base_url();?>vertical/assets/js/jquery.min.js"></script>
-        <script src="<?=base_url();?>vertical/assets/js/popper.min.js"></script>
-        <script src="<?=base_url();?>vertical/assets/js/bootstrap-material-design.js"></script>
-        <script src="<?=base_url();?>vertical/assets/js/modernizr.min.js"></script>
-        <script src="<?=base_url();?>vertical/assets/js/detect.js"></script>
-        <script src="<?=base_url();?>vertical/assets/js/fastclick.js"></script>
-        <script src="<?=base_url();?>vertical/assets/js/jquery.slimscroll.js"></script>
-        <script src="<?=base_url();?>vertical/assets/js/jquery.blockUI.js"></script>
-        <script src="<?=base_url();?>vertical/assets/js/waves.js"></script>
-        <script src="<?=base_url();?>vertical/assets/js/jquery.nicescroll.js"></script>
-        <script src="<?=base_url();?>vertical/assets/js/jquery.scrollTo.min.js"></script>
-
         <!-- Required datatable js -->
         <script src="<?=base_url();?>vertical/assets/plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="<?=base_url();?>vertical/assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
