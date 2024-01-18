@@ -33,16 +33,16 @@ if ($set=="rfid") {
                     <table id="datatable-buttons" class="table table-striped table-bordered w-100">
                         <thead>
                         <tr>
-                        <th>No</th>
-                  <th>Nis</th>
-                  <th>UID RFID</th>
-                  <th>Nama</th>
-                  <th>Kelas</th>
-                  <th>Telp</th>
-                  <th>Gender</th>
-                  <th>Alamat</th>
-                  <th>Foto</th>
-                  <th>Action</th>
+                          <th>No</th>
+                          <th>Nis</th>
+                          <th>UID RFID</th>
+                          <th>Nama</th>
+                          <th>Kelas</th>
+                          <th>Telp</th>
+                          <th>Gender</th>
+                          <th>Alamat</th>
+                          <th>Foto</th>
+                          <th>Action</th>
                         </tr>
                         </thead>
 
