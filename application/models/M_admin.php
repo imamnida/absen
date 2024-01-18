@@ -92,6 +92,7 @@ class M_admin extends CI_Model {
     function get_rfid(){
         $this->db->select('*');
         $this->db->from('rfid');
+        $this->db->join('kelas','kelas.id = rfid.id_kelas','left');
         $this->db->order_by('id_rfid', 'desc');
         //$this->db->limit(1);
         $query = $this->db->get();
@@ -221,6 +222,7 @@ class M_admin extends CI_Model {
     function get_murid($id_kelas){
         $this->db->select('*');
         $this->db->from('rfid');
+        $this->db->join('kelas','kelas.id = rfid.id_kelas','left');
         $this->db->where('id_kelas',$id_kelas);
         $this->db->order_by("nama", "ASC");
 
@@ -232,6 +234,23 @@ class M_admin extends CI_Model {
             return false;
         }
     } 
+
+    public function find_murid($id_murid)
+    {
+        $this->db->select('*');
+        $this->db->from('rfid');
+        $this->db->join('kelas','kelas.id = rfid.id_kelas','left');
+        $this->db->where('id_rfid',$id_murid);
+        $this->db->order_by("nama", "ASC");
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        }else{
+            return false;
+        }
+    }
 
     function insert_kelas($data){
         $this->db->insert('kelas', $data);
@@ -274,6 +293,24 @@ class M_admin extends CI_Model {
             return $query->row();
         }
     }
+
+    public function rekap_absen($id_kelas, $begin, $end)
+    {
+        $this->db->select('rfid.*, (SELECT COUNT(*) FROM absensi WHERE absensi.id_rfid = rfid.id_rfid and absensi.keterangan ="masuk") AS jumlah_absen');
+        $this->db->from('rfid');
+        $this->db->order_by("rfid.nama", "asc");
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        }
+    }
+
+
+
+
+
 
     function count_murid($id_kelas){
         $this->db->select('*');

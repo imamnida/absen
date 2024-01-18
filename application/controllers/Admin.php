@@ -567,11 +567,11 @@ class Admin extends CI_Controller {
 		$id_kelas = $_GET['id_kelas'];
 
 		$kelas = $this->m_admin->find_kelas($id_kelas);
+		$murid = $this->m_admin->get_murid($id_kelas);
 		$data['kelas'] = $kelas;
+		$data['murid'] = $murid;
 		
 		$this->load->view('i_kelas_detail',$data);
-		
-		
 	}
 	public function hapus_kelas(){
 		if(!$this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
@@ -593,6 +593,72 @@ class Admin extends CI_Controller {
 		
 	}
 
+
+	public function detail_murid($id_murid=null)
+	{
+		if(!$this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
+		{
+			return ;
+		}
+
+		if(!$id_murid){
+			echo "insert id murid";
+			return;
+		}
+
+		$murid = $this->m_admin->find_murid($id_murid);
+
+		if (!$murid) {
+			echo "murid tidak ditemukan";
+			return;
+		}
+
+		$this->load->view('i_detail_murid',[
+			"murid" => $murid[0],
+		]);
+	}
+
+	public function rekap_absen($id_kelas=null)
+	{
+		if(!$this->session->userdata('userlogin')) // mencegah akses langsung tanpa login
+		{
+			return ;
+		}
+
+		if(!$id_kelas){
+			echo "insert id kelas";
+			return;
+		}
+
+		$kelas = $this->m_admin->find_kelas($id_kelas);
+
+		if (!$kelas) {
+			echo "kelas tidak ditemukan";
+			return;
+		}
+
+		$rekap_absen = [];
+			echo "Asdf";
+			
+			$tanggal_mulai = $this->input->get('tanggalMulai');
+			$tanggal_selesai = $this->input->get('tanggalSelesai');
+
+			$begin = new DateTime($tanggal_mulai);
+			$end   = new DateTime($tanggal_selesai);
+
+			$end = $end->modify("+1 day");
+
+			echo ($tanggal_mulai);
+			return;
+
+			$rekap_absen = $this->m_admin->rekap_absen($id_kelas, $begin, $end);
+
+		$this->load->view('i_detail_absen',[
+			"kelas" => $kelas,
+			"rekap_absen" => $rekap_absen,
+		]);
+
+	}
 
 	public function rekapAbsen2excel(Type $var = null)
 	{

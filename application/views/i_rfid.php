@@ -63,11 +63,7 @@ if ($set=="rfid") {
                   <td><b class="text-success"><?php echo $row->uid;?></b></td>
                   <td><?php echo $row->nama;?></td>
                   <?php
-                    $kelas = "-";
-                    if ($row->id_kelas != null) {
-                      $kelas = $m_admin->find_kelas($row->id_kelas);
-                      $kelas = $kelas->kelas;
-                    }
+                    $kelas = $row->kelas;
                   ?>
                   <td><?php echo $kelas;?></td>
                   <td><?php echo $row->telp;?></td>
@@ -235,11 +231,7 @@ if ($set=="rfid") {
                   <td><b class="text-success"><?php echo $row->uid;?></b></td>
                   <td><?php echo $row->nama;?></td>
                   <?php
-                    $kelas = "-";
-                    if ($row->id_kelas != null) {
-                      $kelas = $m_admin->find_kelas($row->id_kelas);
-                      $kelas = $kelas->kelas;
-                    }
+                    $kelas = $row->kelas;
                   ?>
                   <td><?php echo $kelas;?></td>
                   <td><?php echo $row->telp;?></td>
