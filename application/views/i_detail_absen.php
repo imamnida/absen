@@ -28,11 +28,11 @@
                                 <div class="row mb-3">
                                     <label for="tanggalMulai" class="col-sm-2 col-form-label">Tanggal Mulai</label>
                                     <div class="col-sm-4">
-                                        <input type="date" name="tanggalMulai" class="form-control" required>
+                                        <input type="date" name="tanggalMulai" value="<?php if(isset($_GET['tanggalMulai'])){echo $_GET['tanggalMulai'];}  ?>" class="form-control" required>
                                     </div>
                                     <label for="tanggalSelesai" class="col-sm-2 col-form-label">Tanggal Selesai</label>
                                     <div class="col-sm-4">
-                                        <input type="date" name="tanggalSelesai" class="form-control" required>
+                                        <input type="date" name="tanggalSelesai" value="<?php if(isset($_GET['tanggalSelesai'])){echo $_GET['tanggalSelesai'];}  ?>" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">

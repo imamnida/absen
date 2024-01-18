@@ -296,7 +296,7 @@ class M_admin extends CI_Model {
 
     public function rekap_absen($id_kelas, $begin, $end)
     {
-        $this->db->select('rfid.*, (SELECT COUNT(*) FROM absensi WHERE absensi.id_rfid = rfid.id_rfid and absensi.keterangan ="masuk") AS jumlah_absen');
+        $this->db->select("rfid.*, (SELECT COUNT(*) FROM absensi WHERE absensi.id_rfid = rfid.id_rfid and absensi.keterangan ='masuk' AND (absensi.created_at >= ".$begin." AND absensi.created_at < ".$end.")) AS jumlah_absen");
         $this->db->from('rfid');
         $this->db->order_by("rfid.nama", "asc");
 

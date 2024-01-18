@@ -28,11 +28,10 @@
                         <hr>
                         <div class="table-responsive">
                             <p>NIS : <?= $murid->nis; ?></p>
-                            <p>Alamat : <?= $murid->alamat; ?></p>
                             <p>Kelas : <?= $murid->kelas; ?></p>
                             <p>Telp. : <?= $murid->telp; ?></p>
                             <p>RFID UUD : <?= $murid->uid; ?></p>
-
+                            <p>Alamat : <?= $murid->alamat; ?></p>
                         </div>
                     </div>
                 </div>

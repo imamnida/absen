@@ -21,38 +21,11 @@
             <div class="col-md-12 col-xl-12">
                 <div class="card m-b-30">
                     <div class="card-body">
-                        <h4 class="mt-0 header-title">Rekapitulasi Absensi Kelas : <?php echo $kelas->kelas; ?></h4>
-                        <div class="general-label">
-                            <form action="<?php site_url()?>rekapAbsen2excel" method="get">
-                                <div class="row mb-3">
-                                    <label for="tanggalMulai" class="col-sm-2 col-form-label">Tanggal Mulai</label>
-                                    <div class="col-sm-4">
-                                        <input type="date" name="tanggalMulai" class="form-control" required>
-                                    </div>
-                                    <label for="tanggalSelesai" class="col-sm-2 col-form-label">Tanggal Selesai</label>
-                                    <div class="col-sm-4">
-                                        <input type="date" name="tanggalSelesai" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <input type="hidden" name="id_kelas" value="<?php echo $kelas->id; ?>">
-                                    <label class="col-sm-2 col-form-label"></label>
-                                    <div class="col-sm-10">
-                                        <button type="submit" class="btn btn-primary">Ambil Data</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div> 
-        </div>           
-        
-        <div class="row">
-            <div class="col-md-12 col-xl-12">
-                <div class="card m-b-30">
-                    <div class="card-body">
+                        <div class="d-flex">
                         <h4 class="mt-0 header-title">Data Murid Kelas : <?php echo $kelas->kelas; ?></h4>
+                        <a class="ml-auto" href="<?=base_url()?>/admin/rekap_absen/<?= $kelas->id; ?>"><button class="btn btn-primary">Rekap Absen</button></a>
+
+                        </div>
                         <div class="table-responsive">
                             <table id="datatable-buttons" class="table table-striped table-bordered w-100">
                                 <thead>

@@ -402,6 +402,7 @@ class Admin extends CI_Controller {
 						//print_r($value);
 						$data['id'] = $value->id_rfid;
 						$data['nama'] = $value->nama;
+						$data['nis'] = $value->nis;
 						$data['telp'] = $value->telp;
 						$data['jabatan'] = $value->jabatan;
 						$data['kelas'] = $value->id_kelas != null ? $this->m_admin->find_kelas($value->id_kelas) : null;
@@ -638,20 +639,16 @@ class Admin extends CI_Controller {
 		}
 
 		$rekap_absen = [];
-			echo "Asdf";
-			
+		if (isset($_GET["tanggalMulai"]) && isset($_GET["tanggalSelesai"])) {
 			$tanggal_mulai = $this->input->get('tanggalMulai');
 			$tanggal_selesai = $this->input->get('tanggalSelesai');
 
-			$begin = new DateTime($tanggal_mulai);
-			$end   = new DateTime($tanggal_selesai);
+			$tanggal_mulai = strtotime($tanggal_mulai);
+			$tanggal_selesai = strtotime($tanggal_selesai);
 
-			$end = $end->modify("+1 day");
-
-			echo ($tanggal_mulai);
-			return;
-
-			$rekap_absen = $this->m_admin->rekap_absen($id_kelas, $begin, $end);
+			$tanggal_selesai += 86400;	// tambah 1 hari (hitungan detik)
+			$rekap_absen = $this->m_admin->rekap_absen($id_kelas, $tanggal_mulai, $tanggal_selesai);
+		}
 
 		$this->load->view('i_detail_absen',[
 			"kelas" => $kelas,

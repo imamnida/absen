@@ -143,7 +143,10 @@ if ($set=="rfid") {
                 </div>
                 <div class="form-group">
                   <label>Gender</label>
-                  <input type="text" name="gender" class="form-control" placeholder="gender" value="<?php if(isset($gender)){echo $gender;}?>" required>
+                  <select name="gender" class="form-control">
+                  <option <?php if($gender == "l"){echo "selected";} ?> value="l">Laki-Laki</option>
+                    <option <?php if($gender == "p"){echo "selected";} ?> value="p">Perempuan</option>
+                  </select>
                 </div>
                 <div class="form-group">
                   <label>Kelas</label>
