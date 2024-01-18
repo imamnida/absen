@@ -411,6 +411,7 @@ class Admin extends CI_Controller {
 					}
 
 					$data['list_kelas'] = $this->m_admin->get_kelas();
+					$data['list_kampus'] = $this->m_admin->get_kampus();
 					$data['set'] = "edit-rfid";
 					$this->load->view('i_rfid', $data);
 				}else{
@@ -430,12 +431,14 @@ class Admin extends CI_Controller {
 				$telp = $this->input->post('telp');
 				$gender = $this->input->post('gender');
 				$kelas_id = $this->input->post('kelas_id');
+				$kampus_id = $this->input->post('kampus_id');
 				$alamat = $this->input->post('alamat');
 
 				$data = array('nama' => $nama,
 								'telp' => $telp,
 								'gender' => $gender,
 								'id_kelas' => $kelas_id,
+								'id_kampus' => $kampus_id,
 								'alamat' => $alamat,
 			 				);
 				//echo $id;
@@ -518,6 +521,40 @@ class Admin extends CI_Controller {
 				redirect(base_url().'admin/absensi');
 			}
 		}
+	}
+
+	public function kampus()
+	{
+		if(!$this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
+		{
+			return ;
+		}
+
+		$kampus = $this->m_admin->get_kampus();
+
+		$data["kampus"] = $kampus;
+
+		$this->load->view('i_kampus', $data);
+	}
+
+	public function hapus_kampus()
+	{
+		if(!$this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
+		{
+			return ;
+		}
+
+		if(!isset($_GET['id_kampus'])){
+			echo "insert id kampus";
+			return;
+		}
+
+		$id_kampus = $_GET['id_kampus'];
+
+		$kampus = $this->m_admin->hapus_kampus($id_kampus);
+		
+		
+		redirect(base_url().'admin/kampus');
 	}
 
 	public function kelas(){

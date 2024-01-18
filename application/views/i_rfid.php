@@ -148,6 +148,20 @@ if ($set=="rfid") {
                     <option <?php if($gender == "p"){echo "selected";} ?> value="p">Perempuan</option>
                   </select>
                 </div>
+
+                <div class="form-group">
+                  <label>Kampus</label>
+                  <select name="kampus_id" class="form-control">
+                    <?php
+                      foreach ($list_kampus as $kampus) {
+                    ?>
+                      <option <?php if($kampus != null && $kampus->id == $kampus->id){ ?> selected <?php } ?> value="<?php echo $kampus->id; ?>"><?php echo $kampus->kampus; ?></option>
+                    <?php
+                      }
+                    ?>
+                  </select>
+                </div>
+
                 <div class="form-group">
                   <label>Kelas</label>
                   <select name="kelas_id" class="form-control">

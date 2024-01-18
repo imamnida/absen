@@ -308,6 +308,30 @@ class M_admin extends CI_Model {
     }
 
 
+    public function get_kampus()
+    {
+        $this->db->select('*');
+        $this->db->from('kampus');
+        $this->db->order_by("id", "desc");
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        }
+    }
+
+    
+    public function hapus_kampus($id)
+    {
+        $this->db->where('id',$id_kelas);
+        $this->db->delete('kampus');
+
+        if ($this->db->affected_rows() == 1) {
+            return TRUE;
+        }
+        return FALSE;
+    }
 
 
 
