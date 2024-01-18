@@ -324,7 +324,7 @@ class M_admin extends CI_Model {
     
     public function hapus_kampus($id)
     {
-        $this->db->where('id',$id_kelas);
+        $this->db->where('id',$id);
         $this->db->delete('kampus');
 
         if ($this->db->affected_rows() == 1) {

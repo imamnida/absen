@@ -96,6 +96,14 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                     <span> Data Alat </span>
                                 </a>
                             </li>
+
+                            <li>
+                                <a href="<?=base_url();?>admin/kampus" class="waves-effect">
+                                    <i class="mdi mdi-city"></i>
+                                    <span> Daftar Kampus</span>
+                                </a>
+                            </li>
+
                             <li>
                                 <a href="<?=base_url();?>admin/kelas" class="waves-effect">
                                     <i class="mdi mdi-city"></i>
