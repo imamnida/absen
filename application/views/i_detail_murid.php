@@ -19,7 +19,7 @@
 
         <div class="row">
             <div class="col-md-3 col-xl-3">
-                <img src="http://localhost/vertical/assets/images/logo.png" style="max-width:100%; margin:auto;" alt="">
+                <img src="<?= $murid->foto ?>" style="max-width:100%; margin:auto;" alt="">
             </div>
             <div class="col-md-9 col-xl-9">
                 <div class="card m-b-30">
@@ -28,6 +28,7 @@
                         <hr>
                         <div class="table-responsive">
                             <p>NIS : <?= $murid->nis; ?></p>
+                            <p>Kelas : <?= $murid->kampus; ?></p>
                             <p>Kelas : <?= $murid->kelas; ?></p>
                             <p>Telp. : <?= $murid->telp; ?></p>
                             <p>RFID UUD : <?= $murid->uid; ?></p>

@@ -405,6 +405,7 @@ class Admin extends CI_Controller {
 						$data['nis'] = $value->nis;
 						$data['telp'] = $value->telp;
 						$data['jabatan'] = $value->jabatan;
+						$data['id_kampus'] = $value->id_kampus;
 						$data['kelas'] = $value->id_kelas != null ? $this->m_admin->find_kelas($value->id_kelas) : null;
 						$data['gender'] = $value->gender;
 						$data['alamat'] = $value->alamat;
@@ -528,6 +529,14 @@ class Admin extends CI_Controller {
 		if(!$this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
 		{
 			return ;
+		}
+
+		if (isset($_POST['kampus'])) {
+
+			$this->m_admin->insert_kampus([
+				"kampus" => $_POST['kampus'],
+			]);
+
 		}
 
 		$kampus = $this->m_admin->get_kampus();

@@ -37,6 +37,7 @@ if ($set=="rfid") {
                           <th>Nis</th>
                           <th>UID RFID</th>
                           <th>Nama</th>
+                          <th>Kampus</th>
                           <th>Kelas</th>
                           <th>Telp</th>
                           <th>Gender</th>
@@ -62,6 +63,7 @@ if ($set=="rfid") {
                   <td><?php echo $row->nis;?></td>
                   <td><b class="text-success"><?php echo $row->uid;?></b></td>
                   <td><?php echo $row->nama;?></td>
+                  <td><?php echo $row->kampus;?></td>
                   <?php
                     $kelas = $row->kelas;
                   ?>
@@ -155,7 +157,7 @@ if ($set=="rfid") {
                     <?php
                       foreach ($list_kampus as $kampus) {
                     ?>
-                      <option <?php if($kampus != null && $kampus->id == $kampus->id){ ?> selected <?php } ?> value="<?php echo $kampus->id; ?>"><?php echo $kampus->kampus; ?></option>
+                      <option <?php if($kampus != null && $kampus->id == $id_kampus){ ?> selected <?php } ?> value="<?php echo $kampus->id; ?>"><?php echo $kampus->kampus; ?></option>
                     <?php
                       }
                     ?>
@@ -247,6 +249,7 @@ if ($set=="rfid") {
                   <td><?php echo $no;?></td>
                   <td><b class="text-success"><?php echo $row->uid;?></b></td>
                   <td><?php echo $row->nama;?></td>
+                  <td><?php echo $row->kampus;?></td>
                   <?php
                     $kelas = $row->kelas;
                   ?>

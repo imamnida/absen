@@ -34,6 +34,7 @@
                                         <th>Nis</th>
                                         <th>UID RFID</th>
                                         <th>Nama</th>
+                                        <th>Kampus</th>
                                         <th>Kelas</th>
                                         <th>Telp</th>
                                         <th>Gender</th>
@@ -62,6 +63,7 @@
                                             <td><?php echo $row->nis;?></td>
                                             <td style="min-width:150px;"><b class="text-success"><?php echo $row->uid;?></b></td>
                                             <td style="min-width:250px;"><?php echo $row->nama;?></td>
+                                            <td style="min-width:100px;"><?php echo $row->kampus;?></td>
                                             <td style="min-width:100px;"><?php echo $row->kelas;?></td>
                                             <td><?php echo $row->telp;?></td>
                                             <td style="min-width:50x;"><?php echo $row->gender;?></td>

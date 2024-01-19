@@ -93,6 +93,7 @@ class M_admin extends CI_Model {
         $this->db->select('*');
         $this->db->from('rfid');
         $this->db->join('kelas','kelas.id = rfid.id_kelas','left');
+        $this->db->join('kampus','kampus.id = rfid.id_kampus','left');
         $this->db->order_by('id_rfid', 'desc');
         //$this->db->limit(1);
         $query = $this->db->get();
@@ -223,6 +224,7 @@ class M_admin extends CI_Model {
         $this->db->select('*');
         $this->db->from('rfid');
         $this->db->join('kelas','kelas.id = rfid.id_kelas','left');
+        $this->db->join('kampus','kampus.id = rfid.id_kampus','left');
         $this->db->where('id_kelas',$id_kelas);
         $this->db->order_by("nama", "ASC");
 
@@ -240,6 +242,7 @@ class M_admin extends CI_Model {
         $this->db->select('*');
         $this->db->from('rfid');
         $this->db->join('kelas','kelas.id = rfid.id_kelas','left');
+        $this->db->join('kampus','kampus.id = rfid.id_kampus','left');
         $this->db->where('id_rfid',$id_murid);
         $this->db->order_by("nama", "ASC");
 
@@ -332,6 +335,12 @@ class M_admin extends CI_Model {
         }
         return FALSE;
     }
+
+    public function insert_kampus($data)
+    {
+        $this->db->insert('kampus', $data);
+        return TRUE;
+     }
 
 
 
