@@ -442,8 +442,7 @@ class Admin extends CI_Controller {
 								'id_kampus' => $kampus_id,
 								'alamat' => $alamat,
 			 				);
-				echo $id;
-				return;
+			
 
 
 				if ($this->m_admin->updateRFID($id,$data)) {
