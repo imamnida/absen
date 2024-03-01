@@ -34,13 +34,20 @@ class Absensi_model extends CI_Model {
     private function get_id_rfid_by_uid($uid) {
         $query = $this->db->get_where('rfid', array('uid' => $uid));
         $result = $query->row();
-        return $result->id_rfid;
+        return $result ? $result->id_rfid : null;
     }
+
     public function is_already_absent($uid, $keterangan) {
         $this->db->where('id_rfid', $this->get_id_rfid_by_uid($uid));
         $this->db->where('keterangan', $keterangan);
         $query = $this->db->get('absensi');
         return $query->num_rows() > 0;
     }
-    
+
+    public function is_registered_uid($uid) {
+        $this->db->where('uid', $uid);
+        $query = $this->db->get('rfid');
+        return $query->num_rows() > 0;
+    }
 }
+?>

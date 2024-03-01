@@ -26,27 +26,28 @@ class Absensi extends CI_Controller {
         $uid = $this->input->post('uid');
         $id_devices = $this->input->post('id_devices');
 
-        if ($action == 'masuk') {
-            // Periksa apakah siswa telah melakukan absensi masuk sebelumnya
-            $is_already_absent = $this->Absensi_model->is_already_absent($uid, 'masuk');
+        // Periksa apakah UID sudah terdaftar dalam tabel 'rfid'
+        $is_registered_uid = $this->Absensi_model->is_registered_uid($uid);
 
-            if ($is_already_absent) {
-                // Jika sudah melakukan absensi masuk sebelumnya, tampilkan pesan yang sesuai
-                $data['message'] = 'Anda sudah melakukan absensi masuk sebelumnya.';
-            } else {
-                // Jika belum melakukan absensi masuk sebelumnya, lakukan absensi
+        if (!$is_registered_uid) {
+            // Jika UID belum terdaftar, berikan pesan kesalahan atau arahkan siswa untuk mendaftar
+            $data['message'] = 'UID belum terdaftar. Silakan mendaftar terlebih dahulu.';
+            $this->load->view('absensi_form', $data);
+            return; // Hentikan eksekusi metode
+        }
+
+        // Periksa apakah siswa sudah melakukan absensi sebelumnya
+        $is_already_absent = $this->Absensi_model->is_already_absent($uid, $action);
+
+        if ($is_already_absent) {
+            // Jika sudah melakukan absensi sebelumnya, tampilkan pesan yang sesuai
+            $data['message'] = 'Anda sudah melakukan absensi '.$action.' sebelumnya.';
+        } else {
+            // Lanjutkan dengan proses absensi jika belum absen sebelumnya
+            if ($action == 'masuk') {
                 $this->Absensi_model->absen_masuk($uid, $id_devices);
                 $data['message'] = 'Absensi masuk berhasil.';
-            }
-        } elseif ($action == 'keluar') {
-            // Periksa apakah siswa telah melakukan absensi keluar sebelumnya
-            $is_already_absent = $this->Absensi_model->is_already_absent($uid, 'keluar');
-
-            if ($is_already_absent) {
-                // Jika sudah melakukan absensi keluar sebelumnya, tampilkan pesan yang sesuai
-                $data['message'] = 'Anda sudah melakukan absensi keluar sebelumnya.';
-            } else {
-                // Jika belum melakukan absensi keluar sebelumnya, lakukan absensi
+            } elseif ($action == 'keluar') {
                 $this->Absensi_model->absen_keluar($uid, $id_devices);
                 $data['message'] = 'Absensi keluar berhasil.';
             }
@@ -56,3 +57,4 @@ class Absensi extends CI_Controller {
         $this->load->view('absensi_form', $data);
     }
 }
+?>

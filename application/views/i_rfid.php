@@ -74,8 +74,12 @@ if ($set=="rfid") {
                   <td>
                     <?php
                       if (!empty($row->foto)) {
+
                           // Menampilkan gambar dari Google Drive
                         echo '<img src="' . htmlspecialchars($row->foto) . '" alt="Foto Siswa" style="width: 100px; height: auto;">';
+
+                        echo '<img src="' . $row->foto . '" alt="Foto Siswa" style="width: 100px; height: auto;">';
+
                       } else {
                         echo 'Tidak ada foto';
                       }

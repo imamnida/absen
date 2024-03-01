@@ -63,10 +63,10 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <div class="text-center">
-                        <!--<a href="index.html" class="logo"><i class="mdi mdi-assistant"></i> Urora</a>-->
-                        <a href="<?=base_url();?>admin/dashboard" class="logo">
-                            <img src="<?=base_url();?>vertical/assets/images/logo-lg.png" alt="" class="logo-large">
-                        </a>
+                        <a href="<?=base_url();?>admin/dashboard" class="logo"><i class="mdi mdi-assistant"></i> SMKN 1 TALAGA</a>
+                        <!--<a href="<?=base_url();?>admin/dashboard" class="logo">
+                            <img src="<?=base_url();?>vertical/assets/images/smk.png" alt="" class="logo-large">
+                        </a-->
                     </div>
                 </div>
 
@@ -106,7 +106,11 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
 
                             <li>
                                 <a href="<?=base_url();?>admin/kelas" class="waves-effect">
-                                    <i class="mdi mdi-chair-school"></i>
+
+                                    
+
+                                    <i class="mdi mdi-city"></i>
+
                                     <span> Daftar Kelas </span>
                                 </a>
                             </li>
@@ -142,13 +146,13 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                     <i class="mdi mdi-camera-timer"></i>
                                     <span> Setting </span>
                                 </a>
-                            </li>
-                            <li>
+                            </li>                            <li>
                                 <a href="<?=base_url();?>absensi" class="waves-effect">
                                     <i class="mdi mdi-account-card-details"></i>
                                     <span> Absensi Barcode </span>
                                 </a>
                             </li>
+
                             
 
                         </ul>

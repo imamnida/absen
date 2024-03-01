@@ -1,5 +1,5 @@
 <footer class="footer">
-                    © 2018 Urora by Imam Dienul.
+                    © 2018 KESISWAAN SMKN 1 TALAGA.
                 </footer>
 
             </div>
