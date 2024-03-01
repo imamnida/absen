@@ -442,8 +442,9 @@ class Admin extends CI_Controller {
 								'id_kampus' => $kampus_id,
 								'alamat' => $alamat,
 			 				);
-				//echo $id;
-				//print_r($data);
+				echo $id;
+				return;
+
 
 				if ($this->m_admin->updateRFID($id,$data)) {
 					$this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil di update</div>");
