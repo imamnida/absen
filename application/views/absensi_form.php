@@ -10,7 +10,7 @@
     <meta content="Mannatthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <link rel="shortcut icon" href="<?= base_url(); ?>vertical/assets/images/favicon.ico">
+    <link rel="shortcut icon" href="<?= base_url(); ?>vertical/assets/images/logo.png">
     <link href="<?= base_url(); ?>vertical/assets/plugins/animate/animate.css" rel="stylesheet" type="text/css">
     <link href="<?= base_url(); ?>vertical/assets/css/bootstrap-material-design.min.css" rel="stylesheet" type="text/css">
     <link href="<?= base_url(); ?>vertical/assets/css/icons.css" rel="stylesheet" type="text/css">
