@@ -76,10 +76,10 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 
-	 //'hostname' => 'localhost',
-	   //'username' => 'u398357365_salma',
-	   //'password' => 'Imamdienul1',
-	   //'database' => 'u398357365_absensi',
+	 'hostname' => 'localhost',
+	   'username' => 'u398357365_salma',
+	   'password' => 'Imamdienul1',
+	   'database' => 'u398357365_absensi',
 
 	
 	//'username' => 'root',
@@ -87,9 +87,9 @@ $db['default'] = array(
 	//'database' => 'absensi',
 	
 
-	'username' => 'root',
-	'password' => '',
-	'database' => 'haha',
+	//'username' => 'root',
+	//'password' => '',
+	//'database' => 'haha',
 
 	
 
