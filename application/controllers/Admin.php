@@ -416,10 +416,10 @@ class Admin extends CI_Controller {
 					$data['set'] = "edit-rfid";
 					$this->load->view('i_rfid', $data);
 				}else{
-					redirect(base_url().'admin/rfid/datarfid');
+					redirect(base_url().'admin/rfid/rfidnew');
 				}
 			}else{
-				redirect(base_url().'admin/rfid/datarfid');
+				redirect(base_url().'admin/rfid/rfidnew');
 			}
 		}
 	}
