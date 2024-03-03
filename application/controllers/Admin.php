@@ -429,6 +429,7 @@ class Admin extends CI_Controller {
 			if (isset($_POST['id']) && isset($_POST['nama'])) {
 				$id = $this->input->post('id');
 				$nama = $this->input->post('nama');
+				$nis = $this->input->post('nis');
 				$telp = $this->input->post('telp');
 				$gender = $this->input->post('gender');
 				$kelas_id = $this->input->post('kelas_id');
@@ -437,6 +438,7 @@ class Admin extends CI_Controller {
 
 				$data = array('nama' => $nama,
 								'telp' => $telp,
+					      			'nis' => $nis,
 								'gender' => $gender,
 								'id_kelas' => $kelas_id,
 								'id_kampus' => $kampus_id,
