@@ -416,10 +416,10 @@ class Admin extends CI_Controller {
 					$data['set'] = "edit-rfid";
 					$this->load->view('i_rfid', $data);
 				}else{
-					redirect(base_url().'admin/rfid/rfidnew');
+					redirect(base_url().'admin/rfid/datarfid');
 				}
 			}else{
-				redirect(base_url().'admin/rfid/rfidnew');
+				redirect(base_url().'admin/rfid/datarfid');
 			}
 		}
 	}
@@ -450,7 +450,7 @@ class Admin extends CI_Controller {
 				}else{
 					$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data gagal di update</div>");
 				}
-				redirect(base_url().'admin/rfid/datarfid');
+				redirect(base_url().'admin/rfid/rfidnew');
 			}
 		}
 	}
