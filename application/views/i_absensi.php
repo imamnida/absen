@@ -46,7 +46,7 @@ if ($set == "absensi") {
                                             <th>Kelas</th>
                                             <th>Keterangan</th>
                                             <th>Waktu</th>
-                                            <th>Foto</th>
+                                          
                                         </tr>
                                     </thead>
 
@@ -68,7 +68,7 @@ if ($set == "absensi") {
                                                     <td><?= $kelas->kelas;?></td>
                                                     <td><?= $row->keterangan;?></td>
                                                     <td><?= date("H:i:s - d M Y", $row->created_at);?></td>
-                                                    <td><img src="<?= $row->foto;?>" width="150" height="auto" alt="img not found" /></td>
+                                                    
                                                 </tr>
                                             <?php endforeach;?>
                                         <?php endif;?>
