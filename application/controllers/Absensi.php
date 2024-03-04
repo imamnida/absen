@@ -1,4 +1,4 @@
-<?php
+ini contlolernya "<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Absensi extends CI_Controller {
@@ -10,22 +10,10 @@ class Absensi extends CI_Controller {
     }
 
     public function index(){
-        // Check if the user is logged in
-        if (!$this->session->userdata('user_id')) {
-            // Redirect to login page if not logged in
-            redirect('login'); // Adjust 'login' to your actual login controller/method
-        }
-        
         $this->load->view('absensi_form');
     }
 
     public function absen() {
-        // Check if the user is logged in
-        if (!$this->session->userdata('user_id')) {
-            // Redirect to login page if not logged in
-            redirect('login'); // Adjust 'login' to your actual login controller/method
-        }
-        
         // Ambil tindakan (masuk/keluar) dari form
         $action = $this->input->post('action');
 
@@ -34,12 +22,6 @@ class Absensi extends CI_Controller {
     }
 
     private function absen_process($action) {
-        // Check if the user is logged in
-        if (!$this->session->userdata('user_id')) {
-            // Redirect to login page if not logged in
-            redirect('login'); // Adjust 'login' to your actual login controller/method
-        }
-        
         // Ambil UID dari form
         $uid = $this->input->post('uid');
         $id_devices = $this->input->post('id_devices');
@@ -76,3 +58,4 @@ class Absensi extends CI_Controller {
     }
 }
 ?>
+"
