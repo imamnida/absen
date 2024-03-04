@@ -6,7 +6,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
   $avatar = $this->session->userdata('avatar');
 }else{
   //masuk tanpa login
-  $this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-remove\"></i> Mohon Login terlebih dahulu</div>");
+  $this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-remove\"></i> ANDA MENGGUNAKAN HP ANDA AKAN DI PANGGIL</div>");
   redirect(base_url().'login');
 }
 ?>
