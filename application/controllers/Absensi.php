@@ -58,4 +58,4 @@ class Absensi extends CI_Controller {
     }
 }
 ?>
-"
+
