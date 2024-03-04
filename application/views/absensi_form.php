@@ -1,3 +1,15 @@
+<?php
+
+if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
+{ 
+  $users = $this->session->userdata('userlogin');
+  $avatar = $this->session->userdata('avatar');
+}else{
+  //masuk tanpa login
+  $this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-remove\"></i> Mohon Login terlebih dahulu</div>");
+  redirect(base_url().'login');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
