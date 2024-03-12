@@ -401,6 +401,46 @@ class M_admin extends CI_Model {
         return $query->num_rows(); 
     }
 
+   // Fungsi untuk menemukan siswa yang tidak hadir selama 3 hari berturut-turut
+public function siswa_tidak_hadir_3_hari_berturut_turut($id_kelas) {
+    // Array untuk menyimpan data siswa yang tidak hadir selama 3 hari berturut-turut
+    $siswa_tidak_hadir = array();
+    
+    // Mendapatkan tanggal hari ini
+    $today = date('Y-m-d');
+    
+    // Loop melalui semua siswa dalam kelas
+    $siswa_kelas = $this->db->where('id_kelas', $id_kelas)->get('rfid')->result();
+    foreach ($siswa_kelas as $siswa) {
+        // Hitungan berturut-turut absensi tidak hadir
+        $hitungan_tidak_hadir = 0;
+        
+        // Loop selama 3 hari ke belakang
+        for ($i = 0; $i < 3; $i++) {
+            $tanggal_cek = date('Y-m-d', strtotime("-$i day", strtotime($today)));
+            
+            // Periksa apakah siswa tidak hadir pada tanggal ini
+            $absensi_siswa = $this->db->where('id_rfid', $siswa->id_rfid)
+                                      ->where('DATE(FROM_UNIXTIME(created_at))', $tanggal_cek)
+                                      ->where('keterangan', 'absen')
+                                      ->get('absensi')
+                                      ->row();
+            if (!$absensi_siswa) {
+                $hitungan_tidak_hadir++;
+            } else {
+                // Reset hitungan jika siswa hadir pada suatu hari
+                $hitungan_tidak_hadir = 0;
+            }
+        }
+        
+        // Jika siswa tidak hadir selama 3 hari berturut-turut, tambahkan ke array
+        if ($hitungan_tidak_hadir == 3) {
+            $siswa_tidak_hadir[] = $siswa;
+        }
+    }
+    
+    return $siswa_tidak_hadir;
+}
 
 
 }

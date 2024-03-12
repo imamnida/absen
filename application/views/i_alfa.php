@@ -1,6 +1,5 @@
 <?php
-$this->load->View('include/header.php');
-
+$this->load->view('include/header.php');
 ?>
 <div class="page-content-wrapper">
     <div class="container-fluid">
@@ -19,9 +18,6 @@ $this->load->View('include/header.php');
             </div>
             <div class="clearfix"></div>
         </div>
-
-        
-                    
         <div class="row">
             <div class="col-12">
                 <div class="card m-b-30">
@@ -37,34 +33,31 @@ $this->load->View('include/header.php');
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php if(empty($kelas)){?>
-                            <tr>
-                                <td>Data tidak ditemukan</td>
-                                <td>Data tidak ditemukan</td>
-                                <td>Data tidak ditemukan</td>
-                                <td>Data tidak ditemukan</td>
-                            </tr>
-                            <?php 
-                            }else{
-                                $no=0;
-                                foreach($kelas as $row){ 
-                                $no++;
-                                ?>
-                                <tr>
-                                    <td style="text-align:start"><?php echo $no;?></td>
-                                    <td style="text-align:start"><b class="text-primary"><?php echo $row->kelas;?></b></td>
-                                    <?php 
-                                    $jumlah_murid = $m_admin->count_murid($row->id);
-                                    ?>
-                                    <td style="text-align:start"><?php echo $jumlah_murid; ?></td>
-                                    <td style="text-align:start">
-                                        <a href="<?=base_url()?>admin/lihat_alfa?id_kelas=<?=$row->id?>" class="btn btn-success" title="Lihat Rekap"><i class="fa fa-eye"></i></a>
-                                         </td>
-                                </tr>
-                            <?php 
-                                }
-                            }
-                            ?>
+                                <?php if(empty($kelas)): ?>
+                                    <tr>
+                                        <td>Data tidak ditemukan</td>
+                                        <td>Data tidak ditemukan</td>
+                                        <td>Data tidak ditemukan</td>
+                                        <td>Data tidak ditemukan</td>
+                                    </tr>
+                                <?php else: ?>
+                                    <?php $no = 0; ?>
+                                    <?php foreach($kelas as $row): ?>
+                                        <?php $no++; ?>
+                                        <tr>
+                                            <td style="text-align:start"><?php echo $no; ?></td>
+                                            <td style="text-align:start"><b class="text-primary"><?php echo $row->kelas; ?></b></td>
+                                            <?php 
+                                            // Mengambil jumlah siswa di dalam kelas yang tidak melakukan absensi selama 3 hari
+                                            $jumlah_tidak_absensi = isset($jumlah_tidak_absensi_per_kelas[$row->id]) ? $jumlah_tidak_absensi_per_kelas[$row->id] : 0;
+                                            ?>
+                                            <td style="text-align:start"><?php echo $jumlah_tidak_absensi; ?></td>
+                                            <td style="text-align:start">
+                                                <a href="<?= base_url() ?>admin/lihat_alfa?id_kelas=<?= $row->id ?>" class="btn btn-success" title="Lihat Rekap"><i class="fa fa-eye"></i></a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </tbody>
                         </table>            
                     </div>
@@ -77,5 +70,3 @@ $this->load->View('include/header.php');
 <?php
 $this->load->view('include/footer.php');
 ?>
-
-            

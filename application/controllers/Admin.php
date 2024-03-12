@@ -604,30 +604,41 @@ class Admin extends CI_Controller {
 		}
 
 	}
-	public function alfa(){
-		if(!$this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
-		{
-			return ;
+	public function alfa() {
+		$this->load->model('M_admin');
+
+		// Panggil fungsi untuk mendapatkan daftar kelas
+		$kelas = $this->M_admin->get_kelas();
+	
+		// Buat array untuk menyimpan jumlah siswa yang tidak hadir selama 3 hari berturut-turut untuk setiap kelas
+		$jumlah_tidak_absensi_per_kelas = array();
+	
+		// Loop untuk setiap kelas
+		foreach ($kelas as $kelas_item) {
+			// Tentukan ID kelas yang ingin Anda periksa absensinya
+			$id_kelas = $kelas_item->id; 
+	
+			// Panggil fungsi untuk mendapatkan siswa yang tidak hadir dalam kelas ini selama 3 hari berturut-turut
+			$siswa_tidak_hadir_kelas = $this->M_admin->siswa_tidak_hadir_3_hari_berturut_turut($id_kelas);
+	
+			// Hitung jumlah siswa yang tidak hadir
+			$jumlah_tidak_absensi = count($siswa_tidak_hadir_kelas);
+	
+			// Simpan jumlah siswa yang tidak hadir selama 3 hari berturut-turut untuk kelas ini
+			$jumlah_tidak_absensi_per_kelas[$id_kelas] = $jumlah_tidak_absensi;
 		}
-
-		if(isset($_POST['kelas'])){
-			$kelas = [
-				'kelas' => $_POST['kelas']
-			];
-
-			$this->m_admin->insert_kelas($kelas);
-
-			$data['message'] = "Berhasil menambahkan kelas"; 
-			
-		}
-
-		$data['kelas'] = $this->m_admin->get_kelas();
-
-		$data['m_admin'] = $this->m_admin;
-
+	
+		// Kirim data ke view
+		$data['kelas'] = $kelas;
+		$data['jumlah_tidak_absensi_per_kelas'] = $jumlah_tidak_absensi_per_kelas;
+	
+		// Load view yang sesuai
 		$this->load->view('i_alfa', $data);
-
 	}
+	
+
+	
+	
 
 	public function lihat_alfa(){
 		if(!$this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
