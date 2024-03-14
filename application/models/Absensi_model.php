@@ -13,8 +13,8 @@ class Absensi_model extends CI_Model {
             'id_devices' => $id_devices,
             'id_rfid' => $id_rfid,
             'keterangan' => 'masuk',
-            'foto' => '', // Anda dapat menambahkan fungsi untuk mengambil foto jika diperlukan
-            'created_at' => time() // Waktu absensi
+            'foto' => '', 
+            'created_at' => time() 
         );
         $this->db->insert('absensi', $data);
     }
@@ -25,8 +25,8 @@ class Absensi_model extends CI_Model {
             'id_devices' => $id_devices,
             'id_rfid' => $id_rfid,
             'keterangan' => 'keluar',
-            'foto' => '', // Anda dapat menambahkan fungsi untuk mengambil foto jika diperlukan
-            'created_at' => time() // Waktu absensi
+            'foto' => '',
+            'created_at' => time()
         );
         $this->db->insert('absensi', $data);
     }
@@ -38,11 +38,18 @@ class Absensi_model extends CI_Model {
     }
 
     public function is_already_absent($uid, $keterangan) {
-        $this->db->where('id_rfid', $this->get_id_rfid_by_uid($uid));
-        $this->db->where('keterangan', $keterangan);
-        $query = $this->db->get('absensi');
-        return $query->num_rows() > 0;
-    }
+    $today = date("Y-m-d"); 
+
+ 
+    $this->db->where('id_rfid', $this->get_id_rfid_by_uid($uid));
+    $this->db->where('keterangan', $keterangan);
+    $this->db->where('DATE(created_at)', $today); 
+    $query = $this->db->get('absensi');
+    
+
+    return $query->num_rows() > 0;
+}
+
 
     public function is_registered_uid($uid) {
         $this->db->where('uid', $uid);
