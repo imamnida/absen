@@ -41,7 +41,7 @@ class Absensi extends CI_Controller {
 
         if ($is_already_absent) {
             // Jika sudah melakukan absensi sebelumnya, tampilkan pesan yang sesuai
-            $data['message'] = 'Anda sudah melakukan absensi '.$action.' sebelumnya.';
+            $data['message'] = 'Anda sudah melakukan absensi '.$action.' sebelumnya hari ini.';
         } else {
             // Lanjutkan dengan proses absensi jika belum absen sebelumnya
             if ($action == 'masuk') {
