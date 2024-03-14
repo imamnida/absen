@@ -13,8 +13,8 @@ class Absensi_model extends CI_Model {
             'id_devices' => $id_devices,
             'id_rfid' => $id_rfid,
             'keterangan' => 'masuk',
-            'foto' => '', // Anda dapat menambahkan fungsi untuk mengambil foto jika diperlukan
-            'created_at' => time() // Waktu absensi
+            'foto' => '', 
+            'created_at' => time() 
         );
         $this->db->insert('absensi', $data);
     }
@@ -25,8 +25,8 @@ class Absensi_model extends CI_Model {
             'id_devices' => $id_devices,
             'id_rfid' => $id_rfid,
             'keterangan' => 'keluar',
-            'foto' => '', // Anda dapat menambahkan fungsi untuk mengambil foto jika diperlukan
-            'created_at' => time() // Waktu absensi
+            'foto' => '',
+            'created_at' => time()
         );
         $this->db->insert('absensi', $data);
     }
@@ -38,11 +38,25 @@ class Absensi_model extends CI_Model {
     }
 
     public function is_already_absent($uid, $keterangan) {
+        // Get today's date
+        $today = date("Y-m-d");
+
+        // Get the timestamp for the beginning of today
+        $beginning_of_today = strtotime('midnight', strtotime($today));
+
+        // Get the timestamp for the beginning of tomorrow
+        $beginning_of_tomorrow = strtotime('+1 day', $beginning_of_today);
+
+        // Query to check if the user has already performed attendance today
         $this->db->where('id_rfid', $this->get_id_rfid_by_uid($uid));
         $this->db->where('keterangan', $keterangan);
+        $this->db->where('created_at >=', $beginning_of_today);
+        $this->db->where('created_at <', $beginning_of_tomorrow);
         $query = $this->db->get('absensi');
+
         return $query->num_rows() > 0;
     }
+
 
     public function is_registered_uid($uid) {
         $this->db->where('uid', $uid);
