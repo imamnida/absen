@@ -1,5 +1,5 @@
 <?php $this->load->view('include/header.php'); ?>
-<div class="page-content-wrapper ">
+<div class="page-content-wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
@@ -48,7 +48,7 @@
                 </div>
             </div> 
         </div>           
-        
+        <?php if (!empty($_GET['tanggalMulai']) && !empty($_GET['tanggalSelesai'])) { ?>
         <div class="row">
             <div class="col-md-12 col-xl-12">
                 <div class="card m-b-30">
@@ -59,53 +59,69 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nis</th>
+                                        <th>NIS</th>
                                         <th>Nama</th>
-                                        <th>Telp</th>
-                                        <th>Gender</th>
-                                        <th>Alamat</th>
-                                        <th>Jumlah Absensi</th>
+                                        <?php
+                                        $date = strtotime($_GET['tanggalMulai']);
+                                        $end_date = strtotime($_GET['tanggalSelesai']);
+                                        while ($date <= $end_date) {
+                                        ?>
+                                            <th><?= date('Y-m-d', $date); ?></th>
+                                        <?php
+                                            $date = strtotime("+1 day", $date);
+                                        }
+                                        ?>
                                     </tr>
                                 </thead>
-
                                 <tbody>
-                                    <?php 
-                                    if(empty($rekap_absen)){
-                                    ?>
-                                    <tr>
-                                        <td colspan="7">Data tidak ditemukan</td>
-                                    </tr>                                
-                                    <?php 
-                                    } else {
+                                    <?php
+                                    if (!empty($rekap_absen)) {
                                         $no = 0;
-                                        foreach($rekap_absen as $row){ 
-                                            if ($row->nama != "") {
+                                        foreach ($rekap_absen as $row) {
                                             $no++;
                                     ?>
-                                        <tr>
-                                            <td><?php echo $no;?></td>
-                                            <td><?php echo $row->nis;?></td>
-                                            <td style="min-width:250px;"><?php echo $row->nama;?></td>
-                                            <td><?php echo $row->telp;?></td>
-                                            <td style="min-width:50x;"><?php echo $row->gender;?></td>
-                                            <td style="min-width:250px;"><?php echo $row->alamat;?></td>
-                                            <td style="min-width:250px;"><?php echo $row->jumlah_absen;?></td>
-                                        </tr>
-                                    <?php 
-                                            }
+                                            <tr>
+                                                <td><?php echo $no; ?></td>
+                                                <td><?php echo $row->nis; ?></td>
+                                                <td><?php echo $row->nama; ?></td>
+                                                <?php
+                                                $date = strtotime($_GET['tanggalMulai']);
+                                                $end_date = strtotime($_GET['tanggalSelesai']);
+                                                while ($date <= $end_date) {
+                                                    $formatted_date = date('Y-m-d', $date);
+                                                    $absen_found = false;
+                                                    foreach ($row->absensi as $absen) {
+                                                        if (date('Y-m-d', strtotime($absen->created_at)) == $formatted_date) {
+                                                            echo '<td>' . $absen->keterangan . '<br>' . date('Y-m-d H:i:s', $absen->created_at) . '</td>';
+                                                            $absen_found = true;
+                                                            break;
+                                                        }
+                                                    }
+                                                    if (!$absen_found) {
+                                                        echo '<td>-</td>';
+                                                    }
+                                                    $date = strtotime("+1 day", $date);
+                                                }
+                                                ?>
+                                            </tr>
+                                        <?php
                                         }
-                                    }
+                                    } else {
+                                        ?>
+                                        <tr>
+                                            <td colspan="<?php echo (count($rekap_absen) + 3); ?>">Tidak ada data kehadiran dalam rentang tanggal yang diminta.</td>
+                                        </tr>
+                                    <?php
+                                    }}
                                     ?>
                                 </tbody>
-                            </table>    
+                            </table>
                         </div>
-                        
                     </div>
                 </div>
             </div> 
         </div>
     </div>
 </div>
-
 
 <?php $this->load->view('include/footer.php'); ?>

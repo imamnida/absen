@@ -342,19 +342,38 @@ class M_admin extends CI_Model {
         }
     }
 
-    public function rekap_absen($id_kelas, $begin, $end)
-{
-    $this->db->select("rfid.*, (SELECT COUNT(*) FROM absensi WHERE absensi.id_rfid = rfid.id_rfid AND absensi.keterangan ='masuk' AND (absensi.created_at >= '".$begin."' AND absensi.created_at < '".$end."')) AS jumlah_absen");
-    $this->db->from('rfid');
-    $this->db->where('id_kelas', $id_kelas);
-    $this->db->order_by("rfid.nama", "asc");
+    
 
-    $query = $this->db->get();
+    public function rekap_absen($id_kelas, $tanggal_mulai, $tanggal_selesai) {
+        // Mendapatkan data siswa dalam kelas
+        $siswa_kelas = $this->db->where('id_kelas', $id_kelas)->get('rfid')->result();
+        
+        // Array untuk menyimpan rekap absensi
+        $rekap_absen = array();
+        
+        foreach ($siswa_kelas as $siswa) {
+            // Query untuk mendapatkan absensi siswa dalam rentang tanggal yang ditentukan
+            $this->db->select('*');
+            $this->db->from('absensi');
+            $this->db->where('id_rfid', $siswa->id_rfid);
+            $this->db->where('created_at >=', $tanggal_mulai);
+            $this->db->where('created_at <', $tanggal_selesai);
+            $query = $this->db->get();
 
-    if ($query->num_rows() > 0) {
-        return $query->result();
+            // Menyimpan hasil query ke dalam array
+            $absensi_siswa = $query->result();
+
+            // Menyimpan data siswa dan absensinya ke dalam array rekap absen
+            $rekap_absen[] = (object) array(
+                'nis' => $siswa->nis,
+                'nama' => $siswa->nama,
+                'absensi' => $absensi_siswa
+            );
+        }
+
+        return $rekap_absen;
     }
-}
+    
 
 
     public function get_kampus()

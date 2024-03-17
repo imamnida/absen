@@ -164,7 +164,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
         // Cegah pengiriman formulir jika waktu tidak valid
         uidInput.addEventListener("keypress", (event) => {
             const hour = new Date().getHours();
-            if (hour < 6 || hour >= 22) {
+            if (hour < 6 || hour >= 23) {
                 event.preventDefault();
                 alert("Waktu tidak sesuai untuk absensi!");
             }

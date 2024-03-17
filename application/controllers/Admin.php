@@ -748,43 +748,39 @@ class Admin extends CI_Controller {
 		]);
 	}
 
-	public function rekap_absen($id_kelas=null)
-	{
-		if(!$this->session->userdata('userlogin')) // mencegah akses langsung tanpa login
-		{
-			return ;
-		}
+	public function rekap_absen($id_kelas = null)
+    {
+        if(!$this->session->userdata('userlogin')) // mencegah akses langsung tanpa login
+        {
+            return ;
+        }
 
-		if(!$id_kelas){
-			echo "insert id kelas";
-			return;
-		}
+        if(!$id_kelas){
+            echo "insert id kelas";
+            return;
+        }
 
-		$kelas = $this->m_admin->find_kelas($id_kelas);
+        $kelas = $this->m_admin->find_kelas($id_kelas);
 
-		if (!$kelas) {
-			echo "kelas tidak ditemukan";
-			return;
-		}
+        if (!$kelas) {
+            echo "kelas tidak ditemukan";
+            return;
+        }
 
-		$rekap_absen = [];
-		if (isset($_GET["tanggalMulai"]) && isset($_GET["tanggalSelesai"])) {
-			$tanggal_mulai = $this->input->get('tanggalMulai');
-			$tanggal_selesai = $this->input->get('tanggalSelesai');
+        $rekap_absen = [];
+        if (isset($_GET["tanggalMulai"]) && isset($_GET["tanggalSelesai"])) {
+            $tanggal_mulai = strtotime($this->input->get('tanggalMulai'));
+            $tanggal_selesai = strtotime($this->input->get('tanggalSelesai')) + 86400; // Tambah 1 hari
 
-			$tanggal_mulai = strtotime($tanggal_mulai);
-			$tanggal_selesai = strtotime($tanggal_selesai);
+            $rekap_absen = $this->m_admin->rekap_absen($id_kelas, $tanggal_mulai, $tanggal_selesai);
+        }
 
-			$tanggal_selesai += 86400;	// tambah 1 hari (hitungan detik)
-			$rekap_absen = $this->m_admin->rekap_absen($id_kelas, $tanggal_mulai, $tanggal_selesai);
-		}
+        $this->load->view('i_detail_absen', [
+            "kelas" => $kelas,
+            "rekap_absen" => $rekap_absen,
+        ]);
+    }
 
-		$this->load->view('i_detail_absen',[
-			"kelas" => $kelas,
-			"rekap_absen" => $rekap_absen,
-		]);
-
-	}
 
 	public function rekapAbsen2excel(Type $var = null)
 	{
