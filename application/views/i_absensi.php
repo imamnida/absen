@@ -11,9 +11,9 @@ if ($set == "absensi") {
                     <div class="page-title-box">
                         <div class="btn-group float-right">
                             <ol class="breadcrumb hide-phone p-0 m-0">
-                                <li class="breadcrumb-item"><a href="#">Urora</a></li>
-                                <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                                <li class="breadcrumb-item active">Datatable</li>
+                                <li class="breadcrumb-item"><a href="#">Absensi</a></li>
+                                <li class="breadcrumb-item"><a href="#">Siswa</a></li>
+                                <li class="breadcrumb-item active">?</li>
                             </ol>
                         </div>
                         <h4 class="page-title">Absensi</h4>

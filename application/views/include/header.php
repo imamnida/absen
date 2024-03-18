@@ -39,6 +39,8 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
         <link rel="stylesheet" href="<?=base_url();?>vertical/assets/css/icons.css" type="text/css">
         <link rel="stylesheet" href="<?=base_url();?>vertical/assets/css/style.css" type="text/css">
 
+   
+
     </head>
 
 
@@ -65,7 +67,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                     <div class="text-center">
                         <a href="<?=base_url();?>admin/dashboard" class="logo"><i class="mdi mdi-assistant"></i> SMKN 1 TALAGA</a>
                         <!--<a href="<?=base_url();?>admin/dashboard" class="logo">
-                            <img src="<?=base_url();?>vertical/assets/images/smk.png" alt="" class="logo-large">
+                            <img src="<?=base_url();?>vertical/<?=base_url();?>vertical/assets/images/smk.png" alt="" class="logo-large">
                         </a-->
                     </div>
                 </div>
@@ -202,7 +204,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                 <li class="list-inline-item dropdown notification-list">
                                     <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
                                         aria-expanded="false">
-                                        <img src="<?=base_url();?>vertical/assets/images/<?=$avatar;?>" alt="user" >
+                                        <img src="<?=base_url();?>vertical/<?=base_url();?>vertical/assets/images/<?=$avatar;?>" alt="user" >
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                         <!-- item-->

@@ -92,7 +92,7 @@
                                                     $absen_found = false;
                                                     foreach ($row->absensi as $absen) {
                                                         if (date('Y-m-d', strtotime($absen->created_at)) == $formatted_date) {
-                                                            echo '<td>' . $absen->keterangan . '<br>' . date('Y-m-d H:i:s', $absen->created_at) . '</td>';
+                                                            echo '<td>' . $absen->keterangan . '</td>';
                                                             $absen_found = true;
                                                             break;
                                                         }
@@ -109,7 +109,7 @@
                                     } else {
                                         ?>
                                         <tr>
-                                            <td colspan="<?php echo (count($rekap_absen) + 3); ?>">Tidak ada data kehadiran dalam rentang tanggal yang diminta.</td>
+                                            <td colspan="<?php echo isset($rekap_absen) ? (count($rekap_absen) + 3) : 0; ?>">Tidak ada data kehadiran dalam rentang tanggal yang diminta.</td>
                                         </tr>
                                     <?php
                                     }}
