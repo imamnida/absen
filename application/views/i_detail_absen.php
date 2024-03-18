@@ -107,7 +107,7 @@
                                                     if (!$absen_found) {
                                                         echo '-';
                                                     }
-                                                    echo '/<td>'
+                                                    echo '/<td>';
                                                     $date = strtotime("+1 day", $date);
                                                 }
                                                 ?>
