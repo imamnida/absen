@@ -90,20 +90,16 @@
                                                 while ($date <= $end_date) {
                                                     $formatted_date = date('Y-m-d', $date);
                                                     $absen_found = false;
-                                                    echo "<td>";
                                                     foreach ($row->absensi as $absen) {
-                                                        echo date('Y-m-d', $absen->created_at)."==";
-                                                        // if (date('Y-m-d', $absen->created_at) == $formatted_date) {
-                                                        //     echo '<td>' . $absen->keterangan . '</td>';
-                                                        //     $absen_found = true;
-                                                        //     break;
-                                                        // }
+                                                        if (date('Y-m-d', $absen->created_at) == $formatted_date) {
+                                                            echo '<td>' . $absen->keterangan . '</td>';
+                                                            $absen_found = true;
+                                                            break;
+                                                        }
                                                     }
-                                                    echo "</td>";
-                                                    
-                                                    // if (!$absen_found) {
-                                                    //     echo '<td>-</td>';
-                                                    // }
+                                                    if (!$absen_found) {
+                                                        echo '<td>-</td>';
+                                                    }
                                                     $date = strtotime("+1 day", $date);
                                                 }
                                                 ?>
