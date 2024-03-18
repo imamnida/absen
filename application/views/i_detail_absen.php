@@ -91,14 +91,16 @@
                                                     $formatted_date = date('Y-m-d', $date);
                                                     $absen_found = false;
                                                     foreach ($row->absensi as $absen) {
-                                                        if (date('Y-m-d', strtotime($absen->created_at)) == $formatted_date) {
-                                                            echo '<td>' . $absen->keterangan . '</td>';
-                                                            $absen_found = true;
-                                                            break;
-                                                        }
+                                                        echo '<td>' . date('Y-m-d', strtotime($absen->created_at) . '</td>';
+                                                        
+                                                        // if (date('Y-m-d', strtotime($absen->created_at)) == $formatted_date) {
+                                                        //     echo '<td>' . $absen->keterangan . '</td>';
+                                                        //     $absen_found = true;
+                                                        //     break;
+                                                        // }
                                                     }
                                                     if (!$absen_found) {
-                                                        echo '<td>-</td>';
+                                                        // echo '<td>-</td>';
                                                     }
                                                     $date = strtotime("+1 day", $date);
                                                 }
