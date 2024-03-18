@@ -90,7 +90,7 @@
                                                 while ($date <= $end_date) {
                                                     $formatted_date = date('Y-m-d', $date);
                                                     $absen_found = false;
-                                                    echo '<td>'
+                                                    echo '<td>';
                                                     foreach ($row->absensi as $absen) {
                                                         if (date('Y-m-d', $absen->created_at) == $formatted_date) {
 
