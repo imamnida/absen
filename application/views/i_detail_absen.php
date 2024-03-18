@@ -111,11 +111,12 @@
                                                         }
                                                         echo '<td>'.$tulisan_absen.'</td>';
                                                         
-                                                        $date = strtotime("+1 day", $date);
                                                     }else{
                                                         echo '<td>Libur</td>';
                                                         
                                                     }
+                                                        $date = strtotime("+1 day", $date);
+                                                    
                                                 }
                                                 ?>
                                             </tr>
