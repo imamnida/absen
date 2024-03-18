@@ -90,16 +90,24 @@
                                                 while ($date <= $end_date) {
                                                     $formatted_date = date('Y-m-d', $date);
                                                     $absen_found = false;
+                                                    echo '<td>'
                                                     foreach ($row->absensi as $absen) {
                                                         if (date('Y-m-d', $absen->created_at) == $formatted_date) {
-                                                            echo '<td>' . $absen->keterangan . '</td>';
+
+                                                            if($absen->keterangan == "masuk"){
+                                                                echo "masuk-";
+                                                            }
+                                                             if($absen->keterangan == "keluar"){
+                                                                echo "keluar";
+                                                            }
                                                             $absen_found = true;
                                                             break;
                                                         }
                                                     }
                                                     if (!$absen_found) {
-                                                        echo '<td>-</td>';
+                                                        echo '-';
                                                     }
+                                                    echo '/<td>'
                                                     $date = strtotime("+1 day", $date);
                                                 }
                                                 ?>
