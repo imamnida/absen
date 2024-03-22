@@ -27,6 +27,7 @@
                     <div class="col-md-6 mx-auto">
                         <div class="card">
                             <div class="card-body">
+                                <!-- Login Form -->
                                 <div class="text-center pt-3">
                                     <a href="index.html">
                                         <img src="<?=base_url();?>vertical/assets/images/logo.png" alt="logo" height="200" />
@@ -68,6 +69,19 @@
                                         </div>
                                     </form>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tutorial Section on the Right -->
+                    <div class="col-md-6 mx-auto">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Cara Penggunaan Aplikasi:</h5>
+                                <p>
+                                    1. Login sebagai Admin dengan username "admin" dan password "adminabsen123".<br>
+                                    2. Setelah login, pilih menu "Absensi Barcode" untuk mulai absensi.<br>
+                                    3. Tempelkan barcode Anda ke perangkat pembaca untuk melakukan absensi.
+                                </p>
                             </div>
                         </div>
                     </div>
