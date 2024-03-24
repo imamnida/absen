@@ -129,7 +129,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label for="uid">UID:</label>
+                                                <label for="uid">NIS:</label>
                                                 <input type="text" class="form-control" name="uid" id="uid" required style="color: black;">
                                             </div>
                                             <input type="hidden" name="id_devices" value="1">
