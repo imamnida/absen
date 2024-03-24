@@ -23,6 +23,17 @@ class Absensi extends CI_Controller {
 
     private function absen_process($action) {
         // Ambil UID dari form
+        $this->load->model('m_admin');
+		$today = date('Y-m-d'); // Menggunakan format tanggal Y-m-d untuk mendapatkan hari ini
+		$tomorrow = date('Y-m-d', strtotime('tomorrow')); // Menggunakan format tanggal Y-m-d untuk mendapatkan besok
+	
+		$data['masuk'] = $this->m_admin->get_absensi("masuk", strtotime("today"), strtotime("tomorrow"));
+		$data['keluar'] = $this->m_admin->get_absensi("keluar", strtotime("today"), strtotime("tomorrow"));
+	
+		$jumlah_tidak_absensi = $this->m_admin->hitung_tidak_absensi();
+
+		// Kemudian kirimkan hasilnya ke tampilan
+		$data['jumlah_tidak_absensi'] = $jumlah_tidak_absensi;
         $uid = $this->input->post('uid');
         $id_devices = $this->input->post('id_devices');
 
