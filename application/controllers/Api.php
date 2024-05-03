@@ -388,7 +388,7 @@ class Api extends CI_Controller {
 								$respon = "";
 
 								if (time() < $masuk1) {
-									$notif = array('status' => 'failed', 'ket' => 'GAGAL                            .');
+									$notif = array('status' => 'failed', 'ket' => 'DILUAR WAKTU                          .');
 									echo json_encode($notif);
 								}
 								if (time() >= $masuk1 && time() <= $masuk2) {
@@ -402,7 +402,7 @@ class Api extends CI_Controller {
 									$respon = "TELAT                            .";
 								}
 								if (time() > $masuk2 + 3600 && time() < $keluar1 ) {			//3600 = 1 jam
-									$notif = array('status' => 'failed', 'ket' => 'GAGAL                            .');
+									$notif = array('status' => 'failed', 'ket' => 'DILUAR WAKTU                          .');
 									echo json_encode($notif);
 								}
 								if (time() >= $keluar1 && time() <= $keluar2 + 3600) {
@@ -411,7 +411,7 @@ class Api extends CI_Controller {
 									$respon = "KELUAR                             .";
 								}
 								if (time() > $keluar2 + 3600) {
-									$notif = array('status' => 'failed', 'ket' => 'GAGAL                            .');
+									$notif = array('status' => 'failed', 'ket' => 'DILUAR WAKTU                          .');
 									echo json_encode($notif);
 								}
 
