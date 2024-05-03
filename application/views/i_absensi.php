@@ -65,8 +65,7 @@ if ($set == "absensi") {
                                                     <?php
                                                     $kelas = ($row->id_kelas == null) ? $m_admin->find_kelas($row->id_kelas) : ["kelas" => "-"];
                                                     ?>
-                                              
-                                     
+                                                    <td><?= $kelas->kelas ?></td>
                                                     <td><?= $row->keterangan ?></td>
                                                     <td><?= date("H:i:s - d M Y", strtotime($row->created_at)); ?></td>
 
