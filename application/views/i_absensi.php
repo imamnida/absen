@@ -63,7 +63,7 @@ if ($set == "absensi") {
                                                     <td><?= $row->nama_devices?> (<?= $row->id_devices;?>)</td>
                                                     <td><?= $row->nama?></td>
                                                     <?php
-                                                    $kelas = ($row->id_kelas != null) ? $m_admin->find_kelas($row->id_kelas) : ["kelas" => "-"];
+                                                    $kelas = ($row->id_kelas= null) ? $m_admin->find_kelas($row->id_kelas) : ["kelas" => "-"];
                                                     ?>
                                                     <td><?= $kelas->kelas?></td>
                                                     <td><?= $row->keterangan?></td>
