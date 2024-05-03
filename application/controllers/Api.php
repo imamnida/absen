@@ -388,7 +388,7 @@ class Api extends CI_Controller {
 								$respon = "";
 
 								if (time() < $masuk1) {
-									$notif = array('status' => 'failed', 'ket' => 'GAGAL');
+									$notif = array('status' => 'failed', 'ket' => 'GAGAL                            .');
 									echo json_encode($notif);
 								}
 								if (time() >= $masuk1 && time() <= $masuk2) {
@@ -411,7 +411,7 @@ class Api extends CI_Controller {
 									$respon = "keluar";
 								}
 								if (time() > $keluar2 + 3600) {
-									$notif = array('status' => 'failed', 'ket' => 'GAGAL');
+									$notif = array('status' => 'failed', 'ket' => 'GAGAL                            .');
 									echo json_encode($notif);
 								}
 
