@@ -60,13 +60,13 @@ if ($set == "absensi") {
                                             foreach($data as $row): $no++;?>
                                                 <tr>
                                                     <td><b class="text-success"><?= $no;?></b></td>
-                                                    <td><?= $row->nama_devices;?> (<?= $row->id_devices;?>)</td>
-                                                    <td><?= $row->nama;?></td>
+                                                    <td><?= $row->nama_devices?> (<?= $row->id_devices;?>)</td>
+                                                    <td><?= $row->nama?></td>
                                                     <?php
                                                     $kelas = ($row->id_kelas != null) ? $m_admin->find_kelas($row->id_kelas) : ["kelas" => "-"];
                                                     ?>
-                                                    <td><?= $kelas->kelas;?></td>
-                                                    <td><?= $row->keterangan;?></td>
+                                                    <td><?= $kelas->kelas?></td>
+                                                    <td><?= $row->keterangan?></td>
                                                     <td><?= date("H:i:s - d M Y", $row->created_at);?></td>
                                                     
                                                 </tr>
