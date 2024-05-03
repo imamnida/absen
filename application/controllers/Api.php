@@ -394,12 +394,12 @@ class Api extends CI_Controller {
 								if (time() >= $masuk1 && time() <= $masuk2) {
 									$absen = true;
 									$ket = "masuk";
-									$respon = "masuk tepat waktu";
+									$respon = "MASUK BERHASIL                      .";
 								}
 								if (time() > $masuk2 && time() <= $masuk2 + 3600) {			//3600 = 1 jam
 									$absen = true;
 									$ket = "masuk";
-									$respon = "telat masuk";
+									$respon = "TELAT                            .";
 								}
 								if (time() > $masuk2 + 3600 && time() < $keluar1 ) {			//3600 = 1 jam
 									$notif = array('status' => 'failed', 'ket' => 'GAGAL                            .');
