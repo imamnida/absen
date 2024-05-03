@@ -402,7 +402,7 @@ class Api extends CI_Controller {
 									$respon = "telat masuk";
 								}
 								if (time() > $masuk2 + 3600 && time() < $keluar1 ) {			//3600 = 1 jam
-									$notif = array('status' => 'failed', 'ket' => 'GAGAL');
+									$notif = array('status' => 'failed', 'ket' => 'GAGAL                            .');
 									echo json_encode($notif);
 								}
 								if (time() >= $keluar1 && time() <= $keluar2 + 3600) {
