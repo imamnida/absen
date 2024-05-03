@@ -451,7 +451,7 @@ class Api extends CI_Controller {
 											echo json_encode($notif);
 										}
 									}else{
-										$notif = array('status' => 'failed', 'ket' => 'SUDAH ABSENSI         .');
+										$notif = array('status' => 'failed', 'ket' => 'SUDAH ABSENSI               .');
 										echo json_encode($notif);
 									}	
 								}
