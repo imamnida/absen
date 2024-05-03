@@ -35,7 +35,7 @@ if ($set == "absensi") {
                     <div class="col-12">
                         <div class="card m-b-30">
                             <div class="card-body">
-                                <h4 class="mt-0 header-title"><b><?= $title; ?></b> <b class="text-danger"><?= date("d M Y",time());?></b></h4>
+                                <h4 class="mt-0 header-title"><b><?= $title; ?></b> <b class="text-danger"><?= date("d M Y", time()); ?></b></h4>
 
                                 <table id="datatable-buttons" class="table table-striped table-bordered w-100">
                                     <thead>
@@ -46,39 +46,39 @@ if ($set == "absensi") {
                                             <th>Kelas</th>
                                             <th>Keterangan</th>
                                             <th>Waktu</th>
-                                          
+
                                         </tr>
                                     </thead>
 
                                     <tbody>
-                                        <?php if(empty($data)):?>
+                                        <?php if (empty($data)) : ?>
                                             <tr>
                                                 <td colspan="7">Data tidak ditemukan</td>
                                             </tr>
-                                        <?php else:
+                                        <?php else :
                                             $no = 0;
-                                            foreach($data as $row): $no++;?>
+                                            foreach ($data as $row) : $no++; ?>
                                                 <tr>
-                                                    <td><b class="text-success"><?= $no;?></b></td>
-                                                    <td><?= $row->nama_devices?> (<?= $row->id_devices;?>)</td>
-                                                    <td><?= $row->nama?></td>
+                                                    <td><b class="text-success"><?= $no; ?></b></td>
+                                                    <td><?= $row->nama_devices ?> (<?= $row->id_devices; ?>)</td>
+                                                    <td><?= $row->nama ?></td>
                                                     <?php
-                                                    $kelas = ($row->id_kelas= null) ? $m_admin->find_kelas($row->id_kelas) : ["kelas" => "-"];
+                                                    $kelas = ($row->id_kelas == null) ? $m_admin->find_kelas($row->id_kelas) : ["kelas" => "-"];
                                                     ?>
-                                                    <td><?= $kelas->kelas?></td>
-                                                    <td><?= $row->keterangan?></td>
-                                                    <td><?= date("H:i:s - d M Y", $row->created_at);?></td>
-                                                    
+                                                    <td><?= $kelas->kelas ?></td>
+                                                    <td><?= $row->keterangan ?></td>
+                                                    <td><?= date("H:i:s - d M Y", strtotime($row->created_at)); ?></td>
+
                                                 </tr>
-                                            <?php endforeach;?>
-                                        <?php endif;?>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
-            <?php endforeach;?>
+            <?php endforeach; ?>
 
         </div><!-- container -->
 
