@@ -408,7 +408,7 @@ class Api extends CI_Controller {
 								if (time() >= $keluar1 && time() <= $keluar2 + 3600) {
 									$absen = true;
 									$ket = "keluar";
-									$respon = "keluar";
+									$respon = "KELUAR                             .";
 								}
 								if (time() > $keluar2 + 3600) {
 									$notif = array('status' => 'failed', 'ket' => 'GAGAL                            .');
