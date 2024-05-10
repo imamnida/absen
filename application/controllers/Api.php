@@ -461,7 +461,7 @@ class Api extends CI_Controller {
 							echo json_encode($notif);
 						}
 					}else{
-						$notif = array('status' => 'failed', 'ket' => 'FAILED RFID NOT FOUND');
+						$notif = array('status' => 'failed', 'ket' => 'HUBUNGI STAFF                           .');
 						echo json_encode($notif);
 					}
 				}else{
