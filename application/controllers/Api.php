@@ -180,7 +180,7 @@ class Api extends CI_Controller {
 							if ($idrfid > 0) {
 								$histori = array('id_rfid' => $idrfid, 'keterangan' => 'ADD RFID CARD', 'waktu' => time(), 'id_devices' => $iddev);
 								if ($this->m_api->insert_histori($histori)) {
-									$notif = array('status' => 'success', 'ket' => 'DAFTAR BERHASIL                               .');
+									$notif = array('status' => 'success', 'ket' => 'DAFTAR BERHASIL                          .');
 									echo json_encode($notif);
 								}
 							}else{
