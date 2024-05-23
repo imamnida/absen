@@ -35,17 +35,13 @@ $this->load->view('include/header.php');
                             <tbody>
                                 <?php if(empty($kelas)): ?>
                                     <tr>
-                                        <td>Data tidak ditemukan</td>
-                                        <td>Data tidak ditemukan</td>
-                                        <td>Data tidak ditemukan</td>
-                                        <td>Data tidak ditemukan</td>
+                                        <td colspan="4">Data tidak ditemukan</td>
                                     </tr>
                                 <?php else: ?>
-                                    <?php $no = 0; ?>
+                                    <?php $no = 1; ?>
                                     <?php foreach($kelas as $row): ?>
-                                        <?php $no++; ?>
                                         <tr>
-                                            <td style="text-align:start"><?php echo $no; ?></td>
+                                            <td style="text-align:start"><?php echo $no++; ?></td>
                                             <td style="text-align:start"><b class="text-primary"><?php echo $row->kelas; ?></b></td>
                                             <?php 
                                             // Mengambil jumlah siswa di dalam kelas yang tidak melakukan absensi selama 3 hari
@@ -53,7 +49,7 @@ $this->load->view('include/header.php');
                                             ?>
                                             <td style="text-align:start"><?php echo $jumlah_tidak_absensi; ?></td>
                                             <td style="text-align:start">
-                                                <a href="<?= base_url() ?>admin/lihat_alfa?id_kelas=<?= $row->id ?>" class="btn btn-success" title="Lihat Rekap"><i class="fa fa-eye"></i></a>
+                                                <a href="<?= base_url() ?>alfa/detail/<?= $row->id ?>" class="btn btn-success" title="Lihat Rekap"><i class="fa fa-eye"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

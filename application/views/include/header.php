@@ -99,7 +99,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                 </a>
                             </li>
                             <li>
-                                <a href="<?=base_url();?>admin/alfa" class="waves-effect">
+                                <a href="<?=base_url();?>alfa" class="waves-effect">
                                     <i class="mdi mdi-account-card-details"></i>
                                     <span> Siswa Alfa 3 Hari <span class="badge badge-danger heartbit noti-icon-badge">5</span> </span>
                                 </a>
