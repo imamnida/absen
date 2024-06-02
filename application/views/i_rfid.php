@@ -71,20 +71,15 @@ if ($set=="rfid") {
                   <td><?php echo $row->telp;?></td>
                   <td><?php echo $row->gender;?></td>
                   <td><?php echo $row->alamat;?></td>
-                  <td>
-                    <?php
-                      if (!empty($row->foto)) {
-
-                          // Menampilkan gambar dari Google Drive
-                        echo '<img src="' . htmlspecialchars($row->foto) . '" alt="Foto Siswa" style="width: 100px; height: auto;">';
-
-                        echo '<img src="' . $row->foto . '" alt="Foto Siswa" style="width: 100px; height: auto;">';
-
-                      } else {
-                        echo 'Tidak ada foto';
-                      }
-                    ?>
-                  </td>
+                  <td style="min-width:200px;">
+                                                <?php
+                                                if (!empty($row->foto)) {
+                                                    echo '<img src="' . $row->foto . '" alt="Foto Siswa" style="width: 100px; height: auto;">';
+                                                } else {
+                                                    echo 'Tidak ada foto';
+                                                }
+                                                ?>
+                                            </td>
                   <td>
                     <a href="<?=base_url()?>/admin/edit_rfid/<?=$row->id_rfid?>" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i></a>
                   </td>
@@ -184,6 +179,18 @@ if ($set=="rfid") {
                 <div class="form-group">
                   <label>Alamat</label>
                   <input type="text" name="alamat" class="form-control" placeholder="alamat" value="<?php if(isset($alamat)){echo $alamat;}?>" required>
+                </div>
+                <div class="form-group">
+                  <label>Link Foto</label>
+                  <input type="text" name="alamat" class="form-control" placeholder="Link Google Drive" value="<?php if(isset($foto)){echo $foto;}?>" required>
+                </div>
+                <div class="form-group">
+                  <label>Link Kartu Keluarga</label>
+                  <input type="text" name="alamat" class="form-control" placeholder="Link Google Drive" value="<?php if(isset($kaka)){echo $kaka;}?>" required>
+                </div>
+                <div class="form-group">
+                  <label>Link Foto Rumah</label>
+                  <input type="text" name="alamat" class="form-control" placeholder="Link Google Drive" value="<?php if(isset($rumah)){echo $rumah;}?>" required>
                 </div>
               </div>
               <div class="box-footer">

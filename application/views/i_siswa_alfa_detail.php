@@ -8,10 +8,10 @@
                         <ol class="breadcrumb hide-phone p-0 m-0">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item"><a href="<?= base_url('absensi') ?>">Daftar Kelas</a></li>
-                            <li class="breadcrumb-item active">Detail Murid</li>
+                            <li class="breadcrumb-item active">Detail Alfa</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Detail Murid</h4>
+                    <h4 class="page-title">Sisiwa 3 Hari Tidak hadir</h4>
                 </div>
             </div>
             <div class="clearfix"></div>

@@ -93,6 +93,13 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                 </a>
                             </li>
                             <li>
+                                <a href="<?=base_url();?>absensi" class="waves-effect">
+                                    <i class="mdi mdi-account-card-details"></i>
+                                    <span> Absensi Barcode </span>
+                                </a>
+                            </li>
+
+                            <li>
                                 <a href="<?=base_url();?>admin/devices" class="waves-effect">
                                     <i class="mdi mdi-engine-outline"></i>
                                     <span> Data Alat </span>
@@ -154,13 +161,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                     <i class="mdi mdi-camera-timer"></i>
                                     <span> Setting </span>
                                 </a>
-                            </li>                            <li>
-                                <a href="<?=base_url();?>absensi" class="waves-effect">
-                                    <i class="mdi mdi-account-card-details"></i>
-                                    <span> Absensi Barcode </span>
-                                </a>
-                            </li>
-
+                            </li>                           
                             
 
                         </ul>
@@ -204,7 +205,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                 <li class="list-inline-item dropdown notification-list">
                                     <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
                                         aria-expanded="false">
-                                        <img src="<?=base_url();?>vertical/<?=base_url();?>vertical/assets/images/<?=$avatar;?>" alt="user" >
+                                        <img src="<?=base_url();?>vertical/assets/images/<?=$avatar;?>" alt="user" >
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                         <!-- item-->
