@@ -118,7 +118,7 @@ if ($set == "dashboard") {
                             </div>
                             <div class="col-8 ml-auto align-self-center text-center">
                                 <div class="m-l-10 text-white float-right">
-                                    <h5 class="mt-0 round-inner"><?= $jmlmasuk; ?></h5>
+                                    <h5 class="mt-0 round-inner">0</h5>
                                     <p class="mb-0">Siswa Ijin</p>
                                 </div>
                             </div>
@@ -138,7 +138,7 @@ if ($set == "dashboard") {
                             </div>
                             <div class="col-8 ml-auto align-self-center text-center">
                                 <div class="m-l-10 text-white float-right">
-                                    <h5 class="mt-0 round-inner"><?= $jmlmasuk; ?></h5>
+                                    <h5 class="mt-0 round-inner">0</h5>
                                     <p class="mb-0">Siswa Sakit</p>
                                 </div>
                             </div>
