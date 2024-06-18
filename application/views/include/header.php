@@ -79,7 +79,12 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                             <li class="menu-title">Main</li>
 
                            
-
+                           <li>
+                                <a href="<?=base_url();?>admin/dashboard" class="waves-effect">
+                                    <i class="mdi mdi-view-dashboard"></i>
+                                    <span> Dashboard</span>
+                                </a>
+                            </li>
                             
                             <li>
                                 <a href="<?=base_url();?>admin/list_users" class="waves-effect">
@@ -113,12 +118,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                     <span> Daftar Kampus</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="<?=base_url();?>admin/dashboard" class="waves-effect">
-                                    <i class="mdi mdi-view-dashboard"></i>
-                                    <span> Dashboard</span>
-                                </a>
-                            </li>
+                            
 
                             <li>
                                 <a href="<?=base_url();?>admin/kelas" class="waves-effect">
