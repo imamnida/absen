@@ -80,7 +80,7 @@
                                 <p>
                                     1. Login sebagai Admin dengan username "admin" dan password "adminabsen123".<br>
                                     2. Setelah login, pilih menu "Absensi Barcode" untuk mulai absensi.<br>
-                                    3. Tempelkan barcode Anda ke perangkat pembaca untuk melakukan absensi.
+                                   
                                 </p>
                             </div>
                         </div>
