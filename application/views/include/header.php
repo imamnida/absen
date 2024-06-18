@@ -78,12 +78,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                         <ul>
                             <li class="menu-title">Main</li>
 
-                            <li>
-                                <a href="<?=base_url();?>admin/dashboard" class="waves-effect">
-                                    <i class="mdi mdi-view-dashboard"></i>
-                                    <span> Dashboard</span>
-                                </a>
-                            </li>
+                           
 
                             
                             <li>
@@ -116,6 +111,12 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                 <a href="<?=base_url();?>admin/kampus" class="waves-effect">
                                     <i class="mdi mdi-city"></i>
                                     <span> Daftar Kampus</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?=base_url();?>admin/dashboard" class="waves-effect">
+                                    <i class="mdi mdi-view-dashboard"></i>
+                                    <span> Dashboard</span>
                                 </a>
                             </li>
 
