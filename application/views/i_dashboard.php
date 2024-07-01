@@ -24,7 +24,19 @@ if ($set == "dashboard") {
             </div>
         </div>
 
-        <!-- end page title end breadcrumb -->
+        <!-- Welcome Box -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card m-b-30">
+                    <div class="card-body text-center">
+                        <img src="<?=base_url();?>vertical/assets/images/logo.png" alt="School Logo" style="max-width: 150px; margin-bottom: 20px;">
+                        <h1 class="card-title">SELAMAT DATANG DI APLIKASI ADMINISTRASI ATTENDACE SYSTEM TERBARU</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Cards -->
         <div class="row">
             <!-- Column: RFID Scanner -->
             <div class="col-sm-12 col-md-6 col-xl-3">

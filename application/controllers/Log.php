@@ -1,17 +1,17 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Login extends CI_Controller {
+class Log extends CI_Controller {
 
 	public function __construct() {
         parent::__construct();
-        $this->load->model('m_login');
+        $this->load->model('w_login');
         $this->load->library('bcrypt');
     }
 
 	public function index()
 	{
-		$this->load->view('i_login');
+		$this->load->view('wad/w_login');
 	
 	}
 
@@ -29,7 +29,7 @@ class Login extends CI_Controller {
 	        }
 
 			//ambil data dari database
-			$check = $this->m_login->prosesLogin($username);
+			$check = $this->w_login->prosesLogin($username);
 			$hasil = 0;
 			if(isset($check)){
 				$hasil++;
@@ -38,7 +38,7 @@ class Login extends CI_Controller {
 			//echo $pass;
 			//echo "<br>";
 			if($hasil > 0){
-				$data = $this->m_login->viewDataByID($username); 
+				$data = $this->w_login->viewDataByID($username); 
 				foreach ($data as $dkey) {
 					$passDB = $dkey->password;
 					//$role = $dkey->role;
@@ -52,7 +52,7 @@ class Login extends CI_Controller {
 					$this->session->set_userdata('userlogin',$username);
 					$this->session->set_userdata('avatar',$avatar);
 
-					redirect(base_url().'admin/dashboard');
+					redirect(base_url().'wad/dashboard');
 					
 				}else{
 					// Password does not match

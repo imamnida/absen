@@ -35,7 +35,7 @@
                                 </div>
                                 <div class="px-3 pb-3">
                                     <?php echo $this->session->flashdata('pesan')?>
-                                    <form class="form-horizontal m-t-20 mb-0" action="<?=base_url();?>login/logincheck" method="post">
+                                    <form class="form-horizontal m-t-20 mb-0" action="<?=base_url();?>log/logincheck" method="post">
                                         <div class="form-group row">
                                             <div class="col-12">
                                                 <input name="username" type="text" class="form-control" placeholder="Username">
@@ -59,12 +59,6 @@
                                                 <button class="btn btn-primary btn-raised btn-block waves-effect waves-light" type="submit">Log In</button>
                                             </div>
                                         </div>
-                                        <div class="form-group text-right row m-t-20">
-                                         <div class="col-12">
-                                         <a href="<?=base_url();?>/log" class="btn btn-primary btn-raised btn-block waves-effect waves-light">Walikelas</a>
-                                         </div>
-                                        </div>
-
                                         <div class="form-group m-t-10 mb-0 row">
                                             <div class="col-sm-7 m-t-20">
                                                 <a href="#" class="text-muted"><i class="mdi mdi-lock"></i> Forgot your password ?</a>
@@ -84,8 +78,8 @@
                             <div class="card-body">
                                 <h5 class="card-title">Cara Penggunaan Aplikasi:</h5>
                                 <p>
-                                    1. Login sebagai Admin dengan username "admin" dan password "adminabsen123".<br>
-                                    2. Setelah login, pilih menu "Absensi Barcode" untuk mulai absensi.<br>
+                                    1. Login sebagai Walikelas dengan username "Nuptk" dan password "admin".<br>
+                                    2. Setelah login, pilih menu "Daftar Kelas"<br>
                                    
                                 </p>
                             </div>
