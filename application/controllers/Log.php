@@ -3,75 +3,56 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Log extends CI_Controller {
 
-	public function __construct() {
+    public function __construct() {
         parent::__construct();
-        $this->load->model('w_login');
+        $this->load->model('W_login'); // Load the W_login model
         $this->load->library('bcrypt');
     }
 
-	public function index()
-	{
-		$this->load->view('wad/w_login');
-	
-	}
+    public function index() {
+        $this->load->view('wad/w_login');
+    }
 
-	public function logincheck(){
-		if (isset($_POST['username']) && isset($_POST['pass'])) {
-			
-			$username = $this->input->post('username');
-			$pass = $this->input->post('pass');
-			$hash = $this->bcrypt->hash_password($pass);	//encrypt password
+    public function logincheck() {
+        if ($this->input->post('nuptk') && $this->input->post('pass')) {
+            $nuptk = $this->input->post('nuptk'); // Pastikan nama field sesuai dengan yang di POST
+            $pass = $this->input->post('pass');
 
-			if(isset($_POST["remember"])){
-	        	$hour = time() + 3600 * 24 * 30;
-	        	setcookie('username', $username, $hour);
-	            setcookie('password', $pass, $hour);
-	        }
+            // Fetch user data from database
+            $user = $this->W_login->prosesLogin($nuptk);
 
-			//ambil data dari database
-			$check = $this->w_login->prosesLogin($username);
-			$hasil = 0;
-			if(isset($check)){
-				$hasil++;
-			}
+            if ($user) {
+                $passDB = $user->password;
+                $avatar = $user->avatar;
 
-			//echo $pass;
-			//echo "<br>";
-			if($hasil > 0){
-				$data = $this->w_login->viewDataByID($username); 
-				foreach ($data as $dkey) {
-					$passDB = $dkey->password;
-					//$role = $dkey->role;
-					$avatar = $dkey->avatar;
-					//$idusr = $dkey->id;
-				}
-				//echo $this->bcrypt->check_password($pass, $passDB);
-				if ($this->bcrypt->check_password($pass, $passDB))
-				{
-					// Password match
-					$this->session->set_userdata('userlogin',$username);
-					$this->session->set_userdata('avatar',$avatar);
+                if ($this->bcrypt->check_password($pass, $passDB)) {
+                    // Password match
+                    $this->session->set_userdata('userlogin', $nuptk);
+                    $this->session->set_userdata('avatar', $avatar);
 
-					redirect(base_url().'wad/dashboard');
-					
-				}else{
-					// Password does not match
-					$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-remove\"></i> Gagal Login, password salah</div>");
-					redirect(base_url().'login');
-				}
-			}else {
-				$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-remove\"></i> Gagal Login, username tidak ditemukan</div>");
-				redirect(base_url().'login');
-			}
-		}
-	}
+                    if ($this->input->post("remember")) {
+                        $hour = time() + 3600 * 24 * 30;
+                        setcookie('nuptk', $nuptk, $hour);
+                        setcookie('password', $pass, $hour);
+                    }
 
-	public function logout()
-	{
-		$this->session->sess_destroy();
-		redirect(base_url().'login');
-	}
+                    redirect(base_url().'wad/dashboard');
+                } else {
+                    // Password does not match
+                    $this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-remove\"></i> Gagal Login, password salah</div>");
+                    redirect(base_url().'login');
+                }
+            } else {
+                // nuptk not found
+                $this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-remove\"></i> Gagal Login, nuptk tidak ditemukan</div>");
+                redirect(base_url().'login');
+            }
+        }
+    }
 
-	
-
+    public function logout() {
+        $this->session->sess_destroy();
+        redirect(base_url().'login');
+    }
 }
+?>

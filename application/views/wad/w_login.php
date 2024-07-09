@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <title>login</title>
+    <title>Login</title>
     <meta content="Admin Dashboard" name="description" />
     <meta content="Mannatthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -38,7 +38,7 @@
                                     <form class="form-horizontal m-t-20 mb-0" action="<?=base_url();?>log/logincheck" method="post">
                                         <div class="form-group row">
                                             <div class="col-12">
-                                                <input name="username" type="text" class="form-control" placeholder="Username">
+                                                <input name="nuptk" type="text" class="form-control" placeholder="NUPTK">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -50,7 +50,7 @@
                                             <div class="col-12">
                                                 <div class="custom-control custom-checkbox">
                                                     <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
-                                                    <label class="custom-control-label" for="customCheck1">Remember me</label>
+                                                    <label class="custom-control-label" for="rememberMe">Remember me</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -61,10 +61,10 @@
                                         </div>
                                         <div class="form-group m-t-10 mb-0 row">
                                             <div class="col-sm-7 m-t-20">
-                                                <a href="#" class="text-muted"><i class="mdi mdi-lock"></i> Forgot your password ?</a>
+                                                <a href="#" class="text-muted"><i class="mdi mdi-lock"></i> Forgot your password?</a>
                                             </div>
                                             <div class="col-sm-5 m-t-20">
-                                                <a href="#" class="text-muted"><i class="mdi mdi-account-circle"></i> Create an account ?</a>
+                                                <a href="#" class="text-muted"><i class="mdi mdi-account-circle"></i> Create an account?</a>
                                             </div>
                                         </div>
                                     </form>
@@ -80,7 +80,6 @@
                                 <p>
                                     1. Login sebagai Walikelas dengan username "Nuptk" dan password "admin".<br>
                                     2. Setelah login, pilih menu "Daftar Kelas"<br>
-                                   
                                 </p>
                             </div>
                         </div>

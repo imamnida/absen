@@ -76,7 +76,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
 
                     <div id="sidebar-menu">
                         <ul>
-                            <li class="menu-title">Main</li>
+                           
 
                            
                            <li>
@@ -92,12 +92,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                     <span> Daftar User </span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="<?=base_url();?>absensi" class="waves-effect">
-                                    <i class="mdi mdi-account-card-details"></i>
-                                    <span> Absensi Barcode </span>
-                                </a>
-                            </li>
+
                             <li>
                                 <a href="<?=base_url();?>absensi" class="waves-effect">
                                     <i class="mdi mdi-account-card-details"></i>
@@ -212,7 +207,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                 <li class="list-inline-item dropdown notification-list">
                                     <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
                                         aria-expanded="false">
-                                        <img src="<?=base_url();?>vertical/assets/images/<?=$avatar;?>" alt="user" >
+                                        <img src="<?=base_url();?>vertical/assets/images/logo.png" alt="user" >
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                         <!-- item-->

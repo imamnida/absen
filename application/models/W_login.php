@@ -1,54 +1,43 @@
 <?php
 class W_login extends CI_Model {
-        
-    function prosesLogin($username){
-        $this->db->where('username',$username);
-        
-        return $this->db->get('user')->row();
+
+    function prosesLogin($nuptk){
+        $this->db->where('nuptk', $nuptk);
+        return $this->db->get('walikelas')->row();
     }
 
-    function checkEmail($email){
-        $this->db->where('email',$email);
-        
-        return $this->db->get('user')->row();
-    }
-    
-    function viewDataByID($username){
-        $query = $this->db->where('username',$username);
-        $q = $this->db->get('user');
-        $data = $q->result();
-        
-        return $data;
+    function checknuptk($nuptk){
+        $this->db->where('nuptk', $nuptk);
+        return $this->db->get('walikelas')->row();
     }
 
-    function viewDataByIDemail($email){
-        $query = $this->db->where('email',$email);
-        $q = $this->db->get('user');
-        $data = $q->result();
-        
-        return $data;
+    function viewDataByno($nuptk){
+        $this->db->where('nuptk', $nuptk);
+        $q = $this->db->get('walikelas');
+        return $q->result();
     }
 
-    function checkDataUsrbyID($id,$pass){
-        $this->db->where('id_user',$id);
-        $this->db->where('password',$pass);
-        
-        return $this->db->get('user')->row();
+    function viewDataBynoemail($email){
+        $this->db->where('email', $email);
+        $q = $this->db->get('walikelas');
+        return $q->result();
     }
 
-    function changepassUser($id,$data){
-        $this->db->where('id_user', $id);
-        $this->db->update('user', $data);
+    function checkDataUsrbyno($nuptk, $pass){
+        $this->db->where('nuptk', $nuptk);
+        $this->db->where('password', $pass);
+        return $this->db->get('walikelas')->row();
+    }
 
+    function changepassUser($nuptk, $data){
+        $this->db->where('nuptk', $nuptk);
+        $this->db->update('walikelas', $data);
         return TRUE;
     }
 
-    function adduser($data){
-        $this->db->insert('user', $data);
-
+    function addwalikelas($data){
+        $this->db->insert('walikelas', $data);
         return TRUE;
     }
-
 }
-
 ?>

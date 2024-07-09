@@ -76,7 +76,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
 
                     <div id="sidebar-menu">
                         <ul>
-                            <li class="menu-title">Main</li>
+                           
 
                             <li>
                                 <a href="<?=base_url();?>admin/dashboard" class="waves-effect">

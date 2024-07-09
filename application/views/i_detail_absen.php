@@ -283,94 +283,93 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
             </div> 
         </div>           
         <?php if (!empty($_GET['tanggalMulai']) && !empty($_GET['tanggalSelesai'])) { ?>
-        <div class="row">
-            <div class="col-md-12 col-xl-12">
-                <div class="card m-b-30">
-                    <div class="card-body">
-                        <h4 class="mt-0 header-title">Rekapitulasi Absensi Kelas : <?php echo $kelas->kelas; ?></h4>
-                        <div class="table-responsive">
+    <div class="row">
+        <div class="col-md-12 col-xl-12">
+            <div class="card m-b-30">
+                <div class="card-body">
+                    <h4 class="mt-0 header-title">Rekapitulasi Absensi Kelas : <?php echo $kelas->kelas; ?></h4>
+                    <div class="table-responsive">
                         <table id="datatable-buttons" class="table table-striped table-bordered w-100">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>NIS</th>
-                                        <th>Nama</th>
-                                        <?php
-                                        $date = strtotime($_GET['tanggalMulai']);
-                                        $end_date = strtotime($_GET['tanggalSelesai']);
-                                        while ($date <= $end_date) {
-                                        ?>
-                                            <th><?= date('Y-m-d', $date); ?></th>
-                                        <?php
-                                            $date = strtotime("+1 day", $date);
-                                        }
-                                        ?>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>NIS</th>
+                                    <th>Nama</th>
                                     <?php
-                                    if (!empty($rekap_absen)) {
-                                        $no = 0;
-                                        foreach ($rekap_absen as $row) {
-                                            $no++;
+                                    // Loop untuk menampilkan header tanggal
+                                    $date = strtotime($_GET['tanggalMulai']);
+                                    $end_date = strtotime($_GET['tanggalSelesai']);
+                                    while ($date <= $end_date) {
                                     ?>
-                                            <tr>
-                                                <td><?php echo $no; ?></td>
-                                                <td><?php echo $row->nis; ?></td>
-                                                <td><?php echo $row->nama; ?></td>
-                                                <?php
-                                                $date = strtotime($_GET['tanggalMulai']);
-                                                $end_date = strtotime($_GET['tanggalSelesai']);
-                                                while ($date <= $end_date) {
-                                                    if(date("D",$date) != "Sat" && date("D",$date) != "Sun"){
-                                                    
-                                                        $formatted_date = date('Y-m-d', $date);
-                                                        $absen_found = false;
-    
-                                                        $tulisan_absen = "";
-                                                        foreach ($row->absensi as $absen) {
-                                                            if (date('Y-m-d', $absen->created_at) == $formatted_date) {
-                                                                if($absen->keterangan == "masuk"){
-                                                                    $tulisan_absen = "masuk";
-                                                                }
-                                                                 if($absen->keterangan == "keluar"){
-                                                                    $tulisan_absen = "masuk-keluar";
-                                                                }
-                                                                $absen_found = true;
-                                                                // break;
-                                                            }
-                                                        }
-                                                        if (!$absen_found) {
-                                                            $tulisan_absen = '-';
-                                                        }
-                                                        echo '<td>'.$tulisan_absen.'</td>';
-                                                        
-                                                    }else{
-                                                        echo '<td>Libur</td>';
-                                                        
-                                                    }
-                                                        $date = strtotime("+1 day", $date);
-                                                    
-                                                }
-                                                ?>
-                                            </tr>
-                                        <?php
-                                        }
-                                    } else {
-                                        ?>
+                                        <th><?= date('Y-m-d', $date); ?></th>
+                                    <?php
+                                        $date = strtotime("+1 day", $date);
+                                    }
+                                    ?>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if (!empty($rekap_absen)) {
+                                    $no = 0;
+                                    // Loop untuk menampilkan data absensi setiap siswa
+                                    foreach ($rekap_absen as $row) {
+                                        $no++;
+                                ?>
                                         <tr>
-                                            <td colspan="<?php echo isset($rekap_absen) ? (count($rekap_absen) + 3) : 0; ?>">Tidak ada data kehadiran dalam rentang tanggal yang diminta.</td>
+                                            <td><?php echo $no; ?></td>
+                                            <td><?php echo $row->nis; ?></td>
+                                            <td><?php echo $row->nama; ?></td>
+                                            <?php
+                                            // Loop untuk menampilkan absensi per tanggal
+                                            $date = strtotime($_GET['tanggalMulai']);
+                                            $end_date = strtotime($_GET['tanggalSelesai']);
+                                            while ($date <= $end_date) {
+                                                if(date("D", $date) != "Sat" && date("D", $date) != "Sun"){
+                                                    $formatted_date = date('Y-m-d', $date);
+                                                    $absen_found = false;
+                                                    $tulisan_absen = "";
+                                                    foreach ($row->absensi as $absen) {
+                                                        if (date('Y-m-d', $absen->created_at) == $formatted_date) {
+                                                            if($absen->keterangan == "masuk"){
+                                                                $tulisan_absen = "masuk";
+                                                            } elseif($absen->keterangan == "keluar"){
+                                                                $tulisan_absen = "masuk-keluar";
+                                                            } elseif($absen->keterangan == "izin"){
+                                                                $tulisan_absen = "izin";
+                                                            } elseif($absen->keterangan == "sakit"){
+                                                                $tulisan_absen = "sakit";
+                                                            }
+                                                            $absen_found = true;
+                                                        }
+                                                    }
+                                                    if (!$absen_found) {
+                                                        $tulisan_absen = '-';
+                                                    }
+                                                    echo '<td>'.$tulisan_absen.'</td>';
+                                                } else {
+                                                    echo '<td>Libur</td>';
+                                                }
+                                                $date = strtotime("+1 day", $date);
+                                            }
+                                            ?>
                                         </tr>
                                     <?php
-                                    }}
+                                    }
+                                } else {
                                     ?>
-                                </tbody>
-                            </table>
-                        </div>
+                                    <tr>
+                                        <td colspan="<?php echo isset($rekap_absen) ? (count($rekap_absen) + 3) : 0; ?>">Tidak ada data kehadiran dalam rentang tanggal yang diminta.</td>
+                                    </tr>
+                                <?php
+                                }}
+                                ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </div> 
-        </div>
+            </div>
+        </div> 
     </div>
 </div>
 

@@ -67,10 +67,10 @@
 
                                         <div class="form-group m-t-10 mb-0 row">
                                             <div class="col-sm-7 m-t-20">
-                                                <a href="#" class="text-muted"><i class="mdi mdi-lock"></i> Forgot your password ?</a>
+                                               
                                             </div>
-                                            <div class="col-sm-5 m-t-20">
-                                                <a href="#" class="text-muted"><i class="mdi mdi-account-circle"></i> Create an account ?</a>
+                                            <div class="col-sm-7 m-t-20">
+                                                <a href="<?=base_url();?>/rfidcontroller" class="text-muted"><i class="mdi mdi-account-circle"></i> Buat Akun Siswa ?</a>
                                             </div>
                                         </div>
                                     </form>
@@ -78,19 +78,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Tutorial Section on the Right -->
-                    <div class="col-md-6 mx-auto">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Cara Penggunaan Aplikasi:</h5>
-                                <p>
-                                    1. Login sebagai Admin dengan username "admin" dan password "adminabsen123".<br>
-                                    2. Setelah login, pilih menu "Absensi Barcode" untuk mulai absensi.<br>
-                                   
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
         </div>
