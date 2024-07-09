@@ -70,7 +70,7 @@
                                                
                                             </div>
                                             <div class="col-sm-7 m-t-20">
-                                                <a href="<?=base_url();?>rfidcontroller" class="text-muted"><i class="mdi mdi-account-circle"></i> Buat Akun Siswa ?</a>
+                                                <a href="<?=base_url();?>/rfidcontroller" class="text-muted"><i class="mdi mdi-account-circle"></i> Buat Akun Siswa ?</a>
                                             </div>
                                         </div>
                                     </form>
