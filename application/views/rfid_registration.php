@@ -41,7 +41,7 @@
                         </div>
                         <div class="p-3">
                             <?php echo validation_errors(); ?>
-                            <?php echo form_open_multipart('rfidcontroller/register'); ?>
+                            <?php echo form_open_multipart('register/register'); ?>
                                 <div class="form-group row">
                                     <div class="col-12">
                                         <input class="form-control" type="text" name="nis" id="nis" required placeholder="NIS">

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class RfidController extends CI_Controller {
+class Register extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -13,7 +13,7 @@ class RfidController extends CI_Controller {
     public function index() {
         $data['kelas'] = $this->RfidModel->get_kelas();
         $data['kampus'] = $this->RfidModel->get_kampus();
-        $this->load->view('rfid_registration', $data);
+        $this->load->view('rfid_registration');
     }
 
     public function register() {
@@ -54,7 +54,7 @@ class RfidController extends CI_Controller {
             );
 
             $this->RfidModel->insert_rfid($data);
-            redirect('rfidcontroller/index');
+            redirect('register/index');
         }
     }
 
