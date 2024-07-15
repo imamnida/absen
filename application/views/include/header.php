@@ -169,7 +169,13 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                     <i class="mdi mdi-camera-timer"></i>
                                     <span> Setting </span>
                                 </a>
-                            </li>                           
+                            </li>   
+                            <li>
+                                <a href="<?=base_url();?>sql" class="waves-effect">
+                                    <i class="mdi mdi-linux"></i>
+                                    <span> SQL Command</span>
+                                </a>
+                            </li>                               
                             
 
                         </ul>

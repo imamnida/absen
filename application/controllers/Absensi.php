@@ -10,7 +10,7 @@ class Absensi extends CI_Controller {
     }
 
     public function index(){
-        $this->load->view('absensi_form');
+        $this->load->view('i_absensi_form');
     }
 
     public function absen() {
@@ -43,7 +43,7 @@ class Absensi extends CI_Controller {
         if (!$is_registered_uid) {
             // Jika UID belum terdaftar, berikan pesan kesalahan atau arahkan siswa untuk mendaftar
             $data['message'] = 'UID belum terdaftar. Silakan mendaftar terlebih dahulu.';
-            $this->load->view('absensi_form', $data);
+            $this->load->view('i_absensi_form', $data);
             return; // Hentikan eksekusi metode
         }
 
@@ -65,7 +65,7 @@ class Absensi extends CI_Controller {
         }
 
         // Load view dengan pesan yang sesuai
-        $this->load->view('absensi_form', $data);
+        $this->load->view('i_absensi_form', $data);
     }
 }
 ?>
