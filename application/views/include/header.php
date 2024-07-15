@@ -92,6 +92,12 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                     <span> Daftar User </span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="<?=base_url();?>walikelas/list_walikelas" class="waves-effect">
+                                    <i class="mdi mdi-account-multiple"></i>
+                                    <span> Walikelas </span>
+                                </a>
+                            </li>
 
                             <li>
                                 <a href="<?=base_url();?>absensi" class="waves-effect">

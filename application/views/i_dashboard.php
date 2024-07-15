@@ -6,6 +6,7 @@ if ($set == "dashboard") {
     $jmlalat = isset($devices) ? count($devices) : 0;
     $jmlmasuk = isset($masuk) ? count($masuk) : 0;
     $jmlkeluar = isset($keluar) ? count($keluar) : 0;
+    $jumlah_tidak_absensi = isset($jumlah_tidak_absensi) ? $jumlah_tidak_absensi : 0;
 ?>
 
 <div class="page-content-wrapper dashborad-v">
@@ -118,48 +119,8 @@ if ($set == "dashboard") {
                     </div>
                 </div>
             </div>
-            <!-- Column: Siswa Ijin -->
-            <div class="col-sm-12 col-md-6 col-xl-3">
-                <div class="card bg-info m-b-30">
-                    <div class="card-body">
-                        <div class="d-flex row">
-                            <div class="col-3 align-self-center">
-                                <div class="round">
-                                    <i class="mdi mdi-school"></i>
-                                </div>
-                            </div>
-                            <div class="col-8 ml-auto align-self-center text-center">
-                                <div class="m-l-10 text-white float-right">
-                                    <h5 class="mt-0 round-inner">0</h5>
-                                    <p class="mb-0">Siswa Ijin</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Column: Siswa Sakit -->
-            <div class="col-sm-12 col-md-6 col-xl-3">
-                <div class="card bg-info m-b-30">
-                    <div class="card-body">
-                        <div class="d-flex row">
-                            <div class="col-3 align-self-center">
-                                <div class="round">
-                                    <i class="mdi mdi-seat-individual-suite"></i>
-                                </div>
-                            </div>
-                            <div class="col-8 ml-auto align-self-center text-center">
-                                <div class="m-l-10 text-white float-right">
-                                    <h5 class="mt-0 round-inner">0</h5>
-                                    <p class="mb-0">Siswa Sakit</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!-- Column: Siswa Keluar -->
-            <div class="col-sm-12 col-md-6 col-xl-3">
+            <div class="col-sm-12 col-md-6 col-xl-3 offset-xl-3"> <!-- Offset the column to center it on desktop -->
                 <div class="card bg-success m-b-30">
                     <div class="card-body">
                         <div class="d-flex row">

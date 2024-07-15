@@ -140,63 +140,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                             
 
                         </div>
-                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
-            <div class="card bg-info m-b-30">
-                <div class="card-body">
-                    <div class="d-flex row">
-                        <div class="col-3 align-self-center">
-                            <div class="round">
-                                <i class="mdi mdi-account-multiple-plus"></i>
-                            </div>
-                        </div>
-                        <div class="col-8 text-center ml-auto align-self-center">
-                            <div class="m-l-10 text-white float-right">
-                                <h5 class="mt-0 round-inner"><?=$jmlmasuk;?></h5>
-                                <p class="mb-0 ">Siswa Masuk</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
-            <div class="card bg-info m-b-30">
-                <div class="card-body">
-                    <div class="d-flex row">
-                        <div class="col-3 align-self-center">
-                            <div class="round">
-                                <i class="mdi mdi-account-multiple-plus"></i>
-                            </div>
-                        </div>
-                        <div class="col-8 text-center ml-auto align-self-center">
-                            <div class="m-l-10 text-white float-right">
-                                <h5 class="mt-0 round-inner"><?=$jmlkeluar;?></h5>
-                                <p class="mb-0 ">Siswa keluar</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-11 col-md-22 col-lg-6 col-xl-10">
-            <div class="card bg-danger m-b-30">
-                <div class="card-body">
-                    <div class="d-flex row">
-                        <div class="col-3 align-self-center">
-                            <div class="round">
-                                <i class="mdi mdi-link-variant-off"></i>
-                            </div>
-                        </div>
-                        <div class="col-8 text-center ml-auto align-self-center">
-                            <div class="m-l-10 text-white float-right">
-                                
-                                <h5 class="mt-0 round-inner"><?php echo  $jumlah_tidak_absensi ?></h5>
-                                <p class="mb-0 ">Siswa Alfa</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
+                      
         </div>
         </div>
                     </div>
