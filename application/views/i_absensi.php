@@ -13,7 +13,7 @@ if ($set == "absensi") {
                             <ol class="breadcrumb hide-phone p-0 m-0">
                                 <li class="breadcrumb-item"><a href="#">Absensi</a></li>
                                 <li class="breadcrumb-item"><a href="#">Siswa</a></li>
-                                <li class="breadcrumb-item active">?</li>
+                                <li class="breadcrumb-item active">Absensi Siswa</li>
                             </ol>
                         </div>
                         <h4 class="page-title">Absensi</h4>

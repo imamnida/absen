@@ -85,7 +85,29 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                     <span> Dashboard</span>
                                 </a>
                             </li>
-                            
+                            <li>
+                                <a href="<?=base_url();?>admin/kelas" class="waves-effect">
+
+                                    
+
+                                    <i class="mdi mdi-city"></i>
+
+                                    <span> Daftar Kelas </span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="<?=base_url();?>admin/absensi" class="waves-effect">
+                                    <i class="mdi mdi-presentation-play"></i>
+                                    <span> Absensi </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?=base_url();?>izin" class="waves-effect">
+                                    <i class="mdi mdi-presentation-play"></i>
+                                    <span> izin </span>
+                                </a>
+                            </li>
                             <li>
                                 <a href="<?=base_url();?>admin/list_users" class="waves-effect">
                                     <i class="mdi mdi-account-multiple"></i>
@@ -115,7 +137,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                             <li>
                                 <a href="<?=base_url();?>alfa" class="waves-effect">
                                     <i class="mdi mdi-account-card-details"></i>
-                                    <span> Siswa Alfa 3 Hari <span class="badge badge-danger heartbit noti-icon-badge">5</span> </span>
+                                    <span> Siswa Alfa 3 Hari <span class="badge badge-danger heartbit noti-icon-badge">36</span> </span>
                                 </a>
                             </li>
 
@@ -127,17 +149,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                             </li>
                             
 
-                            <li>
-                                <a href="<?=base_url();?>admin/kelas" class="waves-effect">
-
-                                    
-
-                                    <i class="mdi mdi-city"></i>
-
-                                    <span> Daftar Kelas </span>
-                                </a>
-                            </li>
-
+                           
                             <li>
                                 <a href="<?=base_url();?>admin/rfidnew" class="waves-effect">
                                     <i class="mdi mdi-credit-card-multiple"></i>
@@ -152,12 +164,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                             </li>
 
 
-                            <li>
-                                <a href="<?=base_url();?>admin/absensi" class="waves-effect">
-                                    <i class="mdi mdi-presentation-play"></i>
-                                    <span> Absensi </span>
-                                </a>
-                            </li>
+                           
                             <li>
                                 <a href="<?=base_url();?>admin/histori" class="waves-effect">
                                     <i class="mdi mdi-history"></i>
