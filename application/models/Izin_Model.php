@@ -1,5 +1,5 @@
 <?php
-class Izin_model extends CI_Model {
+class Izin_Model extends CI_Model {
     public function __construct() {
         $this->load->database();
     }
