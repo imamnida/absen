@@ -41,7 +41,7 @@ if ($set == "absensi") {
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Alat</th>
+                                            <th>Oleh</th>
                                             <th>Nama</th>
                                             <th>Kelas</th>
                                             <th>Keterangan</th>

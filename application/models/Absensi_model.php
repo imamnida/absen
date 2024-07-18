@@ -31,6 +31,30 @@ class Absensi_model extends CI_Model {
         $this->db->insert('absensi', $data);
     }
 
+    public function absen_izin($uid, $id_devices) {
+        $id_rfid = $this->get_id_rfid_by_uid($uid);
+        $data = array(
+            'id_devices' => $id_devices,
+            'id_rfid' => $id_rfid,
+            'keterangan' => 'izin',
+            'foto' => '',
+            'created_at' => time()
+        );
+        $this->db->insert('absensi', $data);
+    }
+
+    public function absen_sakit($uid, $id_devices) {
+        $id_rfid = $this->get_id_rfid_by_uid($uid);
+        $data = array(
+            'id_devices' => $id_devices,
+            'id_rfid' => $id_rfid,
+            'keterangan' => 'sakit',
+            'foto' => '',
+            'created_at' => time()
+        );
+        $this->db->insert('absensi', $data);
+    }
+
     private function get_id_rfid_by_uid($uid) {
         $query = $this->db->get_where('rfid', array('uid' => $uid));
         $result = $query->row();
@@ -56,7 +80,6 @@ class Absensi_model extends CI_Model {
 
         return $query->num_rows() > 0;
     }
-
 
     public function is_registered_uid($uid) {
         $this->db->where('uid', $uid);

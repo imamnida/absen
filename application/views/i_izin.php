@@ -8,10 +8,10 @@
                         <ol class="breadcrumb hide-phone p-0 m-0">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item"><a href="#">Siswa</a></li>
-                            <li class="breadcrumb-item active">Izin Hari Ini</li>
+                            <li class="breadcrumb-item active">Tidak Hadir Hari Ini</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">SISWA TIDAK HADIR HARI INI</h4>
+                    <h4 class="page-title">Siswa Tidak Hadir Hari Ini</h4>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -20,7 +20,7 @@
             <div class="col-12">
                 <div class="card m-b-30">
                     <div class="card-body">            
-                        <h4 class="mt-0 header-title">Class List</h4>
+                        <h4 class="mt-0 header-title">Daftar Kelas</h4>
                         <table id="datatable-buttons" class="table table-striped table-bordered w-100">
                             <thead>
                                 <tr>
@@ -42,10 +42,9 @@
                                             <td style="text-align:start"><?php echo $no++; ?></td>
                                             <td style="text-align:start"><b class="text-primary"><?php echo $row->kelas; ?></b></td>
                                             <?php 
-                                            // Mengambil jumlah siswa di dalam kelas yang tidak hadir hari ini
-                                            $jumlah_tidak_hadir = isset($jumlah_tidak_hadir_per_kelas[$row->id]) ? $jumlah_tidak_hadir_per_kelas[$row->id] : 0;
+                                            $jumlah_tidak_absensi = isset($jumlah_tidak_absensi_per_kelas[$row->id]) ? $jumlah_tidak_absensi_per_kelas[$row->id] : 0;
                                             ?>
-                                            <td style="text-align:start"><?php echo $jumlah_tidak_hadir; ?></td>
+                                            <td style="text-align:start"><?php echo $jumlah_tidak_absensi; ?></td>
                                             <td style="text-align:start">
                                                 <a href="<?= base_url() ?>izin/detail/<?= $row->id ?>" class="btn btn-success" title="Lihat Detail"><i class="fa fa-eye"></i></a>
                                             </td>
@@ -60,5 +59,4 @@
         </div>
     </div>
 </div> 
-
 <?php $this->load->view('include/footer.php'); ?>

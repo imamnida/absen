@@ -14,7 +14,7 @@ class Absensi extends CI_Controller {
     }
 
     public function absen() {
-        // Ambil tindakan (masuk/keluar) dari form
+        // Ambil tindakan (masuk/keluar/izin/sakit) dari form
         $action = $this->input->post('action');
 
         // Panggil fungsi absen_process dengan tindakan yang diberikan
@@ -23,17 +23,6 @@ class Absensi extends CI_Controller {
 
     private function absen_process($action) {
         // Ambil UID dari form
-        $this->load->model('m_admin');
-		$today = date('Y-m-d'); // Menggunakan format tanggal Y-m-d untuk mendapatkan hari ini
-		$tomorrow = date('Y-m-d', strtotime('tomorrow')); // Menggunakan format tanggal Y-m-d untuk mendapatkan besok
-	
-		$data['masuk'] = $this->m_admin->get_absensi("masuk", strtotime("today"), strtotime("tomorrow"));
-		$data['keluar'] = $this->m_admin->get_absensi("keluar", strtotime("today"), strtotime("tomorrow"));
-	
-		$jumlah_tidak_absensi = $this->m_admin->hitung_tidak_absensi();
-
-		// Kemudian kirimkan hasilnya ke tampilan
-		$data['jumlah_tidak_absensi'] = $jumlah_tidak_absensi;
         $uid = $this->input->post('uid');
         $id_devices = $this->input->post('id_devices');
 
@@ -61,6 +50,15 @@ class Absensi extends CI_Controller {
             } elseif ($action == 'keluar') {
                 $this->Absensi_model->absen_keluar($uid, $id_devices);
                 $data['message'] = 'Absensi keluar berhasil.';
+            } elseif ($action == 'izin') {
+                $this->Absensi_model->absen_izin($uid, $id_devices);
+                $data['message'] = 'Absensi izin berhasil.';
+            } elseif ($action == 'sakit') {
+                $this->Absensi_model->absen_sakit($uid, $id_devices);
+                $data['message'] = 'Absensi sakit berhasil.';
+            } else {
+                // Tindakan tidak valid
+                $data['message'] = 'Tindakan absensi tidak valid.';
             }
         }
 
