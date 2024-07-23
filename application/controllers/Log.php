@@ -5,7 +5,7 @@ class Log extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('W_login'); // Load the W_login model
+        $this->load->model('Walikelas_model'); // Load the Walikelas_model
         $this->load->library('bcrypt');
     }
 
@@ -14,19 +14,23 @@ class Log extends CI_Controller {
     }
 
     public function logincheck() {
-        if ($this->input->post('nuptk') && $this->input->post('pass')) {
-            $nuptk = $this->input->post('nuptk'); // Pastikan nama field sesuai dengan yang di POST
-            $pass = $this->input->post('pass');
+        $nuptk = $this->input->post('nuptk');
+        $pass = $this->input->post('pass');
 
-            // Fetch user data from database
-            $user = $this->W_login->prosesLogin($nuptk);
+        if ($nuptk && $pass) {
+            // Fetch user data from the database
+            $user = $this->Walikelas_model->prosesLogin($nuptk);
 
             if ($user) {
                 $passDB = $user->password;
                 $avatar = $user->avatar;
 
+                // Log the password and hash for debugging
+                log_message('debug', 'Input password: ' . $pass);
+                log_message('debug', 'Stored password hash: ' . $passDB);
+
                 if ($this->bcrypt->check_password($pass, $passDB)) {
-                    // Password match
+                    // Password matches
                     $this->session->set_userdata('userlogin', $nuptk);
                     $this->session->set_userdata('avatar', $avatar);
 
@@ -40,19 +44,23 @@ class Log extends CI_Controller {
                 } else {
                     // Password does not match
                     $this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-remove\"></i> Gagal Login, password salah</div>");
-                    redirect(base_url().'login');
+                    redirect(base_url().'log');
                 }
             } else {
-                // nuptk not found
-                $this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-remove\"></i> Gagal Login, nuptk tidak ditemukan</div>");
-                redirect(base_url().'login');
+                // NUPTK not found
+                $this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-remove\"></i> Gagal Login, NUPTK tidak ditemukan</div>");
+                redirect(base_url().'log');
             }
+        } else {
+            // Missing NUPTK or password
+            $this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-remove\"></i> Harap masukkan NUPTK dan password</div>");
+            redirect(base_url().'log');
         }
     }
 
     public function logout() {
         $this->session->sess_destroy();
-        redirect(base_url().'login');
+        redirect(base_url().'log');
     }
 }
 ?>

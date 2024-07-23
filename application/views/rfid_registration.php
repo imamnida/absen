@@ -35,7 +35,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="text-center pt-3">
-                            <a href="index.html">
+                            <a href="#">
                                 <img src="<?=base_url();?>vertical/assets/images/logo.png" alt="logo" height="200">
                             </a>
                         </div>
@@ -119,6 +119,7 @@
                                         <input class="form-control" type="file" name="rumah" id="rumah" required>
                                     </div>
                                 </div>
+                                <!-- Submit button -->
                                 <div class="form-group text-center row m-t-20">
                                     <div class="col-12">
                                         <button class="btn btn-raised btn-primary btn-block waves-effect waves-light" type="submit">Register</button>
@@ -127,7 +128,7 @@
                             <?php echo form_close(); ?>
                             <div class="form-group m-t-10 mb-0 row">
                                 <div class="col-12 m-t-20 text-center">
-                                    <a href="pages-login.html" class="text-muted">Already have account?</a>
+                                    <a href="#" class="text-muted">Already have account?</a>
                                 </div>
                             </div>
                         </div>

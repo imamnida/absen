@@ -13,7 +13,7 @@ class Register extends CI_Controller {
     public function index() {
         $data['kelas'] = $this->RfidModel->get_kelas();
         $data['kampus'] = $this->RfidModel->get_kampus();
-        $this->load->view('rfid_registration');
+        $this->load->view('rfid_registration', $data);
     }
 
     public function register() {
@@ -58,17 +58,17 @@ class Register extends CI_Controller {
         }
     }
 
-    public function file_check($str){
+    public function file_check($str) {
         $allowed_mime_type_arr = array('image/jpeg','image/jpg','image/png','image/gif');
-        $mime = get_mime_by_extension($_FILES['foto']['name']);
-        if(isset($_FILES['foto']['name']) && $_FILES['foto']['name'] != ""){
-            if(in_array($mime, $allowed_mime_type_arr)){
+        if (isset($_FILES[$str]['name']) && $_FILES[$str]['name'] != "") {
+            $mime = get_mime_by_extension($_FILES[$str]['name']);
+            if (in_array($mime, $allowed_mime_type_arr)) {
                 return true;
-            }else{
+            } else {
                 $this->form_validation->set_message('file_check', 'Please select only jpg/png/gif file.');
                 return false;
             }
-        }else{
+        } else {
             $this->form_validation->set_message('file_check', 'Please choose a file to upload.');
             return false;
         }
@@ -80,14 +80,19 @@ class Register extends CI_Controller {
         $config['max_size'] = 2048;
         $config['max_width'] = 1024;
         $config['max_height'] = 768;
+        $config['file_name'] = $field . '_' . time();
 
         $this->load->library('upload', $config);
 
         if (!$this->upload->do_upload($field)) {
+            $error = $this->upload->display_errors();
+            log_message('error', $error);
+            $this->form_validation->set_message('file_check', $error);
             return '';
         } else {
             return $this->upload->data('file_name');
         }
     }
 }
+
 ?>
