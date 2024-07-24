@@ -87,7 +87,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                             </li>
                             
                             <li>
-                                <a href="<?=base_url();?>izin" class="waves-effect">
+                                <a href="<?=base_url();?>wizin" class="waves-effect">
                                     <i class="mdi mdi-presentation-play"></i>
                                     <span> izin </span>
                                 </a>
