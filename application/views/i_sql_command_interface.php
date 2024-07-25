@@ -37,10 +37,17 @@ if ($set == "sql_interface") {
                                 <input type="file" name="sql_file" class="form-control-file">
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary" value="Jalankan Perintah SQL">Jalankan Perintah SQL</button>
+                                <button type="submit" class="btn btn-primary" name="execute_sql" value="Jalankan Perintah SQL">Jalankan Perintah SQL</button>
                                 <button type="submit" name="drop_all_tables" class="btn btn-danger" value="DROP Semua Tabel">DROP Semua Tabel</button>
                                 <button type="submit" name="truncate_all_tables" class="btn btn-warning" value="Kosongkan Semua Tabel">Kosongkan Semua Tabel</button>
                                 <button type="submit" name="upload_database" class="btn btn-success" value="Unggah Database">Unggah Database</button>
+                                <button type="submit" name="backup_database" class="btn btn-info" value="Backup Database">Backup Database</button>
+                            </div>
+                            <div class="form-group">
+                                <div class="g-recaptcha" data-sitekey="6Lcg4RcqAAAAAKy1zySoasy5Yt5MrKFfy33Zvf5S"></div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Kirim</button>
                             </div>
                         </form>
 

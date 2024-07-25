@@ -5,6 +5,7 @@ class Sql_model extends CI_Model {
 
     public function execute_sql_commands($commands) {
         $output = '';
+        $this->db->trans_start();
         foreach ($commands as $command) {
             if (!empty(trim($command))) {
                 $result = $this->db->query($command);
@@ -12,6 +13,10 @@ class Sql_model extends CI_Model {
                     $output .= "<p>Error executing SQL command: " . $this->db->error()['message'] . "</p>";
                 }
             }
+        }
+        $this->db->trans_complete();
+        if ($this->db->trans_status() === FALSE) {
+            $output .= "<p>Transaction failed: " . $this->db->error()['message'] . "</p>";
         }
         return $output;
     }
@@ -50,6 +55,20 @@ class Sql_model extends CI_Model {
         $sql_commands = explode(';', $sql_file_content);
         $output .= $this->execute_sql_commands($sql_commands);
         return $output;
+    }
+
+    public function backup_database() {
+        $this->load->dbutil();
+        $prefs = array(
+            'format' => 'zip',
+            'filename' => 'backup.sql'
+        );
+        $backup = $this->dbutil->backup($prefs);
+        $db_name = 'backup-on-' . date('Y-m-d-H-i-s') . '.zip';
+        $save = './backups/' . $db_name;
+        $this->load->helper('file');
+        write_file($save, $backup);
+        return $db_name;
     }
 }
 ?>

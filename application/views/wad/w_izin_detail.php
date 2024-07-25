@@ -35,9 +35,9 @@
                                     <p>Telp. : <?= $murid->telp; ?></p>
                                     <p>RFID UID : <?= $murid->uid; ?></p>
                                     <p>Alamat : <?= $murid->alamat; ?></p>
-                                    <form id="absensiForm" action="<?php echo site_url('izin/absen'); ?>" method="post">
+                                    <form id="absensiForm" action="<?php echo site_url('wizin/absen'); ?>" method="post">
                                         <input type="hidden" name="uid" value="<?= $murid->uid ?>">
-                                        <input type="hidden" name="id_devices" value="3">
+                                        <input type="hidden" name="id_devices" value="4">
                                         <input type="hidden" name="id_kelas" value="<?= $id_kelas ?>">
                                         <select name="action" class="form-control">
                                             <option value="masuk">Tidak Membawa Kartu Masuk</option>
@@ -56,7 +56,7 @@
                 <div class="col-12">
                     <div class="card m-b-30">
                         <div class="card-body">
-                            <h1 class="mt-0 header-title">Tidak ada siswa yang tidak hadir hari ini di kelas ini.</h1>
+                            <h1 class="mt-0 header-title">KELAS INI HADIR SEMUA !!!</h1>
                         </div>
                     </div>
                 </div>

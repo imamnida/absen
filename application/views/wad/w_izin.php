@@ -46,7 +46,7 @@
                                             ?>
                                             <td style="text-align:start"><?php echo $jumlah_tidak_absensi; ?></td>
                                             <td style="text-align:start">
-                                                <a href="<?= base_url() ?>izin/detail/<?= $row->id ?>" class="btn btn-success" title="Lihat Detail"><i class="fa fa-eye"></i></a>
+                                                <a href="<?= base_url() ?>wizin/detail/<?= $row->id ?>" class="btn btn-success" title="Lihat Detail"><i class="fa fa-eye"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
