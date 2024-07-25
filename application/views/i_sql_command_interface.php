@@ -44,10 +44,7 @@ if ($set == "sql_interface") {
                                 <button type="submit" name="backup_database" class="btn btn-info" value="Backup Database">Backup Database</button>
                             </div>
                             <div class="form-group">
-                                <div class="g-recaptcha" data-sitekey="6Lcg4RcqAAAAAKy1zySoasy5Yt5MrKFfy33Zvf5S"></div>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Kirim</button>
+                                <div class="g-recaptcha" data-sitekey="6Lcg4RcqAAAAAKy1zySoasy5Yt5MrKFfy33Zvf5S"></div> <!-- Ganti dengan Site Key Anda -->
                             </div>
                         </form>
 

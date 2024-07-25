@@ -14,7 +14,7 @@ class Sql extends CI_Controller {
         $data['set'] = 'sql_interface';
 
         if ($this->input->server('REQUEST_METHOD') === 'POST') {
-            $recaptcha_secret = '6Lcg4RcqAAAAAA00ctzVETIrAoXSlJnyODJM_uBA';
+            $recaptcha_secret = '6Lcg4RcqAAAAA0ctzVElTrAoXSJJnyODJM_uBA';  // Ganti dengan Secret Key Anda
             $recaptcha_response = $this->input->post('g-recaptcha-response');
             $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$recaptcha_secret&response=$recaptcha_response");
             $responseKeys = json_decode($response, true);
