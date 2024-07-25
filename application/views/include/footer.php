@@ -23,6 +23,11 @@
         <script src="<?=base_url();?>vertical/assets/js/jquery.nicescroll.js"></script>
         <script src="<?=base_url();?>vertical/assets/js/jquery.scrollTo.min.js"></script>
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <script>
+   function onSubmit(token) {
+     document.getElementById("demo-form").submit();
+   }
+ </script>
 
 
 
