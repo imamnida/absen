@@ -28,6 +28,8 @@ class Admin extends CI_Controller {
 	
 		$data['masuk'] = $this->m_admin->get_absensi("masuk", strtotime("today"), strtotime("tomorrow"));
 		$data['keluar'] = $this->m_admin->get_absensi("keluar", strtotime("today"), strtotime("tomorrow"));
+	    $data['izin'] = $this->m_admin->get_absensi("izin", strtotime("today"), strtotime("tomorrow"));
+		$data['sakit'] = $this->m_admin->get_absensi("sakit", strtotime("today"), strtotime("tomorrow"));
 	
 		$jumlah_tidak_absensi = $this->m_admin->hitung_tidak_absensi();
 

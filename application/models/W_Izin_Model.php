@@ -16,37 +16,22 @@ class W_Izin_Model extends CI_Model {
     }
 
     public function get_jumlah_tidak_hadir_per_kelas() {
-        // Mendapatkan semua kelas dan jumlah siswa di setiap kelas
-        $query_kelas = $this->db->select('kelas.id as id_kelas, kelas.kelas, COUNT(rfid.id_rfid) as jumlah_siswa')
-                                ->from('kelas')
-                                ->join('rfid', 'rfid.id_kelas = kelas.id', 'left')
-                                ->group_by('kelas.id')
-                                ->get();
-
-        $result_kelas = $query_kelas->result();
-
+        $query = "
+            SELECT rfid.id_kelas, COUNT(rfid.id_rfid) as jumlah_siswa
+            FROM rfid
+            LEFT JOIN absensi ON rfid.id_rfid = absensi.id_rfid 
+              AND DATE(absensi.created_at) = CURDATE()
+            WHERE absensi.id_absensi IS NULL
+            GROUP BY rfid.id_kelas
+        ";
+        $result = $this->db->query($query)->result();
         $jumlah_tidak_absensi_per_kelas = array();
-
-        foreach ($result_kelas as $row) {
-            // Menghitung jumlah siswa yang sudah absen hari ini
-            $query_absen = "
-                SELECT COUNT(absensi.id_absensi) as jumlah_absen
-                FROM absensi
-                JOIN rfid ON absensi.id_rfid = rfid.id_rfid
-                WHERE rfid.id_kelas = ?
-                  AND DATE(absensi.created_at) = CURDATE()
-            ";
-            $count_absen = $this->db->query($query_absen, array($row->id_kelas))->row()->jumlah_absen;
-
-            // Menghitung jumlah siswa yang tidak absen hari ini
-            $jumlah_siswa_tidak_absen = max(0, $row->jumlah_siswa - $count_absen);
-
-            if ($jumlah_siswa_tidak_absen > 0) {
-                $jumlah_tidak_absensi_per_kelas[$row->id_kelas] = $jumlah_siswa_tidak_absen;
-            }
+        foreach ($result as $row) {
+            $jumlah_tidak_absensi_per_kelas[$row->id_kelas] = $row->jumlah_siswa;
         }
         return $jumlah_tidak_absensi_per_kelas;
     }
+    
 
     public function get_siswa_by_kelas($id_kelas) {
         $today = date("Y-m-d");
