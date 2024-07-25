@@ -25,8 +25,7 @@
                             <h4 class="mt-0 header-title">Data Murid Kelas : <?php echo $kelas->kelas; ?></h4>
                             <a class="ml-auto" href="<?= base_url() ?>/admin/rekap_absen/<?= $kelas->id; ?>"><button class="btn btn-primary">Rekap Absen</button></a>
                         </div>
-                        <div class="table-responsive">
-                            <table id="datatable-buttons" class="table table-striped table-bordered w-100">
+                        <table id="datatable-buttons" class="table table-striped table-bordered w-100">
                                 <thead>
                                     <tr>
                                         <th>No</th>
