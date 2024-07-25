@@ -53,6 +53,25 @@
         <script src="<?=base_url();?>vertical/assets/plugins/datatables/buttons.print.min.js"></script>
         <script src="<?=base_url();?>vertical/assets/plugins/datatables/buttons.colVis.min.js"></script>
         <script src="<?=base_url();?>vertical/assets/pages/datatables.init.js"></script>
+        <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('search-menu');
+        searchInput.addEventListener('input', function() {
+            const filter = searchInput.value.toLowerCase();
+            const menuItems = document.querySelectorAll('#sidebar-menu ul li');
+
+            menuItems.forEach(function(item) {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(filter)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+
        
     </body>
 

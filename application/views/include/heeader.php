@@ -93,9 +93,15 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                 </a>
                             </li>
                             <li>
-                                <a href="<?=base_url();?>admin/absensi" class="waves-effect">
+                                <a href="<?=base_url();?>alfa" class="waves-effect">
                                     <i class="mdi mdi-account-remove"></i>
                                     <span>Alfa 3 Hari</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?=base_url();?>admin/absensi" class="waves-effect">
+                                    <i class="mdi mdi-account-remove"></i>
+                                    <span>Absensi View</span>
                                 </a>
                             </li>
                             <li>
