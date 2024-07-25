@@ -22,15 +22,6 @@
         <script src="<?=base_url();?>vertical/assets/js/waves.js"></script>
         <script src="<?=base_url();?>vertical/assets/js/jquery.nicescroll.js"></script>
         <script src="<?=base_url();?>vertical/assets/js/jquery.scrollTo.min.js"></script>
-        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-        <script>
-   function onSubmit(token) {
-     document.getElementById("demo-form").submit();
-   }
- </script>
-
-
-
         <script src="<?=base_url();?>vertical/assets/plugins/carousel/owl.carousel.min.js"></script>
         <script src="<?=base_url();?>vertical/assets/plugins/fullcalendar/vanillaCalendar.js"></script>
         <script src="<?=base_url();?>vertical/assets/plugins/peity/jquery.peity.min.js"></script>
@@ -51,16 +42,7 @@
         <script src="<?=base_url();?>vertical/assets/plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="<?=base_url();?>vertical/assets//plugins/datatables/dataTables.bootstrap4.min.js"></script>
         <script src="<?=base_url();?>vertical/assets/plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="<?=base_url();?>vertical/assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
- 
-
-
-
-
-
-
-
-        
+        <script src="<?=base_url();?>vertical/assets/plugins/datatables/dataTables.bootstrap4.min.js"></script> 
         <!-- Datatable init js -->
         <script src="<?=base_url();?>vertical/assets/plugins/datatables/dataTables.buttons.min.js"></script>
         <script src="<?=base_url();?>vertical/assets/plugins/datatables/buttons.bootstrap4.min.js"></script>

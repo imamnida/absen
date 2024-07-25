@@ -79,94 +79,49 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                     <div id="sidebar-menu">
                         <ul>
                            
-
+                    
                            
-                           <li>
+                        <li>
                                 <a href="<?=base_url();?>admin/dashboard" class="waves-effect">
                                     <i class="mdi mdi-view-dashboard"></i>
                                     <span> Dashboard</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="<?=base_url();?>admin/kelas" class="waves-effect">
-
-                                    
-
-                                    <i class="mdi mdi-city"></i>
-
-                                    <span> Daftar Kelas </span>
+                                <a href="<?=base_url();?>absensi" class="waves-effect">
+                                    <i class="mdi mdi-qrcode-scan"></i>
+                                    <span>Absensi Barcode</span>
                                 </a>
                             </li>
-
                             <li>
                                 <a href="<?=base_url();?>admin/absensi" class="waves-effect">
-                                    <i class="mdi mdi-presentation-play"></i>
-                                    <span> Absensi </span>
+                                    <i class="mdi mdi-account-remove"></i>
+                                    <span>Alfa 3 Hari</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="<?=base_url();?>izin" class="waves-effect">
-                                    <i class="mdi mdi-presentation-play"></i>
-                                    <span> izin </span>
+                                    <i class="mdi mdi-hospital"></i>
+                                    <span>Data Perizinan</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="<?=base_url();?>admin/list_users" class="waves-effect">
-                                    <i class="mdi mdi-account-multiple"></i>
-                                    <span> Daftar User </span>
-                                </a>
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-school"></i> <span> Data </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="<?=base_url();?>admin/kelas">Data Kelas</a></li>
+                                    <li><a href="<?=base_url();?>admin/kampus">Data Kampus</a></li>
+                                    <li><a href="<?=base_url();?>admin/list_users">Data User</a></li>
+                                    <li><a href="<?=base_url();?>walikelas/list_walikelas">Data Walikelas</a></li>
+                                    <li><a href="<?=base_url();?>admin/rfidnew">New RFID</a></li>
+                                    <li><a href="<?=base_url();?>admin/datarfid">Data All</a></li>
+                                </ul>
                             </li>
-                            <li>
-                                <a href="<?=base_url();?>walikelas/list_walikelas" class="waves-effect">
-                                    <i class="mdi mdi-account-multiple"></i>
-                                    <span> Walikelas </span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="<?=base_url();?>absensi" class="waves-effect">
-                                    <i class="mdi mdi-account-card-details"></i>
-                                    <span> Absensi Barcode </span>
-                                </a>
-                            </li>
-
                             <li>
                                 <a href="<?=base_url();?>admin/devices" class="waves-effect">
-                                    <i class="mdi mdi-engine-outline"></i>
-                                    <span> Data Alat </span>
+                                    <i class="mdi mdi-xaml"></i>
+                                    <span> Device </span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="<?=base_url();?>alfa" class="waves-effect">
-                                    <i class="mdi mdi-account-card-details"></i>
-                                    <span> Siswa Alfa 3 Hari <span class="badge badge-danger heartbit noti-icon-badge">36</span> </span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="<?=base_url();?>admin/kampus" class="waves-effect">
-                                    <i class="mdi mdi-city"></i>
-                                    <span> Daftar Kampus</span>
-                                </a>
-                            </li>
-                            
-
-                           
-                            <li>
-                                <a href="<?=base_url();?>admin/rfidnew" class="waves-effect">
-                                    <i class="mdi mdi-credit-card-multiple"></i>
-                                    <span> New RFID </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?=base_url();?>admin/datarfid" class="waves-effect">
-                                    <i class="mdi mdi-credit-card"></i>
-                                    <span> Data RFID </span>
-                                </a>
-                            </li>
-
-
-                           
                             <li>
                                 <a href="<?=base_url();?>admin/histori" class="waves-effect">
                                     <i class="mdi mdi-history"></i>
@@ -184,8 +139,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                     <i class="mdi mdi-linux"></i>
                                     <span> SQL Command</span>
                                 </a>
-                            </li>                               
-                            
+                            </li>   
 
                         </ul>
                     </div>
