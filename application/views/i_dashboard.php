@@ -48,7 +48,7 @@ if ($set == "dashboard") {
                         <div class="d-flex row">
                             <div class="col-3 align-self-center">
                                 <div class="round">
-                                    <i class="mdi mdi-blinds"></i>
+                                    <i class="mdi mdi-ethernet"></i>
                                 </div>
                             </div>
                             <div class="col-8 ml-auto align-self-center text-center">
@@ -68,7 +68,7 @@ if ($set == "dashboard") {
                         <div class="d-flex row">
                             <div class="col-3 align-self-center">
                                 <div class="round">
-                                    <i class="mdi mdi-account-multiple-plus"></i>
+                                    <i class="mdi mdi-account-check"></i>
                                 </div>
                             </div>
                             <div class="col-8 ml-auto align-self-center text-center">
@@ -128,7 +128,7 @@ if ($set == "dashboard") {
                         <div class="d-flex row">
                             <div class="col-3 align-self-center">
                                 <div class="round">
-                                    <i class="mdi mdi-minus-circle-outline"></i>
+                                    <i class="mdi mdi-home"></i>
                                 </div>
                             </div>
                             <div class="col-8 ml-auto align-self-center text-center">
