@@ -98,36 +98,55 @@
     <script src="<?= base_url(); ?>vertical/assets/js/jquery.nicescroll.js"></script>
     <script src="<?= base_url(); ?>vertical/assets/js/jquery.scrollTo.min.js"></script>
 
-    <script>
-        // Restore UID input value and focus after page reload
+<script>
+        // Menyimpan nilai UID sebelum refresh
         var uidInput = document.getElementById("uid");
         var uidValue = uidInput.value;
 
+        // Menjalankan fungsi untuk mengembalikan fokus ke input UID setelah halaman dimuat kembali
         window.onload = function() {
-            uidInput.value = uidValue;
-            uidInput.focus();
-            updateTime();
+            uidInput.value = uidValue; // Mengembalikan nilai UID yang tersimpan
+            uidInput.focus(); // Mengembalikan fokus ke input UID
         };
 
-        // Submit form on Enter key press
+        // Mendengarkan acara penekanan tombol pada input UID
         uidInput.addEventListener("keypress", function(event) {
-            if (event.keyCode === 13) {
-                event.preventDefault();
-                document.getElementById("absensiForm").submit();
+            if (event.keyCode === 13) { // Jika tombol Enter ditekan
+                event.preventDefault(); // Mencegah perilaku default dari tombol Enter
+                submitForm(); // Menjalankan fungsi untuk mengirim formulir
             }
         });
 
-        // Update time every second
+        // Fungsi untuk mengirimkan formulir
+        function submitForm() {
+            document.getElementById("absensiForm").submit();
+        }
+
+        // Mengambil elemen action select
+        const actionSelect = document.getElementById("action");
+
+        // Fungsi untuk memperbarui opsi tindakan berdasarkan waktu
         function updateTime() {
-            var currentTimeElement = document.getElementById("currentTime");
-            if (currentTimeElement) {
-                setInterval(function() {
-                    var now = new Date();
-                    currentTimeElement.textContent = now.toLocaleTimeString();
-                }, 1000);
+            const now = new Date();
+            const hour = now.getHours();
+
+            // Perbarui opsi tindakan berdasarkan waktu
+            if (hour >= 12) {
+                actionSelect.selectedIndex = 1; // Pilih opsi "Absen Keluar" ketika jam sudah melewati 12 siang
             }
         }
-    </script>
-</body>
+
+        // Perbarui waktu saat halaman dimuat
+        updateTime();
+
+        // Cegah pengiriman formulir jika waktu tidak valid
+        uidInput.addEventListener("keypress", (event) => {
+            const hour = new Date().getHours();
+            if (hour < 6 || hour >= 24) {
+                event.preventDefault();
+                alert("Waktu tidak sesuai untuk absensi!");
+            }
+        });
+    </script></body>
 
 </html>

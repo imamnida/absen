@@ -195,7 +195,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                 </div>
 
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                <a href="<?=base_url();?>admin/kelas" class="dropdown-item notify-item">
                     <div class="notify-icon"><img src="<?=base_url();?>vertical/assets/images/pakepala.jpg" alt="user-img" class="img-fluid rounded-circle" /> </div>
                     <p class="notify-details"><b>Udin Wahyudin S.IP., M.Si</b><small class="text-muted">Mohon untuk semua guru guru merekap semua absensi siswa</small></p>
                 </a>
