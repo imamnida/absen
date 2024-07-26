@@ -105,13 +105,18 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                             <li>
                                 <a href="<?=base_url();?>izin" class="waves-effect">
                                     <i class="mdi mdi-hospital"></i>
-                                    <span>Data Perizinan</span>
+                                    <span>Perizinan</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?=base_url();?>admin/kelas" class="waves-effect">
+                                    <i class="ti-files"></i>
+                                    <span>Rekapitulasi</span>
                                 </a>
                             </li>
                             <li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-school"></i> <span> Data </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="<?=base_url();?>admin/kelas">Data Kelas</a></li>
                                     <li><a href="<?=base_url();?>admin/kampus">Data Kampus</a></li>
                                     <li><a href="<?=base_url();?>admin/list_users">Data User</a></li>
                                     <li><a href="<?=base_url();?>walikelas/list_walikelas">Data Walikelas</a></li>
