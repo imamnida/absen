@@ -31,7 +31,7 @@ class Absensi extends CI_Controller {
 
         if (!$is_registered_uid) {
             // Jika UID belum terdaftar, berikan pesan kesalahan atau arahkan siswa untuk mendaftar
-            $data['message'] = 'UID belum terdaftar. Silakan mendaftar terlebih dahulu.';
+            $data['message'] = 'Nis Belum terdaftar. Silakan mendaftar terlebih dahulu.';
             $data['message_type'] = 'danger';
             $this->load->view('i_absensi_form', $data);
             return; // Hentikan eksekusi metode
