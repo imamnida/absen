@@ -230,7 +230,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                 <!-- item-->
                 <a href="https://wa.me/6282295844039?text=Mohon%20perbaiki%20bug%20ini" class="dropdown-item notify-item">
                     <div class="notify-icon bg-warning"><i class="mdi mdi-whatsapp"></i></div>
-                    <p class="notify-details"><b>Mohon beritau admin jika ada kesalahan aplikasi</b><small class="text-muted">alert</small></p>
+                    <p class="notify-details"><b>Mohon beritau admin jika ada kesalahan aplikasi</b><small class="text-muted">jika ada kesalahan aplikasi</small></p>
                 </a>
 
                 <!-- All-->
