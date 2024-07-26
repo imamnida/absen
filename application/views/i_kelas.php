@@ -83,6 +83,7 @@ $this->load->View('include/header.php');
                                     <td style="text-align:start">
                                         <a href="<?=base_url()?>admin/lihat_kelas?id_kelas=<?=$row->id?>" class="btn btn-success" title="Lihat Rekap"><i class="fa fa-eye"></i></a>
                                         <a href="<?php site_url()?>hapus_kelas?id_kelas=<?=$row->id?>" class="btn btn-danger" onclick="return confirm('Anda Yakin menghapus data ini?')"><i class="fa fa-trash"></i></a>
+                                        <a class="ml-auto" href="<?= base_url() ?>/admin/rekap_absen/<?= $row->id; ?>"><button class="btn btn-primary">Rekap Absen</button></a>
                                     </td>
                                 </tr>
                             <?php 

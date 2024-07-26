@@ -1,51 +1,3 @@
-<?php
-
-
- 
-  
-
-  $jmlrfid = 0;
-  $jmlalat = 0;
-  $jmlmasuk = 0;
-  $jmlkeluar = 0;
-
-  $jumlah_tidak_absensi = 0; // Ini adalah contoh inisialisasi variabel
-
-  if (isset($rfid)) {
-    foreach ($rfid as $key => $value) {
-      $jmlrfid++;
-    }
-  }
- 
-
-  if (isset($devices)) {
-    foreach ($devices as $key => $value) {
-      $jmlalat++;
-    }
-  }
-
-  if (isset($masuk)) {
-    foreach ($masuk as $key => $value) {
-      $jmlmasuk++;
-    }
-  }
-
-  if (isset($keluar)) {
-    foreach ($keluar as $key => $value) {
-      $jmlkeluar++;
-    }
-  }
-
-if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
-{ 
-  $users = $this->session->userdata('userlogin');
-  $avatar = $this->session->userdata('avatar');
-}else{
-  //masuk tanpa login
-  $this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-remove\"></i> ANDA MENGGUNAKAN HP ANDA AKAN DI PANGGIL</div>");
-  redirect(base_url().'login');
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,26 +8,14 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
     <title>Absensi | Barcode</title>
     <meta content="Admin Dashboard" name="description" />
     <meta content="Mannatthemes" name="author" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
     <link rel="shortcut icon" href="<?= base_url(); ?>vertical/assets/images/logo.png">
     <link href="<?= base_url(); ?>vertical/assets/plugins/animate/animate.css" rel="stylesheet" type="text/css">
     <link href="<?= base_url(); ?>vertical/assets/css/bootstrap-material-design.min.css" rel="stylesheet" type="text/css">
     <link href="<?= base_url(); ?>vertical/assets/css/icons.css" rel="stylesheet" type="text/css">
     <link href="<?= base_url(); ?>vertical/assets/css/style.css" rel="stylesheet" type="text/css">
-    <style>
-        .centered-alert {
-            position: absolute;
-            top: 20%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            max-width: 90%;
-        }
-    </style>
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <a class="navbar-brand" href="#">Absensi Barcode V2</a>
@@ -84,15 +24,16 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
+                <li class="nav-item">
+    <span class="nav-link">Safety</span>
+</li>
+<li class="nav-item">
+    <span class="nav-link">Fast</span>
+</li>
+<li class="nav-item">
+    <span class="nav-link">Accurate</span>
+</li>
+
                 </ul>
             </div>
         </div>
@@ -101,11 +42,6 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
     <div class="col-md-12 text-center mb-3">
         <h2>Welcome To Attendance System Barcode V2</h2>
     </div>
-    <?php if (isset($message) && !empty($message)) : ?>
-        <div class="alert alert-danger mb-1 centered-alert" role="alert">
-            <p><?php echo $message; ?></p>
-        </div>
-    <?php endif; ?>
 
     <div class="wrapper-page">
         <div class="display-table">
@@ -115,12 +51,19 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                         <div class="col-md-6 mx-auto">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="text-center pt-3"></div>
+                                    <div class="text-center pt-3">
+                                        <img src="<?= base_url(); ?>vertical/assets/images/logo.png" alt="Logo" height="150">
+                                    </div>
+                                    <?php if (isset($message) && !empty($message)) : ?>
+                                        <div class="alert alert-dismissible fade show mt-3 <?= $message_type == 'success' ? 'alert-primary' : 'alert-danger'; ?>" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <strong><?= $message_type == 'success' ? 'Well done!' : 'Oh snap!'; ?></strong> <?php echo $message; ?>
+                                        </div>
+                                    <?php endif; ?>
                                     <div class="px-3 pb-3">
-                                        <form id="absensiForm" action="<?php echo site_url('absensi/absen'); ?>" method="post" onsubmit="return false;">
-                                            <div class="text-center">
-                                                <img src="<?= base_url(); ?>vertical/assets/images/logo.png" alt="Logo" height="150">
-                                            </div>
+                                        <form id="absensiForm" action="<?php echo site_url('absensi/absen'); ?>" method="post" onsubmit="return validateForm();">
                                             <div class="form-group">
                                                 <label for="action">Pilih Tindakan:</label>
                                                 <select class="form-control" id="action" name="action" required>
@@ -137,19 +80,12 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                     </div>
                                 </div>
                             </div>
-                            
-
                         </div>
-                      
-        </div>
-        </div>
                     </div>
-                    
                 </div>
             </div>
         </div>
     </div>
-   
     <script src="<?= base_url(); ?>vertical/assets/js/jquery.min.js"></script>
     <script src="<?= base_url(); ?>vertical/assets/js/popper.min.js"></script>
     <script src="<?= base_url(); ?>vertical/assets/js/bootstrap-material-design.js"></script>
@@ -163,54 +99,35 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
     <script src="<?= base_url(); ?>vertical/assets/js/jquery.scrollTo.min.js"></script>
 
     <script>
-        // Menyimpan nilai UID sebelum refresh
+        // Restore UID input value and focus after page reload
         var uidInput = document.getElementById("uid");
         var uidValue = uidInput.value;
 
-        // Menjalankan fungsi untuk mengembalikan fokus ke input UID setelah halaman dimuat kembali
         window.onload = function() {
-            uidInput.value = uidValue; // Mengembalikan nilai UID yang tersimpan
-            uidInput.focus(); // Mengembalikan fokus ke input UID
+            uidInput.value = uidValue;
+            uidInput.focus();
+            updateTime();
         };
 
-        // Mendengarkan acara penekanan tombol pada input UID
+        // Submit form on Enter key press
         uidInput.addEventListener("keypress", function(event) {
-            if (event.keyCode === 13) { // Jika tombol Enter ditekan
-                event.preventDefault(); // Mencegah perilaku default dari tombol Enter
-                submitForm(); // Menjalankan fungsi untuk mengirim formulir
-            }
-        });
-
-        // Fungsi untuk mengirimkan formulir
-        function submitForm() {
-            document.getElementById("absensiForm").submit();
-        }
-
-        // Mengambil elemen action select
-        const actionSelect = document.getElementById("action");
-
-        // Fungsi untuk memperbarui opsi tindakan berdasarkan waktu
-        function updateTime() {
-            const now = new Date();
-            const hour = now.getHours();
-
-            // Perbarui opsi tindakan berdasarkan waktu
-            if (hour >= 12) {
-                actionSelect.selectedIndex = 1; // Pilih opsi "Absen Keluar" ketika jam sudah melewati 12 siang
-            }
-        }
-
-        // Perbarui waktu saat halaman dimuat
-        updateTime();
-
-        // Cegah pengiriman formulir jika waktu tidak valid
-        uidInput.addEventListener("keypress", (event) => {
-            const hour = new Date().getHours();
-            if (hour < 6 || hour >= 00) {
+            if (event.keyCode === 13) {
                 event.preventDefault();
-                alert("Waktu tidak sesuai untuk absensi!");
+                document.getElementById("absensiForm").submit();
             }
         });
+
+        // Update time every second
+        function updateTime() {
+            var currentTimeElement = document.getElementById("currentTime");
+            if (currentTimeElement) {
+                setInterval(function() {
+                    var now = new Date();
+                    currentTimeElement.textContent = now.toLocaleTimeString();
+                }, 1000);
+            }
+        }
     </script>
 </body>
+
 </html>

@@ -13,7 +13,7 @@ class Register extends CI_Controller {
     public function index() {
         $data['kelas'] = $this->RfidModel->get_kelas();
         $data['kampus'] = $this->RfidModel->get_kampus();
-        $this->load->view('rfid_registration', $data);
+        $this->load->view('i_rfid_registration', $data);
     }
 
     public function register() {
