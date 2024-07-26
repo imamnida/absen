@@ -186,35 +186,18 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
             <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
                aria-haspopup="false" aria-expanded="false">
                 <i class="ti-email noti-icon"></i>
-                <span class="badge badge-danger heartbit noti-icon-badge">5</span>
+                <span class="badge badge-danger heartbit noti-icon-badge">1</span>
             </a>
             <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg">
                 <!-- item-->
                 <div class="dropdown-item noti-title align-self-center">
-                    <h5><span class="badge badge-danger float-right">745</span>Messages</h5>
+                    <h5><span class="badge badge-danger float-right">1</span>Messages</h5>
                 </div>
 
                 <!-- item-->
                 <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <div class="notify-icon"><img src="assets/images/users/avatar-2.jpg" alt="user-img" class="img-fluid rounded-circle" /> </div>
-                    <p class="notify-details"><b>Charles M. Jones</b><small class="text-muted">Dummy text of the printing and typesetting industry.</small></p>
-                </a>
-
-                <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <div class="notify-icon"><img src="assets/images/users/avatar-3.jpg" alt="user-img" class="img-fluid rounded-circle" /> </div>
-                    <p class="notify-details"><b>Thomas J. Mimms</b><small class="text-muted">You have 87 unread messages</small></p>
-                </a>
-
-                <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <div class="notify-icon"><img src="assets/images/users/avatar-4.jpg" alt="user-img" class="img-fluid rounded-circle" /> </div>
-                    <p class="notify-details"><b>Luis M. Konrad</b><small class="text-muted">It is a long established fact that a reader will</small></p>
-                </a>
-
-                <!-- All-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    View All
+                    <div class="notify-icon"><img src="<?=base_url();?>vertical/assets/images/pakepala.jpg" alt="user-img" class="img-fluid rounded-circle" /> </div>
+                    <p class="notify-details"><b>Udin Wahyudin S.IP., M.Si</b><small class="text-muted">Mohon untuk semua guru guru merekap semua absensi siswa</small></p>
                 </a>
 
             </div>
@@ -229,25 +212,25 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
             <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-menu-lg">
                 <!-- item-->
                 <div class="dropdown-item noti-title">
-                    <h5><span class="badge badge-danger float-right">87</span>Notification</h5>
+                    <h5><span class="badge badge-danger float-right">3</span>Notification</h5>
                 </div>
 
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <div class="notify-icon bg-primary"><i class="mdi mdi-cart-outline"></i></div>
-                    <p class="notify-details"><b>Your order is placed</b><small class="text-muted">Dummy text of the printing and typesetting industry.</small></p>
+                <a href="<?=base_url();?>izin" class="dropdown-item notify-item">
+                    <div class="notify-icon bg-primary"><i class="mdi mdi-account-remove"></i></div>
+                    <p class="notify-details"><b>Banyak siswa yang tidak hadir</b><small class="text-muted">Mohon periksa kenapa siswa tersebut tidak hadir.</small></p>
                 </a>
 
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                <a href="<?=base_url();?>admin/kelas" class="dropdown-item notify-item">
                     <div class="notify-icon bg-success"><i class="mdi mdi-message"></i></div>
-                    <p class="notify-details"><b>New Message received</b><small class="text-muted">You have 87 unread messages</small></p>
+                    <p class="notify-details"><b>Mohon periksa data siswa</b><small class="text-muted">Jika ada kesalahan maka hubungi admin</small></p>
                 </a>
 
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <div class="notify-icon bg-warning"><i class="mdi mdi-martini"></i></div>
-                    <p class="notify-details"><b>Your item is shipped</b><small class="text-muted">It is a long established fact that a reader will</small></p>
+                <a href="https://wa.me/6282295844039?text=Mohon%20perbaiki%20bug%20ini" class="dropdown-item notify-item">
+                    <div class="notify-icon bg-warning"><i class="mdi mdi-whatsapp"></i></div>
+                    <p class="notify-details"><b>Mohon beritau admin jika ada kesalahan aplikasi</b><small class="text-muted">alert</small></p>
                 </a>
 
                 <!-- All-->
