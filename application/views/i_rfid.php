@@ -40,6 +40,8 @@ if ($set=="rfid") {
                           <th>Kampus</th>
                           <th>Kelas</th>
                           <th>Telp</th>
+                          <th>Orangtua</th>
+                          <th>Jabatan</th>
                           <th>Gender</th>
                           <th>Alamat</th>
                           <th>Foto</th>
@@ -69,6 +71,8 @@ if ($set=="rfid") {
                   ?>
                   <td><?php echo $kelas;?></td>
                   <td><?php echo $row->telp;?></td>
+                  <td><?php echo $row->nomerortu;?></td>
+                  <td><?php echo $row->jabatan;?></td>
                   <td><?php echo $row->gender;?></td>
                   <td><?php echo $row->alamat;?></td>
                   <td style="min-width:200px;">
@@ -140,6 +144,10 @@ if ($set=="rfid") {
                   <input type="text" name="nis" class="form-control" placeholder="Nis" value="<?php if(isset($nis)){echo $nis;}?>" required>
                 </div>
                 <div class="form-group">
+                  <label>Uid</label>
+                  <input type="text" name="uid" class="form-control" placeholder="uid" value="<?php if(isset($uid)){echo $uid;}?>" required>
+                </div>
+                <div class="form-group">
                   <label>Telp</label>
                   <input type="text" name="telp" class="form-control" placeholder="telp" value="<?php if(isset($telp)){echo $telp;}?>" required>
                 </div>
@@ -182,15 +190,15 @@ if ($set=="rfid") {
                 </div>
                 <div class="form-group">
                   <label>Link Foto</label>
-                  <input type="text" name="alamat" class="form-control" placeholder="Link Google Drive" value="<?php if(isset($foto)){echo $foto;}?>" required>
+                  <input type="text" name="foto" class="form-control" placeholder="Link Google Drive" value="<?php if(isset($foto)){echo $foto;}?>" required>
                 </div>
                 <div class="form-group">
                   <label>Link Kartu Keluarga</label>
-                  <input type="text" name="alamat" class="form-control" placeholder="Link Google Drive" value="<?php if(isset($kaka)){echo $kaka;}?>" required>
+                  <input type="text" name="kaka" class="form-control" placeholder="Link Google Drive" value="<?php if(isset($kaka)){echo $kaka;}?>" required>
                 </div>
                 <div class="form-group">
                   <label>Link Foto Rumah</label>
-                  <input type="text" name="alamat" class="form-control" placeholder="Link Google Drive" value="<?php if(isset($rumah)){echo $rumah;}?>" required>
+                  <input type="text" name="rumah" class="form-control" placeholder="Link Google Drive" value="<?php if(isset($rumah)){echo $rumah;}?>" required>
                 </div>
               </div>
               <div class="box-footer">

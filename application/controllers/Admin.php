@@ -409,12 +409,16 @@ class Admin extends CI_Controller {
 						$data['id'] = $value->id_rfid;
 						$data['nama'] = $value->nama;
 						$data['nis'] = $value->nis;
+						$data['uid'] = $value->uid;
 						$data['telp'] = $value->telp;
 						$data['jabatan'] = $value->jabatan;
 						$data['id_kampus'] = $value->id_kampus;
 						$data['kelas'] = $value->id_kelas != null ? $this->m_admin->find_kelas($value->id_kelas) : null;
 						$data['gender'] = $value->gender;
 						$data['alamat'] = $value->alamat;
+						$data['foto'] = $value->foto;
+						$data['kaka'] = $value->kaka;
+						$data['rumah'] = $value->rumah;
 					}
 
 					$data['list_kelas'] = $this->m_admin->get_kelas();
@@ -422,10 +426,10 @@ class Admin extends CI_Controller {
 					$data['set'] = "edit-rfid";
 					$this->load->view('i_rfid', $data);
 				}else{
-					redirect(base_url().'admin/rfid/datarfid');
+					redirect(base_url().'admin/kelas');
 				}
 			}else{
-				redirect(base_url().'admin/rfid/datarfid');
+				redirect(base_url().'admin/kelas');
 			}
 		}
 	}
@@ -436,19 +440,28 @@ class Admin extends CI_Controller {
 				$id = $this->input->post('id');
 				$nama = $this->input->post('nama');
 				$nis = $this->input->post('nis');
+				$uid = $this->input->post('uid');
 				$telp = $this->input->post('telp');
 				$gender = $this->input->post('gender');
 				$kelas_id = $this->input->post('kelas_id');
 				$kampus_id = $this->input->post('kampus_id');
 				$alamat = $this->input->post('alamat');
+				$foto = $this->input->post('foto');
+				$kaka = $this->input->post('kaka');
+				$rumah = $this->input->post('rumah');
+
 
 				$data = array('nama' => $nama,
 								'telp' => $telp,
 					      			'nis' => $nis,
+									'uid' => $uid,
 								'gender' => $gender,
 								'id_kelas' => $kelas_id,
 								'id_kampus' => $kampus_id,
 								'alamat' => $alamat,
+								'foto' => $foto,
+								'kaka' => $kaka,
+								'rumah' => $rumah,
 			 				);
 			
 
@@ -458,7 +471,7 @@ class Admin extends CI_Controller {
 				}else{
 					$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data gagal di update</div>");
 				}
-				redirect(base_url().'admin/rfid/rfidnew');
+				redirect(base_url().'admin/kelas');
 			}
 		}
 	}
