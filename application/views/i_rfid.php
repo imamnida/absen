@@ -63,7 +63,7 @@ if ($set=="rfid") {
                 <tr>
                   <td><?php echo $no;?></td>
                   <td><?php echo $row->nis;?></td>
-                  <td><b class="text-success"><?php echo $row->uid;?></b></td>
+                  <td><?php echo $row->uid;?></td>
                   <td><?php echo $row->nama;?></td>
                   <td><?php echo $row->kampus;?></td>
                   <?php
@@ -75,7 +75,7 @@ if ($set=="rfid") {
                   <td><?php echo $row->jabatan;?></td>
                   <td><?php echo $row->gender;?></td>
                   <td><?php echo $row->alamat;?></td>
-                  <td style="min-width:200px;">
+                  <td>
                                                 <?php
                                                 if (!empty($row->foto)) {
                                                     echo '<img src="' . $row->foto . '" alt="Foto Siswa" style="width: 100px; height: auto;">';

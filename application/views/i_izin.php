@@ -39,13 +39,13 @@
                                     <?php $no = 1; ?>
                                     <?php foreach($kelas as $row): ?>
                                         <tr>
-                                            <td style="text-align:start"><?php echo $no++; ?></td>
-                                            <td style="text-align:start"><b class="text-primary"><?php echo $row->kelas; ?></b></td>
+                                            <td><?php echo $no++; ?></td>
+                                            <td><b class="text-primary"><?php echo $row->kelas; ?></b></td>
                                             <?php 
                                             $jumlah_tidak_absensi = isset($jumlah_tidak_absensi_per_kelas[$row->id]) ? $jumlah_tidak_absensi_per_kelas[$row->id] : 0;
                                             ?>
-                                            <td style="text-align:start"><?php echo $jumlah_tidak_absensi; ?></td>
-                                            <td style="text-align:start">
+                                            <td><?php echo $jumlah_tidak_absensi; ?></td>
+                                            <td>
                                                 <a href="<?= base_url() ?>izin/detail/<?= $row->id ?>" class="btn btn-success" title="Lihat Detail"><i class="fa fa-eye"></i></a>
                                             </td>
                                         </tr>

@@ -72,8 +72,8 @@
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label for="uid">NIS:</label>
-                                                <input type="text" class="form-control" name="uid" id="uid" required style="color: black;">
+                                                <label for="nis">NIS:</label>
+                                                <input type="text" class="form-control" name="nis" id="nis" required style="color: black;">
                                             </div>
                                             <input type="hidden" name="id_devices" value="1">
                                         </form>
@@ -99,18 +99,18 @@
     <script src="<?= base_url(); ?>vertical/assets/js/jquery.scrollTo.min.js"></script>
 
 <script>
-        // Menyimpan nilai UID sebelum refresh
-        var uidInput = document.getElementById("uid");
-        var uidValue = uidInput.value;
+        // Menyimpan nilai nis sebelum refresh
+        var nisInput = document.getElementById("nis");
+        var nisValue = nisInput.value;
 
-        // Menjalankan fungsi untuk mengembalikan fokus ke input UID setelah halaman dimuat kembali
+        // Menjalankan fungsi untuk mengembalikan fokus ke input nis setelah halaman dimuat kembali
         window.onload = function() {
-            uidInput.value = uidValue; // Mengembalikan nilai UID yang tersimpan
-            uidInput.focus(); // Mengembalikan fokus ke input UID
+            nisInput.value = nisValue; // Mengembalikan nilai nis yang tersimpan
+            nisInput.focus(); // Mengembalikan fokus ke input nis
         };
 
-        // Mendengarkan acara penekanan tombol pada input UID
-        uidInput.addEventListener("keypress", function(event) {
+        // Mendengarkan acara penekanan tombol pada input nis
+        nisInput.addEventListener("keypress", function(event) {
             if (event.keyCode === 13) { // Jika tombol Enter ditekan
                 event.preventDefault(); // Mencegah perilaku default dari tombol Enter
                 submitForm(); // Menjalankan fungsi untuk mengirim formulir
@@ -140,7 +140,7 @@
         updateTime();
 
         // Cegah pengiriman formulir jika waktu tidak valid
-        uidInput.addEventListener("keypress", (event) => {
+        nisInput.addEventListener("keypress", (event) => {
             const hour = new Date().getHours();
             if (hour < 6 || hour >= 24) {
                 event.preventDefault();
