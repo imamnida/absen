@@ -143,9 +143,11 @@ code {
   text-align: center;
   padding: 20px 30px;
   position: absolute;
-  right: 0;
-  left: 240px;
+  left: 0;
+  right: auto;
+  width: 100%; /* Jika ingin elemen selebar halaman atau elemen induk */
 }
+
 
 #wrapper {
   height: 100%;

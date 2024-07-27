@@ -77,9 +77,9 @@ $db['default'] = array(
 	'dsn'	=> '',
 
 	 'hostname' => 'localhost',
-	   'username' => 'u398357365_salma',
-	   'password' => 'Imamdienul1',
-	   'database' => 'u398357365_absensi',
+	   //'username' => 'absen_absen',
+	   //'password' => 'P4ssw0rd12345!',
+	   //'database' => 'absen_absen',
 
 	
 	//'username' => 'root',
@@ -91,6 +91,10 @@ $db['default'] = array(
 	//'password' => '',
 	//'database' => 'haha',
 
+
+	'username' => 'u398357365_salma',
+	'password' => 'Imamdienul1',
+	'database' => 'u398357365_absensi',
 	
 
 
@@ -111,3 +115,19 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
