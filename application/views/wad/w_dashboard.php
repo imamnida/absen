@@ -24,7 +24,7 @@
                 <div class="col-sm-12">
                     <div class="card m-b-30">
                         <div class="card-body text-center">
-                            <img src="<?=base_url();?>vertical/assets/images/logo.png" alt="School Logo" style="max-width: 150px; margin-bottom: 20px;">
+                            <img src="<?=base_url();?>assets/images/logo.png" alt="School Logo" style="max-width: 150px; margin-bottom: 20px;">
                             <h1 class="card-title">SELAMAT DATANG DI APLIKASI ADMINISTRASI ATTENDACE SYSTEM TERBARU</h1>
                         </div>
                     </div>

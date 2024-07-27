@@ -22,24 +22,24 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
         <meta content="Mannatthemes" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-        <link rel="shortcut icon" href="<?=base_url();?>vertical/assets/images/logo.png">
+        <link rel="shortcut icon" href="<?=base_url();?>assets/images/logo.png">
 
         <!--Morris Chart CSS -->
-        <link rel="stylesheet" href="<?=base_url();?>vertical/assets/plugins/fullcalendar/vanillaCalendar.css"/>
-        <link rel="stylesheet" href="<?=base_url();?>vertical/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css">
-        <link rel="stylesheet" href="<?=base_url();?>vertical/assets/plugins/chartist/css/chartist.min.css">
-        <link rel="stylesheet" href="<?=base_url();?>vertical/assets/plugins/morris/morris.css">
-        <link rel="stylesheet" href="<?=base_url();?>vertical/assets/plugins/metro/MetroJs.min.css">
+        <link rel="stylesheet" href="<?=base_url();?>assets/plugins/fullcalendar/vanillaCalendar.css"/>
+        <link rel="stylesheet" href="<?=base_url();?>assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css">
+        <link rel="stylesheet" href="<?=base_url();?>assets/plugins/chartist/css/chartist.min.css">
+        <link rel="stylesheet" href="<?=base_url();?>assets/plugins/morris/morris.css">
+        <link rel="stylesheet" href="<?=base_url();?>assets/plugins/metro/MetroJs.min.css">
 
-        <link rel="stylesheet" href="<?=base_url();?>vertical/assets/plugins/carousel/owl.carousel.min.css">
-        <link rel="stylesheet" href="<?=base_url();?>vertical/assets/plugins/carousel/owl.theme.default.min.css">
-        <link href="<?=base_url();?>vertical/assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-        <link href="<?=base_url();?>vertical/assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-        <link href="<?=base_url();?>vertical/assets/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="<?=base_url();?>vertical/assets/plugins/animate/animate.css" type="text/css">
-        <link rel="stylesheet" href="<?=base_url();?>vertical/assets/css/bootstrap-material-design.min.css" type="text/css">
-        <link rel="stylesheet" href="<?=base_url();?>vertical/assets/css/icons.css" type="text/css">
-        <link rel="stylesheet" href="<?=base_url();?>vertical/assets/css/style.css" type="text/css">
+        <link rel="stylesheet" href="<?=base_url();?>assets/plugins/carousel/owl.carousel.min.css">
+        <link rel="stylesheet" href="<?=base_url();?>assets/plugins/carousel/owl.theme.default.min.css">
+        <link href="<?=base_url();?>assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?=base_url();?>assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?=base_url();?>assets/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="<?=base_url();?>assets/plugins/animate/animate.css" type="text/css">
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/bootstrap-material-design.min.css" type="text/css">
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/icons.css" type="text/css">
+        <link rel="stylesheet" href="<?=base_url();?>assets/css/style.css" type="text/css">
 
    
 
@@ -196,7 +196,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
 
                 <!-- item-->
                 <a href="<?=base_url();?>admin/kelas" class="dropdown-item notify-item">
-                    <div class="notify-icon"><img src="<?=base_url();?>vertical/assets/images/pakepala.jpg" alt="user-img" class="img-fluid rounded-circle" /> </div>
+                    <div class="notify-icon"><img src="<?=base_url();?>assets/images/pakepala.jpg" alt="user-img" class="img-fluid rounded-circle" /> </div>
                     <p class="notify-details"><b>Udin Wahyudin S.IP., M.Si</b><small class="text-muted">Mohon untuk semua guru guru merekap semua absensi siswa</small></p>
                 </a>
 
@@ -243,7 +243,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
         
         <li class="list-inline-item dropdown notification-list">
             <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                <img src="<?=base_url();?>vertical/assets/images/logo.png" alt="user" >
+                <img src="<?=base_url();?>assets/images/logo.png" alt="user" >
             </a>
             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                 <!-- item-->

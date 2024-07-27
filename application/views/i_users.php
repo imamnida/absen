@@ -61,7 +61,7 @@ if ($set=="list-users") {
                   <td><?php echo $row->nama;?></td>
                   <td><?php echo $row->email;?></td>
                   <td><?php echo $row->username;?></td>
-                  <td><img src="<?=base_url();?>vertical/assets/images/<?php echo $row->avatar;?>" class="img-circle" width="auto" height="100px" alt="User Image"></td>
+                  <td><img src="<?=base_url();?>assets/images/<?php echo $row->avatar;?>" class="img-circle" width="auto" height="100px" alt="User Image"></td>
                   <td>
                     <?php
                     if ($row->id_user != 1){

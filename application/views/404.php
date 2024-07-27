@@ -9,12 +9,12 @@
         <meta content="Mannatthemes" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-        <link rel="shortcut icon" href="<?=base_url();?>vertical/assets/images/favicon.ico">
+        <link rel="shortcut icon" href="<?=base_url();?>assets/images/favicon.ico">
 
-        <link href="<?=base_url();?>vertical/assets/plugins/animate/animate.css" rel="stylesheet" type="text/css">
-        <link href="<?=base_url();?>vertical/assets/css/bootstrap-material-design.min.css" rel="stylesheet" type="text/css">
-        <link href="<?=base_url();?>vertical/assets/css/icons.css" rel="stylesheet" type="text/css">
-        <link href="<?=base_url();?>vertical/assets/css/style.css" rel="stylesheet" type="text/css">
+        <link href="<?=base_url();?>assets/plugins/animate/animate.css" rel="stylesheet" type="text/css">
+        <link href="<?=base_url();?>assets/css/bootstrap-material-design.min.css" rel="stylesheet" type="text/css">
+        <link href="<?=base_url();?>assets/css/icons.css" rel="stylesheet" type="text/css">
+        <link href="<?=base_url();?>assets/css/style.css" rel="stylesheet" type="text/css">
 
     </head>
 
@@ -29,7 +29,7 @@
                     <diV class="container">
                         <div class="row">
                             <div class="col-md-6">
-                                <img src="<?=base_url();?>vertical/assets/images/extra.png" alt="" class="img-fluid">
+                                <img src="<?=base_url();?>assets/images/extra.png" alt="" class="img-fluid">
                             </div>
                             <div class="col-md-6">
                                 <div class="card">
@@ -52,20 +52,20 @@
         </div>
 
         <!-- jQuery  -->
-        <script src="<?=base_url();?>vertical/assets/js/jquery.min.js"></script>
-        <script src="<?=base_url();?>vertical/assets/js/popper.min.js"></script>
-        <script src="<?=base_url();?>vertical/assets/js/bootstrap-material-design.js"></script>
-        <script src="<?=base_url();?>vertical/assets/js/modernizr.min.js"></script>
-        <script src="<?=base_url();?>vertical/assets/js/detect.js"></script>
-        <script src="<?=base_url();?>vertical/assets/js/fastclick.js"></script>
-        <script src="<?=base_url();?>vertical/assets/js/jquery.slimscroll.js"></script>
-        <script src="<?=base_url();?>vertical/assets/js/jquery.blockUI.js"></script>
-        <script src="<?=base_url();?>vertical/assets/js/waves.js"></script>
-        <script src="<?=base_url();?>vertical/assets/js/jquery.nicescroll.js"></script>
-        <script src="<?=base_url();?>vertical/assets/js/jquery.scrollTo.min.js"></script>
+        <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
+        <script src="<?=base_url();?>assets/js/popper.min.js"></script>
+        <script src="<?=base_url();?>assets/js/bootstrap-material-design.js"></script>
+        <script src="<?=base_url();?>assets/js/modernizr.min.js"></script>
+        <script src="<?=base_url();?>assets/js/detect.js"></script>
+        <script src="<?=base_url();?>assets/js/fastclick.js"></script>
+        <script src="<?=base_url();?>assets/js/jquery.slimscroll.js"></script>
+        <script src="<?=base_url();?>assets/js/jquery.blockUI.js"></script>
+        <script src="<?=base_url();?>assets/js/waves.js"></script>
+        <script src="<?=base_url();?>assets/js/jquery.nicescroll.js"></script>
+        <script src="<?=base_url();?>assets/js/jquery.scrollTo.min.js"></script>
 
         <!-- App js -->
-        <script src="<?=base_url();?>vertical/assets/js/app.js"></script>
+        <script src="<?=base_url();?>assets/js/app.js"></script>
         
     </body>
 </html>

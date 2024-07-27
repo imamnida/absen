@@ -21,22 +21,22 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
     <meta content="Mannatthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <link rel="shortcut icon" href="<?=base_url();?>vertical/assets/images/logo.png">
+    <link rel="shortcut icon" href="<?=base_url();?>assets/images/logo.png">
 
     <!--Morris Chart CSS -->
-    <link rel="stylesheet" href="<?=base_url();?>vertical/assets/plugins/fullcalendar/vanillaCalendar.css" />
-    <link rel="stylesheet" href="<?=base_url();?>vertical/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css">
-    <link rel="stylesheet" href="<?=base_url();?>vertical/assets/plugins/chartist/css/chartist.min.css">
-    <link rel="stylesheet" href="<?=base_url();?>vertical/assets/plugins/morris/morris.css">
-    <link rel="stylesheet" href="<?=base_url();?>vertical/assets/plugins/metro/MetroJs.min.css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/plugins/fullcalendar/vanillaCalendar.css" />
+    <link rel="stylesheet" href="<?=base_url();?>assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/plugins/chartist/css/chartist.min.css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/plugins/morris/morris.css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/plugins/metro/MetroJs.min.css">
 
-    <link rel="stylesheet" href="<?=base_url();?>vertical/assets/plugins/carousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="<?=base_url();?>vertical/assets/plugins/carousel/owl.theme.default.min.css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/plugins/carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/plugins/carousel/owl.theme.default.min.css">
 
-    <link rel="stylesheet" href="<?=base_url();?>vertical/assets/plugins/animate/animate.css" type="text/css">
-    <link rel="stylesheet" href="<?=base_url();?>vertical/assets/css/bootstrap-material-design.min.css" type="text/css">
-    <link rel="stylesheet" href="<?=base_url();?>vertical/assets/css/icons.css" type="text/css">
-    <link rel="stylesheet" href="<?=base_url();?>vertical/assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/plugins/animate/animate.css" type="text/css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/css/bootstrap-material-design.min.css" type="text/css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/css/icons.css" type="text/css">
+    <link rel="stylesheet" href="<?=base_url();?>assets/css/style.css" type="text/css">
 </head>
 
 <body class="fixed-left">
@@ -117,7 +117,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                             <li class="list-inline-item dropdown notification-list">
                                 <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown"
                                     href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                    <img src="<?=base_url();?>vertical/assets/images/<?=$avatar;?>" alt="user">
+                                    <img src="<?=base_url();?>assets/images/<?=$avatar;?>" alt="user">
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                     <div class="dropdown-item noti-title">
@@ -295,21 +295,21 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
     <!-- END wrapper -->
 
     <!-- jQuery  -->
-    <script src="<?=base_url();?>vertical/assets/js/jquery.min.js"></script>
-    <script src="<?=base_url();?>vertical/assets/js/bootstrap.bundle.min.js"></script>
-    <script src="<?=base_url();?>vertical/assets/js/metismenu.min.js"></script>
-    <script src="<?=base_url();?>vertical/assets/js/jquery.slimscroll.js"></script>
-    <script src="<?=base_url();?>vertical/assets/js/waves.min.js"></script>
+    <script src="<?=base_url();?>assets/js/jquery.min.js"></script>
+    <script src="<?=base_url();?>assets/js/bootstrap.bundle.min.js"></script>
+    <script src="<?=base_url();?>assets/js/metismenu.min.js"></script>
+    <script src="<?=base_url();?>assets/js/jquery.slimscroll.js"></script>
+    <script src="<?=base_url();?>assets/js/waves.min.js"></script>
 
     <!--Morris Chart-->
-    <script src="<?=base_url();?>vertical/assets/plugins/morris/morris.min.js"></script>
-    <script src="<?=base_url();?>vertical/assets/plugins/raphael/raphael-min.js"></script>
+    <script src="<?=base_url();?>assets/plugins/morris/morris.min.js"></script>
+    <script src="<?=base_url();?>assets/plugins/raphael/raphael-min.js"></script>
 
     <!-- Dashboard init -->
-    <script src="<?=base_url();?>vertical/assets/pages/dashboard.init.js"></script>
+    <script src="<?=base_url();?>assets/pages/dashboard.init.js"></script>
 
     <!-- App js -->
-    <script src="<?=base_url();?>vertical/assets/js/app.js"></script>
+    <script src="<?=base_url();?>assets/js/app.js"></script>
 
 </body>
 

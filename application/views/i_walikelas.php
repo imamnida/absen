@@ -61,7 +61,7 @@ if ($set=="list-walikelas") {
                   <td><?php echo $row->nama;?></td>
                   <td><?php echo $row->nuptk;?></td>
                   <td><?php echo $row->kelas;?></td>
-                  <td><img src="<?=base_url();?>vertical/assets/images/<?php echo $row->avatar;?>" class="img-circle" width="auto" height="100px" alt="Wali Kelas Image"></td>
+                  <td><img src="<?=base_url();?>assets/images/<?php echo $row->avatar;?>" class="img-circle" width="auto" height="100px" alt="Wali Kelas Image"></td>
                   <td>
                     <a href="<?=base_url()?>walikelas/edit_walikelas/<?=$row->id_walikelas?>" class="btn btn-success"><i class="fa fa-pencil"></i></a>
                     <a href="<?=base_url()?>walikelas/hapus_walikelas/<?=$row->id_walikelas?>" class="btn btn-danger" onclick="return confirm('Anda Yakin menghapus data ini?')"><i class="fa fa-trash-o"></i></a>
