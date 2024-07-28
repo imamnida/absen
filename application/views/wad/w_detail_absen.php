@@ -231,30 +231,29 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                                                     $date = strtotime($_GET['tanggalMulai']);
                                                                     $end_date = strtotime($_GET['tanggalSelesai']);
                                                                     while ($date <= $end_date) {
-                                                                        if(date("D",$date) != "Sat" && date("D",$date) != "Sun"){
-                                                                        
+                                                                        if(date("D", $date) != "Sat" && date("D", $date) != "Sun"){
                                                                             $formatted_date = date('Y-m-d', $date);
                                                                             $absen_found = false;
-        
                                                                             $tulisan_absen = "";
                                                                             foreach ($row->absensi as $absen) {
                                                                                 if (date('Y-m-d', $absen->created_at) == $formatted_date) {
                                                                                     if($absen->keterangan == "masuk"){
                                                                                         $tulisan_absen = "masuk";
-                                                                                    }
-                                                                                     if($absen->keterangan == "keluar"){
+                                                                                    } elseif($absen->keterangan == "keluar"){
                                                                                         $tulisan_absen = "masuk-keluar";
+                                                                                    } elseif($absen->keterangan == "izin"){
+                                                                                        $tulisan_absen = "izin";
+                                                                                    } elseif($absen->keterangan == "sakit"){
+                                                                                        $tulisan_absen = "sakit";
                                                                                     }
                                                                                     $absen_found = true;
-                                                                                    // break;
                                                                                 }
                                                                             }
                                                                             if (!$absen_found) {
                                                                                 $tulisan_absen = '-';
                                                                             }
                                                                             echo '<td>'.$tulisan_absen.'</td>';
-                                                                            
-                                                                        }else{
+                                                                        } else {
                                                                             echo '<td>Libur</td>';
                                                                             
                                                                         }
