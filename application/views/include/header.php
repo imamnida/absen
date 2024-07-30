@@ -67,7 +67,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <div class="text-center">
-                        <a href="<?=base_url();?>admin/dashboard" class="logo"><i class="mdi mdi-assistant"></i> SMKN 1 TALAGA</a>
+                        <a href="<?=base_url();?>admin/dashboard" class="logo"><i class="mdi mdi-assistant"></i> Absensi Online</a>
                     </div>
                 </div>
 
