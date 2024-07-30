@@ -209,7 +209,20 @@ class Admin extends CI_Controller {
 		}
 	}
 
-
+    public function update_device_mode() {
+		$id = $this->input->post('id');
+		$new_mode = $this->input->post('mode');
+	  
+		$data = array(
+		  'mode' => $new_mode
+		);
+	  
+		$this->db->where('id_devices', $id);
+		$this->db->update('devices', $data);
+	  
+		echo json_encode(array('status' => 'success'));
+	  }
+	  
 	public function devices(){
 		$data['set'] = "devices";
 		$data['devices'] = $this->m_admin->get_devices();

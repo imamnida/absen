@@ -32,10 +32,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nis</th>
-                                        <!--th>UID RFID</th-->
                                         <th>Nama</th>
-                                        <!--th>Kampus</th-->
-                                        <!--th>Kelas</th-->
                                         <th>Telp</th>
                                         <th>Gender</th>
                                         <th>Alamat</th>

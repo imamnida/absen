@@ -33,6 +33,8 @@
         <script src="<?=base_url();?>assets/plugins/raphael/raphael.min.js"></script>
         <script src="<?=base_url();?>assets/plugins/morris/morris.min.js"></script>
         <script src="<?=base_url();?>assets/pages/dashborad.js"></script>
+        
+
 
         <!-- App js -->
         <script src="<?=base_url();?>assets/js/app.js"></script>
@@ -71,6 +73,7 @@
         });
     });
 </script>
+
 
        
     </body>
