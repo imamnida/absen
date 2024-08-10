@@ -40,6 +40,7 @@ class Register extends CI_Controller {
             $data = array(
                 'nama' => $this->input->post('nama'),
                 'ttl' => $this->input->post('tempat_tanggal_lahir'),
+                'id_kelas' => $this->input->post('id_kelas'),
                 'nisn' => $this->input->post('nisn'),
                 'alamat' => $this->input->post('alamat'),
                 'foto' => $new_file_name,

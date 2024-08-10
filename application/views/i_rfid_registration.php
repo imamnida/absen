@@ -69,6 +69,15 @@
                                     <input class="form-control" type="text" name="tempat_tanggal_lahir" id="tempat_tanggal_lahir" required placeholder="Tempat, Tanggal Lahir">
                                 </div>
                                 <div class="form-group">
+                                <label for="kelas">Kelas:</label>
+                                <select class="form-control" id="kelas" name="id_kelas">
+                                    <option value="">--Pilih Kelas--</option>
+                                    <?php foreach ($kelas as $row): ?>
+                                        <option value="<?= $row->id ?>"><?= $row->kelas ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                                <div class="form-group">
                                     <label for="nisn">NISN:</label>
                                     <small class="form-text text-muted">Contoh: 1212838392</small>
                                     <input class="form-control" type="text" name="nisn" id="nisn" required placeholder="NISN">

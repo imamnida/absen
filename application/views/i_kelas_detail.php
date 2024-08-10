@@ -23,19 +23,18 @@
                     <div class="card-body">
                         <div class="d-flex">
                             <h4 class="mt-0 header-title">Data Murid Kelas : <?php echo $kelas->kelas; ?></h4>
-                            <a class="ml-auto" href="<?= base_url() ?>/admin/rekap_absen/<?= $kelas->id; ?>"><button class="btn btn-primary">Rekap Absen</button></a>
+
                         </div>
                         <table id="datatable-buttons" class="table table-striped table-bordered w-100">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nis</th>
-                                        <!--th>UID RFID</th-->
+                                        <th>Nisn</th>
+                                       
                                         <th>Nama</th>
-                                        <!--th>Kampus</th-->
-                                        <!--th>Kelas</th-->
-                                        <th>Telp</th>
-                                        <th>Gender</th>
+                                       
+                                
+                               
                                         <th>Alamat</th>
                                         <th>Foto</th>
                                         <th>Action</th>
@@ -58,23 +57,13 @@
                                     ?>
                                         <tr>
                                             <td><?php echo $no; ?></td>
-                                            <td><?php echo $row->nis; ?></td>
-                                            <!--td style="min-width:150px;"><b class="text-success"><?php echo $row->uid; ?></b></td-->
+                                            <td><?php echo $row->nisn; ?></td>
+                                          
                                             <td style="min-width:250px;"><?php echo $row->nama; ?></td>
-                                            <!--td style="min-width:100px;"><?php echo $row->kampus; ?></td-->
-                                            <!--td style="min-width:100px;"><?php echo $row->kelas; ?></td-->
-                                            <td><?php echo $row->telp; ?></td>
-                                            <td style="min-width:50px;"><?php echo $row->gender; ?></td>
+                                          
+                                          
                                             <td style="min-width:250px;"><?php echo $row->alamat; ?></td>
-                                            <td style="min-width:200px;">
-                                                <?php
-                                                if (!empty($row->foto)) {
-                                                    echo '<img src="' . $row->foto . '" alt="Foto Siswa" style="width: 100px; height: auto;">';
-                                                } else {
-                                                    echo 'Tidak ada foto';
-                                                }
-                                                ?>
-                                            </td>
+                                            <td><img src="<?=base_url();?>./uploads/<?php echo $row->foto;?>" class="img-circle" width="auto" height="100px" alt="User Image"></td>
                                             <td style="min-width:100px;">
                                                 <a href="<?= base_url() ?>/admin/detail_murid/<?= $row->id_rfid ?>" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
 
