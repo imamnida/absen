@@ -40,10 +40,14 @@
             background-color: #0056b3;
             border-color: #004085;
         }
+        video, canvas {
+            width: 100%;
+            max-width: 400px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body class="fixed-left">
-    <!-- Begin page -->
     <div class="accountbg"></div>
     <div class="wrapper-page">
         <div class="container">
@@ -69,14 +73,14 @@
                                     <input class="form-control" type="text" name="tempat_tanggal_lahir" id="tempat_tanggal_lahir" required placeholder="Tempat, Tanggal Lahir">
                                 </div>
                                 <div class="form-group">
-                                <label for="kelas">Kelas:</label>
-                                <select class="form-control" id="kelas" name="id_kelas">
-                                    <option value="">--Pilih Kelas--</option>
-                                    <?php foreach ($kelas as $row): ?>
-                                        <option value="<?= $row->id ?>"><?= $row->kelas ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
+                                    <label for="kelas">Kelas:</label>
+                                    <select class="form-control" id="kelas" name="id_kelas">
+                                        <option value="">--Pilih Kelas--</option>
+                                        <?php foreach ($kelas as $row): ?>
+                                            <option value="<?= $row->id ?>"><?= $row->kelas ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
                                 <div class="form-group">
                                     <label for="nisn">NISN:</label>
                                     <small class="form-text text-muted">Contoh: 1212838392</small>
@@ -94,9 +98,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="foto">Foto:</label>
-                                    <input class="form-control" type="file" name="foto" id="foto" required>
+                                    <input class="form-control" type="file" name="foto" id="foto">
+                                    <small class="form-text text-muted">Jika tidak ada foto, silakan gunakan kamera</small>
+                                    <button type="button" class="btn btn-primary mt-2" id="openCamera">Buka Kamera</button>
+                                    <video id="video" autoplay></video>
+                                    <button type="button" class="btn btn-success mt-2" id="capturePhoto">Ambil Foto</button>
+                                    <canvas id="canvas" style="display:none;"></canvas>
+                                    <input type="hidden" name="captured_photo" id="capturedPhotoInput">
                                 </div>
-                                <!-- Submit button -->
                                 <div class="form-group text-center">
                                     <button class="btn btn-primary btn-block waves-effect waves-light" type="submit">Register</button>
                                 </div>
@@ -110,19 +119,35 @@
             </div>
         </div>
     </div>
-    <!-- jQuery -->
     <script src="<?= base_url(); ?>assets/js/jquery.min.js"></script>
     <script src="<?= base_url(); ?>assets/js/popper.min.js"></script>
     <script src="<?= base_url(); ?>assets/js/bootstrap-material-design.js"></script>
-    <script src="<?= base_url(); ?>assets/js/modernizr.min.js"></script>
-    <script src="<?= base_url(); ?>assets/js/detect.js"></script>
-    <script src="<?= base_url(); ?>assets/js/fastclick.js"></script>
-    <script src="<?= base_url(); ?>assets/js/jquery.slimscroll.js"></script>
-    <script src="<?= base_url(); ?>assets/js/jquery.blockUI.js"></script>
-    <script src="<?= base_url(); ?>assets/js/waves.js"></script>
-    <script src="<?= base_url(); ?>assets/js/jquery.nicescroll.js"></script>
-    <script src="<?= base_url(); ?>assets/js/jquery.scrollTo.min.js"></script>
-    <!-- App js -->
     <script src="<?= base_url(); ?>assets/js/app.js"></script>
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const capturedPhotoInput = document.getElementById('capturedPhotoInput');
+
+        document.getElementById('openCamera').addEventListener('click', function() {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    video.srcObject = stream;
+                    video.style.display = 'block';
+                })
+                .catch(err => {
+                    console.error('Error accessing camera: ', err);
+                });
+        });
+
+        document.getElementById('capturePhoto').addEventListener('click', function() {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+            const dataURL = canvas.toDataURL('image/png');
+            capturedPhotoInput.value = dataURL;
+            video.srcObject.getTracks().forEach(track => track.stop());
+            video.style.display = 'none';
+        });
+    </script>
 </body>
 </html>

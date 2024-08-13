@@ -18,25 +18,38 @@ class Register extends CI_Controller {
     }
 
     public function submit() {
-        $config['upload_path'] = './uploads/';
-        $config['allowed_types'] = 'gif|jpg|png|jpeg';
-        $config['max_size'] = 2048;
-        $this->upload->initialize($config);
+        $captured_photo = $this->input->post('captured_photo');
+        $upload_error = '';
 
-        if (!$this->upload->do_upload('foto')) {
-            $error = array('error' => $this->upload->display_errors());
+        if ($captured_photo) {
+            // Handle photo captured from the camera
+            $file_name = $this->input->post('nama') . '_' . time() . '.png';
+            $file_path = './uploads/' . $file_name;
+            $captured_photo = str_replace('data:image/png;base64,', '', $captured_photo);
+            $captured_photo = str_replace(' ', '+', $captured_photo);
+            $image_data = base64_decode($captured_photo);
+            file_put_contents($file_path, $image_data);
+        } else {
+            // Handle uploaded file
+            $config['upload_path'] = './uploads/';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['max_size'] = 2048;
+            $this->upload->initialize($config);
+
+            if (!$this->upload->do_upload('foto')) {
+                $upload_error = $this->upload->display_errors();
+            } else {
+                $upload_data = $this->upload->data();
+                $file_name = $upload_data['file_name'];
+            }
+        }
+
+        if ($upload_error) {
             $data['kelas'] = $this->RfidModel->get_kelas();
             $data['kampus'] = $this->RfidModel->get_kampus();
-            $data['upload_error'] = $error;
+            $data['upload_error'] = $upload_error;
             $this->load->view('i_rfid_registration', $data);
         } else {
-            $upload_data = $this->upload->data();
-            $original_file_name = $upload_data['file_name'];
-            $new_file_name = $this->input->post('nama') . $upload_data['file_ext'];
-
-            // Rename the file
-            rename('./uploads/' . $original_file_name, './uploads/' . $new_file_name);
-
             $data = array(
                 'nama' => $this->input->post('nama'),
                 'ttl' => $this->input->post('tempat_tanggal_lahir'),
@@ -44,10 +57,12 @@ class Register extends CI_Controller {
                 'nisn' => $this->input->post('nisn'),
                 'nik' => $this->input->post('nik'),
                 'alamat' => $this->input->post('alamat'),
-                'foto' => $new_file_name,
+                'foto' => isset($file_name) ? $file_name : NULL,
             );
 
             $this->RfidModel->insert_rfid($data);
+
+            $this->session->set_flashdata('success', 'Registration successful!');
             redirect('register');
         }
     }
