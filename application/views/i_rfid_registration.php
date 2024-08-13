@@ -83,6 +83,11 @@
                                     <input class="form-control" type="text" name="nisn" id="nisn" required placeholder="NISN">
                                 </div>
                                 <div class="form-group">
+                                    <label for="nisn">NIK:</label>
+                                    <small class="form-text text-muted">Contoh: 1212838392</small>
+                                    <input class="form-control" type="number" name="nik" id="nik" required placeholder="NIK">
+                                </div>
+                                <div class="form-group">
                                     <label for="alamat">Alamat:</label>
                                     <small class="form-text text-muted">Contoh: Desa Cibeureum, Kec. Talaga, Kab. Majalengka</small>
                                     <input class="form-control" type="text" name="alamat" id="alamat" required placeholder="Alamat">

@@ -42,6 +42,7 @@ class Register extends CI_Controller {
                 'ttl' => $this->input->post('tempat_tanggal_lahir'),
                 'id_kelas' => $this->input->post('id_kelas'),
                 'nisn' => $this->input->post('nisn'),
+                'nik' => $this->input->post('nik'),
                 'alamat' => $this->input->post('alamat'),
                 'foto' => $new_file_name,
             );
