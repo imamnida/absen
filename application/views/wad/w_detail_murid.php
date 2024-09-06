@@ -25,15 +25,11 @@
             <!-- Photos column -->
             <div class="col-md-3 col-xl-3">
                 <h5>Foto Murid</h5>
-                <img src="<?= $murid->foto ?>" style="max-width:100%; margin:auto;" alt="Foto Murid">
-                <h5>Foto Kaka</h5>
-                <img src="<?= $murid->kaka ?>" style="max-width:100%; margin:auto;" alt="Foto Kaka">
-                <h5>Foto Rumah</h5>
-                <img src="<?= $murid->rumah ?>" style="max-width:100%; margin:auto;" alt="Foto Rumah">
+                <img src="<?=base_url();?>./uploads/<?php echo $murid->foto;?>" class="img-circle" width="auto" height="200px" alt="User Image">
             </div>
-            <!-- End photos column -->
+         
 
-            <!-- Details column -->
+           
             <div class="col-md-9 col-xl-9">
                 <div class="card m-b-30">
                     <div class="card-body">
@@ -45,13 +41,9 @@
                         </h1>
                         <hr>
                         <div class="table-responsive">
-                        <pre>NIS:                       <?= $murid->nis; ?></pre>
-                        <pre>Kampus:                    <?= $murid->kampus; ?></pre>
+                        <pre>nisn:                      <?= $murid->nisn; ?></pre>
+                        <pre>nik:                       <?= $murid->nik; ?></pre>
                         <pre>Kelas:                     <?= $murid->kelas; ?></pre>
-                        <pre>Telp.:                     <?= $murid->telp; ?></pre>
-                        <pre>Telp. Orang Tua:           <?= $murid->nomerortu; ?></pre>
-                        <pre>RFID UID:                  <?= $murid->uid; ?></pre>
-                        <pre>Penyakit Yang Di Derita:   <?= $murid->penyakit; ?></pre>
                         <pre>Alamat:                    <?= $murid->alamat; ?></pre>
                         </div>
                     </div>

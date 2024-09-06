@@ -1,4 +1,5 @@
 <?php $this->load->view('include/header.php'); ?>
+
 <div class="page-content-wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -11,7 +12,7 @@
                             <li class="breadcrumb-item active">Detail Alfa</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Sisiwa 3 Hari Tidak hadir</h4>
+                    <h4 class="page-title">Siswa 3 Hari Tidak Hadir</h4>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -20,21 +21,21 @@
         <div class="row">
             <?php if(!empty($siswa)): ?>
                 <?php foreach($siswa as $murid): ?>
-                    <div class="col-md-3 col-xl-3">
-                        <img src="<?= $murid->foto ?>" style="max-width:100%; margin:auto;" alt="Foto Murid">
-                    </div>
-                    <div class="col-md-9 col-xl-9">
+                    <div class="col-md-12 col-xl-12">
                         <div class="card m-b-30">
                             <div class="card-body">
-                                <h1 class="mt-0 header-title"><?= $murid->nama; ?></h1>
-                                <hr>
-                                <div class="table-responsive">
-                                    <p>NIS : <?= $murid->nis; ?></p>
-                                    <p>Kampus : <?= $murid->kampus; ?></p>
-                                    <p>Kelas : <?= $murid->kelas; ?></p>
-                                    <p>Telp. : <?= $murid->telp; ?></p>
-                                    <p>RFID UID : <?= $murid->uid; ?></p>
-                                    <p>Alamat : <?= $murid->alamat; ?></p>
+                                <div class="d-flex align-items-center">
+                                    <img src="<?= base_url(); ?>./uploads/<?= $murid->foto ?>" class="foto-siswa" alt="Foto Murid">
+                                    <div class="ml-3">
+                                        <h1 class="mt-0 header-title"><?= $murid->nama; ?></h1>
+                                        <hr>
+                                        <div class="table-responsive">
+                                            <p>NISN : <?= $murid->nisn; ?></p>
+                                            <p>Kelas : <?= $murid->kelas; ?></p>
+                                            <p>RFID UID : <?= $murid->uid; ?></p>
+                                            <p>Alamat : <?= $murid->alamat; ?></p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -52,4 +53,23 @@
         </div>
     </div>
 </div>
+
 <?php $this->load->view('include/footer.php'); ?>
+
+<style>
+    .foto-siswa {
+        max-width: 100px; /* Atur ukuran foto sesuai kebutuhan */
+        height: auto;
+        border-radius: 50%; /* Membuat foto bulat */
+        border: 2px solid #000; /* Tambahkan border jika diinginkan */
+    }
+
+    .d-flex {
+        display: flex;
+        align-items: center;
+    }
+
+    .ml-3 {
+        margin-left: 1rem;
+    }
+</style>

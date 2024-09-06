@@ -77,24 +77,17 @@ $db['default'] = array(
 	'dsn'	=> '',
 
 	 'hostname' => 'localhost',
-	   //'username' => 'absen_absen',
-	   //'password' => 'P4ssw0rd12345!',
-	   //'database' => 'absen_absen',
-
-	
-	//'username' => 'root',
-	//'password' => 'abhiasa123',
-	//'database' => 'absensi',
+	  
 	
 
-	//'username' => 'root',
-	//'password' => '',
-	//'database' => 'haha',
+	'username' => 'root',
+'password' => '',
+	'database' => 'haha',
 
 
-	'username' => 'u398357365_salma',
-	'password' => 'Imamdienul1',
-	'database' => 'u398357365_absensi',
+	//'username' => 'u398357365_salma',
+	//'password' => 'Imamdienul1',
+	//'database' => 'u398357365_absensi',
 	
 
 

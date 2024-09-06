@@ -74,77 +74,83 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                 <div class="sidebar-inner slimscrollleft" id="sidebar-main">
 
                     <div id="sidebar-menu">
-                        <ul>
+                    <ul>
                            
                     
                            
-                        <li>
-                                <a href="<?=base_url();?>admin/dashboard" class="waves-effect">
-                                    <i class="mdi mdi-view-dashboard"></i>
-                                    <span> Dashboard</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?=base_url();?>absensi" class="waves-effect">
-                                    <i class="mdi mdi-qrcode-scan"></i>
-                                    <span>Absensi Barcode</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?=base_url();?>alfa" class="waves-effect">
-                                    <i class="mdi mdi-account-remove"></i>
-                                    <span>Alfa 3 Hari</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?=base_url();?>admin/absensi" class="waves-effect">
-                                    <i class="mdi mdi-account-remove"></i>
-                                    <span>Absensi View</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?=base_url();?>izin" class="waves-effect">
-                                    <i class="mdi mdi-hospital"></i>
-                                    <span>Data Perizinan</span>
-                                </a>
-                            </li>
-                            <li class="has_sub">
-                                <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-school"></i> <span> Data </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
-                                <ul class="list-unstyled">
-                                    <li><a href="<?=base_url();?>admin/kelas">Data Kelas</a></li>
-                                    <li><a href="<?=base_url();?>admin/kampus">Data Kampus</a></li>
-                                    <li><a href="<?=base_url();?>admin/list_users">Data User</a></li>
-                                    <li><a href="<?=base_url();?>walikelas/list_walikelas">Data Walikelas</a></li>
-                                    <li><a href="<?=base_url();?>admin/rfidnew">New RFID</a></li>
-                                    <li><a href="<?=base_url();?>admin/datarfid">Data All</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="<?=base_url();?>admin/devices" class="waves-effect">
-                                    <i class="mdi mdi-xaml"></i>
-                                    <span> Device </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?=base_url();?>admin/histori" class="waves-effect">
-                                    <i class="mdi mdi-history"></i>
-                                    <span> Histori Alat </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?=base_url();?>admin/setting" class="waves-effect">
-                                    <i class="mdi mdi-camera-timer"></i>
-                                    <span> Waktu Oprasional </span>
-                                </a>
-                            </li>   
-                            <li>
-                                <a href="<?=base_url();?>sql" class="waves-effect">
-                                    <i class="mdi mdi-linux"></i>
-                                    <span> SQL Command</span>
-                                </a>
-                            </li>   
-
-                        </ul>
+                           <li>
+                                   <a href="<?=base_url();?>admin/dashboard" class="waves-effect">
+                                       <i class="mdi mdi-view-dashboard"></i>
+                                       <span> Dashboard</span>
+                                   </a>
+                               </li>
+                               <li>
+                                   <a href="<?=base_url();?>admin/kelas" class="waves-effect">
+                                       <i class="ti-files"></i>
+                                       <span>Kelas</span>
+                                   </a>
+                               </li>
+                               <li class="has_sub">
+                                   <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-school"></i> <span> Data </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                                   <ul class="list-unstyled">
+                                       <li><a href="<?=base_url();?>admin/kampus">Data Kampus</a></li>
+                                       <li><a href="<?=base_url();?>admin/list_users">Data User</a></li>
+                                       <li><a href="<?=base_url();?>walikelas/list_walikelas">Data Walikelas</a></li>
+                                       <li><a href="<?=base_url();?>admin/rfidnew">New RFID</a></li>
+                                       <li><a href="<?=base_url();?>admin/datarfid">Data All</a></li>
+                                   </ul>
+                               </li>
+                               <li>
+                                   <a href="<?=base_url();?>absensi" class="waves-effect">
+                                       <i class="mdi mdi-qrcode-scan"></i>
+                                       <span>Absensi Barcode</span>
+                                   </a>
+                               </li>
+                               <li>
+                                   <a href="<?=base_url();?>alfa" class="waves-effect">
+                                       <i class="mdi mdi-account-remove"></i>
+                                       <span>Alfa 3 Hari</span>
+                                   </a>
+                               </li>
+                               <li>
+                                   <a href="<?=base_url();?>admin/absensi" class="waves-effect">
+                                       <i class="mdi mdi-account-remove"></i>
+                                       <span>Absensi View</span>
+                                   </a>
+                               </li>
+                               <li>
+                                   <a href="<?=base_url();?>izin" class="waves-effect">
+                                       <i class="mdi mdi-hospital"></i>
+                                       <span>Perizinan</span>
+                                   </a>
+                               </li>
+                              
+                               <li>
+                                   <a href="<?=base_url();?>admin/devices" class="waves-effect">
+                                       <i class="mdi mdi-xaml"></i>
+                                       <span> Device </span>
+                                   </a>
+                               </li>
+                               <li>
+                                   <a href="<?=base_url();?>admin/histori" class="waves-effect">
+                                       <i class="mdi mdi-history"></i>
+                                       <span> Histori Alat </span>
+                                   </a>
+                               </li>
+                               <li>
+                                   <a href="<?=base_url();?>admin/setting" class="waves-effect">
+                                       <i class="mdi mdi-camera-timer"></i>
+                                       <span> Waktu Oprasional </span>
+                                   </a>
+                               </li>   
+                               <li>
+                                   <a href="<?=base_url();?>sql" class="waves-effect">
+                                       <i class="mdi mdi-linux"></i>
+                                       <span> SQL Command</span>
+                                   </a>
+                               </li>   
+   
+                           </ul>
                     </div>
                     <div class="clearfix"></div>
                 </div>

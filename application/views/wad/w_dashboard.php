@@ -1,8 +1,4 @@
-<?php
-{
-    // Memuat header
-    $this->load->view('include/w_header.php');
-?>
+
     <div class="page-content-wrapper dashborad-v">
         <div class="container-fluid">
             <div class="row">
@@ -33,8 +29,4 @@
 
         </div> <!-- container-fluid -->
     </div> <!-- page-content-wrapper dashborad-v -->
-<?php
-    // Memuat footer
-    $this->load->view('include/footer.php');
-}
-?>
+

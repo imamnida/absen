@@ -72,18 +72,8 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Tutorial Section on the Right -->
-                    <div class="col-md-6 mx-auto">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Cara Penggunaan Aplikasi:</h5>
-                                <p>
-                                    1. Login sebagai Walikelas dengan username "Nuptk" dan password "admin".<br>
-                                    2. Setelah login, pilih menu "Daftar Kelas"<br>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                   
+
                 </div>
             </div>
         </div>

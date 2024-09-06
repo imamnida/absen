@@ -37,9 +37,7 @@ if ($set=="list-walikelas") {
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
-                            <th>NUPTK</th>
-                            <th>Kelas</th>
-                            <th>Foto</th>
+                           
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -49,9 +47,7 @@ if ($set=="list-walikelas") {
                 <tr>
                   <td>Data tidak ditemukan</td>
                   <td>Data tidak ditemukan</td>
-                  <td>Data tidak ditemukan</td>
-                  <td>Data tidak ditemukan</td>
-                  <td>Data tidak ditemukan</td>
+                 
                   <td>Data tidak ditemukan</td>
                   <?php } else{
                 $no=0;
@@ -59,9 +55,7 @@ if ($set=="list-walikelas") {
                 <tr>
                   <td><?php echo $no;?></td>
                   <td><?php echo $row->nama;?></td>
-                  <td><?php echo $row->nuptk;?></td>
-                  <td><?php echo $row->kelas;?></td>
-                  <td><img src="<?=base_url();?>assets/images/<?php echo $row->avatar;?>" class="img-circle" width="auto" height="100px" alt="Wali Kelas Image"></td>
+                 
                   <td>
                     <a href="<?=base_url()?>walikelas/edit_walikelas/<?=$row->id_walikelas?>" class="btn btn-success"><i class="fa fa-pencil"></i></a>
                     <a href="<?=base_url()?>walikelas/hapus_walikelas/<?=$row->id_walikelas?>" class="btn btn-danger" onclick="return confirm('Anda Yakin menghapus data ini?')"><i class="fa fa-trash-o"></i></a>

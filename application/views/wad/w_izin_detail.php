@@ -20,24 +20,21 @@
         <div class="row">
             <?php if(!empty($siswa)): ?>
                 <?php foreach($siswa as $murid): ?>
-                    <div class="col-md-3 col-xl-3">
-                        <img src="<?= $murid->foto ?>" style="max-width:100%; margin:auto;" alt="Foto Murid">
-                    </div>
-                    <div class="col-md-9 col-xl-9">
+                    <div class="col-md-4">
                         <div class="card m-b-30">
-                            <div class="card-body">
-                                <h1 class="mt-0 header-title"><?= $murid->nama; ?></h1>
+                            <div class="card-body text-center">
+                                <div class="box">
+                                    <img src="<?=base_url();?>./uploads/<?= $murid->foto ?>" style="width:100px; height:100px; object-fit:cover; border-radius:5px; margin-bottom:15px;" alt="Foto Murid">
+                                </div>
+                                <h1 class="header-title"><?= $murid->nama; ?></h1>
                                 <hr>
                                 <div class="table-responsive">
-                                    <p>NIS : <?= $murid->nis; ?></p>
-                                    <p>Kampus : <?= $murid->kampus; ?></p>
+                                    <p>NISN : <?= $murid->nisn; ?></p>
                                     <p>Kelas : <?= $murid->kelas; ?></p>
-                                    <p>Telp. : <?= $murid->telp; ?></p>
-                                    <p>RFID UID : <?= $murid->uid; ?></p>
-                                    <p>Alamat : <?= $murid->alamat; ?></p>
-                                    <form id="absensiForm" action="<?php echo site_url('wizin/absen'); ?>" method="post">
-                                        <input type="hidden" name="uid" value="<?= $murid->uid ?>">
-                                        <input type="hidden" name="id_devices" value="4">
+                                    
+                                    <form id="absensiForm" action="<?php echo site_url('izin/absen'); ?>" method="post">
+                                        <input type="hidden" name="nisn" value="<?= $murid->nisn ?>">
+                                        <input type="hidden" name="id_devices" value="3">
                                         <input type="hidden" name="id_kelas" value="<?= $id_kelas ?>">
                                         <select name="action" class="form-control">
                                             <option value="masuk">Tidak Membawa Kartu Masuk</option>
@@ -56,7 +53,7 @@
                 <div class="col-12">
                     <div class="card m-b-30">
                         <div class="card-body">
-                            <h1 class="mt-0 header-title">KELAS INI HADIR SEMUA !!!</h1>
+                            <h1 class="mt-0 header-title">Tidak ada siswa yang tidak hadir hari ini di kelas ini.</h1>
                         </div>
                     </div>
                 </div>

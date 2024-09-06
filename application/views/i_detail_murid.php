@@ -1,4 +1,5 @@
 <?php $this->load->view('include/header.php'); ?>
+
 <div class="page-content-wrapper">
     <div class="container-fluid">
         <!-- Page title and breadcrumb -->
@@ -23,15 +24,14 @@
             <div class="col-md-9 col-xl-9">
                 <div class="card m-b-30">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h1 class="header-title mt-0"><?= $murid->nama; ?></h1>
+                        <h1 class="mt-0 header-title d-flex justify-content-between align-items-center">
+                            <?= $murid->nama; ?>
                             <a href="<?= base_url() ?>/admin/edit_rfid/<?= $murid->id_rfid ?>" class="btn btn-info btn-sm">
                                 Edit <i class="fa fa-pencil"></i>
                             </a>
-                        </div>
-                        <hr>
+                        </h1>
                         <div class="text-center mb-3">
-                            <img src="<?=base_url();?>./uploads/<?php echo $murid->foto;?>" class="img-circle" width="auto" height="100px" alt="User Image">
+                            <img src="<?= base_url(); ?>./uploads/<?= $murid->foto; ?>" class="img-circle" width="auto" height="100px" alt="User Image">
                         </div>
                         <div class="table-responsive">
                             <table class="table table-borderless">
@@ -43,6 +43,10 @@
                                     <tr>
                                         <th scope="row">NIK:</th>
                                         <td><?= $murid->nik; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Tempat, Tanggal Lahir:</th>
+                                        <td><?= $murid->ttl; ?></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Kelas:</th>
@@ -61,7 +65,159 @@
             <!-- End details column -->
         </div>
         <!-- End murid details and photos -->
+
+        <div class="text-center">
+            <h4 class="header-title" style="margin-bottom: 20px; text-transform: uppercase;">Kartu Siswa</h4>
+        </div>
+        <div class="text-center">
+            <!-- Kartu dengan ukuran standar KTP -->
+            <div class="card kartu-siswa">
+                <!-- Barcode NISN -->
+                <div class="barcode">
+                    <img src="data:image/png;base64,<?= $barcode; ?>" alt="Barcode">
+                </div>
+                
+                <!-- Foto Murid -->
+                <div class="photo" style="background-image: url('<?= base_url('uploads/'.$murid->foto); ?>');"></div>
+                
+                <!-- Detail Murid -->
+                <div class="details">
+                    <table>
+                        <tr>
+                            <th><strong>Nama</strong></th>
+                            <td><strong>: <?= $murid->nama; ?></strong></td>
+                        </tr>
+                        <tr>
+                            <th><strong>TTL</strong></th>
+                            <td><strong>: <?= $murid->ttl; ?></strong></td>
+                        </tr>
+                        <tr>
+                            <th><strong>NIK</strong></th>
+                            <td><strong>: <?= $murid->nik; ?></strong></td>
+                        </tr>
+                        <tr>
+                            <th><strong>NISN</strong></th>
+                            <td><strong>: <?= $murid->nisn; ?></strong></td>
+                        </tr>
+                        <tr>
+                            <th><strong>Alamat</strong></th>
+                            <td><strong>: <?= $murid->alamat; ?></strong></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- End Kartu Siswa Section -->
     </div>
 </div>
+
+<style>
+    .page-content-wrapper {
+        max-height: 100vh;
+        overflow-y: auto;
+        padding: 10px;
+        margin-top: 70px; /* Adjust the value as needed to push content below the navbar */
+    }
+
+    .card.kartu-siswa {
+        position: relative;
+        width: 85.6mm; /* Width of the card */
+        height: 54mm; /* Height of the card */
+        background-image: url('<?= base_url('assets/images/template.png'); ?>');
+        background-size: cover;
+        background-position: center;
+        border-radius: 8px;
+        border: 2px solid #000;
+        box-sizing: border-box;
+        margin: 0 auto; /* Center horizontally */
+        page-break-inside: avoid;
+    }
+
+    .barcode {
+        position: absolute;
+        top: 68px;
+        left: 10px;
+        width: 120px;
+        height: 30px;
+    }
+
+    .barcode img {
+        width: 100%;
+        height: auto;
+    }
+
+    .photo {
+        position: absolute;
+        top: 95px;
+        left: 23px;
+        width: 60px;
+        height: 80px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 5px;
+        border: 2px solid #fff;
+    }
+
+    .details {
+        position: absolute;
+        top: 99px;
+        left: 100px;
+        color: black;
+        text-align: left;
+        font-family: Arial, sans-serif;
+        text-transform: uppercase;
+        line-height: 1;
+    }
+
+    .details table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .details th, .details td {
+        padding: 2px;
+        text-align: left;
+        font-size: 8px;
+    }
+
+    .details th {
+        font-weight: bold;
+    }
+
+    @media print {
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .page-content-wrapper {
+            width: 100%;
+            height: 100%;
+            overflow-y: visible;
+        }
+
+        .card.kartu-siswa {
+            page-break-inside: avoid;
+            margin-bottom: 0px;
+            background-image: url('<?= base_url('assets/images/template.png'); ?>') !important;
+            background-size: cover;
+            background-position: center;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .photo {
+            background-image: url('<?= base_url('uploads/'.$murid->foto); ?>') !important;
+            background-size: cover;
+            background-position: center;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        @page {
+            margin: 0;
+        }
+    }
+</style>
 
 <?php $this->load->view('include/footer.php'); ?>

@@ -24,6 +24,7 @@ class Log extends CI_Controller {
             if ($user) {
                 $passDB = $user->password;
                 $avatar = $user->avatar;
+                $nama = $user->nama;
 
                 // Log the password and hash for debugging
                 log_message('debug', 'Input password: ' . $pass);
@@ -33,6 +34,7 @@ class Log extends CI_Controller {
                     // Password matches
                     $this->session->set_userdata('userlogin', $nuptk);
                     $this->session->set_userdata('avatar', $avatar);
+                    $this->session->set_userdata('nama', $nama);
 
                     if ($this->input->post("remember")) {
                         $hour = time() + 3600 * 24 * 30;

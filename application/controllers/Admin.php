@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+use Picqer\Barcode\BarcodeGeneratorPNG;
 
 class Admin extends CI_Controller {
 
@@ -47,13 +48,12 @@ class Admin extends CI_Controller {
 		$data['data'] = $this->m_admin->get_users();
 		$this->load->view('i_users', $data);
 	}
-
+	
 	public function add_users(){
 		$data['set'] = "add-users";
 		$this->load->view('i_users', $data);
 	}
-
-
+	
 	public function save_users(){
 		if($this->session->userdata('userlogin')){
 			$users = $this->input->post('users');
@@ -61,154 +61,143 @@ class Admin extends CI_Controller {
 			$username = $this->input->post('username');
 			$pass = $this->input->post('pass');
 			$hash = $this->bcrypt->hash_password($pass);
-
-	        $type = explode('.', $_FILES["image"]["name"]);
-			$type = strtolower($type[count($type)-1]);
-			$imgname = uniqid(rand()).'.'.$type;
-			$url = "vertical/assets/images/".$imgname;
-			if(in_array($type, array("jpg", "jpeg", "gif", "png"))){
-				if(is_uploaded_file($_FILES["image"]["tmp_name"])){
-					if(move_uploaded_file($_FILES["image"]["tmp_name"],$url)){
-						$data = array(
-				                'nama'    => $users,
-				                'email'   => $email,
-				                'username'=> $username,
-				                'password'=> $hash,
-				                'avatar'  => $imgname,
-				        );
-						$this->m_admin->insert_users($data);
-						$this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil di simpan</div>");
-					}
-				}
-			}else{
-				$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data gagal di simpan, ekstensi gambar salah</div>");
-			}
-	        
-			redirect(base_url().'admin/list_users');
-		}
-	}
-
 	
-	public function hapus_users($id=null){
-		if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
-		{ 
-			$path = "";
-			$filename = $this->m_admin->get_user_byid($id);
-			foreach ($filename as $key) {
-				$file = $key->avatar;
-				$path = "vertical/assets/images/".$file;
-			}
-			
-			//echo $path;
-
-			if(file_exists($path)){
-				unlink($path);
-				if($this->m_admin->users_del($id)){
-					$this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil di hapus</div>");
-				}else{
-					$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data gagal di hapus</div>");
-				}
-			}else{
-				if($this->m_admin->users_del($id)){
-					$this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil di hapus image gagal dihapus</div>");
-				}else{
-					$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data gagal di hapus</div>");
-				}
-			}
-
-			redirect(base_url().'admin/list_users');
-		}
-	}
-
-
-	public function edit_users($id=null){
-		if($this->session->userdata('userlogin')){     // mencegah akses langsung tanpa login
-			if (isset($id)) {
-				$user = $this->m_admin->get_user_byid($id);
-				foreach ($user as $key => $value) {
-					//print_r($value);
-					$data['id'] = $id;
-					$data['nama'] = $value->nama;
-					$data['email'] = $value->email;
-					$data['username'] = $value->username;
-					$data['password'] = $value->password;
-					$data['avatar'] = $value->avatar;
-				}
-				$data['set'] = "edit-users";
-				$this->load->view('i_users', $data);
-
-			}else{
-				redirect(base_url().'admin/list_users');
-			}
-		}
-	}
-
-	public function save_edit_users(){
-		if($this->session->userdata('userlogin')){     // mencegah akses langsung tanpa login
-			if (isset($_POST['id']) && isset($_POST['email'])) {
-				$id = $this->input->post('id');
-				$email = $this->input->post('email');
-				$nama = $this->input->post('users');
-				$username = $this->input->post('username');
-				$pass = $this->input->post('pass');
-				$hash = $this->bcrypt->hash_password($pass);
-
-
-				$type = explode('.', $_FILES["image"]["name"]);
-				$type = strtolower($type[count($type)-1]);
-				$imgname = uniqid(rand()).'.'.$type;
-				$url = "vertical/assets/images/".$imgname;
-				if(in_array($type, array("jpg", "jpeg", "gif", "png"))){
-					if(is_uploaded_file($_FILES["image"]["tmp_name"])){
-						if(move_uploaded_file($_FILES["image"]["tmp_name"],$url)){
+			if (!empty($_FILES["image"]["name"])) {
+				$type = pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
+				$type = strtolower($type);
+				$imgname = uniqid(rand()) . '.' . $type;
+				$url = "assets/images/" . $imgname;
+	
+				if (in_array($type, array("jpg", "jpeg", "gif", "png"))) {
+					if (is_uploaded_file($_FILES["image"]["tmp_name"])) {
+						if (move_uploaded_file($_FILES["image"]["tmp_name"], $url)) {
 							$data = array(
-					                'nama'    => $users,
-					                'email'   => $email,
-					                'username'=> $username,
-					                'avatar'  => $imgname,
-					        );
-					        $file = $this->input->post('img');
-							$path = "vertical/assets/images/".$file;
-
-							if(file_exists($path)){
-								unlink($path);
-							}
-							$this->m_admin->updateUser($id, $data);
-							$this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil di simpan</div>");
+								'nama'    => $users,
+								'email'   => $email,
+								'username'=> $username,
+								'password'=> $hash,
+								'avatar'  => $imgname,
+							);
+							$this->m_admin->insert_users($data);
+							$this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil disimpan</div>");
 						}
 					}
-				}else{
-					$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data gagal di simpan, ekstensi gambar salah</div>");
+				} else {
+					$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data gagal disimpan, ekstensi gambar salah</div>");
 				}
-
-				if(isset($_POST['changepass'])){
-					$data = array(		'email' => $email,
-										'nama' => $nama,
-										'username'=> $username,
-						                'password'=> $hash,
-				 				);
-					if ($this->m_admin->updateUser($id,$data)) {
-						$this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil di update</div>");
-					}else{
-						$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data gagal di update</div>");
-					}
-				}else{
-					$data = array(		'email' => $email,
-										'nama' => $nama,
-										'username'=> $username,
-				 				);
-					if ($this->m_admin->updateUser($id,$data)) {
-						$this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil di update</div>");
-					}else{
-						$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data gagal di update</div>");
-					}				
-				}
-
+			}
+			
+			redirect(base_url().'admin/list_users');
+		}
+	}
+	
+	public function hapus_users($id = null){
+		if($this->session->userdata('userlogin')){
+			$filename = $this->m_admin->get_user_byid($id);
+			$file = isset($filename->avatar) ? $filename->avatar : null;
+			$path = "assets/images/" . $file;
+	
+			if ($file && file_exists($path)) {
+				unlink($path);
+			}
+	
+			if ($this->m_admin->users_del($id)) {
+				$this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil dihapus</div>");
+			} else {
+				$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data gagal dihapus</div>");
+			}
+	
+			redirect(base_url().'admin/list_users');
+		}
+	}
+	
+	public function edit_users($id = null){
+		if($this->session->userdata('userlogin') && isset($id)){
+			$user = $this->m_admin->get_user_byid($id);
+	
+			if ($user) {
+				$data = array(
+					'id'       => $id,
+					'nama'     => $user->nama,
+					'email'    => $user->email,
+					'username' => $user->username,
+					'password' => $user->password,
+					'avatar'   => $user->avatar,
+					'set'      => "edit-users"
+				);
+				$this->load->view('i_users', $data);
+			} else {
 				redirect(base_url().'admin/list_users');
 			}
 		}
 	}
-
+	
+	public function save_edit_users(){
+		if($this->session->userdata('userlogin') && isset($_POST['id']) && isset($_POST['email'])){
+			$id = $this->input->post('id');
+			$email = $this->input->post('email');
+			$nama = $this->input->post('users');
+			$username = $this->input->post('username');
+			$pass = $this->input->post('pass');
+			$hash = $this->bcrypt->hash_password($pass);
+	
+			if (!empty($_FILES["image"]["name"])) {
+				$type = pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
+				$type = strtolower($type);
+				$imgname = uniqid(rand()) . '.' . $type;
+				$url = "assets/images/" . $imgname;
+	
+				if (in_array($type, array("jpg", "jpeg", "gif", "png"))) {
+					if (is_uploaded_file($_FILES["image"]["tmp_name"])) {
+						if (move_uploaded_file($_FILES["image"]["tmp_name"], $url)) {
+							$file = $this->input->post('img');
+							$path = "assets/images/" . $file;
+	
+							if (file_exists($path)) {
+								unlink($path);
+							}
+	
+							$data = array(
+								'nama'     => $nama,
+								'email'    => $email,
+								'username' => $username,
+								'avatar'   => $imgname,
+							);
+	
+							$this->m_admin->updateUser($id, $data);
+							$this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil disimpan</div>");
+						}
+					}
+				} else {
+					$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data gagal disimpan, ekstensi gambar salah</div>");
+				}
+			}
+	
+			if (isset($_POST['changepass'])) {
+				$data = array(
+					'email'    => $email,
+					'nama'     => $nama,
+					'username' => $username,
+					'password' => $hash,
+				);
+			} else {
+				$data = array(
+					'email'    => $email,
+					'nama'     => $nama,
+					'username' => $username,
+				);
+			}
+	
+			if ($this->m_admin->updateUser($id, $data)) {
+				$this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil diupdate</div>");
+			} else {
+				$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data gagal diupdate</div>");
+			}
+	
+			redirect(base_url().'admin/list_users');
+		}
+	}
+	
     public function update_device_mode() {
 		$id = $this->input->post('id');
 		$new_mode = $this->input->post('mode');
@@ -412,82 +401,127 @@ class Admin extends CI_Controller {
 		$this->load->view('i_rfid', $data);
 	}
 
-	public function edit_rfid($id=null){
-		if($this->session->userdata('userlogin')){     // mencegah akses langsung tanpa login
+	public function edit_rfid($id = null) {
+		if ($this->session->userdata('userlogin')) { // Prevent direct access without login
 			if (isset($id)) {
 				$rfid = $this->m_admin->get_rfid_byid($id);
 				if (isset($rfid)) {
 					foreach ($rfid as $key => $value) {
-						//print_r($value);
 						$data['id'] = $value->id_rfid;
 						$data['nama'] = $value->nama;
-						$data['nis'] = $value->nis;
-						$data['uid'] = $value->uid;
-						$data['telp'] = $value->telp;
-						$data['jabatan'] = $value->jabatan;
-						$data['id_kampus'] = $value->id_kampus;
+						$data['nisn'] = $value->nisn;
+						$data['nik'] = $value->nik;
+						$data['ttl'] = $value->ttl;
 						$data['kelas'] = $value->id_kelas != null ? $this->m_admin->find_kelas($value->id_kelas) : null;
-						$data['gender'] = $value->gender;
 						$data['alamat'] = $value->alamat;
 						$data['foto'] = $value->foto;
-						$data['kaka'] = $value->kaka;
-						$data['rumah'] = $value->rumah;
 					}
-
+	
 					$data['list_kelas'] = $this->m_admin->get_kelas();
-					$data['list_kampus'] = $this->m_admin->get_kampus();
 					$data['set'] = "edit-rfid";
+	
+					// If form is submitted
+					if ($this->input->post()) {
+						$captured_photo = $this->input->post('captured_photo');
+						$upload_error = '';
+	
+						if ($captured_photo) {
+							// Handle photo captured from the camera
+							$file_name = strtolower(str_replace(' ', '_', $this->input->post('nama'))) . '_' . time() . '.png';
+							$file_path = './uploads/' . $file_name;
+							$captured_photo = str_replace('data:image/png;base64,', '', $captured_photo);
+							$captured_photo = str_replace(' ', '+', $captured_photo);
+							$image_data = base64_decode($captured_photo);
+							file_put_contents($file_path, $image_data);
+						} else {
+							// Handle uploaded file
+							$config['upload_path'] = './uploads/';
+							$config['allowed_types'] = 'gif|jpg|png|jpeg';
+							$config['max_size'] = 0;
+							$config['file_name'] = strtolower(str_replace(' ', '_', $this->input->post('nama'))) . '_' . time(); // Set file name based on user's name
+	
+							$this->load->library('upload', $config);
+	
+							if (!$this->upload->do_upload('foto')) {
+								$upload_error = $this->upload->display_errors();
+								$file_name = $data['foto']; // Use old photo if error occurs
+							} else {
+								$upload_data = $this->upload->data();
+								$file_name = $upload_data['file_name'];
+							}
+						}
+	
+						// Data to be updated
+						$update_data = array(
+							'nama' => $this->input->post('nama'),
+							'nisn' => $this->input->post('nisn'),
+							'nik' => $this->input->post('nik'),
+							'ttl' => $this->input->post('ttl'),
+							'id_kelas' => $this->input->post('kelas'),
+							'alamat' => $this->input->post('alamat'),
+							'foto' => isset($file_name) ? $file_name : $data['foto'], // Use old photo if no new photo
+						);
+	
+						// Update RFID data
+						$this->m_admin->update_rfid($id, $update_data);
+	
+						// Set success message and redirect to edit page
+						$this->session->set_flashdata('success', 'Data RFID berhasil diperbarui!');
+						redirect(base_url() . 'admin/edit_rfid/' . $id);
+					}
+	
+					// Load view for edit form
 					$this->load->view('i_rfid', $data);
-				}else{
-					redirect(base_url().'admin/kelas');
+				} else {
+					redirect(base_url() . 'admin/kelas');
 				}
-			}else{
-				redirect(base_url().'admin/kelas');
+			} else {
+				redirect(base_url() . 'admin/kelas');
 			}
+		} else {
+			redirect(base_url() . 'login'); // Redirect to login page if not logged in
 		}
 	}
+	
 
-	public function save_edit_rfid(){
-		if($this->session->userdata('userlogin')){     // mencegah akses langsung tanpa login
-			if (isset($_POST['id']) && isset($_POST['nama'])) {
-				$id = $this->input->post('id');
-				$nama = $this->input->post('nama');
-				$nis = $this->input->post('nis');
-				$uid = $this->input->post('uid');
-				$telp = $this->input->post('telp');
-				$gender = $this->input->post('gender');
-				$kelas_id = $this->input->post('kelas_id');
-				$kampus_id = $this->input->post('kampus_id');
-				$alamat = $this->input->post('alamat');
-				$foto = $this->input->post('foto');
-				$kaka = $this->input->post('kaka');
-				$rumah = $this->input->post('rumah');
+	public function save_edit_rfid() {
+    if ($this->session->userdata('userlogin')) { // Prevent direct access without login
+        if ($this->input->post('id')) {
+            $id = $this->input->post('id');
+            $nama = $this->input->post('nama');
+            $nisn = $this->input->post('nisn');
+			$nik = $this->input->post('nik');
+            $ttl = $this->input->post('ttl');
+            $kelas_id = $this->input->post('kelas_id');
+            $alamat = $this->input->post('alamat');
 
+            // Prepare data for update without modifying photo
+            $update_data = array(
+                'nama' => $nama,
+                'nisn' => $nisn,
+				'nik' => $nik,
+                'ttl' => $ttl,
+                'id_kelas' => $kelas_id,
+                'alamat' => $alamat,
+            );
 
-				$data = array('nama' => $nama,
-								'telp' => $telp,
-					      			'nis' => $nis,
-									'uid' => $uid,
-								'gender' => $gender,
-								'id_kelas' => $kelas_id,
-								'id_kampus' => $kampus_id,
-								'alamat' => $alamat,
-								'foto' => $foto,
-								'kaka' => $kaka,
-								'rumah' => $rumah,
-			 				);
-			
+            // Update RFID data
+            if ($this->m_admin->updateRFID($id, $update_data)) {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-success" id="alert"><i class="glyphicon glyphicon-ok"></i> Data berhasil diupdate</div>');
+            } else {
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger" id="alert"><i class="glyphicon glyphicon-remove"></i> Data gagal diupdate</div>');
+            }
 
+            redirect('admin/lihat_kelas?id_kelas=' . $kelas_id);
+        } else {
+            $this->session->set_flashdata('error', 'ID tidak ditemukan.');
+            redirect('admin/lihat_kelas');
+        }
+    } else {
+        redirect(base_url() . 'login'); // Redirect to login page if not logged in
+    }
+}
 
-				if ($this->m_admin->updateRFID($id,$data)) {
-					$this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil di update</div>");
-				}else{
-					$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data gagal di update</div>");
-				}
-				redirect(base_url().'admin/kelas');
-			}
-		}
-	}
 
 
 	public function hapus_rfid($id=null){
@@ -612,6 +646,7 @@ class Admin extends CI_Controller {
 			];
 
 			$this->m_admin->insert_kelas($kelas);
+			$id_kelas = $_GET['id_kelas'];
 
 			$data['message'] = "Berhasil menambahkan kelas"; 
 			
@@ -689,6 +724,10 @@ class Admin extends CI_Controller {
 		$this->load->view('i_siswa_alfa',$data);
 	}
 	
+
+	
+	
+	
 	public function lihat_kelas(){
 		if(!$this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
 		{
@@ -752,29 +791,68 @@ class Admin extends CI_Controller {
 			"murid" => $murid[0],
 		]);
 	}
-	public function detail_murid($id_murid=null)
-	{
-		if(!$this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
-		{
-			return ;
-		}
-
-		if(!$id_murid){
-			echo "insert id murid";
+	public function hapus_murid($id_rfid) {
+		// Load the model if it's not already loaded
+		$this->load->model('M_admin');
+	
+		// ini adalah yang bisa berjalan dengan b
+		$murid = $this->M_admin->find_murid($id_rfid);
+		if ($murid) {
+			$id_kelas = $murid[0]->id_kelas; // Assuming id_kelas is a field in the murid table
+		} else {
+			$this->session->set_flashdata('error', 'Murid tidak ditemukan.');
+			redirect('admin/lihat_kelas'); // Redirect to a default page or handle error appropriately
 			return;
 		}
-
-		$murid = $this->m_admin->find_murid($id_murid);
-
-		if (!$murid) {
-			echo "murid tidak ditemukan";
-			return;
+	
+		// Call a method in your model to delete the student
+		$result = $this->M_admin->delete_murid($id_rfid);
+	
+		if ($result) {
+			// If deletion is successful, set a success message
+			$this->session->set_flashdata('success', 'Murid berhasil dihapus.');
+		} else {
+			// If deletion fails, set an error message
+			$this->session->set_flashdata('error', 'Murid gagal dihapus.');
 		}
-
-		$this->load->view('i_detail_murid',[
-			"murid" => $murid[0],
-		]);
+	
+		// Redirect back to the class detail page with the class ID
+		redirect('admin/lihat_kelas?id_kelas=' . $id_kelas);
 	}
+	
+	
+	public function detail_murid($id_murid = null) {
+        if (!$this->session->userdata('userlogin')) {
+            // Mencegah akses langsung tanpa login
+            return;
+        }
+
+        if (!$id_murid) {
+            echo "Insert ID murid";
+            return;
+        }
+
+        // Load model
+        $this->load->model('m_admin');
+
+        // Cari murid
+        $murid = $this->m_admin->find_murid($id_murid);
+
+        if (!$murid) {
+            echo "Murid tidak ditemukan";
+            return;
+        }
+
+        // Generate barcode
+        $generator = new BarcodeGeneratorPNG();
+        $barcode = base64_encode($generator->getBarcode($murid[0]->nisn, $generator::TYPE_CODE_128));
+
+        // Load view dengan data murid dan barcode
+        $this->load->view('i_detail_murid', [
+            "murid" => $murid[0],
+            "barcode" => $barcode
+        ]);
+    }
 
 	public function rekap_absen($id_kelas = null)
     {
@@ -810,199 +888,7 @@ class Admin extends CI_Controller {
     }
 
 
-	public function rekapAbsen2excel(Type $var = null)
-	{
-		if(!$this->session->userdata('userlogin'))  
-		{
-			return ;
-		}
-
-		if(!isset($_GET['id_kelas'])){
-			echo "insert id kelas";
-			return;
-		}
-		
-		$tanggal_mulai = $this->input->get('tanggalMulai');
-		$tanggal_selesai = $this->input->get('tanggalSelesai');
-		
-
-		$alphabet = range('A','Z');
-
-		$begin = new DateTime($tanggal_mulai);
-		$end   = new DateTime($tanggal_selesai);
-
-		$diff = $begin->diff($end)->format("%a");
-
-		if($diff > 13){
-			echo  "maksimal 14 hari";
-			return;
-		}
-
-
-		$id_kelas = $_GET['id_kelas'];
-
-		$kelas = $this->m_admin->find_kelas($id_kelas);
-
-		$murid = $this->m_admin->get_murid($id_kelas);
-
-		if(!$murid){
-			echo "murid untiuk kelas ini kosong";
-			return;
-		}
-
-
-		$spreadsheet = new Spreadsheet;
-
-		$spreadsheet->setActiveSheetIndex(0)
-					->setCellValue('A1', 'Nama');
-
-		$k = 2;
-		foreach ($murid as $mrd) {
-			$spreadsheet->setActiveSheetIndex(0)->setCellValue("A".$k,$mrd->nama);
-			$k++;
-		}
-		
-		$j = 1;
-		for($i = $begin; $i <= $end; $i->modify('+1 day')){
-			$spreadsheet->setActiveSheetIndex(0)->setCellValue($alphabet[$j]."1",$i->format("D"));
-			$k = 2;
-			foreach ($murid as $mrd) {
-				$jam_masuk = $this->m_admin->get_jam_masuk($mrd->id_rfid,strtotime($i->format('Y-m-d')));
-				if($jam_masuk->num_rows() > 0 ){
-					$masuk = $jam_masuk->row();
-					$waktu = date("H:i:s d M Y", $masuk->created_at);
-				}else{
-					$waktu = "-";
-				}
-				$spreadsheet->setActiveSheetIndex(0)->setCellValue($alphabet[$j].$k,$waktu);
-				$k++;
-			}
-			$j++;
-		}
-			
-		// return;
-		$writer = new Xlsx($spreadsheet);
-
-		header('Content-Type: application/vnd.ms-excel');
-		header('Content-Disposition: attachment;filename="Absensi_KELAS_'.$kelas->kelas.'_'.$tanggal_mulai.'_'.$tanggal_selesai.'.xlsx"');
-		header('Cache-Control: max-age=0');
-
-		$writer->save('php://output');
-
-		// echo $tanggal;
-	}
-
-
-	public function export2excel(){
-		if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
-		{
-			if (isset($_GET['tanggal'])) {
-				$tanggal = $this->input->get('tanggal');
-				//echo $tanggal;
-
-				$split = explode("_", $tanggal);
-				$x = 0;
-				foreach ($split as $key => $value) {
-					$date[$x] = $value;
-					$x++;
-				}
-
-				$ts1 = strtotime($date[0]);
-				$ts2 = strtotime($date[1]);
-
-				$ts2 += 86400;	// tambah 1 hari (hitungan detik)
-
-				$datamasuk = $this->m_admin->get_absensi("masuk",$ts1,$ts2);
-				$datakeluar = $this->m_admin->get_absensi("keluar",$ts1,$ts2);
-
-				$spreadsheet = new Spreadsheet;
-
-				$spreadsheet->setActiveSheetIndex(0)
-				          ->setCellValue('A1', 'No')
-				          ->setCellValue('B1', 'Alat Absensi')
-				          ->setCellValue('C1', 'Nama')
-				          ->setCellValue('D1', 'Kelas')
-				          ->setCellValue('E1', 'Keterangan')
-				          ->setCellValue('F1', 'Waktu');
-
-				$baris = 2;
-				$spreadsheet->setActiveSheetIndex(0)
-				               ->setCellValue('A' . $baris, "ABSENSI MASUK");
-				$baris++;
-				$nomor = 1;
-
-				if (isset($datamasuk)){
-					foreach($datamasuk as $masuk) {
-
-						$waktu = date("H:i:s d M Y", $masuk->created_at);
-
-						$kelas = "-"; 
-
-						if($masuk->id_kelas != null){
-							$kelas = $this->m_admin->find_kelas($masuk->id_kelas);
-							$kelas = $kelas->kelas;
-						}
-
-						$spreadsheet->setActiveSheetIndex(0)
-								   ->setCellValue('A' . $baris, $nomor."")
-								   ->setCellValue('B' . $baris, $masuk->nama_devices)
-								   ->setCellValue('C' . $baris, $masuk->nama)
-								   ->setCellValue('D' . $baris, $kelas)
-								   ->setCellValue('E' . $baris, $masuk->keterangan)
-								   ->setCellValue('F' . $baris, $waktu);
-
-					   $baris++;
-					   $nomor++;
-
-					}
-				}
-
-
-				$baris ++;
-				$spreadsheet->setActiveSheetIndex(0)
-				               ->setCellValue('A' . $baris, "ABSENSI KELUAR");
-				$baris ++;
-				$nomor = 1;
-
-				if (isset($datakeluar)){
-					foreach($datakeluar as $keluar) {
-
-						$waktu = date("H:i:s d M Y", $keluar->created_at);
-
-						$kelas = "-"; 
-
-						if($masuk->id_kelas != null){
-							$kelas = $this->m_admin->find_kelas($masuk->id_kelas);
-							$kelas = $kelas->kelas;
-						}
-
-						$spreadsheet->setActiveSheetIndex(0)
-								   ->setCellValue('A' . $baris, $nomor."")
-								   ->setCellValue('B' . $baris, $keluar->nama_devices)
-								   ->setCellValue('C' . $baris, $keluar->nama)
-								   ->setCellValue('D' . $baris, $kelas)
-								   ->setCellValue('E' . $baris, $keluar->keterangan)
-								   ->setCellValue('F' . $baris, $waktu);
-
-					   $baris++;
-					   $nomor++;
-
-					}
-				}
-				
-				$writer = new Xlsx($spreadsheet);
-
-				header('Content-Type: application/vnd.ms-excel');
-				header('Content-Disposition: attachment;filename="Absensi_'.$tanggal.'.xlsx"');
-				header('Cache-Control: max-age=0');
-
-				$writer->save('php://output');
-			}else{
-				redirect(base_url().'admin/absensi');
-			}
-		}
-				
-     }
+	
 	
 	public function setting()
 	{

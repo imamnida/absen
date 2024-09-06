@@ -7,8 +7,8 @@ class Absensi_model extends CI_Model {
         parent::__construct();
     }
 
-    public function absen_masuk($nis, $id_devices) {
-        $id_rfid = $this->get_id_rfid_by_nis($nis);
+    public function absen_masuk($nisn, $id_devices) {
+        $id_rfid = $this->get_id_rfid_by_nisn($nisn);
         $data = array(
             'id_devices' => $id_devices,
             'id_rfid' => $id_rfid,
@@ -19,8 +19,8 @@ class Absensi_model extends CI_Model {
         $this->db->insert('absensi', $data);
     }
 
-    public function absen_keluar($nis, $id_devices) {
-        $id_rfid = $this->get_id_rfid_by_nis($nis);
+    public function absen_keluar($nisn, $id_devices) {
+        $id_rfid = $this->get_id_rfid_by_nisn($nisn);
         $data = array(
             'id_devices' => $id_devices,
             'id_rfid' => $id_rfid,
@@ -31,8 +31,8 @@ class Absensi_model extends CI_Model {
         $this->db->insert('absensi', $data);
     }
 
-    public function absen_izin($nis, $id_devices) {
-        $id_rfid = $this->get_id_rfid_by_nis($nis);
+    public function absen_izin($nisn, $id_devices) {
+        $id_rfid = $this->get_id_rfid_by_nisn($nisn);
         $data = array(
             'id_devices' => $id_devices,
             'id_rfid' => $id_rfid,
@@ -43,8 +43,8 @@ class Absensi_model extends CI_Model {
         $this->db->insert('absensi', $data);
     }
 
-    public function absen_sakit($nis, $id_devices) {
-        $id_rfid = $this->get_id_rfid_by_nis($nis);
+    public function absen_sakit($nisn, $id_devices) {
+        $id_rfid = $this->get_id_rfid_by_nisn($nisn);
         $data = array(
             'id_devices' => $id_devices,
             'id_rfid' => $id_rfid,
@@ -55,24 +55,24 @@ class Absensi_model extends CI_Model {
         $this->db->insert('absensi', $data);
     }
 
-    private function get_id_rfid_by_nis($nis) {
-        $query = $this->db->get_where('rfid', array('nis' => $nis));
+    private function get_id_rfid_by_nisn($nisn) {
+        $query = $this->db->get_where('rfid', array('nisn' => $nisn));
         $result = $query->row();
         return $result ? $result->id_rfid : null;
     }
 
-    public function is_already_absent($nis, $keterangan) {
-        // Get today's date
+    public function is_already_absent($nisn, $keterangan) {
+
         $today = date("Y-m-d");
 
-        // Get the timestamp for the beginning of today
+         
         $beginning_of_today = strtotime('midnight', strtotime($today));
 
-        // Get the timestamp for the beginning of tomorrow
+        
         $beginning_of_tomorrow = strtotime('+1 day', $beginning_of_today);
 
-        // Query to check if the user has already performed attendance today
-        $this->db->where('id_rfid', $this->get_id_rfid_by_nis($nis));
+       
+        $this->db->where('id_rfid', $this->get_id_rfid_by_nisn($nisn));
         $this->db->where('keterangan', $keterangan);
         $this->db->where('created_at >=', $beginning_of_today);
         $this->db->where('created_at <', $beginning_of_tomorrow);
@@ -81,8 +81,8 @@ class Absensi_model extends CI_Model {
         return $query->num_rows() > 0;
     }
 
-    public function is_registered_nis($nis) {
-        $this->db->where('nis', $nis);
+    public function is_registered_nisn($nisn) {
+        $this->db->where('nisn', $nisn);
         $query = $this->db->get('rfid');
         return $query->num_rows() > 0;
     }

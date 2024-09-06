@@ -19,10 +19,17 @@ class Wad extends CI_Controller {
 
 	public function dashboard() {
 		
+		
+	
+	
+		$this->load->view('include/w_header');
 		$this->load->view('wad/w_dashboard');
+		$this->load->view('include/footer');
+	
+
 	}
 	
-	// Fungsi untuk menghitung jumlah pengguna RFID yang tidak melakukan absensi hari ini
+	
 	
 	
 

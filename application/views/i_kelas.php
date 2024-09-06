@@ -1,7 +1,7 @@
 <?php
-$this->load->View('include/header.php');
-
+$this->load->view('include/header.php');
 ?>
+
 <div class="page-content-wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -14,7 +14,7 @@ $this->load->View('include/header.php');
                             <li class="breadcrumb-item active">Kelas_list</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Class-List</h4>
+                    <h4 class="page-title">Class List</h4>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -30,8 +30,6 @@ $this->load->View('include/header.php');
                                 <div class="col-4">
                                     <label class="sr-only" for="inlineFormInputGroup">Nama Kelas</label>
                                     <div class="input-group">
-                                        <div class="input-group-prepend">
-                                        </div>
                                         <input type="text" name="kelas" required placeholder="Nama Kelas" class="form-control">
                                     </div>
                                 </div>                                                                           
@@ -55,41 +53,37 @@ $this->load->View('include/header.php');
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Kelas</th>
-                                    <th>Jumlah Murid</th>
+                                    <th>Murid</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php if(empty($kelas)){?>
-                            <tr>
-                                <td>Data tidak ditemukan</td>
-                                <td>Data tidak ditemukan</td>
-                                <td>Data tidak ditemukan</td>
-                                <td>Data tidak ditemukan</td>
-                            </tr>
-                            <?php 
-                            }else{
-                                $no=0;
-                                foreach($kelas as $row){ 
-                                $no++;
-                                ?>
-                                <tr>
-                                    <td style="text-align:start"><?php echo $no;?></td>
-                                    <td style="text-align:start"><b class="text-primary"><?php echo $row->kelas;?></b></td>
-                                    <?php 
-                                    $jumlah_murid = $m_admin->count_murid($row->id);
-                                    ?>
-                                    <td style="text-align:start"><?php echo $jumlah_murid; ?></td>
-                                    <td style="text-align:start">
-                                        <a class="ml-auto" href="<?= base_url() ?>admin/lihat_kelas?id_kelas=<?= $row->id; ?>"><button class="btn btn-info">Detail</button></a>
-                                       
-                                        <a href="<?php site_url()?>hapus_kelas?id_kelas=<?=$row->id?>" class="btn btn-danger" onclick="return confirm('Anda Yakin menghapus data ini?')"><i class="fa fa-trash"></i></a>
-                                    </td>
-                                </tr>
-                            <?php 
-                                }
-                            }
-                            ?>
+                                <?php if (empty($kelas)): ?>
+                                    <tr>
+                                        <td colspan="4" class="text-center">Data tidak ditemukan</td>
+                                    </tr>
+                                <?php else: ?>
+                                    <?php $no = 1; ?>
+                                    <?php foreach ($kelas as $row): ?>
+                                        <tr>
+                                            <td><?php echo $no++; ?></td>
+                                            <td><b class="text-primary"><?php echo $row->kelas; ?></b></td>
+                                            <?php $jumlah_murid = $m_admin->count_murid($row->id); ?>
+                                            <td><?php echo $jumlah_murid; ?></td>
+                                            <td>
+                                                <a href="<?= base_url() ?>admin/lihat_kelas?id_kelas=<?= $row->id; ?>" class="btn btn-primary">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                                <a href="<?= base_url() ?>/admin/rekap_absen/<?= $row->id; ?>" class="btn btn-primary">
+                                                    <i class="fa fa-book"></i>
+                                                </a>
+                                                <a href="<?= site_url() ?>hapus_kelas?id_kelas=<?= $row->id; ?>" class="btn btn-danger" onclick="return confirm('Anda yakin menghapus data ini?')">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </tbody>
                         </table>            
                     </div>
@@ -97,10 +91,8 @@ $this->load->View('include/header.php');
             </div>
         </div>
     </div>
-</div> 
+</div>
 
 <?php
 $this->load->view('include/footer.php');
 ?>
-
-            

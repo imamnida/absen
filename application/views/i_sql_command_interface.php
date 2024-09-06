@@ -4,9 +4,7 @@ $this->load->view('include/header.php');
 if ($set == "sql_interface") {
 ?>
 <div class="page-content-wrapper">
-
     <div class="container-fluid">
-
         <div class="row">
             <div class="col-sm-12">
                 <div class="page-title-box">
@@ -29,7 +27,7 @@ if ($set == "sql_interface") {
                     <div class="card-body">
                         <h4 class="mt-0 header-title">SQL Command Interface</h4>
 
-                        <form id="sqlForm" action="" method="post" enctype="multipart/form-data">
+                        <form id="sqlForm" action="<?= base_url(); ?>sql" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <textarea class="form-control" name="sql_query" rows="5" placeholder="Masukkan perintah SQL di sini"></textarea>
                             </div>
@@ -37,11 +35,11 @@ if ($set == "sql_interface") {
                                 <input type="file" name="sql_file" class="form-control-file">
                             </div>
                             <div class="form-group">
-                                <button type="button" class="btn btn-primary" onclick="confirmAction('execute_sql', 'Jalankan Perintah SQL')">Execute</button>
-                                <button type="button" class="btn btn-danger" onclick="confirmAction('drop_all_tables', 'DROP Semua Tabel')">Drop All Tables</button>
-                                <button type="button" class="btn btn-warning" onclick="confirmAction('truncate_all_tables', 'Kosongkan Semua Tabel')">Truncate All Tables</button>
-                                <button type="button" class="btn btn-success" onclick="confirmAction('upload_database', 'Unggah Database')">Upload Database</button>
-                                <button type="button" class="btn btn-info" onclick="confirmAction('backup_database', 'Backup Database')">Backup Database</button>
+                                <button type="button" class="btn btn-primary" onclick="confirmAction('execute_sql')">Execute</button>
+                                <button type="button" class="btn btn-danger" onclick="confirmAction('drop_all_tables')">Drop All Tables</button>
+                                <button type="button" class="btn btn-warning" onclick="confirmAction('truncate_all_tables')">Truncate All Tables</button>
+                                <button type="button" class="btn btn-success" onclick="confirmAction('upload_database')">Upload Database</button>
+                                <button type="button" class="btn btn-info" onclick="confirmAction('backup_database')">Backup Database</button>
                             </div>
                         </form>
 
@@ -52,9 +50,7 @@ if ($set == "sql_interface") {
                 </div>
             </div> <!-- end col -->
         </div> <!-- end row -->
-
     </div><!-- container -->
-
 </div> <!-- Page content Wrapper -->
 
 <!-- Modal -->
@@ -68,7 +64,7 @@ if ($set == "sql_interface") {
                 </button>
             </div>
             <div class="modal-body">
-                Apakah Anda yakin ingin melanjutkan tindakan ini?
+                Apakah Anda yakin ingin <span id="confirmationMessage"></span>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -77,27 +73,33 @@ if ($set == "sql_interface") {
         </div>
     </div>
 </div>
+
 <script>
-    function confirmAction(actionName, actionValue) {
+    function confirmAction(actionName) {
+        var actionDescription = {
+            'execute_sql': 'Jalankan Perintah SQL',
+            'drop_all_tables': 'DROP Semua Tabel',
+            'truncate_all_tables': 'Kosongkan Semua Tabel',
+            'upload_database': 'Unggah Database',
+            'backup_database': 'Backup Database'
+        };
+
+        var confirmationMessage = (actionDescription[actionName] || 'melakukan tindakan ini');
+        document.getElementById('confirmationMessage').innerText = confirmationMessage;
         $('#confirmationModal').modal('show');
-        $('#confirmButton').attr('data-action-name', actionName);
-        $('#confirmButton').attr('data-action-value', actionValue);
+
+        document.getElementById('confirmButton').onclick = function() {
+            var form = document.getElementById('sqlForm');
+            var hiddenField = document.createElement('input');
+            hiddenField.type = 'hidden';
+            hiddenField.name = actionName;
+            hiddenField.value = 'true';
+            form.appendChild(hiddenField);
+            form.submit();
+        };
     }
-
-    $('#confirmButton').click(function() {
-        var actionName = $(this).attr('data-action-name');
-        var actionValue = $(this).attr('data-action-value');
-
-        var form = $('#sqlForm');
-        var hiddenField = $('<input>')
-            .attr('type', 'hidden')
-            .attr('name', actionName)
-            .attr('value', actionValue);
-        form.append(hiddenField);
-
-        form.submit();
-    });
 </script>
+
 <?php
 }
 

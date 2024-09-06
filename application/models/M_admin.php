@@ -26,7 +26,11 @@ class M_admin extends CI_Model {
         return FALSE;
     }
 
-
+ public function delete_murid($id_rfid) {
+        // Delete the student from the database based on their RFID ID
+        $this->db->where('id_rfid', $id_rfid);
+        return $this->db->delete('rfid');  // assuming 'rfid' is your table name
+    }
     function updateUser($id,$data){
         $this->db->where('id_user', $id);
         $this->db->update('user', $data);
@@ -150,7 +154,8 @@ class M_admin extends CI_Model {
    
     
 
-
+   
+    
     function get_history(){
         $this->db->select('*');
         $this->db->from('histori');
@@ -244,7 +249,17 @@ class M_admin extends CI_Model {
     
         return $tidak_absensi_count;
     }
+    public function get_all_murid() {
+        $query = $this->db->get('rfid'); // Replace 'students' with your table name
+        return $query->result();
+    }
     
+    
+    public function find_students_by_ids($ids) {
+        $this->db->where_in('id_rfid', $ids);
+        $query = $this->db->get('rfid'); 
+        return $query->result();
+    }
     
     public function get_kelas_byrow() {
         $query = $this->db->get('kelas'); 

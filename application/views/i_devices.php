@@ -54,7 +54,7 @@ if ($set == "devices") {
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Id Device</th>
+                   
                     <th>Name</th>
                     <th>Mode</th>
                     <th>Action</th>
@@ -72,14 +72,14 @@ if ($set == "devices") {
                       $no++; ?>
                       <tr>
                         <td style="text-align:center"><?php echo $no; ?></td>
-                        <td style="text-align:center"><b class="text-success"><?php echo $row->id_devices; ?></b></td>
+
                         <td style="text-align:center"><?php echo $row->nama_devices; ?></td>
                         <td style="text-align:center" class="mode-cell" data-id="<?= $row->id_devices ?>">
                           <?php echo $row->mode == "SCAN" ? "READER" : "ADD CARD"; ?>
                         </td>
                         <td style="text-align:center">
                           <button class="btn btn-sm btn-toggle mode-toggle" data-id="<?= $row->id_devices ?>" data-mode="<?= $row->mode ?>">
-                            <?php echo $row->mode == "ADD" ? "Click to READER" : "Click to ADD"; ?>
+                            <?php echo $row->mode == "ADD" ? "READ" : "ADD"; ?>
                           </button>
                         </td>
                       </tr>
@@ -119,7 +119,7 @@ $this->load->view('include/footer.php');
         },
         success: function(response) {
           var newModeText = newMode == 'ADD' ? 'ADD CARD' : 'READER';
-          var newButtonText = newMode == 'ADD' ? 'Switch to READER' : 'Switch to ADD';
+          var newButtonText = newMode == 'ADD' ? 'Click to READER' : 'Click to ADD';
           $('.mode-cell[data-id="' + deviceId + '"]').text(newModeText);
           $('.mode-toggle[data-id="' + deviceId + '"]').data('mode', newMode).text(newButtonText);
         }
