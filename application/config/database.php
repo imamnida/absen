@@ -85,9 +85,9 @@ $db['default'] = array(
 	//'database' => 'haha',
 
 
-	'username' => 'u398357365_salma',
-	'password' => 'Imamdienul1',
-	'database' => 'u398357365_absensi',
+	'username' => 'mtsnmaja_absensi',
+	'password' => 'Absensisiswa11',
+	'database' => 'mtsnmaja_absensiswa',
 	
 
 

@@ -536,17 +536,38 @@ class Admin extends CI_Controller {
 		}
 	}
 
-	public function absensi(){
-		$data['set'] = "absensi";
+   public function absensi(){
+    $data['set'] = "absensi";
 
-		$today = strtotime("today");
-		$tomorrow = strtotime("tomorrow");
+    // Set today's and tomorrow's timestamps for filtering
+    $today = strtotime("today");
+    $tomorrow = strtotime("tomorrow");
 
-		$data['absensimasuk'] = $this->m_admin->get_absensi("masuk",$today,$tomorrow);
-		$data['absensikeluar'] = $this->m_admin->get_absensi("keluar",$today,$tomorrow);
-		$data['m_admin'] = $this->m_admin;
-		$this->load->view('i_absensi', $data);
-	}
+    // Get absensi data for masuk and keluar
+    $data['absensimasuk'] = $this->m_admin->get_absensi("masuk", $today, $tomorrow);
+    $data['absensikeluar'] = $this->m_admin->get_absensi("keluar", $today, $tomorrow);
+    $data['m_admin'] = $this->m_admin;
+
+    // Load the absensi view with data
+    $this->load->view('i_absensi', $data);
+}
+
+public function fetch_data() {
+    $today = strtotime("today");
+    $tomorrow = strtotime("tomorrow");
+
+    // Fetch updated data from the model
+    $absensimasuk = $this->m_admin->get_absensi("masuk", $today, $tomorrow);
+    $absensikeluar = $this->m_admin->get_absensi("keluar", $today, $tomorrow);
+
+    // Return JSON response
+    echo json_encode([
+        'absensimasuk' => $absensimasuk,
+        'absensikeluar' => $absensikeluar
+    ]);
+}
+
+
 
 	public function lastabsensi(){
 		if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
