@@ -15,7 +15,7 @@ if ($set == "rfid") {
                             <li class="breadcrumb-item active">Data</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">RFID</h4>
+                    <h4 class="page-title">USER</h4>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -26,7 +26,7 @@ if ($set == "rfid") {
             <div class="col-12">
                 <div class="card m-b-30">
                     <div class="card-body">
-                        <h4 class="mt-0 header-title">RFID Data</h4>
+                        <h4 class="mt-0 header-title">USER</h4>
                         <!-- Form to generate all cards -->
                         <form method="post" action="<?= base_url('card/generate_cards'); ?>" style="display:inline;">
                             <input type="hidden" name="cetak_semua" value="1">
@@ -40,7 +40,7 @@ if ($set == "rfid") {
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>NisN</th>
+                                    <th>NISN</th>
                                     <th>UID RFID</th>
                                     <th>NIK</th>
                                     <th>Nama</th>
@@ -176,8 +176,7 @@ if ($set == "rfid") {
         </div><!-- container -->
     </div>
 <?php
-} else if ($set == "new") {
-?>
+} else if ($set == "new") { ?>
     <div class="page-content-wrapper">
         <div class="container-fluid">
             <div class="row">
@@ -200,45 +199,34 @@ if ($set == "rfid") {
                 <div class="col-12">
                     <div class="card m-b-30">
                         <div class="card-body">
-                            <h4 class="mt-0 header-title">Buttons example</h4>
+                            <h4 class="mt-0 header-title"><a href="<?= current_url(); ?>" class="btn btn-info mt-2">
+        <i class="fa fa-refresh"></i> Perbarui
+    </a></h4>
                             <table id="datatable-buttons" class="table table-striped table-bordered w-100">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
-                                        <th>NisN</th>
+                                        <th>NO</th>
                                         <th>UID RFID</th>
-                                        <th>NIK</th>
-                                        <th>Nama</th>
-                                        <th>Kelas</th>
-                                        <th>Alamat</th>
-                                        <th>Foto</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php if (empty($rfid)) { ?>
                                         <tr>
-                                            <td colspan="9">Data tidak ditemukan</td>
+                                            <td colspan="9">RFID baru tidak ditemukan</td>
                                         </tr>
                                     <?php } else {
                                         $no = 0;
                                         foreach ($rfid as $row) {
-                                            if ($row->nama != "") {
+                                            // Check if any required field is empty
+                                            if (empty($row->nama) || empty($row->nik) || empty($row->kelas)) {
                                                 $no++;
                                     ?>
                                                 <tr>
                                                     <td><?php echo $no; ?></td>
-                                                    <td><?php echo $row->nisn; ?></td>
                                                     <td><?php echo $row->uid; ?></td>
-                                                    <td><?php echo $row->nik; ?></td>
-                                                    <td><?php echo $row->nama; ?></td>
-                                                    <td><?php echo $row->kelas; ?></td>
-                                                    <td><?php echo $row->alamat; ?></td>
                                                     <td>
-                                                        <img src="<?= base_url(); ?>uploads/<?php echo $row->foto; ?>" class="img-circle" width="auto" height="100px" alt="User Image">
-                                                    </td>
-                                                    <td>
-                                                        <a href="<?= base_url() ?>/admin/edit_rfid/<?= $row->id_rfid ?>" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i></a>
+                                                        <a href="<?= base_url() ?>/admin/edit_rfid/<?= $row->id_rfid ?>" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Daftarkan Siswa</a>
                                                     </td>
                                                 </tr>
                                     <?php
@@ -250,9 +238,9 @@ if ($set == "rfid") {
                             </table>
                         </div>
                     </div>
-                </div> <!-- end col -->
-            </div> <!-- end row -->
-        </div><!-- container -->
+                </div>
+            </div>
+        </div>
     </div>
 <?php
 }

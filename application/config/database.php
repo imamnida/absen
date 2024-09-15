@@ -80,14 +80,14 @@ $db['default'] = array(
 	  
 	
 
-	//'username' => 'root',
-//'password' => '',
-	//'database' => 'haha',
+	'username' => 'root',
+	'password' => '',
+	'database' => 'haha',
 
 
-	'username' => 'mtsnmaja_absensi',
-	'password' => 'Absensisiswa11',
-	'database' => 'mtsnmaja_absensiswa',
+	//'username' => 'mtsnmaja_absensi',
+	//'password' => 'Absensisiswa11',
+	//'database' => 'mtsnmaja_absensiswa',
 	
 
 
