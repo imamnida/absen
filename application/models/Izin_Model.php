@@ -21,34 +21,22 @@ class Izin_Model extends CI_Model {
     }
 
     public function get_jumlah_tidak_hadir_per_kelas() {
-        $this->db->select('kelas.id as id_kelas, kelas.kelas, COUNT(rfid.id_rfid) as jumlah_siswa');
-        $this->db->from('kelas');
-        $this->db->join('rfid', 'rfid.id_kelas = kelas.id', 'left');
-        $this->db->group_by('kelas.id');
-        $query_kelas = $this->db->get();
-
-        $jumlah_tidak_absensi_per_kelas = [];
-
-        if ($query_kelas->num_rows() > 0) {
-            foreach ($query_kelas->result() as $row) {
-                $this->db->select('COUNT(absensi.id_absensi) as jumlah_absen');
-                $this->db->from('absensi');
-                $this->db->join('rfid', 'absensi.id_rfid = rfid.id_rfid');
-                $this->db->where('rfid.id_kelas', $row->id_kelas);
-                $this->db->where('DATE(absensi.created_at) = CURDATE()');
-                $query_absen = $this->db->get();
-                $count_absen = $query_absen->row()->jumlah_absen;
-
-                $jumlah_siswa_tidak_absen = max(0, $row->jumlah_siswa - $count_absen);
-
-                if ($jumlah_siswa_tidak_absen > 0) {
-                    $jumlah_tidak_absensi_per_kelas[$row->id_kelas] = $jumlah_siswa_tidak_absen;
-                }
-            }
+        $query = "
+            SELECT rfid.id_kelas, COUNT(rfid.id_rfid) as jumlah_siswa
+            FROM rfid
+            LEFT JOIN absensi ON rfid.id_rfid = absensi.id_rfid 
+              AND absensi.created_at >= UNIX_TIMESTAMP(CURDATE())
+            WHERE absensi.id_absensi IS NULL
+            GROUP BY rfid.id_kelas
+        ";
+        $result = $this->db->query($query)->result();
+        $jumlah_tidak_absensi_per_kelas = array();
+        foreach ($result as $row) {
+            $jumlah_tidak_absensi_per_kelas[$row->id_kelas] = $row->jumlah_siswa;
         }
-
         return $jumlah_tidak_absensi_per_kelas;
     }
+    
 
     public function get_siswa_by_kelas($id_kelas) {
         $today = date("Y-m-d");

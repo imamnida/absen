@@ -22,6 +22,7 @@ class Siswa extends CI_Controller {
                 $hour = time() + 3600 * 24 * 30;
                 setcookie('nik', $nik, $hour);
                 setcookie('nisn', $pass, $hour);
+                
             }
 
             // Ambil data dari database
@@ -38,16 +39,14 @@ class Siswa extends CI_Controller {
                     
                 }
 
-                // Bandingkan password yang dimasukkan dengan yang ada di database
+              
                 if ($pass === $passDB) {
-                    // nisn match
+                 
                     $this->session->set_userdata('userlogin', $nik);
                     $this->session->set_userdata('nisn', $passDB); 
                     $this->session->set_userdata('nama', $nama);
 
-                    // Debugging - Pastikan NISN disimpan di session
-                    // var_dump($this->session->userdata('nisn')); exit;
-
+                  
                     redirect(base_url().'absensi_hp');
                     
                 } else {

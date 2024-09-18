@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card m-b-30">
-                    <div class="card-body">            
+                    <div class="card-body">
                         <h4 class="mt-0 header-title">Daftar Kelas</h4>
                         <table id="datatable-buttons" class="table table-striped table-bordered w-100">
                             <thead>
@@ -42,6 +42,7 @@
                                             <td><?php echo $no++; ?></td>
                                             <td><b class="text-primary"><?php echo $row->kelas; ?></b></td>
                                             <?php 
+                                            // Ambil jumlah siswa yang tidak hadir untuk kelas ini
                                             $jumlah_tidak_absensi = isset($jumlah_tidak_absensi_per_kelas[$row->id]) ? $jumlah_tidak_absensi_per_kelas[$row->id] : 0;
                                             ?>
                                             <td><?php echo $jumlah_tidak_absensi; ?></td>
@@ -52,11 +53,11 @@
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             </tbody>
-                        </table>            
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div> 
+</div>
 <?php $this->load->view('include/footer.php'); ?>

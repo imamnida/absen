@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <title>Absensi | Barcode</title>
+    <title>Absensi</title>
     <meta content="Admin Dashboard" name="description" />
     <meta content="Mannatthemes" name="author" />
     <link rel="shortcut icon" href="<?= base_url(); ?>assets/images/logo.png">
@@ -13,12 +13,37 @@
     <link href="<?= base_url(); ?>assets/css/bootstrap-material-design.min.css" rel="stylesheet" type="text/css">
     <link href="<?= base_url(); ?>assets/css/icons.css" rel="stylesheet" type="text/css">
     <link href="<?= base_url(); ?>assets/css/style.css" rel="stylesheet" type="text/css">
+
+    <style>
+        .form-group label {
+            color: #333;
+            font-weight: bold;
+        }
+        .form-control {
+            border: none;
+            box-shadow: none;
+            border-radius: 0;
+            background-color: #f8f9fa;
+        }
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #007bff;
+        }
+        .btn-block {
+            border-radius: 0;
+        }
+        .card {
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+        }
+    </style>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand" href="#">Absensi</a>
+            <h5 style="color: #ffffff;">Welcome, <?= $this->session->userdata('nama'); ?></h5>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -65,7 +90,7 @@
                                         <form id="absensiForm" action="<?= site_url('absensi_hp/absen'); ?>" method="post">
                                             <div class="form-group">
                                                 <label for="nisn">NISN:</label>
-                                                <input type="text" class="form-control" name="nisn" id="nisn" required style="color: black;" value="<?= $this->session->userdata('nisn'); ?>" readonly>
+                                                <input type="text" class="form-control" name="nisn" id="nisn" required value="<?= $this->session->userdata('nisn'); ?>" readonly>
                                             </div>
                                             <input type="hidden" name="id_devices" value="5">
                                             <button type="button" class="btn btn-success btn-block" onclick="submitForm('masuk')">Absen Masuk</button>
