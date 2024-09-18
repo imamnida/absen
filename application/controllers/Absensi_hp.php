@@ -3,15 +3,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Absensi_hp extends CI_Controller {
 
-    // Koordinat dalam format DMS
     private $coordinatesDMS = "6°50'23\"S 108°14'19\"E";  
-    
     private $centerLat;
     private $centerLng;
     private $allowedRadius = 100; 
 
     public function __construct() {
         parent::__construct();
+        // Set timezone dalam konstruktor
+        date_default_timezone_set("Asia/Jakarta");
         $this->load->model('Absensi_hp_model');
         list($this->centerLat, $this->centerLng) = $this->convertDMSToDecimal($this->coordinatesDMS);
     }
@@ -105,6 +105,14 @@ class Absensi_hp extends CI_Controller {
             return;
         }
 
+        // Cek waktu operasional
+        if (!$this->Absensi_hp_model->cek_waktu_operasional($action)) {
+            $data['message'] = 'Absensi ' . $action . ' hanya dapat dilakukan pada jam operasional yang ditentukan.';
+            $data['message_type'] = 'danger';
+            $this->load->view('i_absen_hp', $data);
+            return;
+        }
+
         $is_already_absent = $this->Absensi_hp_model->is_already_absent($nisn, $action);
 
         if ($is_already_absent) {
@@ -114,15 +122,14 @@ class Absensi_hp extends CI_Controller {
             if ($action == 'masuk') {
                 $this->Absensi_hp_model->absen_masuk($nisn, $id_devices);
                 $data['message'] = 'Absensi masuk berhasil.';
-                $data['message_type'] = 'success';
             } elseif ($action == 'keluar') {
                 $this->Absensi_hp_model->absen_keluar($nisn, $id_devices);
                 $data['message'] = 'Absensi keluar berhasil.';
-                $data['message_type'] = 'success';
             } else {
-                $data['message'] = 'Tindakan absensi tidak valid.';
+                $data['message'] = 'Aksi absensi tidak valid.';
                 $data['message_type'] = 'danger';
             }
+            $data['message_type'] = 'success';
         }
 
         $this->load->view('i_absen_hp', $data);
