@@ -42,7 +42,7 @@
                                             <td><?php echo $no++; ?></td>
                                             <td><b class="text-primary"><?php echo $row->kelas; ?></b></td>
                                             <?php 
-                                            // Ambil jumlah siswa yang tidak hadir untuk kelas ini
+                                           
                                             $jumlah_tidak_absensi = isset($jumlah_tidak_absensi_per_kelas[$row->id]) ? $jumlah_tidak_absensi_per_kelas[$row->id] : 0;
                                             ?>
                                             <td><?php echo $jumlah_tidak_absensi; ?></td>
