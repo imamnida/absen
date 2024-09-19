@@ -33,7 +33,7 @@ class Wizin extends CI_Controller {
         $is_registered_nisn = $this->W_Izin_Model->is_registered_nisn($nisn);
 
         if (!$is_registered_nisn) {
-            $data['message'] = 'nisn belum terdaftar. Silakan mendaftar terlebih dahulu.';
+            $data['message'] = 'NISN belum terdaftar. Silakan mendaftar terlebih dahulu.';
             $data['siswa'] = $this->W_Izin_Model->get_siswa_by_kelas($id_kelas);
             $data['id_kelas'] = $id_kelas;
             $this->load->view('wad/w_izin_detail', $data);
@@ -43,20 +43,12 @@ class Wizin extends CI_Controller {
         $is_already_absent = $this->W_Izin_Model->is_already_absent($nisn, $action);
 
         if ($is_already_absent) {
-            $data['message'] = 'Anda sudah melakukan absensi '.$action.' sebelumnya hari ini.';
+            $data['message'] = 'Anda sudah melakukan absensi ' . $action . ' sebelumnya hari ini.';
         } else {
-            if ($action == 'masuk') {
-                $this->W_Izin_Model->absen_masuk($nisn, $id_devices);
-                $data['message'] = 'Absensi masuk berhasil.';
-            } elseif ($action == 'keluar') {
-                $this->W_Izin_Model->absen_keluar($nisn, $id_devices);
-                $data['message'] = 'Absensi keluar berhasil.';
-            } elseif ($action == 'izin') {
-                $this->W_Izin_Model->absen_izin($nisn, $id_devices);
-                $data['message'] = 'Absensi izin berhasil.';
-            } elseif ($action == 'sakit') {
-                $this->W_Izin_Model->absen_sakit($nisn, $id_devices);
-                $data['message'] = 'Absensi sakit berhasil.';
+            // Call the simpan_absensi method based on the action
+            if (in_array($action, ['masuk', 'keluar', 'izin', 'sakit'])) {
+                $this->W_Izin_Model->simpan_absensi($nisn, $id_devices, $action);
+                $data['message'] = 'Absensi ' . $action . ' berhasil.';
             } else {
                 $data['message'] = 'Tindakan absensi tidak valid.';
             }
@@ -66,6 +58,5 @@ class Wizin extends CI_Controller {
         $data['id_kelas'] = $id_kelas;
         $this->load->view('wad/w_izin_detail', $data);
     }
-
 }
 ?>

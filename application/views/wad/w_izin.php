@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card m-b-30">
-                    <div class="card-body">            
+                    <div class="card-body">
                         <h4 class="mt-0 header-title">Daftar Kelas</h4>
                         <table id="datatable-buttons" class="table table-striped table-bordered w-100">
                             <thead>
@@ -39,24 +39,25 @@
                                     <?php $no = 1; ?>
                                     <?php foreach($kelas as $row): ?>
                                         <tr>
-                                            <td style="text-align:start"><?php echo $no++; ?></td>
-                                            <td style="text-align:start"><b class="text-primary"><?php echo $row->kelas; ?></b></td>
+                                            <td><?php echo $no++; ?></td>
+                                            <td><b class="text-primary"><?php echo $row->kelas; ?></b></td>
                                             <?php 
+                                           
                                             $jumlah_tidak_absensi = isset($jumlah_tidak_absensi_per_kelas[$row->id]) ? $jumlah_tidak_absensi_per_kelas[$row->id] : 0;
                                             ?>
-                                            <td style="text-align:start"><?php echo $jumlah_tidak_absensi; ?></td>
-                                            <td style="text-align:start">
-                                                <a href="<?= base_url() ?>wizin/detail/<?= $row->id ?>" class="btn btn-success" title="Lihat Detail"><i class="fa fa-eye"></i></a>
+                                            <td><?php echo $jumlah_tidak_absensi; ?></td>
+                                            <td>
+                                                <a href="<?= base_url() ?>izin/detail/<?= $row->id ?>" class="btn btn-success" title="Lihat Detail"><i class="fa fa-eye"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             </tbody>
-                        </table>            
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div> 
+</div>
 <?php $this->load->view('include/footer.php'); ?>

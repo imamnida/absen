@@ -17,7 +17,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-        <title>Admin Dashboard</title>
+        <title>Rekapitulasi Absensi  <?php echo $kelas->kelas; ?></title>
         <meta content="Admin Dashboard" name="description" />
         <meta content="Mannatthemes" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -280,7 +280,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>NIS</th>
+                                   
                                     <th>Nama</th>
                                     <?php
                                   
@@ -305,7 +305,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
     ?>
             <tr>
                 <td><?php echo $no; ?></td>
-                <td><?php echo $row->nis; ?></td>
+               
                 <td><?php echo $row->nama; ?></td>
                 <?php
 
