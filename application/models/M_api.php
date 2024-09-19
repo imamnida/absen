@@ -55,16 +55,13 @@ class M_api extends CI_Model {
         return $data;
 	}
 
-	function waktuoperasional(){
-        $this->db->select('*');
-        $this->db->from('waktu_operasional');
-        $this->db->limit(2);
-        $query = $this->db->get();
-
-        if ($query->num_rows() > 0) {
-            return $query->result();
-        }
+	public function get_waktu_by_day($day) {
+        // Sesuaikan query ini sesuai dengan struktur tabel waktu_operasional
+        $this->db->where('day', $day); // Contoh field 'day' di tabel waktu_operasional
+        $query = $this->db->get('waktu_operasional');
+        return $query->result();
     }
+    
 
     function insert_absensi($data){
 		$this->db->insert('absensi', $data);

@@ -118,11 +118,11 @@ class Api extends CI_Controller {
 		if (isset($_GET['key']) && isset($_GET['iddev']) && isset($_GET['rfid'])) {
 			$key = $this->input->get('key');
 			$cekkey = $this->m_api->getkey();
-
+	
 			if($cekkey[0]->key == $key){
 				$iddev = $this->input->get('iddev');
 				$rfid = $this->input->get('rfid');
-
+	
 				$cekrfid = $this->m_api->checkRFID($rfid);
 				$countrfid = 0;
 				$idrfid = 0;
@@ -130,16 +130,27 @@ class Api extends CI_Controller {
 					$countrfid++;
 					$idrfid = $value->id_rfid;
 				}
-
+	
 				$device = $this->m_api->getdevice($iddev);
 				$count = 0;
 				foreach ($device as $key => $value) {
 					$count++;
 				}
-
+	
 				if ($count > 0) {
 					if ($countrfid > 0) {
-						$waktu = $this->m_api->waktuoperasional();
+						// Cek hari saat ini
+						$hariIni = date('N'); // 1 = Senin, 7 = Minggu
+	
+						if ($hariIni == 7) { // Jika hari Minggu, absensi tidak diperbolehkan
+							$notif = array('status' => 'failed', 'ket' => 'ABSENSI TIDAK TERSEDIA PADA HARI MINGGU');
+							echo json_encode($notif);
+							return;
+						}
+	
+						// Ambil waktu operasional berdasarkan hari
+						$waktu = $this->m_api->get_waktu_by_day($hariIni); // Buat fungsi baru di model untuk ambil waktu berdasarkan hari
+						
 						if (isset($waktu)) {
 							foreach ($waktu as $key => $value) {
 								if ($value->id_waktu_operasional == 1) {
@@ -149,10 +160,11 @@ class Api extends CI_Controller {
 									$keluar = $value->waktu_operasional;
 								}
 							}
-						}else{
+						} else {
 							$notif = array('status' => 'failed', 'ket' => 'error waktu operasional');
 							echo json_encode($notif);
 						}
+	
 						if (isset($masuk) && isset($keluar)) {
 							$masuk = explode("-", $masuk);
 							$keluar = explode("-", $keluar);
@@ -165,7 +177,7 @@ class Api extends CI_Controller {
 								$absen = false;
 								$ket = "";
 								$respon = "";
-
+	
 								if (time() < $masuk1) {
 									$notif = array('status' => 'failed', 'ket' => 'DILUAR WAKTU                          .');
 									echo json_encode($notif);
@@ -193,14 +205,14 @@ class Api extends CI_Controller {
 									$notif = array('status' => 'failed', 'ket' => 'DILUAR WAKTU                          .');
 									echo json_encode($notif);
 								}
-
+	
 								if ($absen) {
 									$today = strtotime("today");
 									$tomorrow = strtotime("tomorrow");
-
+	
 									$datamasuk = $this->m_api->get_absensi("masuk",$today,$tomorrow);
 									$datakeluar = $this->m_api->get_absensi("keluar",$today,$tomorrow);
-
+	
 									$duplicate = 0;
 									if (isset($datamasuk)) {
 										foreach ($datamasuk as $key => $value) {
@@ -216,7 +228,7 @@ class Api extends CI_Controller {
 											}
 										}
 									}
-
+	
 									if ($duplicate == 0) {
 										$data = array('id_devices' => $iddev, 'id_rfid' => $idrfid,
 														'keterangan' => $ket, 'created_at' => time());
@@ -256,7 +268,7 @@ class Api extends CI_Controller {
 			echo json_encode($notif);
 		}
 	}
-
+	
 	public function realtimehistori(){
 		$data = $this->m_admin->get_history();
 		echo '<table id="t1" class="table table-bordered table-striped">
