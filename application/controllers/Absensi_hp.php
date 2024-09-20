@@ -95,7 +95,6 @@ class Absensi_hp extends CI_Controller {
             return;
         }
 
-      
         $distance = $this->calculateDistance($this->centerLat, $this->centerLng, $deviceLat, $deviceLng);
         if ($distance > $this->allowedRadius) {
             $data['message'] = 'Anda berada di luar area absensi yang diizinkan.';
@@ -104,7 +103,7 @@ class Absensi_hp extends CI_Controller {
             return;
         }
 
-      
+        // Check operational time for the current day and action
         if (!$this->Absensi_hp_model->cek_waktu_operasional($action)) {
             $data['message'] = 'Absensi ' . $action . ' hanya dapat dilakukan pada jam operasional yang ditentukan.';
             $data['message_type'] = 'danger';

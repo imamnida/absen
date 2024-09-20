@@ -47,26 +47,29 @@ class Absensi_hp_model extends CI_Model {
         return $result ? $result->id_rfid : null;
     }
 
-    public function cek_waktu_operasional($keterangan) {
-        $this->db->where('keterangan', $keterangan);
+   
+    public function cek_waktu_operasional($action) {
+        $current_day = date('l'); // Get current day of the week
+        $current_time = date('H:i'); // Get current time
+
+        // Query the waktu_operasional table based on current day and action
+        $this->db->where('day', $current_day);
+        $this->db->where('keterangan', $action);
         $query = $this->db->get('waktu_operasional');
-        $waktu_operasional = $query->row();
-    
-        if ($waktu_operasional) {
-            // Memecah waktu operasional menjadi start dan end
-            list($start, $end) = explode('-', $waktu_operasional->waktu_operasional);
-            $current_time = date('H:i');
-    
-            // Debugging untuk memeriksa waktu operasional dan waktu saat ini
-          
-    
-            // Cek apakah waktu sekarang berada dalam rentang waktu operasional
-            return ($current_time >= $start && $current_time <= $end);
+
+        if ($query->num_rows() > 0) {
+            $operational_time = $query->row()->waktu_operasional;
+            list($start_time, $end_time) = explode('-', $operational_time);
+
+            // Check if the current time is within the operational time
+            if ($current_time >= $start_time && $current_time <= $end_time) {
+                return true; // Within operational time
+            }
         }
-    
-        return false;
+
+        return false; // Outside operational time
     }
-    
+
 
     public function is_already_absent($nisn, $keterangan) {
         $today_start = strtotime("today"); // Start of today
