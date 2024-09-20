@@ -25,7 +25,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <h4 class="mt-0 header-title">Data Murid Kelas: <?= $kelas->kelas; ?></h4>
                             <div>
-                                <a href="<?= base_url(); ?>/admin/rekap_absen/<?= $kelas->id; ?>" class="btn btn-primary">Rekap Absen</a>
+                                <a href="<?= base_url(); ?>/kelas/rekap_absen/<?= $kelas->id; ?>" class="btn btn-primary">Rekap Absen</a>
                                 <form method="post" action="<?= base_url('cardcontroller/generate_cards'); ?>" style="display:inline;">
                                     <input type="hidden" name="cetak_semua" value="1">
                                     <input type="hidden" name="kelas_id" value="<?= $kelas->id; ?>">
@@ -61,10 +61,10 @@
                                                         <img src="<?= base_url(); ?>uploads/<?= $row->foto; ?>" class="img-circle" width="auto" height="80px" alt="Foto Murid">
                                                     </td>
                                                     <td>
-                                                        <a href="<?= base_url(); ?>/admin/detail_murid/<?= $row->id_rfid; ?>" class="btn btn-success btn-sm">
+                                                        <a href="<?= base_url(); ?>/kelas/detail_murid/<?= $row->id_rfid; ?>" class="btn btn-success btn-sm">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
-                                                        <a href="<?= base_url(); ?>/admin/hapus_murid/<?= $row->id_rfid; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus murid ini?');">
+                                                        <a href="<?= base_url(); ?>/kelas/hapus_murid/<?= $row->id_rfid; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus murid ini?');">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </td>

@@ -7,30 +7,30 @@ class Card extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('m_admin'); // Load your model
+        $this->load->model('m_admin');
     }
 
     public function index() {
         if (!$this->session->userdata('userlogin')) {
-            // Redirect to login page
+          
             redirect('login');
         }
 
-        // Get all students for selection
+      
         $data['murid'] = $this->m_admin->get_all_murid();
 
-        // Load view for selecting students
+      
         $this->load->view('i_kelas_detail', $data);
     }
 
     public function generate_cards() {
         if (!$this->session->userdata('userlogin')) {
-            // Redirect to login page if not logged in
+          
             redirect('login');
         }
     
         if ($this->input->post('cetak_semua')) {
-            $students = $this->m_admin->get_all_murid(); // Fetch all students
+            $students = $this->m_admin->get_all_murid();
         } else {
             $student_ids = $this->input->post('murid_ids');
             if (empty($student_ids)) {
@@ -56,7 +56,7 @@ class Card extends CI_Controller {
             ];
         }
     
-        // Load view to display generated cards
+      
         $this->load->view('display_cards', ['cards' => $data]);
     }
 }

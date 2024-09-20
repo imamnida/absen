@@ -20,7 +20,7 @@ class Login extends CI_Controller {
 			
 			$username = $this->input->post('username');
 			$pass = $this->input->post('pass');
-			$hash = $this->bcrypt->hash_password($pass);	//encrypt password
+			$hash = $this->bcrypt->hash_password($pass);	
 
 			if(isset($_POST["remember"])){
 	        	$hour = time() + 3600 * 24 * 30;
@@ -28,34 +28,33 @@ class Login extends CI_Controller {
 	            setcookie('password', $pass, $hour);
 	        }
 
-			//ambil data dari database
+		
 			$check = $this->m_login->prosesLogin($username);
 			$hasil = 0;
 			if(isset($check)){
 				$hasil++;
 			}
 
-			//echo $pass;
-			//echo "<br>";
+		
 			if($hasil > 0){
 				$data = $this->m_login->viewDataByID($username); 
 				foreach ($data as $dkey) {
 					$passDB = $dkey->password;
-					//$role = $dkey->role;
+			
 					$avatar = $dkey->avatar;
-					//$idusr = $dkey->id;
+				
 				}
-				//echo $this->bcrypt->check_password($pass, $passDB);
+				
 				if ($this->bcrypt->check_password($pass, $passDB))
 				{
-					// Password match
+					
 					$this->session->set_userdata('userlogin',$username);
 					$this->session->set_userdata('avatar',$avatar);
 
-					redirect(base_url().'admin/dashboard');
+					redirect(base_url().'dashboard');
 					
 				}else{
-					// Password does not match
+				
 					$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-remove\"></i> Gagal Login, password salah</div>");
 					redirect(base_url().'login');
 				}

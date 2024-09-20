@@ -67,7 +67,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <div class="text-center">
-                        <a href="<?=base_url();?>admin/dashboard" class="logo"><i class="mdi mdi-access-point"></i> Absensi Online</a>
+                        <a href="<?=base_url();?>dashboard" class="logo"><i class="mdi mdi-access-point"></i> Absensi Online</a>
                     </div>
                 </div>
 
@@ -79,7 +79,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                     
                            
                         <li>
-                                <a href="<?=base_url();?>admin/dashboard" class="waves-effect">
+                                <a href="<?=base_url();?>dashboard" class="waves-effect">
                                     <i class="mdi mdi-view-dashboard"></i>
                                     <span> Dashboard</span>
                                 </a>
@@ -88,7 +88,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                 <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-file"></i> <span> Data </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                                 <ul class="list-unstyled">
                                     <li>
-                                        <a href="<?=base_url();?>admin/kelas" class="waves-effect">
+                                        <a href="<?=base_url();?>kelas" class="waves-effect">
                                             <i class="ti-home"></i>
                                             <span>Kelas</span>
                                         </a>
@@ -100,13 +100,13 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?=base_url();?>admin/datarfid" class="waves-effect">
+                                        <a href="<?=base_url();?>datarfid" class="waves-effect">
                                             <i class="mdi mdi-account"></i>
                                             <span>Siswa</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?=base_url();?>admin/rfidnew" class="waves-effect">
+                                        <a href="<?=base_url();?>rfidnew" class="waves-effect">
                                             <i class="mdi mdi-access-point"></i>
                                             <span>RFID</span>
                                         </a>
@@ -118,7 +118,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                 <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-calendar"></i> <span> Absensi </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                                 <ul class="list-unstyled">
                             <li>
-                                <a href="<?=base_url();?>admin/absensi" class="waves-effect">
+                                <a href="<?=base_url();?>absensi" class="waves-effect">
                                     <i class="mdi mdi-account-check"></i>
                                     <span>Riwayat Kehadiran</span>
                                 </a>
@@ -146,7 +146,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                 </a>
                             </li>
                             <li>
-                                <a href="<?=base_url();?>admin/histori" class="waves-effect">
+                                <a href="<?=base_url();?>histori" class="waves-effect">
                                     <i class="mdi mdi-history"></i>
                                     <span> Histori Alat </span>
                                 </a>
@@ -155,23 +155,23 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                 <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-cog"></i> <span> Pengaturan </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                                 <ul class="list-unstyled">
                             <li>
-                                <a href="<?=base_url();?>admin/list_users" class="waves-effect">
+                                <a href="<?=base_url();?>list_users" class="waves-effect">
                                     <i class="mdi mdi-account-key"></i>
                                     <span> Admin </span>
                                 </a>
                             </li>
                             <li>
-                                <a href="<?=base_url();?>admin/devices" class="waves-effect">
+                                <a href="<?=base_url();?>devices" class="waves-effect">
                                     <i class="mdi mdi-xaml"></i>
                                     <span> Device </span>
                                 </a>
                             <li>
-                                <a href="<?=base_url();?>admin/kampus" class="waves-effect">
+                                <a href="<?=base_url();?>kampus" class="waves-effect">
                                     <i class="mdi mdi-access-point"></i>
                                     <span> Access Point </span>
                                 </a>
                             </li>
-                                <a href="<?=base_url();?>admin/setting" class="waves-effect">
+                                <a href="<?=base_url();?>setting" class="waves-effect">
                                     <i class="mdi mdi-camera-timer"></i>
                                     <span> Waktu Oprasional </span>
                                 </a>

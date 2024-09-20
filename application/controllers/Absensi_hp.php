@@ -10,7 +10,7 @@ class Absensi_hp extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        // Set timezone dalam konstruktor
+     
         date_default_timezone_set("Asia/Jakarta");
         $this->load->model('Absensi_hp_model');
         list($this->centerLat, $this->centerLng) = $this->convertDMSToDecimal($this->coordinatesDMS);
@@ -54,7 +54,7 @@ class Absensi_hp extends CI_Controller {
     }
 
     private function calculateDistance($lat1, $lng1, $lat2, $lng2) {
-        $earthRadius = 6371000; // dalam meter
+        $earthRadius = 6371000;
 
         $dLat = deg2rad($lat2 - $lat1);
         $dLng = deg2rad($lng2 - $lng1);
@@ -80,9 +80,8 @@ class Absensi_hp extends CI_Controller {
     private function absen_process($action) {
         $nisn = $this->session->userdata('nisn');
         $id_devices = $this->input->post('id_devices');
-        $deviceLat = $this->input->post('latitude'); // Ambil koordinat latitude dari POST
-        $deviceLng = $this->input->post('longitude'); // Ambil koordinat longitude dari POST
-
+        $deviceLat = $this->input->post('latitude');
+        $deviceLng = $this->input->post('longitude'); 
         if (!$nisn) {
             redirect(base_url().'siswa');
         }
@@ -96,7 +95,7 @@ class Absensi_hp extends CI_Controller {
             return;
         }
 
-        // Periksa jarak
+      
         $distance = $this->calculateDistance($this->centerLat, $this->centerLng, $deviceLat, $deviceLng);
         if ($distance > $this->allowedRadius) {
             $data['message'] = 'Anda berada di luar area absensi yang diizinkan.';
@@ -105,7 +104,7 @@ class Absensi_hp extends CI_Controller {
             return;
         }
 
-        // Cek waktu operasional
+      
         if (!$this->Absensi_hp_model->cek_waktu_operasional($action)) {
             $data['message'] = 'Absensi ' . $action . ' hanya dapat dilakukan pada jam operasional yang ditentukan.';
             $data['message_type'] = 'danger';

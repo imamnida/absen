@@ -178,22 +178,26 @@ class M_admin extends CI_Model {
         return $data;
     }
 
-    function waktuoperasional(){
+
+
+    public function waktuoperasional() {
         $this->db->select('*');
         $this->db->from('waktu_operasional');
-        $this->db->limit(2);
         $query = $this->db->get();
-
-        if ($query->num_rows() > 0) {
-            return $query->result();
-        }
+        return $query->result();
     }
 
-    function updateWaktuOperasional($id,$data){
-        $this->db->where('id_waktu_operasional', $id);
-        $this->db->update('waktu_operasional', $data);
+    // Fungsi untuk memperbarui waktu operasional per hari
+    public function update_waktu_operasional($day, $waktu_masuk, $waktu_keluar) {
+        // Update waktu masuk
+        $this->db->where('day', $day);
+        $this->db->where('keterangan', 'masuk');
+        $this->db->update('waktu_operasional', ['waktu_operasional' => $waktu_masuk]);
 
-        return TRUE;
+        // Update waktu keluar
+        $this->db->where('day', $day);
+        $this->db->where('keterangan', 'keluar');
+        $this->db->update('waktu_operasional', ['waktu_operasional' => $waktu_keluar]);
     }
 
     public function find_rfid($id_rfid)

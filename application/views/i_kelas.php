@@ -71,10 +71,10 @@ $this->load->view('include/header.php');
                                             <?php $jumlah_murid = $m_admin->count_murid($row->id); ?>
                                             <td><?php echo $jumlah_murid; ?></td>
                                             <td>
-                                                <a href="<?= base_url() ?>admin/lihat_kelas?id_kelas=<?= $row->id; ?>" class="btn btn-primary">
+                                                <a href="<?= base_url() ?>kelas/lihat_kelas?id_kelas=<?= $row->id; ?>" class="btn btn-primary">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
-                                                <a href="<?= base_url() ?>/admin/rekap_absen/<?= $row->id; ?>" class="btn btn-primary">
+                                                <a href="<?= base_url() ?>/kelas/rekap_absen/<?= $row->id; ?>" class="btn btn-primary">
                                                     <i class="fa fa-book"></i>
                                                 </a>
                                                 <a href="<?= site_url() ?>hapus_kelas?id_kelas=<?= $row->id; ?>" class="btn btn-danger" onclick="return confirm('Anda yakin menghapus data ini?')">

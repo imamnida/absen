@@ -119,7 +119,7 @@ if ($set == "absensi") {
 <script>
     function fetchAbsensiData() {
         $.ajax({
-            url: '<?= site_url('admin/absensi/fetch_data'); ?>',
+            url: '<?= site_url('absensi/fetch_data'); ?>',
             type: 'GET',
             dataType: 'json',
             success: function (response) {

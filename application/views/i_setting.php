@@ -1,23 +1,28 @@
 <?php
 $this->load->view('include/header.php');
 
-if ($set == "setting") {
-    // Initialize variables
-    $skey = "";
-    $waktumasuk = "";
-    $waktukeluar = "";
+// Inisialisasi array hari tanpa Minggu
+$days = ['Monday' => 'Senin', 'Tuesday' => 'Selasa', 'Wednesday' => 'Rabu', 'Thursday' => 'Kamis', 'Friday' => 'Jumat', 'Saturday' => 'Sabtu'];
 
-    // Check and set operational times if available
+// Inisialisasi array untuk menyimpan waktu operasional
+$waktuOperasionalHari = [];
+
+// Proses data waktu operasional berdasarkan hari
+foreach ($days as $englishDay => $hari) {
+    $waktuOperasionalHari[$englishDay] = ['masuk' => '', 'keluar' => ''];
+    
     if (isset($waktuoperasional)) {
         foreach ($waktuoperasional as $value) {
-            if ($value->id_waktu_operasional == 1) {
-                $waktumasuk = $value->waktu_operasional;
-            }
-            if ($value->id_waktu_operasional == 2) {
-                $waktukeluar = $value->waktu_operasional;
+            if ($value->day == $englishDay) {
+                if ($value->keterangan == 'masuk') {
+                    $waktuOperasionalHari[$englishDay]['masuk'] = $value->waktu_operasional;
+                } else if ($value->keterangan == 'keluar') {
+                    $waktuOperasionalHari[$englishDay]['keluar'] = $value->waktu_operasional;
+                }
             }
         }
     }
+}
 ?>
 <div class="page-content-wrapper">
     <div class="container-fluid">
@@ -28,41 +33,57 @@ if ($set == "setting") {
                         <ol class="breadcrumb hide-phone p-0 m-0">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item"><a href="#">Device</a></li>
-                            <li class="breadcrumb-item active">Setting</li>
+                            <li class="breadcrumb-item active">Setting Waktu Operasional</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Setting Operational Time</h4>
+                    <h4 class="page-title">Setting Waktu Operasional</h4>
                 </div>
             </div>
             <div class="clearfix"></div>
         </div>
-        <!-- End Page Title and Breadcrumb -->
+
+        <!-- Mulai menampilkan form per hari -->
         <div class="row">
             <div class="col-md-12 col-xl-12">
                 <div class="card mb-30">
                     <div class="card-body">
-                        <h4 class="mt-0 header-title">Setting</h4>
+                      
                         <div class="general-label">
                             <?php echo $this->session->flashdata('pesan'); ?>
-                            <form action="<?= base_url(); ?>admin/setwaktuoperasional" method="post" id="settingsForm">
-                                <div class="row mb-3">
-                                    <label for="inputMasuk" class="col-sm-2 col-form-label">Waktu Masuk</label>
-                                    <div class="col-sm-10">
-                                        <input class="form-control" type="text" name="masuk" value="<?= $waktumasuk; ?>" style="text-align:center;" placeholder="jam:menit-jam:menit" id="inputMasuk">
+                            <form action="<?= base_url(); ?>setting/updateWaktuOperasional" method="post" id="settingsForm">
+
+                                <!-- Loop untuk menampilkan form untuk setiap hari -->
+                                <?php foreach ($days as $englishDay => $hari): ?>
+                                    <div class="day-section">
+                                        <h5>Waktu Operasional untuk Hari <?php echo $hari; ?></h5>
+                                        
+                                        <!-- Input Waktu Masuk -->
+                                        <div class="row mb-3">
+                                            <label for="inputMasuk_<?php echo $englishDay; ?>" class="col-sm-2 col-form-label">Waktu Masuk (<?php echo $hari; ?>)</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" type="text" name="masuk[<?php echo $englishDay; ?>]" value="<?= $waktuOperasionalHari[$englishDay]['masuk']; ?>" style="text-align:center;" placeholder="jam:menit-jam:menit" id="inputMasuk_<?php echo $englishDay; ?>">
+                                            </div>
+                                        </div>
+
+                                        <!-- Input Waktu Keluar -->
+                                        <div class="row mb-3">
+                                            <label for="inputKeluar_<?php echo $englishDay; ?>" class="col-sm-2 col-form-label">Waktu Keluar (<?php echo $hari; ?>)</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" type="text" name="keluar[<?php echo $englishDay; ?>]" value="<?= $waktuOperasionalHari[$englishDay]['keluar']; ?>" style="text-align:center;" placeholder="jam:menit-jam:menit" id="inputKeluar_<?php echo $englishDay; ?>">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputKeluar" class="col-sm-2 col-form-label">Waktu Keluar</label>
-                                    <div class="col-sm-10">
-                                        <input class="form-control" type="text" name="keluar" value="<?= $waktukeluar; ?>" style="text-align:center;" placeholder="jam:menit-jam:menit" id="inputKeluar">
-                                    </div>
-                                </div>
+                                    <hr>
+                                <?php endforeach; ?>
+
+                                <!-- Submit Button -->
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label"></label>
                                     <div class="col-sm-10">
-                                        <input class="btn btn-success" type="submit" value="Set Waktu Operasional">
+                                        <input class="btn btn-success" type="submit" value="Set Semua Waktu Operasional">
                                     </div>
                                 </div>
+
                             </form>
                         </div>
                     </div>
@@ -73,12 +94,10 @@ if ($set == "setting") {
 </div> <!-- End Page Content Wrapper -->
 
 <?php
-}
-
 $this->load->view('include/footer.php');
 ?>
 
-<!-- Confirmation Modal HTML -->
+<!-- Konfirmasi Modal HTML -->
 <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

@@ -113,13 +113,12 @@ class Api extends CI_Controller {
 		}
 	}
 
-
-	public function absensijson(){
+	public function absensijson() {
 		if (isset($_GET['key']) && isset($_GET['iddev']) && isset($_GET['rfid'])) {
 			$key = $this->input->get('key');
 			$cekkey = $this->m_api->getkey();
 	
-			if($cekkey[0]->key == $key){
+			if ($cekkey[0]->key == $key) {
 				$iddev = $this->input->get('iddev');
 				$rfid = $this->input->get('rfid');
 	
@@ -139,30 +138,30 @@ class Api extends CI_Controller {
 	
 				if ($count > 0) {
 					if ($countrfid > 0) {
-						// Cek hari saat ini
-						$hariIni = date('N'); // 1 = Senin, 7 = Minggu
+						$hariIni = date('l');
 	
-						if ($hariIni == 7) { // Jika hari Minggu, absensi tidak diperbolehkan
+						if ($hariIni == 'Sunday') { 
 							$notif = array('status' => 'failed', 'ket' => 'ABSENSI TIDAK TERSEDIA PADA HARI MINGGU');
 							echo json_encode($notif);
 							return;
 						}
 	
-						// Ambil waktu operasional berdasarkan hari
-						$waktu = $this->m_api->get_waktu_by_day($hariIni); // Buat fungsi baru di model untuk ambil waktu berdasarkan hari
 						
-						if (isset($waktu)) {
+						$waktu = $this->m_api->get_waktu_by_day($hariIni);
+	
+						if ($waktu) {
 							foreach ($waktu as $key => $value) {
-								if ($value->id_waktu_operasional == 1) {
+								if ($value->keterangan == 'masuk') {
 									$masuk = $value->waktu_operasional;
 								}
-								if ($value->id_waktu_operasional == 2) {
+								if ($value->keterangan == 'keluar') {
 									$keluar = $value->waktu_operasional;
 								}
 							}
 						} else {
 							$notif = array('status' => 'failed', 'ket' => 'error waktu operasional');
 							echo json_encode($notif);
+							return;
 						}
 	
 						if (isset($masuk) && isset($keluar)) {
@@ -173,55 +172,62 @@ class Api extends CI_Controller {
 								$masuk2 = strtotime($masuk[1]);
 								$keluar1 = strtotime($keluar[0]);
 								$keluar2 = strtotime($keluar[1]);
-								
+	
+								$currentTime = time();
 								$absen = false;
 								$ket = "";
 								$respon = "";
 	
-								if (time() < $masuk1) {
-									$notif = array('status' => 'failed', 'ket' => 'DILUAR WAKTU                          .');
-									echo json_encode($notif);
-								}
-								if (time() >= $masuk1 && time() <= $masuk2) {
-									$absen = true;
-									$ket = "masuk";
-									$respon = "MASUK BERHASIL                        .";
-								}
-								if (time() > $masuk2 && time() <= $masuk2 + 3600) {			//3600 = 1 jam
-									$absen = true;
-									$ket = "masuk";
-									$respon = "TELAT                            .";
-								}
-								if (time() > $masuk2 + 3600 && time() < $keluar1 ) {			//3600 = 1 jam
-									$notif = array('status' => 'failed', 'ket' => 'DILUAR WAKTU                          .');
-									echo json_encode($notif);
-								}
-								if (time() >= $keluar1 && time() <= $keluar2 + 3600) {
-									$absen = true;
-									$ket = "keluar";
-									$respon = "KELUAR                             .";
-								}
-								if (time() > $keluar2 + 3600) {
-									$notif = array('status' => 'failed', 'ket' => 'DILUAR WAKTU                          .');
-									echo json_encode($notif);
+								
+								if ($masuk1 > $masuk2) { 
+								
+									if (($currentTime >= $masuk1 && $currentTime <= strtotime('23:59')) || 
+										($currentTime >= strtotime('00:00') && $currentTime <= $masuk2)) {
+										
+										$absen = true;
+										$ket = "masuk";
+										$respon = "MASUK BERHASIL                        .";
+									} else {
+										$notif = array('status' => 'failed', 'ket' => 'DILUAR WAKTU                          .');
+										echo json_encode($notif);
+										return;
+									}
+								} else {
+								
+									if ($currentTime >= $masuk1 && $currentTime <= $masuk2) {
+										$absen = true;
+										$ket = "masuk";
+										$respon = "MASUK BERHASIL                        .";
+									} else if ($currentTime >= $keluar1 && $currentTime <= $keluar2) {
+										$absen = true;
+										$ket = "keluar";
+										$respon = "KELUAR                             .";
+									} else {
+										$notif = array('status' => 'failed', 'ket' => 'DILUAR WAKTU                          .');
+										echo json_encode($notif);
+										return;
+									}
 								}
 	
+							
 								if ($absen) {
 									$today = strtotime("today");
 									$tomorrow = strtotime("tomorrow");
 	
-									$datamasuk = $this->m_api->get_absensi("masuk",$today,$tomorrow);
-									$datakeluar = $this->m_api->get_absensi("keluar",$today,$tomorrow);
+									$datamasuk = $this->m_api->get_absensi("masuk", $today, $tomorrow);
+									$datakeluar = $this->m_api->get_absensi("keluar", $today, $tomorrow);
 	
 									$duplicate = 0;
-									if (isset($datamasuk)) {
+	
+									if ($datamasuk) {
 										foreach ($datamasuk as $key => $value) {
 											if ($value->id_rfid == $idrfid && $value->keterangan == $ket) {
 												$duplicate++;
 											}
 										}
 									}
-									if (isset($datakeluar)) {
+	
+									if ($datakeluar) {
 										foreach ($datakeluar as $key => $value) {
 											if ($value->id_rfid == $idrfid && $value->keterangan == $ket) {
 												$duplicate++;
@@ -230,82 +236,50 @@ class Api extends CI_Controller {
 									}
 	
 									if ($duplicate == 0) {
-										$data = array('id_devices' => $iddev, 'id_rfid' => $idrfid,
-														'keterangan' => $ket, 'created_at' => time());
+										$data = array(
+											'id_devices' => $iddev,
+											'id_rfid' => $idrfid,
+											'keterangan' => $ket,
+											'created_at' => time()
+										);
 										if ($this->m_api->insert_absensi($data)) {
-											$histori = array('id_rfid' => $idrfid, 'keterangan' => $ket, 'waktu' => time(), 'id_devices' => $iddev);
+											$histori = array(
+												'id_rfid' => $idrfid,
+												'keterangan' => $ket,
+												'waktu' => time(),
+												'id_devices' => $iddev
+											);
 											$this->m_api->insert_histori($histori);
 											$notif = array('status' => 'success', 'ket' => $respon);
 											echo json_encode($notif);
-										}else{
+										} else {
 											$notif = array('status' => 'failed', 'ket' => 'gagal insert absensi');
 											echo json_encode($notif);
 										}
-									}else{
-										$notif = array('status' => 'failed', 'ket' => 'SUDAH ABSENSI                            .');
+									} else {
+										$notif = array('status' => 'failed', 'ket' => 'SUDAH ABSENSI.');
 										echo json_encode($notif);
-									}	
+									}
+								} else {
+									$notif = array('status' => 'failed', 'ket' => 'error waktu operasional');
+									echo json_encode($notif);
 								}
 							}
-						}else{
-							$notif = array('status' => 'failed', 'ket' => 'error waktu operasional');
+						} else {
+							$notif = array('status' => 'failed', 'ket' => 'HUBUNGI STAFF.');
 							echo json_encode($notif);
 						}
-					}else{
-						$notif = array('status' => 'failed', 'ket' => 'HUBUNGI STAFF                           .');
+					} else {
+						$notif = array('status' => 'failed', 'ket' => 'id device tidak ditemukan');
 						echo json_encode($notif);
 					}
-				}else{
-					$notif = array('status' => 'failed', 'ket' => 'id device tidak ditemukan');
+				} else {
+					$notif = array('status' => 'failed', 'ket' => 'salah secret key');
 					echo json_encode($notif);
 				}
-			}else{
-				$notif = array('status' => 'failed', 'ket' => 'salah secret key');
-				echo json_encode($notif);
 			}
-		}else{
-			$notif = array('status' => 'failed', 'ket' => 'salah parameter');
-			echo json_encode($notif);
 		}
 	}
 	
-	public function realtimehistori(){
-		$data = $this->m_admin->get_history();
-		echo '<table id="t1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th style="text-align:center">ID Histori</th>
-                  <th style="text-align:center">UID RFID</th>
-                  <th style="text-align:center">Keterangan</th>
-                  <th style="text-align:center">Nama Device</th>
-                  <th style="text-align:center">Waktu</th>
-                </tr>
-                </thead>
-                <tbody>';
-        if(empty($data)){
-        	echo '
-                <tr>
-                  <td style="text-align:center">Data tidak ditemukan</td>
-                  <td style="text-align:center">Data tidak ditemukan</td>
-                  <td style="text-align:center">Data tidak ditemukan</td>
-                  <td style="text-align:center">Data tidak ditemukan</td>
-                  <td style="text-align:center">Data tidak ditemukan</td>
-                </tr>';
-        } else{
-            foreach($data as $row){
-            	echo '
-                <tr>
-                  <td style="text-align:center"><b class="text-success">'.$row->id_histori.'</b></td>
-                  <td style="text-align:center">'.$row->uid.'</td>
-                  <td style="text-align:center">'.$row->keterangan.'</td>
-                  <td style="text-align:center">'.$row->nama_devices.' ('.$row->id_devices.')</td>
-                  <td style="text-align:center">'.date("d M Y, H:i:s",$row->waktu).'</td>
-                </tr>';
-            }
-        }
-        echo '
-                </tbody>
-              </table>';
-	}
-
+	
 }

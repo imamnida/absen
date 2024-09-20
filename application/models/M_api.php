@@ -56,11 +56,30 @@ class M_api extends CI_Model {
 	}
 
 	public function get_waktu_by_day($day) {
-        // Sesuaikan query ini sesuai dengan struktur tabel waktu_operasional
-        $this->db->where('day', $day); // Contoh field 'day' di tabel waktu_operasional
-        $query = $this->db->get('waktu_operasional');
-        return $query->result();
+        // Daftar hari yang valid
+        $valid_days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
+    
+        // Periksa apakah $day adalah hari yang valid
+        if (!in_array($day, $valid_days)) {
+            log_message('error', 'Hari tidak valid: ' . $day);
+            return null;  // Mengembalikan null jika hari tidak valid
+        }
+    
+        // Query database jika hari valid
+        $this->db->select('*');
+        $this->db->from('waktu_operasional');
+        $this->db->where('day', $day);
+        
+        $query = $this->db->get();
+        
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            log_message('error', 'Tidak ada waktu operasional untuk hari: ' . $day);
+            return null;  // Mengembalikan null jika tidak ada data
+        }
     }
+    
     
 
     function insert_absensi($data){

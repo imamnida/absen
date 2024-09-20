@@ -8,6 +8,7 @@ class Admin extends CI_Controller {
 	public function __construct() {
         parent::__construct();
         $this->load->model('m_admin');
+	
         $this->load->library('bcrypt');
         date_default_timezone_set("asia/jakarta");
     }
@@ -613,47 +614,7 @@ public function fetch_data() {
 		}
 	}
 
-	public function kampus()
-	{
-		if(!$this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
-		{
-			return ;
-		}
-
-		if (isset($_POST['kampus'])) {
-
-			$this->m_admin->insert_kampus([
-				"kampus" => $_POST['kampus'],
-			]);
-
-		}
-
-		$kampus = $this->m_admin->get_kampus();
-
-		$data["kampus"] = $kampus;
-
-		$this->load->view('i_kampus', $data);
-	}
-
-	public function hapus_kampus()
-	{
-		if(!$this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
-		{
-			return ;
-		}
-
-		if(!isset($_GET['id_kampus'])){
-			echo "insert id kampus";
-			return;
-		}
-
-		$id_kampus = $_GET['id_kampus'];
-
-		$kampus = $this->m_admin->hapus_kampus($id_kampus);
-		
-		
-		redirect(base_url().'admin/kampus');
-	}
+	
 
 	public function kelas(){
 		if(!$this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
@@ -688,130 +649,7 @@ public function fetch_data() {
 		}
 
 	}
-	public function alfa() {
-		$this->load->model('M_admin');
-
-		// Panggil fungsi untuk mendapatkan daftar kelas
-		$kelas = $this->M_admin->get_kelas();
 	
-		// Buat array untuk menyimpan jumlah siswa yang tidak hadir selama 3 hari berturut-turut untuk setiap kelas
-		$jumlah_tidak_absensi_per_kelas = array();
-	
-		// Loop untuk setiap kelas
-		foreach ($kelas as $kelas_item) {
-			// Tentukan ID kelas yang ingin Anda periksa absensinya
-			$id_kelas = $kelas_item->id; 
-	
-			// Panggil fungsi untuk mendapatkan siswa yang tidak hadir dalam kelas ini selama 3 hari berturut-turut
-			$siswa_tidak_hadir_kelas = $this->M_admin->siswa_tidak_hadir_3_hari_berturut_turut($id_kelas);
-	
-			// Hitung jumlah siswa yang tidak hadir
-			$jumlah_tidak_absensi = count($siswa_tidak_hadir_kelas);
-	
-			// Simpan jumlah siswa yang tidak hadir selama 3 hari berturut-turut untuk kelas ini
-			$jumlah_tidak_absensi_per_kelas[$id_kelas] = $jumlah_tidak_absensi;
-		}
-	
-		// Kirim data ke view
-		$data['kelas'] = $kelas;
-		$data['jumlah_tidak_absensi_per_kelas'] = $jumlah_tidak_absensi_per_kelas;
-	
-		// Load view yang sesuai
-		$this->load->view('i_alfa', $data);
-	}
-	
-
-	
-	
-
-	public function lihat_alfa(){
-		if(!$this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
-		{
-			return ;
-		}
-
-		if(!isset($_GET['id_kelas'])){
-			echo "insert id kelas";
-			return;
-		}
-
-		$id_kelas = $_GET['id_kelas'];
-
-		$kelas = $this->m_admin->find_kelas($id_kelas);
-		$murid = $this->m_admin->get_murid($id_kelas);
-		$data['kelas'] = $kelas;
-		$data['murid'] = $murid;
-		
-		$this->load->view('i_siswa_alfa',$data);
-	}
-	
-
-	
-	
-	
-	public function lihat_kelas(){
-		if(!$this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
-		{
-			return ;
-		}
-
-		if(!isset($_GET['id_kelas'])){
-			echo "insert id kelas";
-			return;
-		}
-
-		$id_kelas = $_GET['id_kelas'];
-
-		$kelas = $this->m_admin->find_kelas($id_kelas);
-		$murid = $this->m_admin->get_murid($id_kelas);
-		$data['kelas'] = $kelas;
-		$data['murid'] = $murid;
-		
-		$this->load->view('i_kelas_detail',$data);
-	}
-	public function hapus_kelas(){
-		if(!$this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
-		{
-			return ;
-		}
-
-		if(!isset($_GET['id_kelas'])){
-			echo "insert id kelas";
-			return;
-		}
-
-		$id_kelas = $_GET['id_kelas'];
-
-		$kelas = $this->m_admin->hapus_kelas($id_kelas);
-		
-		
-		redirect(base_url().'admin/kelas');
-		
-	}
-
-	public function alfa_detail($id_murid=null)
-	{
-		if(!$this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
-		{
-			return ;
-		}
-
-		if(!$id_murid){
-			echo "insert id murid";
-			return;
-		}
-
-		$murid = $this->m_admin->find_murid($id_murid);
-
-		if (!$murid) {
-			echo "murid tidak ditemukan";
-			return;
-		}
-
-		$this->load->view('i_siswa_alfa_detail',[
-			"murid" => $murid[0],
-		]);
-	}
 	public function hapus_murid($id_rfid) {
 		// Load the model if it's not already loaded
 		$this->load->model('M_admin');
@@ -914,39 +752,25 @@ public function fetch_data() {
 	public function setting()
 	{
 		$data['set'] = "setting";
-		$data['key'] = $this->m_admin->getkey();
 		$data['waktuoperasional'] = $this->m_admin->waktuoperasional();
 		//print_r($data);
 		$this->load->view('i_setting', $data);
 	
 	}
 
-	public function setwaktuoperasional(){
-		if($this->session->userdata('userlogin')){     // mencegah akses langsung tanpa login
-			if (isset($_POST['masuk']) && isset($_POST['keluar'])) {
-				$masuk = $this->input->post('masuk');
-				$keluar = $this->input->post('keluar');
-
-				if (strlen($masuk) == 11 && strlen($keluar) == 11){
-					if ($masuk[2] == ":" && $masuk[5] == "-" && $masuk[8] == ":" && $keluar[2] == ":" && $keluar[5] == "-" && $keluar[8] == ":"){
-						$datamasuk = array('waktu_operasional' => $masuk);
-						$datakeluar = array('waktu_operasional' => $keluar);
-
-						if ($this->m_admin->updateWaktuOperasional(1,$datamasuk)) {
-							$this->m_admin->updateWaktuOperasional(2,$datakeluar);
-							$this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil di update</div>");
-						}else{
-							$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data gagal di update</div>");
-						}
-					}else{
-						$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Salah format waktu, contoh 16:00-17:00</div>");
-					}
-				}else{
-					$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Salah format waktu, contoh 16:00-17:00</div>");
-				}
-				redirect(base_url().'admin/setting');
-			}
-		}
-	}
 	
+	
+    public function updateWaktuOperasional() {
+        $masuk = $this->input->post('masuk'); // Array waktu masuk
+        $keluar = $this->input->post('keluar'); // Array waktu keluar
+
+        foreach ($masuk as $day => $waktu_masuk) {
+            $waktu_keluar = isset($keluar[$day]) ? $keluar[$day] : ''; // Ambil waktu keluar yang sesuai
+            $this->m_admin->update_waktu_operasional($day, $waktu_masuk, $waktu_keluar);
+        }
+
+        // Setelah update, redirect kembali ke halaman form
+        $this->session->set_flashdata('pesan', 'Waktu operasional berhasil diperbarui!');
+        redirect('admin/setting');
+    }
 }

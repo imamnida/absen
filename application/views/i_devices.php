@@ -31,7 +31,7 @@ if ($set == "devices") {
           <div class="card m-b-30">
             <div class="card-body">
               <h4 class="mt-0 header-title">Tambah Device</h4>
-              <form id="add-device-form" action="<?= base_url(); ?>/admin/save_devices" method="post">
+              <form id="add-device-form" action="<?= base_url(); ?>/devices/save_devices" method="post">
                 <div class="form-group">
                   <label>Nama Devices</label>
                   <input type="text" name="nama" class="form-control" placeholder="nama devices" required>
@@ -111,7 +111,7 @@ $this->load->view('include/footer.php');
       var newMode = currentMode == 'ADD' ? 'SCAN' : 'ADD';
 
       $.ajax({
-        url: '<?= base_url("admin/update_device_mode") ?>',
+        url: '<?= base_url("devices/update_device_mode") ?>',
         type: 'POST',
         data: {
           id: deviceId,

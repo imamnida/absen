@@ -15,7 +15,7 @@ if ($set == "rfid") {
                             <li class="breadcrumb-item active">Data</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">USER</h4>
+                    <h4 class="page-title">Siswa</h4>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -26,7 +26,7 @@ if ($set == "rfid") {
             <div class="col-12">
                 <div class="card m-b-30">
                     <div class="card-body">
-                        <h4 class="mt-0 header-title">USER</h4>
+                        <h4 class="mt-0 header-title">Siswa</h4>
                         <!-- Form to generate all cards -->
                         <form method="post" action="<?= base_url('card/generate_cards'); ?>" style="display:inline;">
                             <input type="hidden" name="cetak_semua" value="1">
@@ -73,7 +73,7 @@ if ($set == "rfid") {
                                                     <img src="<?= base_url(); ?>uploads/<?php echo $item->foto; ?>" class="img-circle" width="auto" height="100px" alt="User Image">
                                                 </td>
                                                 <td>
-                                                    <a href="<?= base_url() ?>/admin/edit_rfid/<?= $item->id_rfid ?>" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i></a>
+                                                    <a href="<?= base_url() ?>/rfid/edit_rfid/<?= $item->id_rfid ?>" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i></a>
                                                 </td>
                                             </tr>
                                 <?php
@@ -118,7 +118,7 @@ if ($set == "rfid") {
                         <div class="card-body">
                             <h4 class="mt-0 header-title">General Form</h4>
                             <div class="general-label">
-                                <form role="form" action="<?= base_url(); ?>admin/save_edit_rfid" method="post" enctype="multipart/form-data">
+                                <form role="form" action="<?= base_url(); ?>rfid/save_edit_rfid" method="post" enctype="multipart/form-data">
                                     <div class="box-body">
                                         <input type="hidden" name="id" value="<?php if (isset($id)) { echo $id; } ?>">
 
@@ -226,7 +226,7 @@ if ($set == "rfid") {
                                                     <td><?php echo $no; ?></td>
                                                     <td><?php echo $row->uid; ?></td>
                                                     <td>
-                                                        <a href="<?= base_url() ?>/admin/edit_rfid/<?= $row->id_rfid ?>" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Daftarkan Siswa</a>
+                                                        <a href="<?= base_url() ?>/rfid/edit_rfid/<?= $row->id_rfid ?>" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Daftarkan Siswa</a>
                                                     </td>
                                                 </tr>
                                     <?php

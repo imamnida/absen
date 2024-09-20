@@ -45,7 +45,7 @@ class Izin extends CI_Controller {
         if ($is_already_absent) {
             $data['message'] = 'Anda sudah melakukan absensi ' . $action . ' sebelumnya hari ini.';
         } else {
-            // Call the simpan_absensi method based on the action
+
             if (in_array($action, ['masuk', 'keluar', 'izin', 'sakit'])) {
                 $this->Izin_Model->simpan_absensi($nisn, $id_devices, $action);
                 $data['message'] = 'Absensi ' . $action . ' berhasil.';

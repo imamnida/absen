@@ -1,76 +1,87 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+
+
 class Absensi extends CI_Controller {
 
-    public function __construct() {
+	public function __construct() {
         parent::__construct();
-        // Load model Absensi_model
-        $this->load->model('Absensi_model');
+        $this->load->model('m_admin');
+        date_default_timezone_set("asia/jakarta");
     }
 
-    public function index(){
-        $this->load->view('i_absensi_form');
-    }
+	
+public function index(){
+    $data['set'] = "absensi";
 
-    public function absen() {
-        // Ambil tindakan (masuk/keluar/izin/sakit) dari form
-        $action = $this->input->post('action');
+  
+    $today = strtotime("today");
+    $tomorrow = strtotime("tomorrow");
 
-        // Panggil fungsi absen_process dengan tindakan yang diberikan
-        $this->absen_process($action);
-    }
+  
+    $data['absensimasuk'] = $this->m_admin->get_absensi("masuk", $today, $tomorrow);
+    $data['absensikeluar'] = $this->m_admin->get_absensi("keluar", $today, $tomorrow);
+    $data['m_admin'] = $this->m_admin;
 
-    private function absen_process($action) {
-        // Ambil nisn dari form
-        $nisn = $this->input->post('nisn');
-        $id_devices = $this->input->post('id_devices');
 
-        // Periksa apakah nisn sudah terdaftar dalam tabel 'rfid'
-        $is_registered_nisn = $this->Absensi_model->is_registered_nisn($nisn);
-
-        if (!$is_registered_nisn) {
-            // Jika nisn belum terdaftar, berikan pesan kesalahan atau arahkan siswa untuk mendaftar
-            $data['message'] = 'nisn Belum terdaftar. Silakan mendaftar terlebih dahulu.';
-            $data['message_type'] = 'danger';
-            $this->load->view('i_absensi_form', $data);
-            return; // Hentikan eksekusi metode
-        }
-
-        // Periksa apakah siswa sudah melakukan absensi sebelumnya
-        $is_already_absent = $this->Absensi_model->is_already_absent($nisn, $action);
-
-        if ($is_already_absent) {
-            // Jika sudah melakukan absensi sebelumnya, tampilkan pesan yang sesuai
-            $data['message'] = 'Anda sudah melakukan absensi '.$action.' sebelumnya hari ini.';
-            $data['message_type'] = 'warning';
-        } else {
-            // Lanjutkan dengan proses absensi jika belum absen sebelumnya
-            if ($action == 'masuk') {
-                $this->Absensi_model->absen_masuk($nisn, $id_devices);
-                $data['message'] = 'Absensi masuk berhasil.';
-                $data['message_type'] = 'success';
-            } elseif ($action == 'keluar') {
-                $this->Absensi_model->absen_keluar($nisn, $id_devices);
-                $data['message'] = 'Absensi keluar berhasil.';
-                $data['message_type'] = 'success';
-            } elseif ($action == 'izin') {
-                $this->Absensi_model->absen_izin($nisn, $id_devices);
-                $data['message'] = 'Absensi izin berhasil.';
-                $data['message_type'] = 'success';
-            } elseif ($action == 'sakit') {
-                $this->Absensi_model->absen_sakit($nisn, $id_devices);
-                $data['message'] = 'Absensi sakit berhasil.';
-                $data['message_type'] = 'success';
-            } else {
-                // Tindakan tidak valid
-                $data['message'] = 'Tindakan absensi tidak valid.';
-                $data['message_type'] = 'danger';
-            }
-        }
-
-        // Load view dengan pesan yang sesuai
-        $this->load->view('i_absensi_form', $data);
-    }
+    $this->load->view('i_absensi', $data);
 }
-?>
+
+public function fetch_data() {
+    $today = strtotime("today");
+    $tomorrow = strtotime("tomorrow");
+
+    $absensimasuk = $this->m_admin->get_absensi("masuk", $today, $tomorrow);
+    $absensikeluar = $this->m_admin->get_absensi("keluar", $today, $tomorrow);
+
+   
+    echo json_encode([
+        'absensimasuk' => $absensimasuk,
+        'absensikeluar' => $absensikeluar
+    ]);
+}
+
+
+
+	public function lastabsensi(){
+		if($this->session->userdata('userlogin'))   
+		{
+			if (isset($_POST['tanggal'])) {
+				$tgl = $this->input->post('tanggal');
+				//echo $tgl;
+				$split1 = explode("-", $tgl);
+				$x = 0;
+				foreach ($split1 as $key => $value) {
+					$date[$x] = $value;
+					$x++;
+				}
+
+				$ts1 = strtotime($date[0]);
+				$ts2 = strtotime($date[1]);
+
+				$tgl1 = date("d-M-Y",$ts1);
+				$tgl2 = date("d-M-Y",$ts2);
+
+				$ts2 += 86400;
+
+				if ($x==2) {
+					$data['datamasuk'] = $this->m_admin->get_absensi("masuk",$ts1,$ts2);
+					$data['datakeluar'] = $this->m_admin->get_absensi("keluar",$ts1,$ts2);
+					$data['tanggal'] = $tgl1 . " - " . $tgl2;
+					$data['waktuabsensi'] = $tgl1 . "_" . $tgl2;
+
+					$data['set'] = "last-absensi";
+					
+					$data['m_admin'] = $this->m_admin;
+
+					$this->load->view('v_absensi', $data);
+				}else{
+					redirect(base_url().'absensi');
+				}				
+			}else{
+				redirect(base_url().'absensi');
+			}
+		}
+	}
+}
