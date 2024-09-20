@@ -64,7 +64,7 @@
     </nav>
 
     <div class="col-md-12 text-center mb-3">
-        <h2><?= $this->session->userdata('nama'); ?></h2>
+        <h2></h2>
     </div>
 
     <div class="wrapper-page">
@@ -92,7 +92,7 @@
                                                 <label for="nisn">NISN:</label>
                                                 <input type="text" class="form-control" name="nisn" id="nisn" required value="<?= $this->session->userdata('nisn'); ?>" readonly>
                                             </div>
-                                            <input type="hidden" name="id_devices" value="5">
+                                            <input type="hidden" name="id_devices" value="1">
                                             <button type="button" class="btn btn-success btn-block" onclick="submitForm('masuk')">Absen Masuk</button>
                                             <button type="button" class="btn btn-danger btn-block" onclick="submitForm('keluar')">Absen Keluar</button>
                                         </form>
