@@ -9,115 +9,108 @@
     <meta content="Admin Dashboard" name="description" />
     <meta content="Mannatthemes" name="author" />
     <link rel="shortcut icon" href="<?= base_url(); ?>assets/images/logo.png">
-    <link href="<?= base_url(); ?>assets/plugins/animate/animate.css" rel="stylesheet" type="text/css">
-    <link href="<?= base_url(); ?>assets/css/bootstrap-material-design.min.css" rel="stylesheet" type="text/css">
-    <link href="<?= base_url(); ?>assets/css/icons.css" rel="stylesheet" type="text/css">
-    <link href="<?= base_url(); ?>assets/css/style.css" rel="stylesheet" type="text/css">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
-        .form-group label {
-            color: #333;
-            font-weight: bold;
-        }
-        .form-control {
-            border: none;
-            box-shadow: none;
-            border-radius: 0;
-            background-color: #f8f9fa;
-        }
-        .form-control:focus {
-            box-shadow: none;
-            border-color: #007bff;
-        }
-        .btn-block {
-            border-radius: 0;
-        }
-        .card {
-            border: none;
-            border-radius: 0;
-            box-shadow: none;
-        }
+        .bg-custom-pink { background-color: #FF4D6D; }
+        .text-custom-pink { color: #FF4D6D; }
+        .bg-custom-green { background-color: #4CAF50; }
     </style>
 </head>
 
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <h5 style="color: #ffffff;">Welcome, <?= $this->session->userdata('nama'); ?></h5>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <span class="nav-link">Safety</span>
-                    </li>
-                    <li class="nav-item">
-                        <span class="nav-link">Fast</span>
-                    </li>
-                    <li class="nav-item">
-                        <span class="nav-link">Accurate</span>
-                    </li>
-                </ul>
-            </div>
+<body class="bg-gray-100">
+    <div class="max-w-md mx-auto bg-white shadow-lg rounded-3xl overflow-hidden mt-8">
+        <div class="p-6 bg-custom-pink text-white">
+            <h1 class="text-2xl font-bold">Selamat Siang</h1>
+            <p class="text-3xl font-bold mt-2"><?= $this->session->userdata('nama'); ?></p>
         </div>
-    </nav>
+        
+        <div class="p-6">
+            <div class="grid grid-cols-4 gap-4 mb-6">
+                <div class="text-center">
+                    <div class="bg-red-100 text-custom-pink rounded-full p-3 mb-2">
+                        <i class="fas fa-camera text-xl"></i>
+                    </div>
+                    <span class="text-xs">Absen</span>
+                </div>
+                <div class="text-center">
+                    <div class="bg-blue-100 text-blue-500 rounded-full p-3 mb-2">
+                        <i class="fas fa-clock text-xl"></i>
+                    </div>
+                    <span class="text-xs">Shift</span>
+                </div>
+                <div class="text-center">
+                    <div class="bg-yellow-100 text-yellow-500 rounded-full p-3 mb-2">
+                        <i class="fas fa-history text-xl"></i>
+                    </div>
+                    <span class="text-xs">History</span>
+                </div>
+                <div class="text-center">
+                    <div class="bg-green-100 text-green-500 rounded-full p-3 mb-2">
+                        <i class="fas fa-file-alt text-xl"></i>
+                    </div>
+                    <span class="text-xs">Profil</span>
+                </div>
+            </div>
 
-    <div class="col-md-12 text-center mb-3">
-        <h2></h2>
-    </div>
+            <div class="mb-6">
+                <div class="text-center pt-3">
+                    <img src="<?= base_url(); ?>assets/images/logo.png" alt="Logo" class="h-24 mx-auto">
+                </div>
+                <?php if (isset($message) && !empty($message)) : ?>
+                    <div class="alert alert-dismissible fade show mt-3 <?= $message_type == 'success' ? 'bg-green-100 text-green-800' : ($message_type == 'warning' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'); ?> p-4 rounded-lg" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong><?= $message_type == 'success' ? 'Well done!' : ($message_type == 'warning' ? 'Warning!' : 'Oh snap!'); ?></strong> <?= $message; ?>
+                    </div>
+                <?php endif; ?>
+                <form id="absensiForm" action="<?= site_url('absensi_hp/absen'); ?>" method="post" class="mt-4">
+                    <div class="mb-4">
+                        <label for="nisn" class="block text-gray-700 text-sm font-bold mb-2">NISN:</label>
+                        <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="nisn" id="nisn" required value="<?= $this->session->userdata('nisn'); ?>" readonly>
+                    </div>
+                    <input type="hidden" name="id_devices" value="1">
+                    <div class="grid grid-cols-2 gap-4">
+                        <button type="button" class="w-full bg-custom-green text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center" onclick="submitForm('masuk')">
+                            <i class="fas fa-arrow-left mr-2"></i> Absen Masuk
+                        </button>
+                        <button type="button" class="w-full bg-custom-pink text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center" onclick="submitForm('keluar')">
+                            Absen Pulang <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
 
-    <div class="wrapper-page">
-        <div class="display-table">
-            <div class="display-table-cell">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6 mx-auto">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="text-center pt-3">
-                                        <img src="<?= base_url(); ?>assets/images/logo.png" alt="Logo" height="150">
-                                    </div>
-                                    <?php if (isset($message) && !empty($message)) : ?>
-                                        <div class="alert alert-dismissible fade show mt-3 <?= $message_type == 'success' ? 'alert-primary' : ($message_type == 'warning' ? 'alert-warning' : 'alert-danger'); ?>" role="alert">
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            <strong><?= $message_type == 'success' ? 'Well done!' : ($message_type == 'warning' ? 'Warning!' : 'Oh snap!'); ?></strong> <?= $message; ?>
-                                        </div>
-                                    <?php endif; ?>
-                                    <div class="px-3 pb-3">
-                                        <form id="absensiForm" action="<?= site_url('absensi_hp/absen'); ?>" method="post">
-                                            <div class="form-group">
-                                                <label for="nisn">NISN:</label>
-                                                <input type="text" class="form-control" name="nisn" id="nisn" required value="<?= $this->session->userdata('nisn'); ?>" readonly>
-                                            </div>
-                                            <input type="hidden" name="id_devices" value="1">
-                                            <button type="button" class="btn btn-success btn-block" onclick="submitForm('masuk')">Absen Masuk</button>
-                                            <button type="button" class="btn btn-danger btn-block" onclick="submitForm('keluar')">Absen Keluar</button>
-                                        </form>
-                                    </div>
-                                    <div id="error-message" class="alert alert-danger d-none mt-3" role="alert"></div>
-                                </div>
-                            </div>
-                        </div>
+            <div id="error-message" class="hidden bg-red-100 text-red-800 p-4 rounded-lg mt-3" role="alert"></div>
+
+            <div class="mt-6">
+                <h3 class="font-bold mb-2">Absensi Bulan Ini</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-purple-100 p-3 rounded-lg">
+                        <i class="fas fa-calendar-check text-purple-500 mb-1"></i>
+                        <p class="text-sm">Hadir</p>
+                        <p class="font-bold">-- hari</p>
+                    </div>
+                    <div class="bg-green-100 p-3 rounded-lg">
+                        <i class="fas fa-user-clock text-green-500 mb-1"></i>
+                        <p class="text-sm">Izin</p>
+                        <p class="font-bold">-- hari</p>
+                    </div>
+                    <div class="bg-yellow-100 p-3 rounded-lg">
+                        <i class="fas fa-procedures text-yellow-500 mb-1"></i>
+                        <p class="text-sm">Sakit</p>
+                        <p class="font-bold">-- hari</p>
+                    </div>
+                    <div class="bg-red-100 p-3 rounded-lg">
+                        <i class="fas fa-user-times text-red-500 mb-1"></i>
+                        <p class="text-sm">Terlambat</p>
+                        <p class="font-bold">-- hari</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <script src="<?= base_url(); ?>assets/js/jquery.min.js"></script>
-    <script src="<?= base_url(); ?>assets/js/popper.min.js"></script>
-    <script src="<?= base_url(); ?>assets/js/bootstrap-material-design.js"></script>
-    <script src="<?= base_url(); ?>assets/js/modernizr.min.js"></script>
-    <script src="<?= base_url(); ?>assets/js/detect.js"></script>
-    <script src="<?= base_url(); ?>assets/js/fastclick.js"></script>
-    <script src="<?= base_url(); ?>assets/js/jquery.slimscroll.js"></script>
-    <script src="<?= base_url(); ?>assets/js/jquery.blockUI.js"></script>
-    <script src="<?= base_url(); ?>assets/js/waves.js"></script>
-    <script src="<?= base_url(); ?>assets/js/jquery.nicescroll.js"></script>
-    <script src="<?= base_url(); ?>assets/js/jquery.scrollTo.min.js"></script>
 
     <script>
     function submitForm(action) {
