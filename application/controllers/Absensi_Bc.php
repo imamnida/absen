@@ -10,7 +10,7 @@ class Absensi_Bc extends CI_Controller {
     }
 
     public function index(){
-        $this->load->view('i_absensi_form');
+        $this->load->view('i_absensi_bc');
     }
 
     public function absen() {
@@ -33,7 +33,7 @@ class Absensi_Bc extends CI_Controller {
           
             $data['message'] = 'nisn Belum terdaftar. Silakan mendaftar terlebih dahulu.';
             $data['message_type'] = 'danger';
-            $this->load->view('i_absensi_form', $data);
+            $this->load->view('i_absensi_bc', $data);
             return; 
         }
 
@@ -70,7 +70,7 @@ class Absensi_Bc extends CI_Controller {
         }
 
       
-        $this->load->view('i_absensi_form', $data);
+        $this->load->view('i_absensi_bc', $data);
     }
 }
 ?>
