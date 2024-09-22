@@ -20,43 +20,21 @@
 
 <body class="bg-gray-100">
     <div class="max-w-md mx-auto bg-white shadow-lg rounded-3xl overflow-hidden mt-8">
-        <div class="p-6 bg-custom-pink text-white">
-            <h1 class="text-2xl font-bold">Selamat Siang</h1>
-            <p class="text-3xl font-bold mt-2"><?= $this->session->userdata('nama'); ?></p>
+        <div class="p-6 bg-custom-pink text-white flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold">Selamat Siang</h1>
+                <p class="text-3xl font-bold mt-2"><?= $this->session->userdata('nama'); ?></p>
+            </div>
+           
         </div>
         
         <div class="p-6">
-            <div class="grid grid-cols-4 gap-4 mb-6">
-                <div class="text-center">
-                    <div class="bg-red-100 text-custom-pink rounded-full p-3 mb-2">
-                        <i class="fas fa-camera text-xl"></i>
-                    </div>
-                    <span class="text-xs">Absen</span>
-                </div>
-                <div class="text-center">
-                    <div class="bg-blue-100 text-blue-500 rounded-full p-3 mb-2">
-                        <i class="fas fa-clock text-xl"></i>
-                    </div>
-                    <span class="text-xs">Shift</span>
-                </div>
-                <div class="text-center">
-                    <div class="bg-yellow-100 text-yellow-500 rounded-full p-3 mb-2">
-                        <i class="fas fa-history text-xl"></i>
-                    </div>
-                    <span class="text-xs">History</span>
-                </div>
-                <div class="text-center">
-                    <div class="bg-green-100 text-green-500 rounded-full p-3 mb-2">
-                        <i class="fas fa-file-alt text-xl"></i>
-                    </div>
-                    <span class="text-xs">Profil</span>
-                </div>
+            <div id="coordinates" class="text-center mb-4 font-bold"></div>
+            <div id="range-message" class="text-center mb-4 font-bold text-green-600 hidden">
+                Anda sedang berada pada jangkauan absensi
             </div>
 
             <div class="mb-6">
-                <div class="text-center pt-3">
-                    <img src="<?= base_url(); ?>assets/images/logo.png" alt="Logo" class="h-24 mx-auto">
-                </div>
                 <?php if (isset($message) && !empty($message)) : ?>
                     <div class="alert alert-dismissible fade show mt-3 <?= $message_type == 'success' ? 'bg-green-100 text-green-800' : ($message_type == 'warning' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'); ?> p-4 rounded-lg" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -65,6 +43,8 @@
                         <strong><?= $message_type == 'success' ? 'Well done!' : ($message_type == 'warning' ? 'Warning!' : 'Oh snap!'); ?></strong> <?= $message; ?>
                     </div>
                 <?php endif; ?>
+                <img src="<?= base_url(); ?>assets/images/logo.png" alt="Logo" class="h-30" style="display: block; margin: auto;">
+
                 <form id="absensiForm" action="<?= site_url('absensi_hp/absen'); ?>" method="post" class="mt-4">
                     <div class="mb-4">
                         <label for="nisn" class="block text-gray-700 text-sm font-bold mb-2">NISN:</label>
@@ -86,26 +66,21 @@
 
             <div class="mt-6">
                 <h3 class="font-bold mb-2">Absensi Bulan Ini</h3>
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-3 gap-4">
                     <div class="bg-purple-100 p-3 rounded-lg">
                         <i class="fas fa-calendar-check text-purple-500 mb-1"></i>
-                        <p class="text-sm">Hadir</p>
-                        <p class="font-bold">-- hari</p>
-                    </div>
-                    <div class="bg-green-100 p-3 rounded-lg">
-                        <i class="fas fa-user-clock text-green-500 mb-1"></i>
-                        <p class="text-sm">Izin</p>
-                        <p class="font-bold">-- hari</p>
+                        <p class="text-sm">Masuk</p>
+                        <p class="font-bold"><?= $attendance_data['masuk'] ?> hari</p>
                     </div>
                     <div class="bg-yellow-100 p-3 rounded-lg">
-                        <i class="fas fa-procedures text-yellow-500 mb-1"></i>
-                        <p class="text-sm">Sakit</p>
-                        <p class="font-bold">-- hari</p>
+                        <i class="fas fa-user-clock text-yellow-500 mb-1"></i>
+                        <p class="text-sm">Izin</p>
+                        <p class="font-bold"><?= $attendance_data['izin'] ?> hari</p>
                     </div>
                     <div class="bg-red-100 p-3 rounded-lg">
-                        <i class="fas fa-user-times text-red-500 mb-1"></i>
-                        <p class="text-sm">Terlambat</p>
-                        <p class="font-bold">-- hari</p>
+                        <i class="fas fa-procedures text-red-500 mb-1"></i>
+                        <p class="text-sm">Sakit</p>
+                        <p class="font-bold"><?= $attendance_data['sakit'] ?> hari</p>
                     </div>
                 </div>
             </div>
@@ -121,7 +96,6 @@
 
                 const form = document.getElementById('absensiForm');
                 
-                // Remove existing hidden inputs if any to prevent duplication
                 ['latitude', 'longitude', 'action'].forEach(name => {
                     const existingInput = document.querySelector(`input[name="${name}"]`);
                     if (existingInput) {
@@ -155,6 +129,41 @@
             alert('Geolokasi tidak didukung oleh browser ini.');
         }
     }
+
+    function updateCoordinates() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                const lat = position.coords.latitude.toFixed(6);
+                const lng = position.coords.longitude.toFixed(6);
+                document.getElementById('coordinates').textContent = `Koordinat: ${lat}, ${lng}`;
+
+                // Send coordinates to server to check if in range
+                fetch('<?= site_url('absensi_hp/check_range'); ?>', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ latitude: lat, longitude: lng }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.inRange) {
+                        document.getElementById('range-message').classList.remove('hidden');
+                    } else {
+                        document.getElementById('range-message').classList.add('hidden');
+                    }
+                });
+            }, () => {
+                document.getElementById('coordinates').textContent = 'Gagal mendapatkan koordinat';
+            });
+        } else {
+            document.getElementById('coordinates').textContent = 'Geolokasi tidak didukung';
+        }
+    }
+
+    // Update coordinates every 5 seconds
+    updateCoordinates();
+    setInterval(updateCoordinates, 5000);
     </script>
 
 </body>

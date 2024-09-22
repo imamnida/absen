@@ -6,11 +6,10 @@ class Absensi_hp extends CI_Controller {
     private $coordinatesDMS = "6°50'29\"S 108°14'22\"E";  
     private $centerLat;
     private $centerLng;
-    private $allowedRadius = 100; 
+    private $allowedRadius = 100; // dalam meter
 
     public function __construct() {
         parent::__construct();
-     
         date_default_timezone_set("Asia/Jakarta");
         $this->load->model('Absensi_hp_model');
         list($this->centerLat, $this->centerLng) = $this->convertDMSToDecimal($this->coordinatesDMS);
@@ -69,7 +68,18 @@ class Absensi_hp extends CI_Controller {
     }
 
     public function index() {
-        $this->load->view('i_absen_hp');
+        $nisn = $this->session->userdata('nisn');
+        
+        // Get the first day of the current month
+        $start_date = date('Y-m-01');
+        // Get the last day of the current month
+        $end_date = date('Y-m-t');
+        
+        $attendance_data = $this->Absensi_hp_model->get_monthly_attendance($nisn, $start_date, $end_date);
+        
+        $data['attendance_data'] = $attendance_data;
+        
+        $this->load->view('i_absen_hp', $data);
     }
 
     public function absen() {
@@ -80,9 +90,17 @@ class Absensi_hp extends CI_Controller {
     private function absen_process($action) {
         $nisn = $this->session->userdata('nisn');
         $nama = $this->session->userdata('nama');
+        $id_rfid = $this->session->userdata('id_rfid');
         $id_devices = $this->input->post('id_devices');
         $deviceLat = $this->input->post('latitude');
         $deviceLng = $this->input->post('longitude'); 
+
+        // Fetch updated attendance data
+        $start_date = date('Y-m-01');
+        $end_date = date('Y-m-t');
+        $data['attendance_data'] = $this->Absensi_hp_model->get_monthly_attendance($nisn, $start_date, $end_date);
+
+        
         if (!$nisn) {
             redirect(base_url().'siswa');
         }
@@ -132,6 +150,20 @@ class Absensi_hp extends CI_Controller {
         }
 
         $this->load->view('i_absen_hp', $data);
+    }
+
+    public function check_range() {
+        $json = file_get_contents('php://input');
+        $data = json_decode($json, true);
+
+        $deviceLat = $data['latitude'];
+        $deviceLng = $data['longitude'];
+
+        $distance = $this->calculateDistance($this->centerLat, $this->centerLng, $deviceLat, $deviceLng);
+        $inRange = $distance <= $this->allowedRadius;
+
+        header('Content-Type: application/json');
+        echo json_encode(['inRange' => $inRange]);
     }
 }
 ?>

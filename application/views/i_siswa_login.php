@@ -1,99 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <title>login</title>
+    <title>Login</title>
     <meta content="Admin Dashboard" name="description" />
     <meta content="Mannatthemes" name="author" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-    <link rel="shortcut icon" href="<?=base_url();?>assets/images/logo.png">
-
-    <link href="<?=base_url();?>assets/plugins/animate/animate.css" rel="stylesheet" type="text/css">
-    <link href="<?=base_url();?>assets/css/bootstrap-material-design.min.css" rel="stylesheet" type="text/css">
-    <link href="<?=base_url();?>assets/css/icons.css" rel="stylesheet" type="text/css">
-    <link href="<?=base_url();?>assets/css/style.css" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="<?= base_url(); ?>assets/images/logo.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        .bg-custom-pink { background-color: #FF4D6D; }
+        .text-custom-pink { color: #FF4D6D; }
+        .bg-custom-green { background-color: #4CAF50; }
+    </style>
 </head>
-<body>
 
-<!-- Begin page -->
-<div class="wrapper-page">
-    <div class="display-table">
-        <div class="display-table-cell">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 mx-auto">
-                        <div class="card">
-                            <div class="card-body">
-                                <!-- Login Form -->
-                                <div class="text-center pt-3">
-                                    <a href="index.html">
-                                        <img src="<?=base_url();?>assets/images/logo.png" alt="logo" height="200" />
-                                    </a>
-                                </div>
-                                <div class="px-3 pb-3">
-                                    <?php echo $this->session->flashdata('pesan')?>
-                                    <form class="form-horizontal m-t-20 mb-0" action="<?=base_url();?>siswa/logincheck" method="post">
-                                        <div class="form-group row">
-                                            <div class="col-12">
-                                                <input name="nik" type="text" class="form-control" placeholder="nik">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <div class="col-12">
-                                                <input name="pass" type="nisn" class="form-control" placeholder="nisn">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <div class="col-12">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
-                                                    <label class="custom-control-label" for="customCheck1">Remember me</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group text-right row m-t-20">
-                                            <div class="col-12">
-                                                <button class="btn btn-primary btn-raised btn-block waves-effect waves-light" type="submit">Log In Siswa</button>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group m-t-10 mb-0 row">
-                                            <div class="col-sm-7 m-t-20">
-                                               
-                                            </div>
-                                            <div class="col-sm-7 m-t-20">
-                                                <a href="<?=base_url();?>/register" class="text-muted"><i class="mdi mdi-account-circle"></i> Buat Akun Siswa ?</a>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                   
-                </div>
+<body class="bg-gray-100">
+    <div class="max-w-md mx-auto bg-white shadow-lg rounded-3xl overflow-hidden mt-8">
+        <div class="p-6 bg-custom-pink text-white">
+            <h1 class="text-2xl font-bold">Selamat Datang</h1>
+            <p class="text-xl mt-2">Silahkan Login</p>
+        </div>
+        
+        <div class="p-6">
+            <div class="text-center pt-3">
+                <img src="<?= base_url(); ?>assets/images/logo.png" alt="logo" class="h-24 mx-auto">
             </div>
+            
+            <?php if ($this->session->flashdata('pesan')) : ?>
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <?php echo $this->session->flashdata('pesan') ?>
+                </div>
+            <?php endif; ?>
+
+            <form action="<?= base_url(); ?>siswa/logincheck" method="post" class="mt-4">
+                <div class="mb-4">
+                    <label for="nik" class="block text-gray-700 text-sm font-bold mb-2">NIK:</label>
+                    <input type="text" id="nik" name="nik" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Masukkan NIK">
+                </div>
+                <div class="mb-4">
+                    <label for="pass" class="block text-gray-700 text-sm font-bold mb-2">NISN:</label>
+                    <input type="password" id="pass" name="pass" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Masukkan NISN">
+                </div>
+                <div class="mb-4">
+                    <label class="flex items-center">
+                        <input type="checkbox" name="remember" value="true" class="form-checkbox h-5 w-5 text-custom-pink">
+                        <span class="ml-2 text-gray-700">Remember me</span>
+                    </label>
+                </div>
+                <div class="mb-6">
+                    <button type="submit" class="w-full bg-custom-pink text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline">
+                        Log In Siswa
+                    </button>
+                </div>
+                <div class="text-center">
+                    <a href="<?= base_url(); ?>/register" class="text-custom-pink hover:text-pink-700">
+                        <i class="fas fa-user-plus mr-1"></i> Buat Akun Siswa
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
-</div>
-
-<!-- jQuery  -->
-<script src="<?=base_url();?>assets/js/jquery.min.js"></script>
-<script src="<?=base_url();?>assets/js/popper.min.js"></script>
-<script src="<?=base_url();?>assets/js/bootstrap-material-design.js"></script>
-<script src="<?=base_url();?>assets/js/modernizr.min.js"></script>
-<script src="<?=base_url();?>assets/js/detect.js"></script>
-<script src="<?=base_url();?>assets/js/fastclick.js"></script>
-<script src="<?=base_url();?>assets/js/jquery.slimscroll.js"></script>
-<script src="<?=base_url();?>assets/js/jquery.blockUI.js"></script>
-<script src="<?=base_url();?>assets/js/waves.js"></script>
-<script src="<?=base_url();?>assets/js/jquery.nicescroll.js"></script>
-<script src="<?=base_url();?>assets/js/jquery.scrollTo.min.js"></script>
-
-<!-- App js -->
-<script src="<?=base_url();?>assets/js/app.js"></script>
 </body>
+
 </html>

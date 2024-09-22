@@ -1,11 +1,11 @@
 <?php
 class S_login extends CI_Model {
         
-    function prosesLogin($nik){
-        $this->db->where('nik',$nik);
-        
-        return $this->db->get('rfid')->row();
+    function prosesLogin($nik) {
+        $this->db->where('nik', $nik);
+        return $this->db->get('rfid')->row(); // Mengambil satu baris
     }
+    
 
     function checkEmail($email){
         $this->db->where('email',$email);

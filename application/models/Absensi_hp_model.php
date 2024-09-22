@@ -94,5 +94,42 @@ class Absensi_hp_model extends CI_Model {
         $query = $this->db->get('rfid');
         return $query->num_rows() > 0;
     }
+    function get_absensi($ket,$today,$tomorrow){
+        $this->db->select('*');
+        $this->db->from('absensi');
+        $this->db->join('devices','absensi.id_devices=devices.id_devices','inner');
+        $this->db->join('rfid','absensi.id_rfid=rfid.id_rfid','inner');
+        $this->db->where("keterangan", $ket);
+        $this->db->where("created_at >=", $today);
+        $this->db->where("created_at <", $tomorrow);
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        }
+    }
+    public function get_monthly_attendance($nisn, $start_date, $end_date) {
+        $this->db->select('keterangan, COUNT(*) as count');
+        $this->db->from('absensi');
+        $this->db->join('rfid', 'absensi.id_rfid = rfid.id_rfid');
+        $this->db->where('rfid.nisn', $nisn);
+        $this->db->where('absensi.created_at >=', strtotime($start_date));
+        $this->db->where('absensi.created_at <=', strtotime($end_date));
+        $this->db->group_by('keterangan');
+        $query = $this->db->get();
+        
+        $result = array(
+            'masuk' => 0,
+            'izin' => 0,
+            'sakit' => 0
+        );
+        
+        foreach ($query->result() as $row) {
+            $result[$row->keterangan] = $row->count;
+        }
+        
+        return $result;
+    }
+   
 }
 ?>
