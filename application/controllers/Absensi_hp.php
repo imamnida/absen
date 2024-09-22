@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Absensi_hp extends CI_Controller {
 
-    private $coordinatesDMS = "6°50'29\"S 108°14'22\"E";  
+    private $coordinatesDMS = "6°50'23\"S 108°14'19\"E";  
     private $centerLat;
     private $centerLng;
     private $allowedRadius = 100; // dalam meter
@@ -91,11 +91,12 @@ class Absensi_hp extends CI_Controller {
         $nisn = $this->session->userdata('nisn');
         $nama = $this->session->userdata('nama');
         $id_rfid = $this->session->userdata('id_rfid');
+        $foto = $this->session->userdata('foto');
         $id_devices = $this->input->post('id_devices');
         $deviceLat = $this->input->post('latitude');
         $deviceLng = $this->input->post('longitude'); 
 
-        // Fetch updated attendance data
+     
         $start_date = date('Y-m-01');
         $end_date = date('Y-m-t');
         $data['attendance_data'] = $this->Absensi_hp_model->get_monthly_attendance($nisn, $start_date, $end_date);

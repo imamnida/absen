@@ -15,23 +15,57 @@
         .bg-custom-pink { background-color: #FF4D6D; }
         .text-custom-pink { color: #FF4D6D; }
         .bg-custom-green { background-color: #4CAF50; }
+        .dot {
+            display: inline-block;
+            height: 10px;
+            width: 10px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .dot-green{ background-color: green; }
+        .dot-red { background-color: red; }
+        .clock {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        .bottom-menu {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+        .menu-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            color: #718096;
+        }
+        .menu-item.active {
+            color: #FF4D6D;
+        }
     </style>
 </head>
 
-<body class="bg-gray-100">
-    <div class="max-w-md mx-auto bg-white shadow-lg rounded-3xl overflow-hidden mt-8">
+<body class="bg-gray-100 h-screen flex items-start pb-16">
+    <div class="max-w-md mx-auto bg-white shadow-lg rounded-3xl overflow-hidden w-full mb-16">
         <div class="p-6 bg-custom-pink text-white flex justify-between items-center">
             <div>
                 <h1 class="text-2xl font-bold">Selamat Siang</h1>
                 <p class="text-3xl font-bold mt-2"><?= $this->session->userdata('nama'); ?></p>
             </div>
-           
+            <img src="<?= base_url(); ?>assets/images/logo.png" alt="Logo" class="h-16">
         </div>
         
         <div class="p-6">
-            <div id="coordinates" class="text-center mb-4 font-bold"></div>
+            <div class="flex justify-center items-center mb-4">
+                <span id="range-dot" class="dot dot-red"></span>
+                <div id="coordinates" class="text-center font-bold"></div>
+            </div>
             <div id="range-message" class="text-center mb-4 font-bold text-green-600 hidden">
-                Anda sedang berada pada jangkauan absensi
             </div>
 
             <div class="mb-6">
@@ -43,7 +77,8 @@
                         <strong><?= $message_type == 'success' ? 'Well done!' : ($message_type == 'warning' ? 'Warning!' : 'Oh snap!'); ?></strong> <?= $message; ?>
                     </div>
                 <?php endif; ?>
-                <img src="<?= base_url(); ?>assets/images/logo.png" alt="Logo" class="h-30" style="display: block; margin: auto;">
+                
+                <div id="clock" class="clock mb-4"></div>
 
                 <form id="absensiForm" action="<?= site_url('absensi_hp/absen'); ?>" method="post" class="mt-4">
                     <div class="mb-4">
@@ -85,6 +120,22 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- New bottom menu -->
+    <div class="bottom-menu flex justify-around items-center">
+        <a href="#" class="menu-item active">
+            <i class="fas fa-home text-xl"></i>
+            <span class="text-xs mt-1">Home</span>
+        </a>
+        <a href="#" class="menu-item">
+            <i class="far fa-calendar-alt text-xl"></i>
+            <span class="text-xs mt-1">Present</span>
+        </a>
+        <a href="#" class="menu-item">
+            <i class="far fa-user text-xl"></i>
+            <span class="text-xs mt-1">Profil</span>
+        </a>
     </div>
 
     <script>
@@ -137,7 +188,6 @@
                 const lng = position.coords.longitude.toFixed(6);
                 document.getElementById('coordinates').textContent = `Koordinat: ${lat}, ${lng}`;
 
-                // Send coordinates to server to check if in range
                 fetch('<?= site_url('absensi_hp/check_range'); ?>', {
                     method: 'POST',
                     headers: {
@@ -147,10 +197,15 @@
                 })
                 .then(response => response.json())
                 .then(data => {
+                    const rangeDot = document.getElementById('range-dot');
                     if (data.inRange) {
                         document.getElementById('range-message').classList.remove('hidden');
+                        rangeDot.classList.remove('dot-red');
+                        rangeDot.classList.add('dot-green');
                     } else {
                         document.getElementById('range-message').classList.add('hidden');
+                        rangeDot.classList.remove('dot-green');
+                        rangeDot.classList.add('dot-red');
                     }
                 });
             }, () => {
@@ -161,9 +216,18 @@
         }
     }
 
-    // Update coordinates every 5 seconds
+    function updateClock() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
     updateCoordinates();
     setInterval(updateCoordinates, 5000);
+    updateClock();
+    setInterval(updateClock, 1000);
     </script>
 
 </body>
