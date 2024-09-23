@@ -18,7 +18,8 @@
             display: inline-block;
             height: 10px;
             width: 10px;
-            border-radius: 50%;
+            border-radius: 0 0 10px 10px;
+
             margin-right: 10px;
         }
         .dot-green { background-color: green; }
@@ -154,7 +155,7 @@
 </head>
 
 <body class="bg-gray-100 h-screen flex items-start pb-16">
-    <div class="container max-w-md mx-auto bg-white shadow-lg rounded-3xl overflow-hidden w-full mb-16 relative">
+<div class="container max-w-md mx-auto bg-white shadow-lg rounded-3xl overflow-hidden w-full mb-16 relative" style="border-radius: 0 0 10px 10px;">
         <div id="hamburger-menu" class="hamburger-menu">
             <i class="fas fa-bars"></i>
         </div>
