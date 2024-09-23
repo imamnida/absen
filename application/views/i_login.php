@@ -9,7 +9,7 @@
     <meta content="Mannatthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <link rel="shortcut icon" href="<?=base_url();?>assets/images/logo.png">
+    <link rel="shortcut icon" href="<?=base_url();?>assets/images/gi.png">
 
     <link href="<?=base_url();?>assets/plugins/animate/animate.css" rel="stylesheet" type="text/css">
     <link href="<?=base_url();?>assets/css/bootstrap-material-design.min.css" rel="stylesheet" type="text/css">
@@ -30,7 +30,7 @@
                                 <!-- Login Form -->
                                 <div class="text-center pt-3">
                                     <a href="index.html">
-                                        <img src="<?=base_url();?>assets/images/logo.png" alt="logo" height="200" />
+                                        <img src="<?=base_url();?>assets/images/logogisaka.png" alt="logo" height="100" />
                                     </a>
                                 </div>
                                 <div class="px-3 pb-3">

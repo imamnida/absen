@@ -20,7 +20,7 @@ if($this->session->userdata('userlogin')) {
     <meta content="Mannatthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <link rel="shortcut icon" href="<?=base_url();?>assets/images/logo.png">
+    <link rel="shortcut icon" href="<?=base_url();?>assets/images/gi.png">
 
     <!--Morris Chart CSS -->
     <link rel="stylesheet" href="<?=base_url();?>assets/plugins/fullcalendar/vanillaCalendar.css"/>
@@ -59,12 +59,15 @@ if($this->session->userdata('userlogin')) {
                 <i class="mdi mdi-close"></i>
             </button>
 
-            <!-- LOGO -->
-            <div class="topbar-left">
-                <div class="text-center">
-                    <a href="<?=base_url();?>wad/dashboard" class="logo"><i class="mdi mdi-assistant"></i> MTsN 11 Majalengka</a>
-                </div>
-            </div>
+          <!-- LOGO -->
+<div class="topbar-left">
+    <div class="text-center">
+        <a href="<?= base_url(); ?>dashboard" class="logo">
+            <img src="<?php echo base_url(); ?>assets/images/logogisaka.png" alt="Logo" style="height: 40px;"> 
+           
+        </a>
+    </div>
+</div>
 
             <div class="sidebar-inner slimscrollleft" id="sidebar-main">
 

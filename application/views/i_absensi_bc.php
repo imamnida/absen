@@ -8,7 +8,7 @@
     <title>Absensi | Barcode</title>
     <meta content="Admin Dashboard" name="description" />
     <meta content="Mannatthemes" name="author" />
-    <link rel="shortcut icon" href="<?= base_url(); ?>assets/images/logo.png">
+    <link rel="shortcut icon" href="<?= base_url(); ?>assets/images/gi.png">
     <link href="<?= base_url(); ?>assets/plugins/animate/animate.css" rel="stylesheet" type="text/css">
     <link href="<?= base_url(); ?>assets/css/bootstrap-material-design.min.css" rel="stylesheet" type="text/css">
     <link href="<?= base_url(); ?>assets/css/icons.css" rel="stylesheet" type="text/css">

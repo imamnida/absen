@@ -42,7 +42,7 @@
 
             <div class="p-6">
                 <div class="text-center pt-3">
-                    <img src="<?= base_url(); ?>assets/images/logo.png" alt="logo" class="h-24 mx-auto">
+                    <img src="<?= base_url(); ?>assets/images/logogisaka.png" alt="logo" class="h-24 mx-auto">
                 </div>
 
                 <?php if ($this->session->flashdata('pesan')) : ?>

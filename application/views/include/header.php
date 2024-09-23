@@ -21,7 +21,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
     <meta name="description" content="Admin Dashboard" />
     <meta name="author" content="Mannatthemes" />
 
-    <link rel="shortcut icon" href="<?= base_url(); ?>assets/images/logo.png" />
+    <link rel="shortcut icon" href="<?= base_url(); ?>assets/images/gi.png" />
 
     <!-- Morris Chart CSS -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/plugins/fullcalendar/vanillaCalendar.css" />
@@ -64,13 +64,16 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                 <button type="button" class="button-menu-mobile button-menu-mobile-topbar open-left waves-effect">
                     <i class="mdi mdi-close"></i>
                 </button>
+<!-- LOGO -->
+<div class="topbar-left">
+    <div class="text-center">
+        <a href="<?= base_url(); ?>dashboard" class="logo">
+            <img src="<?php echo base_url(); ?>assets/images/logogisaka.png" alt="Logo" style="height: 40px;"> 
+           
+        </a>
+    </div>
+</div>
 
-                <!-- LOGO -->
-                <div class="topbar-left">
-                    <div class="text-center">
-                        <a href="<?=base_url();?>admin/dashboard" class="logo"><i class="mdi mdi-access-point"></i> Absensi Online</a>
-                    </div>
-                </div>
 
                 <div class="sidebar-inner slimscrollleft" id="sidebar-main">
 
@@ -248,7 +251,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                 </a>
 
                 <!-- item-->
-                <a href="<?=base_url();?>admin/kelas" class="dropdown-item notify-item">
+                <a href="<?=base_url();?>kelas" class="dropdown-item notify-item">
                     <div class="notify-icon bg-success"><i class="mdi mdi-message"></i></div>
                     <p class="notify-details"><b>Mohon periksa data siswa</b><small class="text-muted">Jika ada kesalahan maka hubungi admin</small></p>
                 </a>
