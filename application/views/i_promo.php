@@ -105,7 +105,8 @@
             <div class="header-hero-content">
               <h1 class="header-title wow fadeInLeftBig" data-wow-duration="3s" data-wow-delay="0.2s"><span>Revolusi
                   Absensi Sekolah</span> Dengan Menggunakan Gps Rfid Dan Barcode</h1>
-              <p class="text wow fadeInLeftBig" data-wow-duration="3s" data-wow-delay="0.4s">Dapatkan sistem absensi modern yang akurat dan efisien untuk sekolah Anda.</p>
+              <p class="text wow fadeInLeftBig" data-wow-duration="3s" data-wow-delay="0.4s">Dapatkan sistem absensi
+                modern yang akurat dan efisien untuk sekolah Anda </p>
               <ul class="d-flex">
                 <li><a href="" class="main-btn wow fadeInLeftBig" data-wow-duration="3s" data-wow-delay="0.8s">Download
                     Now</a></li>
@@ -561,7 +562,7 @@
           <div class="lo-lg-12">
             <div class="copyright">
               <div class="copyright-text text-center">
-                <p class="text">Copyright &#169; 2020 <a href="">landapp</a></p>
+                <p class="text">Copyright &#169; 2020 <a href="">Imamdienul</a></p>
               </div>
             </div>
           </div>

@@ -12,12 +12,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
-        .bg-custom-pink {
-            background-color: #FF4D6D;
+        .bg-custom-purple {
+            background-color: #6A0DAD;
         }
 
-        .text-custom-pink {
-            color: #FF4D6D;
+        .text-custom-purple {
+            color: #6A0DAD;
         }
 
         .bg-custom-green {
@@ -35,7 +35,7 @@
 <body class="bg-gray-100">
     <div class="min-h-screen flex items-start justify-center bg-gray-100">
         <div class="w-full max-w-md bg-white shadow-lg rounded-3xl overflow-hidden">
-            <div class="p-6 bg-custom-pink text-white">
+            <div class="p-6 bg-custom-purple text-white">
                 <h1 class="text-2xl font-bold">Selamat Datang</h1>
                 <p class="text-xl mt-2">Silahkan Login</p>
             </div>
@@ -62,17 +62,17 @@
                     </div>
                     <div class="mb-4">
                         <label class="flex items-center">
-                            <input type="checkbox" name="remember" value="true" class="form-checkbox h-5 w-5 text-custom-pink">
+                            <input type="checkbox" name="remember" value="true" class="form-checkbox h-5 w-5 text-custom-purple">
                             <span class="ml-2 text-gray-700">Remember me</span>
                         </label>
                     </div>
                     <div class="mb-6">
-                        <button type="submit" class="w-full bg-custom-pink text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline">
+                        <button type="submit" class="w-full bg-custom-purple text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline">
                             Log In Siswa
                         </button>
                     </div>
                     <div class="text-center">
-                        <a href="<?= base_url(); ?>/register" class="text-custom-pink hover:text-pink-700">
+                        <a href="<?= base_url(); ?>/register" class="text-custom-purple hover:text-purple-700">
                             <i class="fas fa-user-plus mr-1"></i> Buat Akun Siswa
                         </a>
                     </div>

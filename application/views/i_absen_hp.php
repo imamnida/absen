@@ -11,8 +11,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
-        .bg-custom-pink { background-color: #FF4D6D; }
-        .text-custom-pink { color: #FF4D6D; }
+        .bg-custom-purple { background-color: #6A0DAD; }
+        .text-custom-purple { color: #6A0DAD; }
         .bg-custom-green { background-color: #4CAF50; }
         .dot {
             display: inline-block;
@@ -52,6 +52,71 @@
         .page.active {
             display: block;
         }
+        .hamburger-menu {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .back-arrow {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            z-index: 1000;
+            display: none;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background-color: #6A0DAD;
+            transition: right 0.3s ease-in-out;
+            z-index: 1001;
+            padding-top: 60px;
+        }
+        .sidebar.active {
+            right: 0;
+        }
+        .sidebar-item {
+            display: block;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: background-color 0.3s ease;
+        }
+        .nida {
+            display: block;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: background-color 0.3s ease;
+        }
+        .sidebar-item:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        .sidebar-item:last-child {
+            border-bottom: none;
+        }
+        .sidebar-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+        }
 
         /* Desktop styles */
         @media (min-width: 1024px) {
@@ -59,7 +124,7 @@
                 max-width: 1200px;
                 margin: auto;
             }
-            .bg-custom-pink {
+            .bg-custom-purple {
                 padding: 20px;
                 border-radius: 10px;
             }
@@ -89,23 +154,43 @@
 </head>
 
 <body class="bg-gray-100 h-screen flex items-start pb-16">
-    <div class="container max-w-md mx-auto bg-white shadow-lg rounded-3xl overflow-hidden w-full mb-16">
+    <div class="container max-w-md mx-auto bg-white shadow-lg rounded-3xl overflow-hidden w-full mb-16 relative">
+        <div id="hamburger-menu" class="hamburger-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div id="back-arrow" class="back-arrow">
+            <i class="fas fa-arrow-left"></i>
+        </div>
+
+        <!-- Sidebar -->
+        <div id="sidebar" class="sidebar">
+            <div class="sidebar-close" id="sidebar-close">
+                <i class="fas fa-times"></i>
+            </div>
+            <img src="<?= base_url(); ?>assets/images/logo.png" alt="Logo" class="h-16 lg:h-24" style="position: relative; left:22px;">
+            <a href="#" class="sidebar-item" data-page="home">Home</a>
+            <a href="#" class="sidebar-item" data-page="tutorial">Tutorial</a>
+            <a href="#" class="sidebar-item" data-page="profile">Profile</a>
+            <a href="#" class="sidebar-item">Settings</a>
+            <a href="<?= base_url(); ?>siswa/logout" class="nida">Logout</a>
+        </div>
+
         <!-- Home Page -->
         <div id="home" class="page active">
-            <div class="p-6 bg-custom-pink text-white flex justify-between items-center">
+            <div class="p-6 bg-custom-purple text-white flex justify-between items-center">
                 <div>
                     <h1 class="text-2xl lg:text-3xl font-bold">Selamat Siang</h1>
                     <p class="text-3xl lg:text-4xl font-bold mt-2"><?= $this->session->userdata('nama'); ?></p>
                 </div>
-                <img src="<?= base_url(); ?>assets/images/logo.png" alt="Logo" class="h-16 lg:h-24">
+                <img src="<?= base_url(); ?>assets/images/logo.png" alt="Logo" class="h-16 lg:h-24" style="position: relative; right: 15px;">
+
+
             </div>
             
-
             <div class="p-6">
                 <div class="flex justify-center items-center mb-4">
                     <span id="range-dot" class="dot dot-red"></span>
                     <div id="coordinates" class="text-center font-bold"></div>
-                    
                 </div>
                 <div id="range-message" class="text-center mb-4 font-bold text-green-600 hidden"></div>
 
@@ -115,33 +200,28 @@
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            
-                            
                             <strong><?= $message_type == 'success' ? 'Well done!' : ($message_type == 'warning' ? 'Warning!' : 'Oh snap!'); ?></strong> <?= $message; ?>
-                            
                         </div>
-
-                        
                     <?php endif; ?>
 
                     <div id="clock" class="clock mb-4"></div>
                     <div class="p-6">
-                <form id="absensiForm" action="<?= site_url('absensi_hp/absen'); ?>" method="post" class="mt-4">
-                    <div class="mb-4">
-                        <label for="nisn" class="block text-gray-700 text-sm font-bold mb-2">NISN:</label>
-                        <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="nisn" id="nisn" required value="<?= $this->session->userdata('nisn'); ?>" readonly>
+                        <form id="absensiForm" action="<?= site_url('absensi_hp/absen'); ?>" method="post" class="mt-4">
+                            <div class="mb-4">
+                                <label for="nisn" class="block text-gray-700 text-sm font-bold mb-2">NISN:</label>
+                                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="nisn" id="nisn" required value="<?= $this->session->userdata('nisn'); ?>" readonly>
+                            </div>
+                            <input type="hidden" name="id_devices" value="1">
+                            <div class="grid grid-cols-2 gap-4">
+                                <button type="button" class="w-full bg-custom-green text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center" onclick="submitForm('masuk')">
+                                    <i class="fas fa-arrow-left mr-2"></i> Absen Masuk
+                                </button>
+                                <button type="button" class="w-full bg-custom-purple text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center" onclick="submitForm('keluar')">
+                                    Absen Pulang <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                    <input type="hidden" name="id_devices" value="1">
-                    <div class="grid grid-cols-2 gap-4">
-                        <button type="button" class="w-full bg-custom-green text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center" onclick="submitForm('masuk')">
-                            <i class="fas fa-arrow-left mr-2"></i> Absen Masuk
-                        </button>
-                        <button type="button" class="w-full bg-custom-pink text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center" onclick="submitForm('keluar')">
-                            Absen Pulang <i class="fas fa-arrow-right ml-2"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>
 
                     <div id="error-message" class="hidden bg-red-100 text-red-800 p-4 rounded-lg mt-3" role="alert"></div>
 
@@ -169,34 +249,34 @@
             </div>
         </div>
 
-        <!-- Attendance Page -->
+        <!-- Tutorial Page -->
         <div id="tutorial" class="page">
-    <div class="p-6 bg-custom-pink text-white">
-        <h1 class="text-2xl lg:text-3xl font-bold">Tutorial Absensi</h1>
-    </div>
-    <div class="p-6">
-        <h2 class="text-xl font-bold mb-4">Cara Menggunakan Sistem Absensi</h2>
-        <p class="mb-2">Berikut adalah langkah-langkah untuk melakukan absensi:</p>
-        <ol class="list-decimal pl-5 mb-4">
-            <li><strong>Buka Aplikasi:</strong> Masuk ke aplikasi absensi menggunakan akun Anda.</li>
-            <li><strong>Pilih Opsi Absen:</strong> Setelah masuk, Anda akan melihat tombol untuk "Absen Masuk" dan "Absen Pulang". Pilih salah satu sesuai kebutuhan.</li>
-            <li><strong>Periksa Koordinat:</strong> Aplikasi akan secara otomatis mengambil lokasi Anda. Pastikan Anda berada dalam jangkauan yang ditentukan.</li>
-            <li><strong>Kirim Formulir:</strong> Setelah memilih opsi absensi, formulir akan secara otomatis mengisi koordinat dan mengirimkan data absensi.</li>
-            <li><strong>Verifikasi:</strong> Anda akan melihat notifikasi yang menunjukkan apakah absensi berhasil dilakukan.</li>
-        </ol>
-        <p>Jika Anda mengalami kesulitan, silakan hubungi wali kelas atau admin untuk bantuan lebih lanjut.</p>
-    </div>
-</div>
+            <div class="p-6 bg-custom-purple text-white">
+                <h1 class="text-2xl lg:text-3xl font-bold">Tutorial Absensi</h1>
+            </div>
+            <div class="p-6">
+                <h2 class="text-xl font-bold mb-4">Cara Menggunakan Sistem Absensi</h2>
+                <p class="mb-2">Berikut adalah langkah-langkah untuk melakukan absensi:</p>
+                <ol class="list-decimal pl-5 mb-4">
+                    <li><strong>Buka Aplikasi:</strong> Masuk ke aplikasi absensi menggunakan akun Anda.</li>
+                    <li><strong>Pilih Opsi Absen:</strong> Setelah masuk, Anda akan melihat tombol untuk "Absen Masuk" dan "Absen Pulang". Pilih salah satu sesuai kebutuhan.</li>
+                    <li><strong>Periksa Koordinat:</strong> Aplikasi akan secara otomatis mengambil lokasi Anda. Pastikan Anda berada dalam jangkauan yang ditentukan.</li>
+                    <li><strong>Kirim Formulir:</strong> Setelah memilih opsi absensi, formulir akan secara otomatis mengisi koordinat dan mengirimkan data absensi.</li>
+                    <li><strong>Verifikasi:</strong> Anda akan melihat notifikasi yang menunjukkan apakah absensi berhasil dilakukan.</li>
+                </ol>
+                <p>Jika Anda mengalami kesulitan, silakan hubungi wali kelas atau admin untuk bantuan lebih lanjut.</p>
+            </div>
+        </div>
 
         <!-- Profile Page -->
         <div id="profile" class="page">
-            <div class="p-6 bg-custom-pink text-white">
+            <div class="p-6 bg-custom-purple text-white">
                 <h1 class="text-2xl lg:text-3xl font-bold">Profil dan Info Sekolah</h1>
             </div>
             <div class="p-6">
                 <h2 class="text-xl font-bold mb-4">Info Sekolah</h2>
                 <p><strong>Nama Sekolah:</strong> MTsN 11 Majalengka</p>
-                <p><strong>Alamat:</strong>Kp. Sindanghurip Desa Maniis Kec. Cingambul Kab. Majalengka</p>
+                <p><strong>Alamat:</strong> Kp. Sindanghurip Desa Maniis Kec. Cingambul Kab. Majalengka</p>
                 <p><strong>Telepon:</strong> (0233) 8319182</p>
                 <p><strong>Email:</strong> mtsn11majalengka@gmail.com</p>
 
@@ -208,10 +288,7 @@
             </div>
         </div>
     </div>
-
-   
     <div class="bottom-menu flex justify-around items-center">
-        
         <a href="#" class="menu-item" data-page="tutorial">
             <i class="far fa-calendar-alt text-xl"></i>
             <span class="text-xs mt-1">Tutorial</span>
@@ -313,30 +390,47 @@ function updateClock() {
 }
 
 function showPage(pageId) {
-    document.querySelectorAll('.page').forEach(page => {
-        page.style.display = 'none';
-    });
-    document.getElementById(pageId).style.display = 'block';
-    
-    document.querySelectorAll('.menu-item').forEach(item => {
-        item.classList.remove('active');
-    });
-    document.querySelector(`.menu-item[data-page="${pageId}"]`).classList.add('active');
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.menu-item').forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.preventDefault();
-            const pageId = item.getAttribute('data-page');
-            showPage(pageId);
+        document.querySelectorAll('.page').forEach(page => {
+            page.classList.remove('active');
         });
-    });
+        document.getElementById(pageId).classList.add('active');
+        
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.classList.remove('active');
+        });
+        document.querySelector(`.menu-item[data-page="${pageId}"]`).classList.add('active');
 
-    // Initial setup
-    updateClock();
-    setInterval(updateClock, 1000);
-    updateCoordinates();
-    setInterval(updateCoordinates, 5000);
-});
-</script>
+        // Close sidebar when a page is selected
+        toggleSidebar();
+    }
+
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('active');
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const sidebarClose = document.getElementById('sidebar-close');
+        const sidebar = document.getElementById('sidebar');
+
+        hamburgerMenu.addEventListener('click', toggleSidebar);
+        sidebarClose.addEventListener('click', toggleSidebar);
+
+        document.querySelectorAll('.menu-item, .sidebar-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageId = item.getAttribute('data-page');
+                showPage(pageId);
+            });
+        });
+
+        // Initial setup
+        updateClock();
+        setInterval(updateClock, 1000);
+        updateCoordinates();
+        setInterval(updateCoordinates, 5000);
+    });
+    </script>
+</body>
+</html>
