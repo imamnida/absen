@@ -32,8 +32,8 @@ if ($set == "dashboard") {
             <div class="col-sm-12">
                 <div class="card m-b-30">
                     <div class="card-body text-center">
-                        <img src="<?=base_url();?>assets/images/logo.png" alt="School Logo" style="max-width: 150px; margin-bottom: 20px;">
-                        <h1 class="card-title">SELAMAT DATANG DI APLIKASI ADMINISTRASI ATTENDACE SYSTEM TERBARU</h1>
+                        <img src="<?=base_url();?>assets/images/logo.png" alt="School Logo" style="max-width: 400px; margin-bottom: 20px;">
+                        <h1 class="card-title">SELAMAT DATANG DI APLIKASI ADMINISTRASI ATTENDACE SYSTEM SI ATA</h1>
                     </div>
                 </div>
             </div>

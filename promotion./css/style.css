@@ -21,6 +21,7 @@ img {
     max-width: 100%;
 }
 
+
 ul {
     margin: 0;
     padding: 0;
@@ -503,17 +504,26 @@ span {
 }
 
 .header-image {
-    position: relative;
-    padding-top: 80px;
-    animation: bounceTop-1 3s ease infinite;
+    position: relative; /* Menggunakan posisi relative */
+    padding-top: 1rem; /* Gunakan satuan rem untuk padding */
+    animation: bounceTop-1 4s ease infinite;
+    text-align: center; /* Menyelaraskan gambar di tengah */
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px),
-(max-width: 767px) {
+.header-image img {
+    max-width: 100%; /* Membuat gambar responsif dengan lebar maksimum 100% */
+    height: auto; /* Menjaga proporsi gambar */
+    display: inline-block; /* Menampilkan gambar sebagai elemen inline-block */
+}
+
+/* Untuk layar dengan lebar di antara 768px dan 4000px */
+@media only screen and (min-width: 768px) and (max-width: 4000px) {
     .header-image img {
-        height: 0;
+        height: 1000px; /* Diberikan satuan 'px' untuk ukuran tinggi */
     }
 }
+
+
 
 .header-shape-1 {
     position: absolute;
@@ -889,7 +899,7 @@ span {
 
 .download-area .download-image .image-3 {
     position: relative;
-    max-width: 350px;
+    max-width:500px;
     padding-top: 65px;
     padding-left: 60px;
     padding-bottom: 60px;

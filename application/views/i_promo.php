@@ -26,6 +26,21 @@
 </head>
 
 <body>
+  <style>
+.partners-logo {
+  display: flex;
+  flex-wrap: wrap; /* Membuat logo membungkus ke baris berikutnya */
+  justify-content: center; /* Menempatkan logo di tengah */
+}
+
+.partner-logo {
+  width: 80px; /* Sesuaikan ukuran logo */
+  margin: 50px; /* Ruang antar logo */
+  max-width: 150%; /* Membatasi ukuran logo agar responsif */
+}
+
+</style>
+
   <!-- --------- preloader ------------ -->
   <div class="preloader">
     <div class="loader">
@@ -95,91 +110,165 @@
     </div>
     <!---- navbar end--->
     <div class="header-hero" data-scroll-index="0">
-      <!---- home star ------>
-      <div class="shape shape-1"></div>
-      <div class="shape shape-2"></div>
-      <div class="shape shape-3"></div>
-      <div class="shape shape-4"></div>
-      <div class="shape shape-5"></div>
-      <div class="shape shape-6"></div>
-      <div class="container">
-        <div class="row align-items-center justify-content-center justify-content-lg-between">
-          <div class="col-lg-6 col-md-10">
-            <div class="header-hero-content">
-              <h1 class="header-title wow fadeInLeftBig" data-wow-duration="3s" data-wow-delay="0.2s"><span>Revolusi
-                  Absensi Sekolah</span> Dengan Menggunakan Gps Rfid Dan Barcode</h1>
-              <p class="text wow fadeInLeftBig" data-wow-duration="3s" data-wow-delay="0.4s">Dapatkan sistem absensi
-                modern yang akurat dan efisien untuk sekolah Anda. Dengan Teknologi Terkini Yaitu Rfid, Gps, Barcode Dan Metode Absensi Lain nya </p>
-              <ul class="d-flex">
-                <li><a href="" class="main-btn wow fadeInLeftBig" data-wow-duration="3s" data-wow-delay="0.8s">Download
-                    Now</a></li>
-                <li><a href="#" class="header-video venobox wow fadeInLeftBig"
-                    data-autoplay="true" data-vbtype="video" data-wow-duration="3s" data-wow-delay="1.2s"><i
-                      class="fas fa-play"></i></a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6">
-            <div class="header-image">
-              <img src="<?php base_url()?>promotion./img/header/header-app.png" alt="" class="image-1  wow fadeInRightBig"
-                data-wow-duration="3s" data-wow-delay="0.5s">
-            </div>
-          </div>
+  <!-- Home star -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+  <div class="shape shape-3"></div>
+  <div class="shape shape-4"></div>
+  <div class="shape shape-5"></div>
+  <div class="shape shape-6"></div>
+  
+  <div class="container">
+    <div class="row align-items-center justify-content-center justify-content-lg-between">
+      <div class="col-lg-6 col-md-10">
+        <div class="header-hero-content">
+          <h1 class="header-title wow fadeInLeftBig" data-wow-duration="3s" data-wow-delay="0.2s">
+            <span>Absensi Sekolah SI ATA</span> Sistem Informasi Absensi Tepat Akurat
+          </h1>
+          <p class="text wow fadeInLeftBig" data-wow-duration="3s" data-wow-delay="0.4s">
+            Dapatkan sistem absensi modern yang akurat dan efisien untuk sekolah Anda. 
+            Dengan Teknologi Terkini Yaitu RFID, GPS, Barcode Dan Metode Absensi Lainnya.
+          </p>
+          <ul class="d-flex">
+            <li>
+              <a href="" class="main-btn wow fadeInLeftBig" data-wow-duration="3s" data-wow-delay="0.8s">Download Now</a>
+            </li>
+            <li>
+              <a href="#" class="header-video venobox wow fadeInLeftBig" data-autoplay="true" data-vbtype="video" data-wow-duration="3s" data-wow-delay="1.2s">
+                <i class="fas fa-play"></i>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
-      <div class="container">
-        <div class="header-shape-1"></div>
-        <div class="header-shape-2">
-          <img src="<?php base_url()?>promotion./img/header/header-shape-2.svg" alt="">
+      
+      <div class="col-lg-5 col-md-6">
+        <div class="header-image" style="margin-top: 70px;"> <!-- Menambahkan margin-top untuk menurunkan gambar -->
+          <img src="<?php echo base_url(); ?>promotion./img/header/header-app.png" alt="Header App Image" class="image-1 wow fadeInRightBig" data-wow-duration="2s" data-wow-delay="0.5s" style="width: 1000px; height: auto;">
         </div>
       </div>
     </div>
-    <!---- home star ------>
-  </header>
-  <!--------   Header End ----  -->
+  </div>
 
- <!-- ------- Feature Section Start ---------- -->
+  <div class="container">
+    <div class="header-shape-1"></div>
+    <div class="header-shape-2">
+      <img src="<?php echo base_url(); ?>promotion./img/header/header-shape-2.svg" alt="Header Shape 2">
+    </div>
+  </div>
+</div>
+<!-- End of Home star -->
+</header>
+
+  <!--------   Header End ----  -->
+<!-- ------- Feature Section Start ---------- -->
 <section class="feature-section pt-80" data-scroll-index="1">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-xl-6 col-lg-7">
         <div class="section-title text-center mb-30">
-          <h1 class="mb-25 wow fadeInUp" data-wow-delay=".2s">Fitur Lengkap Absensi</h1>
+          <h1 class="mb-25 wow fadeInUp" data-wow-delay=".2s">Fitur Lengkap SI ATA</h1>
           <p class="wow fadeInUp" data-wow-delay=".4s">Sistem absensi kami menyediakan berbagai metode modern untuk memudahkan proses pencatatan kehadiran siswa.</p>
         </div>
       </div>
     </div>
     <div class="row justify-content-center">
       <div class="col-lg-4">
-        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.2s">
+        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.2s" style="height: 300px;">
           <div class="icon color-1">
             <i class="fas fa-map-marker-alt"></i>
           </div>
           <div class="content">
-            <h3>GPS Akurasi Tinggi</h3>
-            <p>Memanfaatkan teknologi GPS untuk memastikan kehadiran siswa dengan akurasi tinggi, menghindari kesalahan dalam pencatatan.</p>
+            <h3>Rekapitulasi</h3>
+            <p>Rekapitulasi Kehadiran Perkelas.</p>
           </div>
         </div>
       </div>
       <div class="col-lg-4">
-        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.4s">
+        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.2s" style="height: 300px;">
+          <div class="icon color-1">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="content">
+            <h3>Login Guru</h3>
+            <p>Guru dapat merekapitulasi kehadiran siswa secara efisien.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.2s" style="height: 300px;">
+          <div class="icon color-1">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div class="content">
+            <h3>Pengaturan Waktu Operasional</h3>
+            <p>Admin dapat mengatur waktu kehadiran pulang dan masuk per hari.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.2s" style="height: 300px;">
+          <div class="icon color-1">
+            <i class="fas fa-map-marked-alt"></i>
+          </div>
+          <div class="content">
+            <h3>Metode Absensi GPS</h3>
+            <p>Menggunakan teknologi GPS untuk mencatat kehadiran siswa dengan akurasi tinggi.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.4s" style="height: 300px;">
           <div class="icon color-2">
             <i class="fas fa-id-card"></i>
           </div>
           <div class="content">
-            <h3>RFID Kartu E-Siswa</h3>
-            <p>Kartu siswa elektronik tidak hanya berfungsi sebagai identitas, tetapi juga untuk absensi. Cukup tap pada RFID reader untuk mencatat kehadiran!</p>
+            <h3>Metode Absensi RFID</h3>
+            <p>Kartu siswa elektronik berfungsi untuk absensi dengan mudah.</p>
           </div>
         </div>
       </div>
       <div class="col-lg-4">
-        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.6s">
+        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.6s" style="height: 300px;">
           <div class="icon color-3">
             <i class="fas fa-qrcode"></i>
           </div>
           <div class="content">
-            <h3>Barcode yang Praktis</h3>
-            <p>Metode absensi menggunakan barcode yang mudah diterapkan pada kartu siswa, memberikan alternatif cepat untuk pencatatan kehadiran.</p>
+            <h3>Metode Absensi Barcode</h3>
+            <p>Absensi menggunakan barcode yang mudah diterapkan pada kartu siswa.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.4s" style="height: 300px;">
+          <div class="icon color-4">
+            <i class="fas fa-exclamation-triangle"></i>
+          </div>
+          <div class="content">
+            <h3>Siswa Alfa 3 Hari</h3>
+            <p>Deteksi otomatis siswa yang tidak hadir selama 3 hari berturut-turut.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.4s" style="height: 300px;">
+          <div class="icon color-5">
+            <i class="fas fa-pencil-alt"></i>
+          </div>
+          <div class="content">
+            <h3>Perijinan</h3>
+            <p>Guru dan admin dapat membuat perijinan untuk siswa yang tidak hadir karena sakit atau izin.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.6s" style="height: 300px;">
+          <div class="icon color-6">
+            <i class="fas fa-tachometer-alt"></i>
+          </div>
+          <div class="content">
+            <h3>Dashboard</h3>
+            <p>Menampilkan data singkat dan statistik pada aplikasi.</p>
           </div>
         </div>
       </div>
@@ -189,29 +278,36 @@
 <!-- ------- Feature Section End ---------- -->
 
 
+
+
   <!-- ----------- About Section Start --------- -->
-  <section class="about-area pt-70 pb-120" data-scroll-index="2">
+<section class="about-area pt-70 pb-120" data-scroll-index="2">
     <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-6">
-          <div class="about-image wow fadeInLeftBig" data-wow-duration="3s" data-wow-delay="0.5s">
-            <div class="about-shape"></div>
-            <img src="<?php base_url()?>promotion./img/about/about-app.png" alt="" class="app">
-          </div>
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="foto" data-wow-duration="3s" data-wow-delay="0.5s">
+                    <!-- about-shape jika kosong, mungkin bisa dihapus jika tidak digunakan -->
+                    <div class="about-shape"></div>
+                    <img src="<?php echo base_url(); ?>promotion./img/about/about-app.png" alt="Sistem Absensi Modern" class="app" style="width:100%; height:auto;">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="about-content mt-50 wow fadeInRightBig" data-wow-duration="3s" data-wow-delay="0.5s">
+                    <div class="section-title">
+                        <h1 class="title">Sistem Absensi yang Modern</h1>
+                        <p class="text">
+                            Kami menawarkan solusi absensi yang lengkap dengan berbagai metode, termasuk GPS, RFID, dan barcode. 
+                            Dengan teknologi terkini, kehadiran siswa dapat dicatat dengan akurat dan efisien, memastikan tidak ada yang terlewatkan.
+                        </p>
+                    </div>
+                    <a href="#contact" class="main-btn">Hubungi Kami</a>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-6">
-        <div class="about-content mt-50 wow fadeInRightBig" data-wow-duration="3s" data-wow-delay="0.5s">
-          <div class="section-title">
-            <h1 class="title">Sistem Absensi yang Modern</h1>
-            <p class="text">Kami menawarkan solusi absensi yang lengkap dengan berbagai metode, termasuk GPS, RFID, dan barcode. Dengan teknologi terkini, kehadiran siswa dapat dicatat dengan akurat dan efisien, memastikan tidak ada yang terlewatkan.</p>
-          </div>
-          <a href="#contact" class="main-btn">Hubungi Kami</a>
-          </div>
-        </div>
-      </div>
     </div>
-  </section>
-  <!-- ----------- About Section End --------- -->
+</section>
+<!-- ----------- About Section End --------- -->
+
 
   <!-- ----------- Testimonial Section Start ------- -->
   <section class="testimonial-section" data-scroll-index="3">
@@ -288,19 +384,18 @@
             <h4 class="title">Basic</h4>
           </div>
           <div class="pricing-price">
-            <span class="pricing">$ 29</span>
-            <p class="text">Month</p>
+            <span class="pricing">Rp 3.500 / Siswa.</span>
+            <p class="text">Tahunan</p>
           </div>
           <div class="pricing-list">
             <ul class="list">
-              <li><i class="fas fa-check"></i> Fitur dasar absensi</li>
-              <li><i class="fas fa-check"></i> Notifikasi kehadiran</li>
+              <li><i class="fas fa-check"></i> Software Absensi Gps Siswa</li>
               <li><i class="fas fa-check"></i> Export laporan bulanan</li>
-              <li><i class="fas fa-check"></i> 24/7 Dukungan Pelanggan</li>
+              <li><i class="fas fa-check"></i> Login Guru</li>
             </ul>
           </div>
           <div class="pricing-btn">
-            <a href="" class="main-btn main-btn-2">Purchase Now</a>
+            <a href="" class="main-btn main-btn-2">Hubungi Kami</a>
           </div>
         </div>
       </div>
@@ -310,19 +405,25 @@
             <h4 class="title">Standard</h4>
           </div>
           <div class="pricing-price">
-            <span class="pricing">$ 59</span>
-            <p class="text">Month</p>
+            <span class="pricing">Rp 27.000 / Siswa.</span>
+            <p class="text">Permanen <small><a href="#syarat-ketentuan" style="font-size: 12px;">(S&K berlaku)</a></small></p>
           </div>
           <div class="pricing-list">
             <ul class="list">
               <li><i class="fas fa-check"></i> Semua fitur Basic</li>
-              <li><i class="fas fa-check"></i> Analisis kehadiran</li>
-              <li><i class="fas fa-check"></i> Pemberitahuan orang tua</li>
-              <li><i class="fas fa-check"></i> 10 laporan kustom</li>
+              <li><i class="fas fa-check"></i> Login Guru</li>
+              <li><i class="fas fa-check"></i> Percetakan Kartu Siswa Otomatis</li>
+              <li><i class="fas fa-check"></i> Export laporan bulanan</li>
+              <li><i class="fas fa-check"></i> Software Absensi Gps Siswa</li>
+              <li><i class="fas fa-check"></i> Kartu E-Pelajar RFID</li>
+              <li><i class="fas fa-check"></i> Foto Siswa</li>
+              <li><i class="fas fa-check"></i> Gratis Device RFID Reader 2</li>
+              <li><i class="fas fa-check"></i> Software Absensi Barcode Siswa</li>
+              <li><i class="fas fa-check"></i> Logo Custom</li>
             </ul>
           </div>
           <div class="pricing-btn">
-            <a href="" class="main-btn main-btn-2">Purchase Now</a>
+            <a href="" class="main-btn main-btn-2">Hubungi Kami</a>
           </div>
         </div>
       </div>
@@ -332,23 +433,29 @@
             <h4 class="title">Professional</h4>
           </div>
           <div class="pricing-price">
-            <span class="pricing">$ 99</span>
-            <p class="text">Month</p>
+            <span class="pricing">Rp 37.000 / Siswa</span>
+            <p class="text">Permanent <small><a href="#syarat-ketentuan" style="font-size: 12px;">(S&K berlaku)</a></small></p>
           </div>
           <div class="pricing-list">
             <ul class="list">
               <li><i class="fas fa-check"></i> Semua fitur Standard</li>
-              <li><i class="fas fa-check"></i> Integrasi API</li>
-              <li><i class="fas fa-check"></i> Data analisis lanjutan</li>
+              <li><i class="fas fa-check"></i> Bisa Di Instal di Server Sekolah</li>
+              <li><i class="fas fa-check"></i> Full Acces Fitur</li>
+              <li><i class="fas fa-check"></i> Kartu E-Pelajar Rfid Barcode</li>
+              <li><i class="fas fa-check"></i> Gratis 2 Device Reader Rfid</li>
               <li><i class="fas fa-check"></i> Support prioritas</li>
               <li><i class="fas fa-check"></i> Pelatihan gratis untuk staf</li>
             </ul>
           </div>
           <div class="pricing-btn">
-            <a href="" class="main-btn main-btn-2">Purchase Now</a>
+            <a href="" class="main-btn main-btn-2">Hubungi Kami</a>
           </div>
         </div>
       </div>
+    </div>
+    <div id="syarat-ketentuan" style="margin-top: 30px;">
+      <h3>Syarat dan Ketentuan</h3>
+      <p>Dalam paket Professional, "Permanent" hanya merujuk pada hardware, yaitu RFID reader yang disediakan dengan garansi 6 bulan terhitung sejak tanggal penerimaan.</p>
     </div>
   </div>
 </div>
@@ -448,6 +555,18 @@
     </div>
   </section>
   <!-- ----------- FAQ Section End --------- -->
+  <div class="col-lg-12">
+          <div class="footer-partners mt-50 text-center">
+            <h4 class="title">Partner Kami</h4>
+            <div class="partners-logo d-flex flex-wrap justify-content-center">
+              <img src="<?php base_url()?>promotion./img/header/logo/landapp-logo.png" alt="Partner Logo" class="partner-logo">
+              <img src="<?php base_url()?>promotion./img/header/logo/lintasarta.jpeg" alt="Partner 1" class="partner-logo">
+              <img src="<?php base_url()?>promotion./img/header/logo/megadata.png" alt="Partner 2" class="partner-logo">
+              <img src="<?php base_url()?>promotion./img/header/logo/rsplumbon.png" alt="Partner 3" class="partner-logo">
+              <img src="<?php base_url()?>promotion./img/header/logo/maangsari.png" alt="Partner 4" class="partner-logo">
+              <img src="<?php base_url()?>promotion./img/header/logo/rancamulya.png" alt="Partner 5" class="partner-logo">
+              <img src="<?php base_url()?>promotion./img/header/logo/supercoridor.png" alt="Partner 6" class="partner-logo">
+              <!-- Tambahkan logo lain sesuai kebutuhan -->
 
   <!-- ----------- Download Section Start ------- -->
   <section class="download-area pt-70 pb-40" data-scroll-index="6">
@@ -463,14 +582,7 @@
   <div class="download-content mt-45 wow fadeInRightBig" data-wow-duration="3s" data-wow-delay="0.5s">
     <h1 class="title">Unduh dan Mulai Menggunakan!</h1>
     <p class="text">Dengan sistem absensi kami, Anda dapat memantau kehadiran siswa dengan mudah dan efisien. Unduh aplikasi sekarang dan nikmati fitur-fitur canggih yang kami tawarkan, termasuk absensi berbasis GPS, RFID, dan barcode.</p>
-    <ul>
-    <li><a href="" class="app-store">
-                  <img src="<?php base_url()?>promotion./img/download/app-store.png" alt="">
-                </a></li>
-              <li><a href="" class="play-store">
-                  <img src="<?php base_url()?>promotion./img/download/play-store.png" alt="">
-                </a></li>
-    </ul>
+   
   </div>
 </div>
 
