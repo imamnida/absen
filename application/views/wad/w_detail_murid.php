@@ -35,7 +35,7 @@
                     <div class="card-body">
                         <h1 class="mt-0 header-title d-flex justify-content-between align-items-center">
                             <?= $murid->nama; ?>
-                            <a href="<?= base_url() ?>/wad/edit_rfid/<?= $murid->id_rfid ?>" class="btn btn-info btn-sm">
+                            <a href="<?= base_url() ?>/wad/edit_siswa/<?= $murid->id_siswa ?>" class="btn btn-info btn-sm">
                                 Edit <i class="fa fa-pencil"></i>
                             </a>
                         </h1>

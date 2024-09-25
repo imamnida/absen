@@ -32,7 +32,7 @@
                                         <div class="table-responsive">
                                             <p>NISN : <?= $murid->nisn; ?></p>
                                             <p>Kelas : <?= $murid->kelas; ?></p>
-                                            <p>RFID UID : <?= $murid->uid; ?></p>
+                                            <p>siswa UID : <?= $murid->uid; ?></p>
                                             <p>Alamat : <?= $murid->alamat; ?></p>
                                         </div>
                                     </div>

@@ -1,7 +1,7 @@
 <?php
 $this->load->view('include/header.php');
 
-if ($set == "rfid") {
+if ($set == "siswa") {
 ?>
   <div class="page-content-wrapper">
     <div class="container-fluid">
@@ -11,7 +11,7 @@ if ($set == "rfid") {
                     <div class="btn-group float-right">
                         <ol class="breadcrumb hide-phone p-0 m-0">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">RFID</a></li>
+                            <li class="breadcrumb-item"><a href="#">siswa</a></li>
                             <li class="breadcrumb-item active">Data</li>
                         </ol>
                     </div>
@@ -41,7 +41,7 @@ if ($set == "rfid") {
                                 <tr>
                                     <th>No</th>
                                     <th>NISN</th>
-                                    <th>UID RFID</th>
+                                    <th>UID siswa</th>
                                     <th>NIK</th>
                                     <th>Nama</th>
                                     <th>Kelas</th>
@@ -51,13 +51,13 @@ if ($set == "rfid") {
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (empty($rfid)) { ?>
+                                <?php if (empty($siswa)) { ?>
                                     <tr>
                                         <td colspan="9">Data tidak ditemukan</td>
                                     </tr>
                                 <?php } else {
                                     $no = 0;
-                                    foreach ($rfid as $item) {
+                                    foreach ($siswa as $item) {
                                         if ($item->nama != "") {
                                             $no++;
                                 ?>
@@ -73,7 +73,7 @@ if ($set == "rfid") {
                                                     <img src="<?= base_url(); ?>uploads/<?php echo $item->foto; ?>" class="img-circle" width="auto" height="100px" alt="User Image">
                                                 </td>
                                                 <td>
-                                                    <a href="<?= base_url() ?>/rfid/edit_rfid/<?= $item->id_rfid ?>" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i></a>
+                                                    <a href="<?= base_url() ?>/siswa/edit_siswa/<?= $item->id_siswa ?>" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i></a>
                                                 </td>
                                             </tr>
                                 <?php
@@ -92,7 +92,7 @@ if ($set == "rfid") {
 
 
 <?php
-} else if ($set == "edit-rfid") {
+} else if ($set == "edit-siswa") {
 ?>
     <div class="page-content-wrapper">
         <div class="container-fluid">
@@ -102,11 +102,11 @@ if ($set == "rfid") {
                         <div class="btn-group float-right">
                             <ol class="breadcrumb hide-phone p-0 m-0">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">RFID</a></li>
-                                <li class="breadcrumb-item active">RFID Edit</li>
+                                <li class="breadcrumb-item"><a href="#">siswa</a></li>
+                                <li class="breadcrumb-item active">siswa Edit</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Edit RFID</h4>
+                        <h4 class="page-title">Edit siswa</h4>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -118,7 +118,7 @@ if ($set == "rfid") {
                         <div class="card-body">
                             <h4 class="mt-0 header-title">General Form</h4>
                             <div class="general-label">
-                                <form role="form" action="<?= base_url(); ?>rfid/save_edit_rfid" method="post" enctype="multipart/form-data">
+                                <form role="form" action="<?= base_url(); ?>siswa/save_edit_siswa" method="post" enctype="multipart/form-data">
                                     <div class="box-body">
                                         <input type="hidden" name="id" value="<?php if (isset($id)) { echo $id; } ?>">
 
@@ -185,11 +185,11 @@ if ($set == "rfid") {
                         <div class="btn-group float-right">
                             <ol class="breadcrumb hide-phone p-0 m-0">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">RFID</a></li>
+                                <li class="breadcrumb-item"><a href="#">siswa</a></li>
                                 <li class="breadcrumb-item active">New</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">RFID</h4>
+                        <h4 class="page-title">siswa</h4>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -206,18 +206,18 @@ if ($set == "rfid") {
                                 <thead>
                                     <tr>
                                         <th>NO</th>
-                                        <th>UID RFID</th>
+                                        <th>UID siswa</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if (empty($rfid)) { ?>
+                                    <?php if (empty($siswa)) { ?>
                                         <tr>
-                                            <td colspan="9">RFID baru tidak ditemukan</td>
+                                            <td colspan="9">siswa baru tidak ditemukan</td>
                                         </tr>
                                     <?php } else {
                                         $no = 0;
-                                        foreach ($rfid as $row) {
+                                        foreach ($siswa as $row) {
                                             // Check if any required field is empty
                                             if (empty($row->nama) || empty($row->nik) || empty($row->kelas)) {
                                                 $no++;
@@ -226,7 +226,7 @@ if ($set == "rfid") {
                                                     <td><?php echo $no; ?></td>
                                                     <td><?php echo $row->uid; ?></td>
                                                     <td>
-                                                        <a href="<?= base_url() ?>/rfid/edit_rfid/<?= $row->id_rfid ?>" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Daftarkan Siswa</a>
+                                                        <a href="<?= base_url() ?>/siswa/edit_siswa/<?= $row->id_siswa ?>" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Daftarkan Siswa</a>
                                                     </td>
                                                 </tr>
                                     <?php
