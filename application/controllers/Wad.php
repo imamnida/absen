@@ -129,14 +129,14 @@ class Wad extends CI_Controller {
         ]);
     }
 
-	public function edit_siswa($id=null){
+	public function edit_rfid($id=null){
 		if($this->session->userdata('userlogin')){     // mencegah akses langsung tanpa login
 			if (isset($id)) {
-				$siswa = $this->w_admin->get_siswa_byid($id);
-				if (isset($siswa)) {
-					foreach ($siswa as $key => $value) {
+				$rfid = $this->w_admin->get_rfid_byid($id);
+				if (isset($rfid)) {
+					foreach ($rfid as $key => $value) {
 						//print_r($value);
-						$data['id'] = $value->id_siswa;
+						$data['id'] = $value->id_rfid;
 						$data['nama'] = $value->nama;
 						$data['nis'] = $value->nis;
 						$data['telp'] = $value->telp;
@@ -153,7 +153,7 @@ class Wad extends CI_Controller {
 
 					$data['list_kelas'] = $this->w_admin->get_kelas();
 					$data['list_kampus'] = $this->w_admin->get_kampus();
-					$data['set'] = "edit-siswa";
+					$data['set'] = "edit-rfid";
 					$this->load->view('wad/wad_edit', $data);
 				}else{
 					redirect(base_url().'wad/kelas');
@@ -165,7 +165,7 @@ class Wad extends CI_Controller {
 	}
 
 	
-	public function save_edit_siswa(){
+	public function save_edit_rfid(){
 		if($this->session->userdata('userlogin')){     // mencegah akses langsung tanpa login
 			if (isset($_POST['id']) && isset($_POST['nama'])) {
 				$id = $this->input->post('id');
@@ -195,7 +195,7 @@ class Wad extends CI_Controller {
 			
 
 
-				if ($this->w_admin->updatesiswa($id,$data)) {
+				if ($this->w_admin->updateRFID($id,$data)) {
 					$this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil di update</div>");
 				}else{
 					$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data gagal di update</div>");

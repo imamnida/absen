@@ -24,9 +24,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 //$config['base_url'] = 'http://localhost/absen';
-$config['base_url'] = 'https://absensi.imamdienul.com';
+//$config['base_url'] = 'https://absensi.imamdienul.com';
 //$config['base_url'] = 'https://absensi.mtsn11majalengka.sch.id';
-//$config['base_url'] = 'http://localhost/';
+$config['base_url'] = 'https://coba:8890/';
 
 
 
@@ -141,8 +141,7 @@ $config['subclass_prefix'] = 'MY_';
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 */
-$config['composer_autoload'] = FCPATH . 'vendor/autoload.php';
-
+$config['composer_autoload'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------

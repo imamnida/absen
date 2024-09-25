@@ -33,7 +33,7 @@ if ($set=="histori") {
                                                 <thead>
                                                 <tr>
                                                 <th>ID Histori</th>
-                <th>UID siswa</th>
+                <th>UID RFID</th>
                 <th>Keterangan</th>
                 <th>Nama Device</th>
                 <th>Waktu</th>

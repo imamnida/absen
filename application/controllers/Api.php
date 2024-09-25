@@ -52,24 +52,24 @@ class Api extends CI_Controller {
 
 
 	public function addcardjson(){
-		if (isset($_GET['key']) && isset($_GET['iddev']) && isset($_GET['siswa'])) {
+		if (isset($_GET['key']) && isset($_GET['iddev']) && isset($_GET['rfid'])) {
 			$key = $this->input->get('key');
 			$cekkey = $this->m_api->getkey();
 
 			if($cekkey[0]->key == $key){
 				$iddev = $this->input->get('iddev');
-				$siswa = $this->input->get('siswa');
+				$rfid = $this->input->get('rfid');
 
-				$checkDoublesiswa = $this->m_api->checksiswa($siswa);
+				$checkDoubleRFID = $this->m_api->checkRFID($rfid);
 				$z = 0;
-				if (isset($checkDoublesiswa)) {
-					foreach ($checkDoublesiswa as $key => $value) {
+				if (isset($checkDoubleRFID)) {
+					foreach ($checkDoubleRFID as $key => $value) {
 						$z++;
 					}
 				}
 
 				if ($z > 0) {
-					$notif = array('status' => 'failed', 'ket' => 'siswa TERDAFTAR                           .');
+					$notif = array('status' => 'failed', 'ket' => 'RFID TERDAFTAR                           .');
 					echo json_encode($notif);
 				}else{
 					$device = $this->m_api->getdevice($iddev);
@@ -78,17 +78,17 @@ class Api extends CI_Controller {
 						$count++;
 					}
 					if ($count > 0) {
-						$savedata = array('id_devices' => $iddev, 'uid' => $siswa);
-						if ($this->m_api->insert_siswa($savedata)) {
-							$getlastsiswa = $this->m_api->last_siswa();
-							$idsiswa = 0;
-							if (isset($getlastsiswa)) {
-								foreach ($getlastsiswa as $key => $value) {
-									$idsiswa = $value->id_siswa;
+						$savedata = array('id_devices' => $iddev, 'uid' => $rfid);
+						if ($this->m_api->insert_rfid($savedata)) {
+							$getlastrfid = $this->m_api->last_rfid();
+							$idrfid = 0;
+							if (isset($getlastrfid)) {
+								foreach ($getlastrfid as $key => $value) {
+									$idrfid = $value->id_rfid;
 								}
 							}
-							if ($idsiswa > 0) {
-								$histori = array('id_siswa' => $idsiswa, 'keterangan' => 'ADD siswa CARD', 'waktu' => time(), 'id_devices' => $iddev);
+							if ($idrfid > 0) {
+								$histori = array('id_rfid' => $idrfid, 'keterangan' => 'ADD RFID CARD', 'waktu' => time(), 'id_devices' => $iddev);
 								if ($this->m_api->insert_histori($histori)) {
 									$notif = array('status' => 'success', 'ket' => 'DAFTAR BERHASIL                          .');
 									echo json_encode($notif);
@@ -114,20 +114,20 @@ class Api extends CI_Controller {
 	}
 
 	public function absensijson() {
-		if (isset($_GET['key']) && isset($_GET['iddev']) && isset($_GET['siswa'])) {
+		if (isset($_GET['key']) && isset($_GET['iddev']) && isset($_GET['rfid'])) {
 			$key = $this->input->get('key');
 			$cekkey = $this->m_api->getkey();
 	
 			if ($cekkey[0]->key == $key) {
 				$iddev = $this->input->get('iddev');
-				$siswa = $this->input->get('siswa');
+				$rfid = $this->input->get('rfid');
 	
-				$ceksiswa = $this->m_api->checksiswa($siswa);
-				$countsiswa = 0;
-				$idsiswa = 0;
-				foreach ($ceksiswa as $key => $value) {
-					$countsiswa++;
-					$idsiswa = $value->id_siswa;
+				$cekrfid = $this->m_api->checkRFID($rfid);
+				$countrfid = 0;
+				$idrfid = 0;
+				foreach ($cekrfid as $key => $value) {
+					$countrfid++;
+					$idrfid = $value->id_rfid;
 				}
 	
 				$device = $this->m_api->getdevice($iddev);
@@ -137,7 +137,7 @@ class Api extends CI_Controller {
 				}
 	
 				if ($count > 0) {
-					if ($countsiswa > 0) {
+					if ($countrfid > 0) {
 						$hariIni = date('l');
 	
 						if ($hariIni == 'Sunday') { 
@@ -221,7 +221,7 @@ class Api extends CI_Controller {
 	
 									if ($datamasuk) {
 										foreach ($datamasuk as $key => $value) {
-											if ($value->id_siswa == $idsiswa && $value->keterangan == $ket) {
+											if ($value->id_rfid == $idrfid && $value->keterangan == $ket) {
 												$duplicate++;
 											}
 										}
@@ -229,7 +229,7 @@ class Api extends CI_Controller {
 	
 									if ($datakeluar) {
 										foreach ($datakeluar as $key => $value) {
-											if ($value->id_siswa == $idsiswa && $value->keterangan == $ket) {
+											if ($value->id_rfid == $idrfid && $value->keterangan == $ket) {
 												$duplicate++;
 											}
 										}
@@ -238,13 +238,13 @@ class Api extends CI_Controller {
 									if ($duplicate == 0) {
 										$data = array(
 											'id_devices' => $iddev,
-											'id_siswa' => $idsiswa,
+											'id_rfid' => $idrfid,
 											'keterangan' => $ket,
 											'created_at' => time()
 										);
 										if ($this->m_api->insert_absensi($data)) {
 											$histori = array(
-												'id_siswa' => $idsiswa,
+												'id_rfid' => $idrfid,
 												'keterangan' => $ket,
 												'waktu' => time(),
 												'id_devices' => $iddev

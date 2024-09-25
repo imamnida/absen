@@ -29,7 +29,7 @@
                     <diV class="container">
                         <div class="row">
                             <div class="col-md-6">
-                                <img src="<?=base_url();?>assets/images/logogisaka.png" alt="" class="img-fluid">
+                                <img src="<?=base_url();?>assets/images/logo.png" alt="" class="img-fluid">
                             </div>
                             <div class="col-md-6">
                                 <div class="card">
@@ -39,7 +39,7 @@
                                             <h1 class="">404!</h1>
                                             <h3 class="text-primary">Sorry, page not found</h3><br>
                     
-                                            <a class="btn btn-raised btn-primary mb-5 waves-effect waves-light" href="<?=base_url();?>dashboard">Back to Dashboard</a>
+                                            <a class="btn btn-raised btn-primary mb-5 waves-effect waves-light" href="index.html">Back to Dashboard</a>
                                         </div>
                     
                                     </div>

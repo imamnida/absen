@@ -403,7 +403,7 @@
             <h4 class="title">Basic</h4>
           </div>
           <div class="pricing-price">
-            <span class="pricing">Rp 9.500 / Siswa.</span>
+            <span class="pricing">Rp 8.500 / Siswa.</span>
             <p class="text">Tahunan</p>
           </div>
           <div class="pricing-list">
@@ -435,6 +435,7 @@
               <li><i class="fas fa-check"></i> Semua fitur Basic</li>
               <li><i class="fas fa-check"></i> Percetakan Kartu Siswa Otomatis</li>
               <li><i class="fas fa-check"></i> Kartu E-Pelajar</li>
+              <li><i class="fas fa-check"></i> Foto Siswa</li>
               <li><i class="fas fa-check"></i> Gratis 1 Device Reader Rfid</li>
               <li><i class="fas fa-check"></i> Logo Custom</li>
             </ul>
@@ -469,7 +470,7 @@
     </div>
     <div id="syarat-ketentuan" style="margin-top: 30px;">
       <h3>Syarat dan Ketentuan</h3>
-      <p>Dalam paket Standart, Professional, "Permanent" hanya merujuk pada hardware, yaitu RFID reader yang disediakan dengan garansi 6 bulan terhitung sejak tanggal penerimaan.</p>
+      <p>Dalam paket Professional, "Permanent" hanya merujuk pada hardware, yaitu RFID reader yang disediakan dengan garansi 6 bulan terhitung sejak tanggal penerimaan.</p>
     </div>
   </div>
 </div>

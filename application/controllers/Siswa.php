@@ -39,7 +39,7 @@ class Siswa extends CI_Controller {
                     $this->session->set_userdata('userlogin', $nik);
                     $this->session->set_userdata('nisn', $passDB);
                     $this->session->set_userdata('nama', $nama);
-                    $this->session->set_userdata('id_siswa', $id_siswa);
+                    $this->session->set_userdata('id_rfid', $id_rfid);
                     $this->session->set_userdata('foto', $foto);
     
                     redirect(base_url().'absensi_hp');
