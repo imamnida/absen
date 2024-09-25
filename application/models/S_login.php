@@ -3,19 +3,19 @@ class S_login extends CI_Model {
         
     function prosesLogin($nik) {
         $this->db->where('nik', $nik);
-        return $this->db->get('rfid')->row(); // Mengambil satu baris
+        return $this->db->get('siswa')->row(); // Mengambil satu baris
     }
     
 
     function checkEmail($email){
         $this->db->where('email',$email);
         
-        return $this->db->get('rfid')->row();
+        return $this->db->get('siswa')->row();
     }
     
     function viewDataByID($nik){
         $query = $this->db->where('nik',$nik);
-        $q = $this->db->get('rfid');
+        $q = $this->db->get('siswa');
         $data = $q->result();
         
         return $data;
@@ -23,28 +23,28 @@ class S_login extends CI_Model {
 
     function viewDataByIDemail($email){
         $query = $this->db->where('email',$email);
-        $q = $this->db->get('rfid');
+        $q = $this->db->get('siswa');
         $data = $q->result();
         
         return $data;
     }
 
     function checkDataUsrbyID($id,$pass){
-        $this->db->where('id_rfid',$id);
+        $this->db->where('id_siswa',$id);
         $this->db->where('nisn',$pass);
         
-        return $this->db->get('rfid')->row();
+        return $this->db->get('siswa')->row();
     }
 
-    function changepassrfid($id,$data){
-        $this->db->where('id_rfid', $id);
-        $this->db->update('rfid', $data);
+    function changepasssiswa($id,$data){
+        $this->db->where('id_siswa', $id);
+        $this->db->update('siswa', $data);
 
         return TRUE;
     }
 
-    function addrfid($data){
-        $this->db->insert('rfid', $data);
+    function addsiswa($data){
+        $this->db->insert('siswa', $data);
 
         return TRUE;
     }

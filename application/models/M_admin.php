@@ -26,10 +26,10 @@ class M_admin extends CI_Model {
         return FALSE;
     }
 
- public function delete_murid($id_rfid) {
-        // Delete the student from the database based on their RFID ID
-        $this->db->where('id_rfid', $id_rfid);
-        return $this->db->delete('rfid');  // assuming 'rfid' is your table name
+ public function delete_murid($id_siswa) {
+        // Delete the student from the database based on their siswa ID
+        $this->db->where('id_siswa', $id_siswa);
+        return $this->db->delete('siswa');  // assuming 'siswa' is your table name
     }
     function updateUser($id,$data){
         $this->db->where('id_user', $id);
@@ -93,12 +93,12 @@ class M_admin extends CI_Model {
         return TRUE;
     }
 
-    function get_rfid(){
+    function get_siswa(){
         $this->db->select('*');
-        $this->db->from('rfid');
-        $this->db->join('kelas','kelas.id = rfid.id_kelas','left');
-        $this->db->join('kampus','kampus.id = rfid.id_kampus','left');
-        $this->db->order_by('id_rfid', 'desc');
+        $this->db->from('siswa');
+        $this->db->join('kelas','kelas.id = siswa.id_kelas','left');
+        $this->db->join('kampus','kampus.id = siswa.id_kampus','left');
+        $this->db->order_by('id_siswa', 'desc');
         //$this->db->limit(1);
         $query = $this->db->get();
 
@@ -108,29 +108,29 @@ class M_admin extends CI_Model {
     }
     
 
-    function get_rfid_byid($id) {
-        $query = $this->db->where('id_rfid',$id);
-        $q = $this->db->get('rfid');
+    function get_siswa_byid($id) {
+        $query = $this->db->where('id_siswa',$id);
+        $q = $this->db->get('siswa');
         $data = $q->result();
         
         return $data;
     }
 
-    function get_rfid_byid_row($id) {
-        return $this->db->count_all_results('rfid');
+    function get_siswa_byid_row($id) {
+        return $this->db->count_all_results('siswa');
 
     }
 
-    function updateRFID($id,$data){
-        $this->db->where('id_rfid', $id);
-        $this->db->update('rfid', $data);
+    function updatesiswa($id,$data){
+        $this->db->where('id_siswa', $id);
+        $this->db->update('siswa', $data);
 
         return TRUE;
     }
 
-    function rfid_del($id) {
-        $this->db->where('id_rfid', $id);
-        $this->db->delete('rfid');
+    function siswa_del($id) {
+        $this->db->where('id_siswa', $id);
+        $this->db->delete('siswa');
         if ($this->db->affected_rows() == 1) {
             return TRUE;
         }
@@ -141,7 +141,7 @@ class M_admin extends CI_Model {
         $this->db->select('*');
         $this->db->from('absensi');
         $this->db->join('devices','absensi.id_devices=devices.id_devices','inner');
-        $this->db->join('rfid','absensi.id_rfid=rfid.id_rfid','inner');
+        $this->db->join('siswa','absensi.id_siswa=siswa.id_siswa','inner');
         $this->db->where("keterangan", $ket);
         $this->db->where("created_at >=", $today);
         $this->db->where("created_at <", $tomorrow);
@@ -159,7 +159,7 @@ class M_admin extends CI_Model {
     function get_history(){
         $this->db->select('*');
         $this->db->from('histori');
-        $this->db->join('rfid', 'rfid.id_rfid=histori.id_rfid', 'inner');
+        $this->db->join('siswa', 'siswa.id_siswa=histori.id_siswa', 'inner');
         $this->db->join('devices', 'devices.id_devices=histori.id_devices', 'inner');
         $this->db->order_by('id_histori', 'desc');
         $this->db->limit(50);
@@ -200,11 +200,11 @@ class M_admin extends CI_Model {
         $this->db->update('waktu_operasional', ['waktu_operasional' => $waktu_keluar]);
     }
 
-    public function find_rfid($id_rfid)
+    public function find_siswa($id_siswa)
     {
         $this->db->select('*');
-        $this->db->from('rfid');
-        $this->db->where('id_rfid',$id_rfid);
+        $this->db->from('siswa');
+        $this->db->where('id_siswa',$id_siswa);
         
         $query = $this->db->get();
 
@@ -217,28 +217,28 @@ class M_admin extends CI_Model {
 
     }
     public function hitung_tidak_absensi() {
-        // Mendapatkan semua nama pengguna RFID
+        // Mendapatkan semua nama pengguna siswa
         $this->db->select('nama');
-        $query = $this->db->get('rfid');
-        $rfid_users = $query->result_array();
+        $query = $this->db->get('siswa');
+        $siswa_users = $query->result_array();
     
         // Inisialisasi variabel untuk menyimpan jumlah pengguna yang tidak absensi
         $tidak_absensi_count = 0;
     
-        // Loop melalui setiap nama pengguna RFID
-        foreach ($rfid_users as $user) {
-            $nama_pengguna_rfid = $user['nama'];
+        // Loop melalui setiap nama pengguna siswa
+        foreach ($siswa_users as $user) {
+            $nama_pengguna_siswa = $user['nama'];
     
-            // Mendapatkan ID RFID berdasarkan nama pengguna RFID
-            $this->db->select('id_rfid');
-            $this->db->where('nama', $nama_pengguna_rfid);
-            $query = $this->db->get('rfid');
+            // Mendapatkan ID siswa berdasarkan nama pengguna siswa
+            $this->db->select('id_siswa');
+            $this->db->where('nama', $nama_pengguna_siswa);
+            $query = $this->db->get('siswa');
             $row = $query->row();
             if ($row) {
-                $id_rfid = $row->id_rfid;
+                $id_siswa = $row->id_siswa;
     
-                // Memeriksa apakah ada entri dalam tabel absensi untuk ID RFID dan tanggal sekarang
-                $this->db->where('id_rfid', $id_rfid);
+                // Memeriksa apakah ada entri dalam tabel absensi untuk ID siswa dan tanggal sekarang
+                $this->db->where('id_siswa', $id_siswa);
                 $this->db->where('DATE(FROM_UNIXTIME(created_at))', date('Y-m-d'));
                 // Tambahkan kondisi untuk tidak menghitung data dengan keterangan "keluar"
                 $this->db->where('keterangan !=', 'keluar');
@@ -254,14 +254,14 @@ class M_admin extends CI_Model {
         return $tidak_absensi_count;
     }
     public function get_all_murid() {
-        $query = $this->db->get('rfid'); // Replace 'students' with your table name
+        $query = $this->db->get('siswa'); // Replace 'students' with your table name
         return $query->result();
     }
     
     
     public function find_students_by_ids($ids) {
-        $this->db->where_in('id_rfid', $ids);
-        $query = $this->db->get('rfid'); 
+        $this->db->where_in('id_siswa', $ids);
+        $query = $this->db->get('siswa'); 
         return $query->result();
     }
     
@@ -270,11 +270,11 @@ class M_admin extends CI_Model {
         return $query->num_rows();
     }
 
-    public function get_jam_masuk($id_rfid, $tanggal)
+    public function get_jam_masuk($id_siswa, $tanggal)
     {
         $this->db->select('*');
         $this->db->from('absensi');
-        $this->db->where('id_rfid', $id_rfid);
+        $this->db->where('id_siswa', $id_siswa);
         $this->db->where('keterangan','masuk');
         $this->db->where("created_at >=", $tanggal);
         $this->db->where("created_at <", $tanggal + 86400);
@@ -286,9 +286,9 @@ class M_admin extends CI_Model {
 
     function get_murid($id_kelas){
         $this->db->select('*');
-        $this->db->from('rfid');
-        $this->db->join('kelas','kelas.id = rfid.id_kelas','left');
-        $this->db->join('kampus','kampus.id = rfid.id_kampus','left');
+        $this->db->from('siswa');
+        $this->db->join('kelas','kelas.id = siswa.id_kelas','left');
+        $this->db->join('kampus','kampus.id = siswa.id_kampus','left');
         $this->db->where('id_kelas',$id_kelas);
         $this->db->order_by("nama", "ASC");
 
@@ -304,10 +304,10 @@ class M_admin extends CI_Model {
     public function find_murid($id_murid)
     {
         $this->db->select('*');
-        $this->db->from('rfid');
-        $this->db->join('kelas','kelas.id = rfid.id_kelas','left');
-        $this->db->join('kampus','kampus.id = rfid.id_kampus','left');
-        $this->db->where('id_rfid',$id_murid);
+        $this->db->from('siswa');
+        $this->db->join('kelas','kelas.id = siswa.id_kelas','left');
+        $this->db->join('kampus','kampus.id = siswa.id_kampus','left');
+        $this->db->where('id_siswa',$id_murid);
         $this->db->order_by("nama", "ASC");
 
         $query = $this->db->get();
@@ -365,7 +365,7 @@ class M_admin extends CI_Model {
 
     public function rekap_absen($id_kelas, $tanggal_mulai, $tanggal_selesai) {
         // Mendapatkan data siswa dalam kelas
-        $siswa_kelas = $this->db->where('id_kelas', $id_kelas)->get('rfid')->result();
+        $siswa_kelas = $this->db->where('id_kelas', $id_kelas)->get('siswa')->result();
         
         // Array untuk menyimpan rekap absensi
         $rekap_absen = array();
@@ -374,7 +374,7 @@ class M_admin extends CI_Model {
             // Query untuk mendapatkan absensi siswa dalam rentang tanggal yang ditentukan
             $this->db->select('*');
             $this->db->from('absensi');
-            $this->db->where('id_rfid', $siswa->id_rfid);
+            $this->db->where('id_siswa', $siswa->id_siswa);
             $this->db->where('created_at >=', $tanggal_mulai);
             $this->db->where('created_at <', $tanggal_selesai);
             $query = $this->db->get();
@@ -431,7 +431,7 @@ class M_admin extends CI_Model {
 
     function count_murid($id_kelas){
         $this->db->select('*');
-        $this->db->from('rfid');
+        $this->db->from('siswa');
         $this->db->where('id_kelas',$id_kelas);
 
         $query = $this->db->get();
@@ -448,7 +448,7 @@ public function siswa_tidak_hadir_3_hari_berturut_turut($id_kelas) {
     $today = date('Y-m-d');
     
     // Loop melalui semua siswa dalam kelas
-    $siswa_kelas = $this->db->where('id_kelas', $id_kelas)->get('rfid')->result();
+    $siswa_kelas = $this->db->where('id_kelas', $id_kelas)->get('siswa')->result();
     foreach ($siswa_kelas as $siswa) {
         // Hitungan berturut-turut absensi tidak hadir
         $hitungan_tidak_hadir = 0;
@@ -458,7 +458,7 @@ public function siswa_tidak_hadir_3_hari_berturut_turut($id_kelas) {
             $tanggal_cek = date('Y-m-d', strtotime("-$i day", strtotime($today)));
             
             // Periksa apakah siswa tidak hadir pada tanggal ini
-            $absensi_siswa = $this->db->where('id_rfid', $siswa->id_rfid)
+            $absensi_siswa = $this->db->where('id_siswa', $siswa->id_siswa)
                                       ->where('DATE(FROM_UNIXTIME(created_at))', $tanggal_cek)
                                       ->where('keterangan', 'absen')
                                       ->get('absensi')

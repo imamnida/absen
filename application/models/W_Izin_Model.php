@@ -22,12 +22,12 @@ class W_Izin_Model extends CI_Model {
 
     public function get_jumlah_tidak_hadir_per_kelas() {
         $query = "
-            SELECT rfid.id_kelas, COUNT(rfid.id_rfid) as jumlah_siswa
-            FROM rfid
-            LEFT JOIN absensi ON rfid.id_rfid = absensi.id_rfid 
+            SELECT siswa.id_kelas, COUNT(siswa.id_siswa) as jumlah_siswa
+            FROM siswa
+            LEFT JOIN absensi ON siswa.id_siswa = absensi.id_siswa 
               AND absensi.created_at >= UNIX_TIMESTAMP(CURDATE())
             WHERE absensi.id_absensi IS NULL
-            GROUP BY rfid.id_kelas
+            GROUP BY siswa.id_kelas
         ";
         $result = $this->db->query($query)->result();
         $jumlah_tidak_absensi_per_kelas = array();
@@ -43,12 +43,12 @@ class W_Izin_Model extends CI_Model {
         $beginning_of_today = strtotime('midnight', strtotime($today));
         $beginning_of_tomorrow = strtotime('+1 day', $beginning_of_today);
 
-        $this->db->select('rfid.*, kelas.kelas, kampus.kampus');
-        $this->db->from('rfid');
-        $this->db->join('kelas', 'rfid.id_kelas = kelas.id', 'left');
-        $this->db->join('kampus', 'rfid.id_kampus = kampus.id', 'left');
-        $this->db->join('absensi', 'rfid.id_rfid = absensi.id_rfid AND absensi.created_at >= ' . $beginning_of_today . ' AND absensi.created_at < ' . $beginning_of_tomorrow, 'left');
-        $this->db->where('rfid.id_kelas', $id_kelas);
+        $this->db->select('siswa.*, kelas.kelas, kampus.kampus');
+        $this->db->from('siswa');
+        $this->db->join('kelas', 'siswa.id_kelas = kelas.id', 'left');
+        $this->db->join('kampus', 'siswa.id_kampus = kampus.id', 'left');
+        $this->db->join('absensi', 'siswa.id_siswa = absensi.id_siswa AND absensi.created_at >= ' . $beginning_of_today . ' AND absensi.created_at < ' . $beginning_of_tomorrow, 'left');
+        $this->db->where('siswa.id_kelas', $id_kelas);
         $this->db->where('absensi.id_absensi IS NULL');
         $query = $this->db->get();
 
@@ -60,13 +60,13 @@ class W_Izin_Model extends CI_Model {
     }
 
     public function is_registered_nisn($nisn) {
-        $query = $this->db->get_where('rfid', array('nisn' => $nisn));
+        $query = $this->db->get_where('siswa', array('nisn' => $nisn));
         return $query->num_rows() > 0;
     }
 
     public function is_already_absent($nisn, $action) {
-        $id_rfid = $this->get_id_rfid_by_nisn($nisn);
-        if (!$id_rfid) {
+        $id_siswa = $this->get_id_siswa_by_nisn($nisn);
+        if (!$id_siswa) {
             return false;
         }
 
@@ -74,7 +74,7 @@ class W_Izin_Model extends CI_Model {
         $beginning_of_today = strtotime('midnight', strtotime($today));
         $beginning_of_tomorrow = strtotime('+1 day', $beginning_of_today);
 
-        $this->db->where('id_rfid', $id_rfid);
+        $this->db->where('id_siswa', $id_siswa);
         $this->db->where('keterangan', $action);
         $this->db->where('created_at >=', $beginning_of_today);
         $this->db->where('created_at <', $beginning_of_tomorrow);
@@ -83,21 +83,21 @@ class W_Izin_Model extends CI_Model {
         return $query->num_rows() > 0;
     }
 
-    private function get_id_rfid_by_nisn($nisn) {
-        $query = $this->db->get_where('rfid', array('nisn' => $nisn));
+    private function get_id_siswa_by_nisn($nisn) {
+        $query = $this->db->get_where('siswa', array('nisn' => $nisn));
         $result = $query->row();
-        return $result ? $result->id_rfid : null;
+        return $result ? $result->id_siswa : null;
     }
 
     public function simpan_absensi($nisn, $id_devices, $action) {
-        $id_rfid = $this->get_id_rfid_by_nisn($nisn);
-        if (!$id_rfid) {
+        $id_siswa = $this->get_id_siswa_by_nisn($nisn);
+        if (!$id_siswa) {
             return false;
         }
 
         $data = array(
             'id_devices' => $id_devices,
-            'id_rfid' => $id_rfid,
+            'id_siswa' => $id_siswa,
             'keterangan' => $action,
             'foto' => '',
             'created_at' => time()

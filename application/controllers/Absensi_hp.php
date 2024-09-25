@@ -90,7 +90,7 @@ class Absensi_hp extends CI_Controller {
     private function absen_process($action) {
         $nisn = $this->session->userdata('nisn');
         $nama = $this->session->userdata('nama');
-        $id_rfid = $this->session->userdata('id_rfid');
+        $id_siswa = $this->session->userdata('id_siswa');
         $foto = $this->session->userdata('foto');
         $id_devices = $this->input->post('id_devices');
         $deviceLat = $this->input->post('latitude');

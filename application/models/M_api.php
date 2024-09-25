@@ -25,15 +25,15 @@ class M_api extends CI_Model {
         return $data;
 	}
 
-	function insert_rfid($data){
-		$this->db->insert('rfid', $data);
+	function insert_siswa($data){
+		$this->db->insert('siswa', $data);
        return TRUE;
 	}
 
-	function last_rfid(){
+	function last_siswa(){
 		$this->db->select('*');
-        $this->db->from('rfid');
-        $this->db->order_by('id_rfid', 'desc');
+        $this->db->from('siswa');
+        $this->db->order_by('id_siswa', 'desc');
         $this->db->limit(1);
         $query = $this->db->get();
 
@@ -47,9 +47,9 @@ class M_api extends CI_Model {
        return TRUE;
 	}
 
-	function checkRFID($rfid){
-		$query = $this->db->where('uid',$rfid);
-        $q = $this->db->get('rfid');
+	function checksiswa($siswa){
+		$query = $this->db->where('uid',$siswa);
+        $q = $this->db->get('siswa');
         $data = $q->result();
         
         return $data;
@@ -100,10 +100,10 @@ class M_api extends CI_Model {
         }
     }
 
-    function lastRFIDfoto($idrfid){
+    function lastsiswafoto($idsiswa){
         $this->db->select('*');
         $this->db->from('absensi');
-        $this->db->where("id_rfid", $idrfid);
+        $this->db->where("id_siswa", $idsiswa);
         $this->db->order_by('id_absensi', 'desc');
         $this->db->limit(1);
         $query = $this->db->get();

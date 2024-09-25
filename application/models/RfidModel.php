@@ -1,5 +1,5 @@
 <?php
-class RfidModel extends CI_Model {
+class siswaModel extends CI_Model {
 
     public function get_kelas() {
         $query = $this->db->get('kelas');
@@ -11,8 +11,8 @@ class RfidModel extends CI_Model {
         return $query->result();
     }
 
-    public function insert_rfid($data) {
-        return $this->db->insert('rfid', $data);
+    public function insert_siswa($data) {
+        return $this->db->insert('siswa', $data);
     }
 }
 ?>

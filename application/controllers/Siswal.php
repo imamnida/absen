@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Rfid extends CI_Controller {
+class Siswal extends CI_Controller {
 
 	public function __construct() {
         parent::__construct();
@@ -12,18 +12,18 @@ class Rfid extends CI_Controller {
 
 	
     public function index(){
-		$data['set'] = "rfid";
-		$data['rfid'] = $this->m_admin->get_rfid();
+		$data['set'] = "siswa";
+		$data['siswa'] = $this->m_admin->get_siswa();
 		$data['m_admin'] = $this->m_admin;
-		$this->load->view('i_rfid', $data);
+		$this->load->view('i_siswa', $data);
 	}
 
-    public function rfid($data=null){
+    public function siswa($data=null){
 		if (isset($data)) {
-			if ($data == "datarfid") {
-				$this->datarfid();
-			}else if ($data == "rfidnew") {
-				$this->rfidnew();
+			if ($data == "datasiswa") {
+				$this->datasiswa();
+			}else if ($data == "siswanew") {
+				$this->siswanew();
 			}else{
 				redirect(base_url().'dashboard');
 			}
@@ -34,21 +34,21 @@ class Rfid extends CI_Controller {
 
 	
 
-	public function rfidnew(){
+	public function siswanew(){
 		$data['set'] = "new";
-		$data['rfid'] = $this->m_admin->get_rfid();
+		$data['siswa'] = $this->m_admin->get_siswa();
 		$data['m_admin'] = $this->m_admin;
 
-		$this->load->view('i_rfid', $data);
+		$this->load->view('i_siswa', $data);
 	}
 
-	public function edit_rfid($id = null) {
+	public function edit_siswa($id = null) {
 		if ($this->session->userdata('userlogin')) { 
 			if (isset($id)) {
-				$rfid = $this->m_admin->get_rfid_byid($id);
-				if (isset($rfid)) {
-					foreach ($rfid as $key => $value) {
-						$data['id'] = $value->id_rfid;
+				$siswa = $this->m_admin->get_siswa_byid($id);
+				if (isset($siswa)) {
+					foreach ($siswa as $key => $value) {
+						$data['id'] = $value->id_siswa;
 						$data['nama'] = $value->nama;
 						$data['nisn'] = $value->nisn;
 						$data['nik'] = $value->nik;
@@ -59,7 +59,7 @@ class Rfid extends CI_Controller {
 					}
 	
 					$data['list_kelas'] = $this->m_admin->get_kelas();
-					$data['set'] = "edit-rfid";
+					$data['set'] = "edit-siswa";
 	
 				
 					if ($this->input->post()) {
@@ -103,15 +103,15 @@ class Rfid extends CI_Controller {
 						);
 	
 					
-						$this->m_admin->update_rfid($id, $update_data);
+						$this->m_admin->update_siswa($id, $update_data);
 	
 					
-						$this->session->set_flashdata('success', 'Data RFID berhasil diperbarui!');
-						redirect(base_url() . 'edit_rfid/' . $id);
+						$this->session->set_flashdata('success', 'Data siswa berhasil diperbarui!');
+						redirect(base_url() . 'edit_siswa/' . $id);
 					}
 	
 				
-					$this->load->view('i_rfid', $data);
+					$this->load->view('i_siswa', $data);
 				} else {
 					redirect(base_url() . 'kelas');
 				}
@@ -124,7 +124,7 @@ class Rfid extends CI_Controller {
 	}
 	
 
-	public function save_edit_rfid() {
+	public function save_edit_siswa() {
     if ($this->session->userdata('userlogin')) { 
         if ($this->input->post('id')) {
             $id = $this->input->post('id');
@@ -146,7 +146,7 @@ class Rfid extends CI_Controller {
             );
 
            
-            if ($this->m_admin->updateRFID($id, $update_data)) {
+            if ($this->m_admin->updatesiswa($id, $update_data)) {
                 $this->session->set_flashdata('pesan', '<div class="alert alert-success" id="alert"><i class="glyphicon glyphicon-ok"></i> Data berhasil diupdate</div>');
             } else {
                 $this->session->set_flashdata('pesan', '<div class="alert alert-danger" id="alert"><i class="glyphicon glyphicon-remove"></i> Data gagal diupdate</div>');
@@ -164,15 +164,15 @@ class Rfid extends CI_Controller {
 
 
 
-	public function hapus_rfid($id=null){
+	public function hapus_siswa($id=null){
 		if($this->session->userdata('userlogin'))    
 		{ 
-			if($this->m_admin->rfid_del($id)){
+			if($this->m_admin->siswa_del($id)){
 				$this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil di hapus</div>");
 			}else{
 				$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data gagal di hapus</div>");
 			}
-			redirect(base_url().'rfid/datarfid');
+			redirect(base_url().'siswa/datasiswa');
 		}
 	}
 
