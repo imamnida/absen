@@ -8,43 +8,43 @@ class Absensi_hp_model extends CI_Model {
     }
 
     public function absen_masuk($nisn, $id_devices) {
-        $id_rfid = $this->get_id_rfid_by_nisn($nisn);
+        $id_siswa = $this->get_id_siswa_by_nisn($nisn);
 
-        if ($id_rfid) {
+        if ($id_siswa) {
             $data = array(
                 'id_devices' => $id_devices,
-                'id_rfid' => $id_rfid,
+                'id_siswa' => $id_siswa,
                 'keterangan' => 'masuk',
                 'foto' => '', 
                 'created_at' => time() // Directly use Unix timestamp
             );
             $this->db->insert('absensi', $data);
         } else {
-            // Handle error: RFID ID tidak ditemukan
+            // Handle error: siswa ID tidak ditemukan
         }
     }
 
     public function absen_keluar($nisn, $id_devices) {
-        $id_rfid = $this->get_id_rfid_by_nisn($nisn);
+        $id_siswa = $this->get_id_siswa_by_nisn($nisn);
 
-        if ($id_rfid) {
+        if ($id_siswa) {
             $data = array(
                 'id_devices' => $id_devices,
-                'id_rfid' => $id_rfid,
+                'id_siswa' => $id_siswa,
                 'keterangan' => 'keluar',
                 'foto' => '',
                 'created_at' => time() // Directly use Unix timestamp
             );
             $this->db->insert('absensi', $data);
         } else {
-            // Handle error: RFID ID tidak ditemukan
+            // Handle error: siswa ID tidak ditemukan
         }
     }
 
-    private function get_id_rfid_by_nisn($nisn) {
-        $query = $this->db->get_where('rfid', array('nisn' => $nisn));
+    private function get_id_siswa_by_nisn($nisn) {
+        $query = $this->db->get_where('siswa', array('nisn' => $nisn));
         $result = $query->row();
-        return $result ? $result->id_rfid : null;
+        return $result ? $result->id_siswa : null;
     }
 
    
@@ -75,12 +75,12 @@ class Absensi_hp_model extends CI_Model {
         $today_start = strtotime("today"); // Start of today
         $tomorrow_start = strtotime("tomorrow"); // Start of tomorrow
 
-        $id_rfid = $this->get_id_rfid_by_nisn($nisn);
-        if (!$id_rfid) {
+        $id_siswa = $this->get_id_siswa_by_nisn($nisn);
+        if (!$id_siswa) {
             return false; 
         }
 
-        $this->db->where('id_rfid', $id_rfid);
+        $this->db->where('id_siswa', $id_siswa);
         $this->db->where('keterangan', $keterangan);
         $this->db->where('created_at >=', $today_start);
         $this->db->where('created_at <', $tomorrow_start);
@@ -91,14 +91,14 @@ class Absensi_hp_model extends CI_Model {
 
     public function is_registered_nisn($nisn) {
         $this->db->where('nisn', $nisn);
-        $query = $this->db->get('rfid');
+        $query = $this->db->get('siswa');
         return $query->num_rows() > 0;
     }
     function get_absensi($ket,$today,$tomorrow){
         $this->db->select('*');
         $this->db->from('absensi');
         $this->db->join('devices','absensi.id_devices=devices.id_devices','inner');
-        $this->db->join('rfid','absensi.id_rfid=rfid.id_rfid','inner');
+        $this->db->join('siswa','absensi.id_siswa=siswa.id_siswa','inner');
         $this->db->where("keterangan", $ket);
         $this->db->where("created_at >=", $today);
         $this->db->where("created_at <", $tomorrow);
@@ -111,8 +111,8 @@ class Absensi_hp_model extends CI_Model {
     public function get_monthly_attendance($nisn, $start_date, $end_date) {
         $this->db->select('keterangan, COUNT(*) as count');
         $this->db->from('absensi');
-        $this->db->join('rfid', 'absensi.id_rfid = rfid.id_rfid');
-        $this->db->where('rfid.nisn', $nisn);
+        $this->db->join('siswa', 'absensi.id_siswa = siswa.id_siswa');
+        $this->db->where('siswa.nisn', $nisn);
         $this->db->where('absensi.created_at >=', strtotime($start_date));
         $this->db->where('absensi.created_at <=', strtotime($end_date));
         $this->db->group_by('keterangan');

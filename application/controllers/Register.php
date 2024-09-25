@@ -5,19 +5,19 @@ class Register extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('RfidModel');
+        $this->load->model('siswaModel');
         $this->load->helper(array('form', 'url'));
         $this->load->library('upload');
     }
 
     public function index() {
-        $data['kelas'] = $this->RfidModel->get_kelas();
-        $data['kampus'] = $this->RfidModel->get_kampus();
+        $data['kelas'] = $this->siswaModel->get_kelas();
+        $data['kampus'] = $this->siswaModel->get_kampus();
         
         // Set default value for is_success
         $data['is_success'] = $this->session->flashdata('registered') ?? false;
         
-        $this->load->view('i_rfid_registration', $data);
+        $this->load->view('i_siswa_registration', $data);
     }
 
     public function submit() {
@@ -50,10 +50,10 @@ class Register extends CI_Controller {
         }
     
         if ($upload_error) {
-            $data['kelas'] = $this->RfidModel->get_kelas();
-            $data['kampus'] = $this->RfidModel->get_kampus();
+            $data['kelas'] = $this->siswaModel->get_kelas();
+            $data['kampus'] = $this->siswaModel->get_kampus();
             $data['upload_error'] = $upload_error;
-            $this->load->view('i_rfid_registration', $data);
+            $this->load->view('i_siswa_registration', $data);
         } else {
             $data = array(
                 'nama' => $this->input->post('nama'),
@@ -65,7 +65,7 @@ class Register extends CI_Controller {
                 'foto' => isset($file_name) ? $file_name : NULL,
             );
     
-            $this->RfidModel->insert_rfid($data);
+            $this->siswaModel->insert_siswa($data);
     
             // Set a flag in the session to indicate successful registration
             $this->session->set_flashdata('registered', true);

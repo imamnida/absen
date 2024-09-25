@@ -378,7 +378,7 @@ span {
 /* ----------- home css ---------- */
 
 .header-hero {
-    position: relative;
+    position: absolute;
     top: 0;
     height: 800px;
     background-position: bottom center;

@@ -13,7 +13,7 @@ class Dashboard extends CI_Controller {
 
     public function index() {
 		$data['set'] = "dashboard";
-		$data['rfid'] = $this->m_admin->get_rfid();
+		$data['siswa'] = $this->m_admin->get_siswa();
 		$data['devices'] = $this->m_admin->get_devices();
 		$data['kelas'] = $this->m_admin->get_kelas_byrow();
 	

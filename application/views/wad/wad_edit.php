@@ -9,11 +9,11 @@
                 <div class="btn-group float-right">
                     <ol class="breadcrumb hide-phone p-0 m-0">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">RFID</a></li>
-                        <li class="breadcrumb-item active">RFID Edit</li>
+                        <li class="breadcrumb-item"><a href="#">siswa</a></li>
+                        <li class="breadcrumb-item active">siswa Edit</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Edit RFID</h4>
+                <h4 class="page-title">Edit siswa</h4>
             </div>
         </div>
         <div class="clearfix"></div>
@@ -25,7 +25,7 @@
                 <div class="card-body">
                     <h4 class="mt-0 header-title">General Form</h4>
                     <div class="general-label">
-                    <form role="form" action="<?=base_url();?>wad/save_edit_rfid" method="post">              
+                    <form role="form" action="<?=base_url();?>wad/save_edit_siswa" method="post">              
               <div class="box-body">
                 <div class="form-group">
                   <input type="hidden" name="id" value="<?php if(isset($id)){echo $id;}?>">

@@ -22,60 +22,69 @@
             <div class="col-md-12 col-xl-12">
                 <div class="card m-b-30">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
                             <h4 class="mt-0 header-title">Data Murid Kelas: <?= $kelas->kelas; ?></h4>
                             <div>
-                                <a href="<?= base_url(); ?>/kelas/rekap_absen/<?= $kelas->id; ?>" class="btn btn-primary">Rekap Absen</a>
-                                <form method="post" action="<?= base_url('cardcontroller/generate_cards'); ?>" style="display:inline;">
-                                    <input type="hidden" name="cetak_semua" value="1">
-                                    <input type="hidden" name="kelas_id" value="<?= $kelas->id; ?>">
-                                    <button type="submit" class="btn btn-success">Cetak Semua Kartu</button>
-                                </form>
-                               
+                                <a href="<?= base_url('kelas/export_siswa/' . $kelas->id); ?>" class="btn btn-success">Export Siswa</a>
+                                <a href="<?= base_url('kelas/import_template'); ?>" class="btn btn-info">Download Template Import</a>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#importModal">
+                                    Import Siswa
+                                </button>
                             </div>
                         </div>
 
-                        <form method="post" action="<?= base_url('cardcontroller/generate_cards'); ?>">
-                            <table id="datatable-buttons" class="table table-striped table-bordered w-100">
-                                <thead>
+                        <?php if ($this->session->flashdata('success')): ?>
+                            <div class="alert alert-success" role="alert">
+                                <?= $this->session->flashdata('success'); ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if ($this->session->flashdata('error')): ?>
+                            <div class="alert alert-danger" role="alert">
+                                <?= $this->session->flashdata('error'); ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <table id="datatable-buttons" class="table table-striped table-bordered w-100">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>NISN</th>
+                                    <th>NIK</th>
+                                    <th>Tanggal Lahir</th>
+                                    <th>Alamat</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (empty($murid)) { ?>
                                     <tr>
-                                        <th>No</th>
-                                        <th>Nama</th>
-                                        <th>Foto</th>
-                                        <th>.</th>
+                                        <td colspan="7" class="text-center">Data tidak ditemukan</td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    <?php if (empty($murid)) { ?>
+                                <?php } else {
+                                    $no = 1;
+                                    foreach ($murid as $row) { ?>
                                         <tr>
-                                            <td colspan="4" class="text-center">Data tidak ditemukan</td>
+                                            <td><?= $no++; ?></td>
+                                            <td><?= $row->nama; ?></td>
+                                            <td><?= $row->nisn; ?></td>
+                                            <td><?= $row->nik; ?></td>
+                                            <td><?= $row->ttl; ?></td>
+                                            <td><?= $row->alamat; ?></td>
+                                            <td>
+                                                <a href="<?= base_url('kelas/edit_siswa/' . $row->id_siswa); ?>" class="btn btn-warning btn-sm">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <a href="<?= base_url('kelas/hapus_siswa/' . $row->id_siswa); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus siswa ini?');">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </td>
                                         </tr>
-                                    <?php } else {
-                                        $no = 1;
-                                        foreach ($murid as $row) {
-                                            if ($row->nama != "") { ?>
-                                                <tr>
-                                                    <td><?= $no++; ?></td>
-                                                    <td><?= $row->nama; ?></td>
-                                                    <td>
-                                                        <img src="<?= base_url(); ?>uploads/<?= $row->foto; ?>" class="img-circle" width="auto" height="80px" alt="Foto Murid">
-                                                    </td>
-                                                    <td>
-                                                        <a href="<?= base_url(); ?>/kelas/detail_murid/<?= $row->id_rfid; ?>" class="btn btn-success btn-sm">
-                                                            <i class="fa fa-eye"></i>
-                                                        </a>
-                                                        <a href="<?= base_url(); ?>/kelas/hapus_murid/<?= $row->id_rfid; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus murid ini?');">
-                                                            <i class="fa fa-trash"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                    <?php }
-                                        }
-                                    } ?>
-                                </tbody>
-                            </table>
-                            
-                        </form>
+                                <?php }
+                                } ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -83,6 +92,30 @@
     </div>
 </div>
 
-
+<!-- Import Modal -->
+<div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="importModalLabel">Import Data Siswa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?= base_url('kelas/import_siswa/' . $kelas->id); ?>" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="file">Pilih File Excel</label>
+                        <input type="file" class="form-control-file" id="file" name="file" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Import</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <?php $this->load->view('include/footer.php'); ?>

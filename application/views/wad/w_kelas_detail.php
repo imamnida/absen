@@ -60,7 +60,7 @@
                                                         <img src="<?= base_url(); ?>./uploads/<?= $row->foto; ?>" class="img-circle" width="auto" height="100px" alt="User Image">
                                                     </td>
                                                     <td style="min-width:100px;">
-                                                        <a href="<?= base_url() ?>/wad/detail_murid/<?= $row->id_rfid; ?>" class="btn btn-success btn-sm">
+                                                        <a href="<?= base_url() ?>/wad/detail_murid/<?= $row->id_siswa; ?>" class="btn btn-success btn-sm">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
                                                     </td>

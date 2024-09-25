@@ -56,9 +56,7 @@ if ($set=="list-walikelas") {
                   <td><?php echo $no;?></td>
                   <td><?php echo $row->nama;?></td>
                  
-                  <td>
-                    <a href="<?=base_url()?>walikelas/edit_walikelas/<?=$row->id_walikelas?>" class="btn btn-success"><i class="fa fa-pencil"></i></a>
-                    <a href="<?=base_url()?>walikelas/hapus_walikelas/<?=$row->id_walikelas?>" class="btn btn-danger" onclick="return confirm('Anda Yakin menghapus data ini?')"><i class="fa fa-trash-o"></i></a>
+                  <td><a href="<?=base_url()?>walikelas/hapus_walikelas/<?=$row->id_walikelas?>" class="btn btn-danger" onclick="return confirm('Anda Yakin menghapus data ini?')"><i class="fa fa-trash-o"></i></a>
                   </td>
                 </tr>
                 <?php }}?>

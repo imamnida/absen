@@ -104,13 +104,13 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?=base_url();?>rfid" class="waves-effect">
+                                        <a href="<?=base_url();?>siswal" class="waves-effect">
                                             <i class="mdi mdi-account"></i>
                                             <span>Siswa</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="<?=base_url();?>rfid/rfidnew" class="waves-effect">
+                                        <a href="<?=base_url();?>siswal/siswanew" class="waves-effect">
                                             <i class="mdi mdi-access-point"></i>
                                             <span>RFID</span>
                                         </a>
