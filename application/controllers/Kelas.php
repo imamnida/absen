@@ -60,7 +60,7 @@ class Kelas extends CI_Controller {
             $row++;
         }
 
-        $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+        $writer = new vendor\PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
         $filename = 'export_siswa_kelas_' . $kelas->kelas . '.xlsx';
 
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
