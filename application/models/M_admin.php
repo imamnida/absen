@@ -348,18 +348,18 @@ class M_admin extends CI_Model {
         }
 
     }
-
-    function find_kelas($id){
+    public function find_kelas($id) {
         $this->db->select('*');
         $this->db->from('kelas');
-        $this->db->where('id',$id);
-
+        $this->db->where('id', $id);
         $query = $this->db->get();
-
+        
         if ($query->num_rows() > 0) {
             return $query->row();
         }
+        return null;
     }
+    
 
     
 
