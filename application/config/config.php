@@ -24,9 +24,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 //$config['base_url'] = 'http://localhost/absen';
-//$config['base_url'] = 'https://absensi.imamdienul.com';
+$config['base_url'] = 'https://absensi.imamdienul.com';
 //$config['base_url'] = 'https://absensi.mtsn11majalengka.sch.id';
-$config['base_url'] = 'https://coba:8890/';
+//$config['base_url'] = 'https://coba:8890/';
 
 
 
