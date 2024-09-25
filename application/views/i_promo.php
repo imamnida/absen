@@ -7,22 +7,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Absensi-Gisaka Media</title>
   <!-- -------- anime css ------ -->
-  <link rel="stylesheet" href="<?php base_url()?>promotion./css/animate.css">
+  <link rel="stylesheet" href="<?php base_url()?>promo/css/animate.css">
   <!-- --------- tiny slider css ------ -->
-  <link rel="stylesheet" href="<?php base_url()?>promotion./css/tiny-slider.css">
-  <link rel="icon" href="<?php base_url()?>promotion./img/header/logo/gi.png" type="image/x-icon">
+  <link rel="stylesheet" href="<?php base_url()?>promo/css/tiny-slider.css">
+  <link rel="icon" href="<?php base_url()?>promo/img/header/logo/gi.png" type="image/x-icon">
   
 
   <!-- --------- font awsome css ------ -->
-  <link rel="stylesheet" href="<?php base_url()?>promotion./css/all.css">
+  <link rel="stylesheet" href="<?php base_url()?>promo/css/all.css">
   <!-- -------- venobox css ------- -->
-  <link rel="stylesheet" href="<?php base_url()?>promotion./css/venobox.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="<?php base_url()?>promo/css/venobox.css" type="text/css" media="screen" />
   <!-- ---- Bootstrap css--- -->
-  <link rel="stylesheet" href="<?php base_url()?>promotion./css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?php base_url()?>promo/css/bootstrap.min.css">
   <!-- ---------- default css --------- -->
-  <link rel="stylesheet" href="<?php base_url()?>promotion./css/default.css">
+  <link rel="stylesheet" href="<?php base_url()?>promo/css/default.css">
   <!-- --- style css -->
-  <link rel="stylesheet" href="<?php base_url()?>promotion./css/style.css">
+  <link rel="stylesheet" href="<?php base_url()?>promo/css/style.css">
+  
 </head>
 
 <body>
@@ -69,7 +70,7 @@
         <nav class="navbar navbar-expand-lg navbar-light">
           <div class="container-fluid">
             <a class="navbar-brand" href="#">
-              <img class="image" src="<?php base_url()?>promotion./img/header/logo/landapp-logo.png" alt="">
+              <img class="image" src="<?php base_url()?>promo/img/header/logo/landapp-logo.png" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
               data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -102,6 +103,7 @@
 
 
               </ul>
+              <a href="<?php echo base_url('login'); ?>" class="btn btn-primary ms-lg-3">Login</a>
 
             </div>
           </div>
@@ -130,9 +132,10 @@
             Dengan Teknologi Terkini Yaitu RFID, GPS, Barcode Dan Metode Absensi Lainnya.
           </p>
           <ul class="d-flex">
-            <li>
-              <a href="" class="main-btn wow fadeInLeftBig" data-wow-duration="3s" data-wow-delay="0.8s">Download Now</a>
-            </li>
+          <li>
+  <a href="#2" data-scroll-nav="4" class="main-btn wow fadeInLeftBig" data-wow-duration="3s" data-wow-delay="0.8s">Download Now</a>
+</li>
+
             <li>
               <a href="#" class="header-video venobox wow fadeInLeftBig" data-autoplay="true" data-vbtype="video" data-wow-duration="3s" data-wow-delay="1.2s">
                 <i class="fas fa-play"></i>
@@ -144,7 +147,7 @@
       
       <div class="col-lg-5 col-md-6">
         <div class="header-image" style="margin-top: 70px;"> <!-- Menambahkan margin-top untuk menurunkan gambar -->
-          <img src="<?php echo base_url(); ?>promotion./img/header/header-app.png" alt="Header App Image" class="image-1 wow fadeInRightBig" data-wow-duration="2s" data-wow-delay="0.5s" style="width: 1000px; height: auto;">
+          <img src="<?php echo base_url(); ?>promo/img/header/header-app.png" alt="Header App Image" class="image-1 wow fadeInRightBig" data-wow-duration="2s" data-wow-delay="0.5s" style="width: 1000px; height: auto;">
         </div>
       </div>
     </div>
@@ -153,7 +156,7 @@
   <div class="container">
     <div class="header-shape-1"></div>
     <div class="header-shape-2">
-      <img src="<?php echo base_url(); ?>promotion./img/header/header-shape-2.svg" alt="Header Shape 2">
+      <img src="<?php echo base_url(); ?>promo/img/header/header-shape-2.svg" alt="Header Shape 2">
     </div>
   </div>
 </div>
@@ -168,107 +171,107 @@
       <div class="col-xl-6 col-lg-7">
         <div class="section-title text-center mb-30">
           <h1 class="mb-25 wow fadeInUp" data-wow-delay=".2s">Fitur Lengkap SI ATA</h1>
-          <p class="wow fadeInUp" data-wow-delay=".4s">Sistem absensi kami menyediakan berbagai metode modern untuk memudahkan proses pencatatan kehadiran siswa.</p>
+          <p class="wow fadeInUp" data-wow-delay=".4s">Sistem absensi kami menyediakan berbagai metode modern untuk memudahkan proses pencatatan kehadiran siswa dengan akurasi dan keamanan yang terjamin.</p>
         </div>
       </div>
     </div>
     <div class="row justify-content-center">
       <div class="col-lg-4">
-        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.2s" style="height: 300px;">
-          <div class="icon color-1">
-            <i class="fas fa-map-marker-alt"></i>
-          </div>
-          <div class="content">
-            <h3>Rekapitulasi</h3>
-            <p>Rekapitulasi Kehadiran Perkelas.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.2s" style="height: 300px;">
-          <div class="icon color-1">
-            <i class="fas fa-user"></i>
-          </div>
-          <div class="content">
-            <h3>Login Guru</h3>
-            <p>Guru dapat merekapitulasi kehadiran siswa secara efisien.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.2s" style="height: 300px;">
-          <div class="icon color-1">
-            <i class="fas fa-clock"></i>
-          </div>
-          <div class="content">
-            <h3>Pengaturan Waktu Operasional</h3>
-            <p>Admin dapat mengatur waktu kehadiran pulang dan masuk per hari.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.2s" style="height: 300px;">
-          <div class="icon color-1">
-            <i class="fas fa-map-marked-alt"></i>
-          </div>
-          <div class="content">
-            <h3>Metode Absensi GPS</h3>
-            <p>Menggunakan teknologi GPS untuk mencatat kehadiran siswa dengan akurasi tinggi.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.4s" style="height: 300px;">
-          <div class="icon color-2">
-            <i class="fas fa-id-card"></i>
-          </div>
-          <div class="content">
-            <h3>Metode Absensi RFID</h3>
-            <p>Kartu siswa elektronik berfungsi untuk absensi dengan mudah.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.6s" style="height: 300px;">
-          <div class="icon color-3">
-            <i class="fas fa-qrcode"></i>
-          </div>
-          <div class="content">
-            <h3>Metode Absensi Barcode</h3>
-            <p>Absensi menggunakan barcode yang mudah diterapkan pada kartu siswa.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.4s" style="height: 300px;">
-          <div class="icon color-4">
-            <i class="fas fa-exclamation-triangle"></i>
-          </div>
-          <div class="content">
-            <h3>Siswa Alfa 3 Hari</h3>
-            <p>Deteksi otomatis siswa yang tidak hadir selama 3 hari berturut-turut.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.4s" style="height: 300px;">
-          <div class="icon color-5">
-            <i class="fas fa-pencil-alt"></i>
-          </div>
-          <div class="content">
-            <h3>Perijinan</h3>
-            <p>Guru dan admin dapat membuat perijinan untuk siswa yang tidak hadir karena sakit atau izin.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.6s" style="height: 300px;">
+        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.6s" style="height: 400px;">
           <div class="icon color-6">
             <i class="fas fa-tachometer-alt"></i>
           </div>
           <div class="content">
             <h3>Dashboard</h3>
-            <p>Menampilkan data singkat dan statistik pada aplikasi.</p>
+            <p>Menampilkan data singkat, statistik, dan laporan real-time yang mudah dipahami oleh guru dan admin.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.2s" style="height: 400px;">
+          <div class="icon color-1">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div class="content">
+            <h3>Rekapitulasi</h3>
+            <p>Rekapitulasi kehadiran per kelas secara akurat dan otomatis, memberikan gambaran lengkap kepada guru dan admin.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.2s" style="height: 400px;">
+          <div class="icon color-1">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="content">
+            <h3>Login Guru</h3>
+            <p>Memudahkan guru untuk merekapitulasi dan memonitor kehadiran siswa dengan efisiensi tinggi.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.2s" style="height: 400px;">
+          <div class="icon color-1">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div class="content">
+            <h3>Pengaturan Waktu Operasional</h3>
+            <p>Admin memiliki kontrol penuh untuk mengatur waktu kehadiran, termasuk jam masuk dan pulang secara fleksibel dan presisi.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.2s" style="height: 400px;">
+          <div class="icon color-1">
+            <i class="fas fa-map-marked-alt"></i>
+          </div>
+          <div class="content">
+            <h3>Metode Absensi GPS</h3>
+            <p>Menggunakan teknologi GPS berakurasi tinggi untuk memastikan kehadiran siswa hanya dapat dicatat di lokasi yang sudah ditentukan. Sistem ini memastikan absensi tidak dapat dilakukan di luar titik koordinat yang telah diatur, menjamin keaslian dan validitas data kehadiran.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.4s" style="height: 400px;">
+          <div class="icon color-2">
+            <i class="fas fa-id-card"></i>
+          </div>
+          <div class="content">
+            <h3>Metode Absensi RFID</h3>
+            <p>Kartu siswa elektronik yang praktis dan efisien memudahkan absensi harian dengan sekali tap.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.6s" style="height: 400px;">
+          <div class="icon color-3">
+            <i class="fas fa-qrcode"></i>
+          </div>
+          <div class="content">
+            <h3>Metode Absensi Barcode</h3>
+            <p>Memanfaatkan barcode unik yang terintegrasi dengan kartu siswa, memungkinkan proses absensi menjadi lebih cepat dan mudah diterapkan.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.4s" style="height: 400px;">
+          <div class="icon color-4">
+            <i class="fas fa-exclamation-triangle"></i>
+          </div>
+          <div class="content">
+            <h3>Deteksi Alfa 3 Hari</h3>
+            <p>Sistem otomatis yang langsung memberikan notifikasi jika siswa tidak hadir selama 3 hari berturut-turut tanpa keterangan, memudahkan tindakan lebih lanjut dari pihak sekolah.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="single-feature wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.4s" style="height: 400px;">
+          <div class="icon color-5">
+            <i class="fas fa-pencil-alt"></i>
+          </div>
+          <div class="content">
+            <h3>Fitur Perijinan</h3>
+            <p>Guru dan admin dapat dengan mudah mencatat izin siswa yang absen karena sakit atau keperluan mendesak lainnya dengan proses yang cepat dan terdokumentasi.</p>
           </div>
         </div>
       </div>
@@ -276,6 +279,7 @@
   </div>
 </section>
 <!-- ------- Feature Section End ---------- -->
+
 
 
 
@@ -288,7 +292,7 @@
                 <div class="foto" data-wow-duration="3s" data-wow-delay="0.5s">
                     <!-- about-shape jika kosong, mungkin bisa dihapus jika tidak digunakan -->
                     <div class="about-shape"></div>
-                    <img src="<?php echo base_url(); ?>promotion./img/about/about-app.png" alt="Sistem Absensi Modern" class="app" style="width:100%; height:auto;">
+                    <img src="<?php echo base_url(); ?>promo/img/about/about-app.png" alt="Sistem Absensi Modern" class="app" style="width:100%; height:auto;">
                 </div>
             </div>
             <div class="col-lg-6">
@@ -309,53 +313,66 @@
 <!-- ----------- About Section End --------- -->
 
 
-  <!-- ----------- Testimonial Section Start ------- -->
-  <section class="testimonial-section" data-scroll-index="3">
-    <div class="container">
-      <div class="row justify-content-center testimonial-active-wrapper">
-        <div class="col-xl-6 col-lg-7">
-          <div class="section-title text-center mb-60">
-            <h1 class="mb-25 text-white wow fadeInUp" data-wow-delay=".2s">What Oure Client Says</h1>
-            <p class="text-white wow fadeInUp" data-wow-delay=".4s">Lorem ipsum dolor sit amet consectetur adipisicing
-              elit. Ipsum, repudiandae pariatur deserunt explicabo repellat voluptatibus.</p>
-          </div>
+ <!-- ----------- Testimonial Section Start ------- -->
+<section class="testimonial-section" data-scroll-index="3">
+  <div class="container">
+    <div class="row justify-content-center testimonial-active-wrapper">
+      <div class="col-xl-6 col-lg-7">
+        <div class="section-title text-center mb-60">
+          <h1 class="mb-25 text-white wow fadeInUp" data-wow-delay=".2s">Apa Kata Klien Kami</h1>
+          <p class="text-white wow fadeInUp" data-wow-delay=".4s">Para pengguna kami merasa puas dengan sistem absensi modern yang kami sediakan untuk sekolah dan lembaga pendidikan.</p>
         </div>
-        <div class="row justify-content-center">
-          <div class="col-xl-7 col-lg-8">
-            <div class="testimonial-active">
-              <div class="testimonial-wrapper">
-                <div class="single-testimonial">
-                  <div class="info">
-                    <div class="image-2">
-                      <img src="<?php base_url()?>promotion./img/testemonial/test-1.jpg" alt="">
-                    </div>
-                    <h4>John Deo</h4>
-                    <p>roduct Design</p>
-                    <div class="quote">
-                      <i class="fas fa-quote-right"></i>
-                    </div>
-                    <div class="content">
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet beatae officia minus
-                        voluptatibus veritatis unde, asperiores laboriosam tempore voluptates debitis.</p>
-                    </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-xl-7 col-lg-8">
+          <div class="testimonial-active">
+            <div class="testimonial-wrapper">
+              <div class="single-testimonial">
+                <div class="info">
+                  <div class="image-2">
+                    <img src="<?php echo base_url()?>promo/img/testemonial/test-1.jpg" alt="">
+                  </div>
+                  <h4>Budi Santoso</h4>
+                  <p>Kepala Sekolah, SMA Harapan Bangsa</p>
+                  <div class="quote">
+                    <i class="fas fa-quote-right"></i>
+                  </div>
+                  <div class="content">
+                    <p>Sistem absensi ini sangat membantu dalam memonitor kehadiran siswa. Dengan fitur GPS dan RFID, kami bisa memastikan kehadiran siswa secara akurat dan efisien. Sistem ini memudahkan kami dalam mengelola absensi harian.</p>
                   </div>
                 </div>
               </div>
-              <div class="testimonial-wrapper">
-                <div class="single-testimonial">
-                  <div class="info">
-                    <div class="image-2">
-                      <img src="<?php base_url()?>promotion./img/testemonial/test-2.jpg" alt="">
-                    </div>
-                    <h4>John Deo</h4>
-                    <p>roduct Design</p>
-                    <div class="quote">
-                      <i class="fas fa-quote-right"></i>
-                    </div>
-                    <div class="content">
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet beatae officia minus
-                        voluptatibus veritatis unde, asperiores laboriosam tempore voluptates debitis.</p>
-                    </div>
+            </div>
+            <div class="testimonial-wrapper">
+              <div class="single-testimonial">
+                <div class="info">
+                  <div class="image-2">
+                    <img src="<?php echo base_url()?>promo/img/testemonial/test-2.jpg" alt="">
+                  </div>
+                  <h4>Siti Nurhaliza</h4>
+                  <p>Guru, SMP Cerdas Bangsa</p>
+                  <div class="quote">
+                    <i class="fas fa-quote-right"></i>
+                  </div>
+                  <div class="content">
+                    <p>Dengan adanya sistem barcode dan RFID pada absensi siswa, kami dapat melacak kehadiran siswa dengan cepat dan mudah. Sistem ini sangat modern dan sangat memudahkan dalam pengelolaan data kehadiran.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-wrapper">
+              <div class="single-testimonial">
+                <div class="info">
+                  <div class="image-2">
+                    <img src="<?php echo base_url()?>promo/img/testemonial/test-3.jpg" alt="">
+                  </div>
+                  <h4>Ahmad Fauzi</h4>
+                  <p>Wali Kelas, SD Bina Cendekia</p>
+                  <div class="quote">
+                    <i class="fas fa-quote-right"></i>
+                  </div>
+                  <div class="content">
+                    <p>Sistem absensi ini sangat membantu kami dalam memantau siswa yang hadir atau tidak hadir. Fitur GPS dan RFID memberikan akurasi yang sangat baik, sehingga pengelolaan absensi menjadi lebih efektif dan efisien.</p>
                   </div>
                 </div>
               </div>
@@ -363,8 +380,10 @@
           </div>
         </div>
       </div>
-  </section>
-  <!-- ----------- Testimonial Section End ------- -->
+  </div>
+</section>
+<!-- ----------- Testimonial Section End ------- -->
+
 
 <!-- ------------ Pricing Section Start --------- -->
 <div class="pricing-area pt-110" data-scroll-index="4">
@@ -384,14 +403,17 @@
             <h4 class="title">Basic</h4>
           </div>
           <div class="pricing-price">
-            <span class="pricing">Rp 3.500 / Siswa.</span>
+            <span class="pricing">Rp 8.500 / Siswa.</span>
             <p class="text">Tahunan</p>
           </div>
           <div class="pricing-list">
             <ul class="list">
-              <li><i class="fas fa-check"></i> Software Absensi Gps Siswa</li>
-              <li><i class="fas fa-check"></i> Export laporan bulanan</li>
-              <li><i class="fas fa-check"></i> Login Guru</li>
+              <li><i class="fas fa-check"></i> Software Only</li>
+              <li><i class="fas fa-check"></i> Gratis Pengelolaan Data</li>
+              <li><i class="fas fa-check"></i> Gratis Pelatihan Siswa Dan Guru</li>
+              <li><i class="fas fa-check"></i> Gratis Perfotoan Siswa</li>
+              <li><i class="fas fa-check"></i> Kartu Pelajar</li>
+             
             </ul>
           </div>
           <div class="pricing-btn">
@@ -411,14 +433,10 @@
           <div class="pricing-list">
             <ul class="list">
               <li><i class="fas fa-check"></i> Semua fitur Basic</li>
-              <li><i class="fas fa-check"></i> Login Guru</li>
               <li><i class="fas fa-check"></i> Percetakan Kartu Siswa Otomatis</li>
-              <li><i class="fas fa-check"></i> Export laporan bulanan</li>
-              <li><i class="fas fa-check"></i> Software Absensi Gps Siswa</li>
-              <li><i class="fas fa-check"></i> Kartu E-Pelajar RFID</li>
+              <li><i class="fas fa-check"></i> Kartu E-Pelajar</li>
               <li><i class="fas fa-check"></i> Foto Siswa</li>
-              <li><i class="fas fa-check"></i> Gratis Device RFID Reader 2</li>
-              <li><i class="fas fa-check"></i> Software Absensi Barcode Siswa</li>
+              <li><i class="fas fa-check"></i> Gratis 1 Device Reader Rfid</li>
               <li><i class="fas fa-check"></i> Logo Custom</li>
             </ul>
           </div>
@@ -433,18 +451,15 @@
             <h4 class="title">Professional</h4>
           </div>
           <div class="pricing-price">
-            <span class="pricing">Rp 37.000 / Siswa</span>
+            <span class="pricing">Rp 33.000 / Siswa</span>
             <p class="text">Permanent <small><a href="#syarat-ketentuan" style="font-size: 12px;">(S&K berlaku)</a></small></p>
           </div>
           <div class="pricing-list">
             <ul class="list">
               <li><i class="fas fa-check"></i> Semua fitur Standard</li>
               <li><i class="fas fa-check"></i> Bisa Di Instal di Server Sekolah</li>
-              <li><i class="fas fa-check"></i> Full Acces Fitur</li>
-              <li><i class="fas fa-check"></i> Kartu E-Pelajar Rfid Barcode</li>
-              <li><i class="fas fa-check"></i> Gratis 2 Device Reader Rfid</li>
+              <li><i class="fas fa-check"></i> Gratis 5 Device Reader Rfid</li>
               <li><i class="fas fa-check"></i> Support prioritas</li>
-              <li><i class="fas fa-check"></i> Pelatihan gratis untuk staf</li>
             </ul>
           </div>
           <div class="pricing-btn">
@@ -548,25 +563,60 @@
         </div>
         <div class="col-lg-6">
           <div class="faq-image wow fadeInRightBig" data-wow-duration="3s" data-wow-delay="0.5s">
-          <img src="<?php base_url()?>promotion./img/faq/faq-img.svg" alt="">
+          <img src="<?php base_url()?>promo/img/faq/faq-img.svg" alt="">
           </div>
         </div>
       </div>
     </div>
   </section>
-  <!-- ----------- FAQ Section End --------- -->
-  <div class="col-lg-12">
-          <div class="footer-partners mt-50 text-center">
-            <h4 class="title">Partner Kami</h4>
-            <div class="partners-logo d-flex flex-wrap justify-content-center">
-              <img src="<?php base_url()?>promotion./img/header/logo/landapp-logo.png" alt="Partner Logo" class="partner-logo">
-              <img src="<?php base_url()?>promotion./img/header/logo/lintasarta.jpeg" alt="Partner 1" class="partner-logo">
-              <img src="<?php base_url()?>promotion./img/header/logo/megadata.png" alt="Partner 2" class="partner-logo">
-              <img src="<?php base_url()?>promotion./img/header/logo/rsplumbon.png" alt="Partner 3" class="partner-logo">
-              <img src="<?php base_url()?>promotion./img/header/logo/maangsari.png" alt="Partner 4" class="partner-logo">
-              <img src="<?php base_url()?>promotion./img/header/logo/rancamulya.png" alt="Partner 5" class="partner-logo">
-              <img src="<?php base_url()?>promotion./img/header/logo/supercoridor.png" alt="Partner 6" class="partner-logo">
-              <!-- Tambahkan logo lain sesuai kebutuhan -->
+ <!-- ----------- Partner Kami Section Start ------- -->
+<div class="col-lg-12">
+  <div class="footer-partners mt-50 text-center">
+    <h4 class="title">Partner Kami</h4>
+    <div class="partners-logo d-flex flex-wrap justify-content-center">
+      <div class="p-2">
+        <img src="<?php echo base_url()?>promo/img/header/logo/landapp-logo.png" alt="Partner Logo" class="img-fluid" style="max-width: 150px; margin: 10px;">
+      </div>
+      <div class="p-2">
+        <img src="<?php echo base_url()?>promo/img/header/logo/lintasarta.jpeg" alt="Partner 1" class="img-fluid" style="max-width: 150px; margin: 10px;">
+      </div>
+      <div class="p-2">
+        <img src="<?php echo base_url()?>promo/img/header/logo/megadata.png" alt="Partner 2" class="img-fluid" style="max-width: 150px; margin: 10px;">
+      </div>
+      <div class="p-2">
+        <img src="<?php echo base_url()?>promo/img/header/logo/rsplumbon.png" alt="Partner 3" class="img-fluid" style="max-width: 150px; margin: 10px;">
+      </div>
+      <div class="p-2">
+        <img src="<?php echo base_url()?>promo/img/header/logo/maangsari.png" alt="Partner 4" class="img-fluid" style="max-width: 150px; margin: 10px;">
+      </div>
+      <div class="p-2">
+        <img src="<?php echo base_url()?>promo/img/header/logo/rancamulya.png" alt="Partner 5" class="img-fluid" style="max-width: 150px; margin: 10px;">
+      </div>
+      <div class="p-2">
+        <img src="<?php echo base_url()?>promo/img/header/logo/supercoridor.png" alt="Partner 6" class="img-fluid" style="max-width: 150px; margin: 10px;">
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ----------- Partner Kami Section End ------- -->
+
+<!-- ----------- Sekolah Kami Section Start ------- -->
+<div class="col-lg-12">
+  <div class="footer-partners mt-50 text-center">
+    <h4 class="title">Sekolah Yang Sudah Memakai</h4>
+    <div class="school-logo d-flex flex-wrap justify-content-center">
+      <div class="p-2">
+        <img src="<?php echo base_url()?>promo/img/sekolah/smkn1talaga.png" alt="SMKN 1 TALAGA" class="img-fluid" style="max-width: 150px; margin: 10px;">
+      </div>
+      <div class="p-2">
+        <img src="<?php echo base_url()?>promo/img/sekolah/mts11majalengka.png" alt="MTSN 11 MAJALENGKA" class="img-fluid" style="max-width: 150px; margin: 10px;">
+      </div>
+      <!-- Tambahkan logo sekolah lain sesuai kebutuhan -->
+    </div>
+  </div>
+</div>
+<!-- ----------- Sekolah Kami Section End ------- -->
+
 
   <!-- ----------- Download Section Start ------- -->
   <section class="download-area pt-70 pb-40" data-scroll-index="6">
@@ -575,7 +625,7 @@
         <div class="col-lg-6 col-md-9">
           <div class="download-image mt-50 wow fadeInLeftBig" data-wow-duration="3s" data-wow-delay="0.5s">
             <div class="download-shape-1"></div>
-            <img src="<?php base_url()?>promotion./img/download/download-app.png" alt="" class="image-3">
+            <img src="<?php base_url()?>promo/img/download/download-app.png" alt="" class="image-3">
           </div>
         </div>
         <div class="col-lg-6">
@@ -604,7 +654,7 @@
         <div class="col-lg-4 col-md-6">
           <div class="footer-about mt-50">
             <a href="" class="logo">
-              <img src="<?php base_url()?>promotion./img/header/logo/landapp-logo.png" alt="">
+              <img src="<?php base_url()?>promo/img/header/logo/landapp-logo.png" alt="">
             </a>
             <p class="text">Sistem absensi canggih kami membantu Anda memantau kehadiran siswa dengan akurasi tinggi.</p>
             <ul class="social">
@@ -697,7 +747,7 @@
         <div class="col-lg-12">
           <div class="copyright">
             <div class="copyright-text text-center">
-              <p class="text">Copyright &#169; 2024 <a href="">Nama Anda</a>. Semua hak dilindungi.</p>
+              <p class="text">Copyright &#169; 2024 <a href="">Imam Dienul</a>. Semua hak dilindungi.</p>
             </div>
           </div>
         </div>
@@ -713,21 +763,21 @@
 
 
   <!-- ---- jquery Js ---- -->
-  <script src="<?php base_url()?>promotion./js/jquery-1.12.4.min.js"></script>
+  <script src="<?php base_url()?>promo/js/jquery-1.12.4.min.js"></script>
   <!-- -------- venobox js ------ -->
-  <script type="text/javascript" src="<?php base_url()?>promotion./js/venobox.min.js"></script>
+  <script type="text/javascript" src="<?php base_url()?>promo/js/venobox.min.js"></script>
   <!-- ---------- wow js ---------- -->
-  <script src="<?php base_url()?>promotion./js/wow.min.js"></script>
+  <script src="<?php base_url()?>promo/js/wow.min.js"></script>
   <!-- ---------- tiny slider js --------- -->
-  <script src="<?php base_url()?>promotion./js/tiny-slider.js"></script>
+  <script src="<?php base_url()?>promo/js/tiny-slider.js"></script>
   <!-- ---------- scrollit js ---------- -->
-  <script src="<?php base_url()?>promotion./js/scrollIt.min.js"></script>
+  <script src="<?php base_url()?>promo/js/scrollIt.min.js"></script>
   <!-- -------- font awsome js --------- -->
-  <script src="<?php base_url()?>promotion./js/all.js"></script>
+  <script src="<?php base_url()?>promo/js/all.js"></script>
   <!-- ---- Bootstrap Js ---- -->
-  <script src="<?php base_url()?>promotion./js/bootstrap.min.js"></script>
+  <script src="<?php base_url()?>promo/js/bootstrap.min.js"></script>
   <!-- ---- main js --- -->
-  <script src="<?php base_url()?>promotion./js/main.js"></script>
+  <script src="<?php base_url()?>promo/js/main.js"></script>
 </body>
 
 </html>

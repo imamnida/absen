@@ -6,7 +6,7 @@ class Absensi_hp extends CI_Controller {
     private $coordinatesDMS = "7°01'13\"S 108°18'14\"E";  
     private $centerLat;
     private $centerLng;
-    private $allowedRadius = 100; // dalam meter
+    private $allowedRadius = 100; 
 
     public function __construct() {
         parent::__construct();
@@ -70,9 +70,9 @@ class Absensi_hp extends CI_Controller {
     public function index() {
         $nisn = $this->session->userdata('nisn');
         
-        // Get the first day of the current month
+       
         $start_date = date('Y-m-01');
-        // Get the last day of the current month
+       
         $end_date = date('Y-m-t');
         
         $attendance_data = $this->Absensi_hp_model->get_monthly_attendance($nisn, $start_date, $end_date);
@@ -123,7 +123,7 @@ class Absensi_hp extends CI_Controller {
             return;
         }
 
-        // Check operational time for the current day and action
+      
         if (!$this->Absensi_hp_model->cek_waktu_operasional($action)) {
             $data['message'] = 'Absensi ' . $action . ' hanya dapat dilakukan pada jam operasional yang ditentukan.';
             $data['message_type'] = 'danger';
