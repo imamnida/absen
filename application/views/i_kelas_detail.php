@@ -61,10 +61,10 @@
                                                         <img src="<?= base_url(); ?>uploads/<?= $row->foto; ?>" class="img-circle" width="auto" height="80px" alt="Foto Murid">
                                                     </td>
                                                     <td>
-                                                        <a href="<?= base_url(); ?>/kelas/detail_murid/<?= $row->id_rfid; ?>" class="btn btn-success btn-sm">
+                                                        <a href="<?= base_url(); ?>/kelas/detail_murid/<?= $row->id_siswa; ?>" class="btn btn-success btn-sm">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
-                                                        <a href="<?= base_url(); ?>/kelas/hapus_murid/<?= $row->id_rfid; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus murid ini?');">
+                                                        <a href="<?= base_url(); ?>/kelas/hapus_murid/<?= $row->id_siswa; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus murid ini?');">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </td>

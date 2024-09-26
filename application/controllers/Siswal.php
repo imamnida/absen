@@ -46,12 +46,12 @@ class Siswal extends CI_Controller {
                 } else {
                     // nisn tidak cocok
                     $this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-remove\"></i> Gagal Login, nisn salah</div>");
-                    redirect(base_url().'siswa');
+                    redirect(base_url().'siswal');
                 }
             } else {
                 // nik tidak ditemukan
                 $this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-remove\"></i> Gagal Login, nik tidak ditemukan</div>");
-                redirect(base_url().'siswa');
+                redirect(base_url().'siswal');
             }
         }
     }
@@ -60,6 +60,6 @@ class Siswal extends CI_Controller {
     public function logout() {
      
         $this->session->sess_destroy();
-        redirect(base_url().'siswa');
+        redirect(base_url().'siswal');
     }
 }

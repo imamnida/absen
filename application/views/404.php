@@ -29,7 +29,7 @@
                     <diV class="container">
                         <div class="row">
                             <div class="col-md-6">
-                                <img src="<?=base_url();?>assets/images/logo.png" alt="" class="img-fluid">
+                                <img src="<?=base_url();?>assets/images/logogisaka.png" alt="" class="img-fluid">
                             </div>
                             <div class="col-md-6">
                                 <div class="card">
