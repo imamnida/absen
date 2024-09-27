@@ -43,7 +43,7 @@
     <div class="min-h-screen flex items-center justify-center bg-gray-100 py-2 px-4 sm:px-6 lg:px-8">
         <div class="w-full max-w-md bg-white shadow-lg rounded-xl overflow-hidden">
             <div class="p-6 sm:p-4 bg-custom-purple text-white">
-                <h1 class="text-2xl sm:text-xl font-bold">SISTEM INFORMASI ABSENSI</h1>
+                <h1 class="text-2xl sm:text-xl font-bold">SISTEM INFORMASI ABSENSI TEPAT AKURAT</h1>
                 <p class="text-xl sm:text-lg mt-2">Silahkan Daftar</p>
             </div>
 
