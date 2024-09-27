@@ -133,7 +133,8 @@
           </p>
           <ul class="d-flex">
           <li>
-  <a href="#2" data-scroll-nav="4" class="main-btn wow fadeInLeftBig" data-wow-duration="3s" data-wow-delay="0.8s">Download Now</a>
+          <a href="<?php echo base_url('assets/_SI_ATA.apk'); ?>" download class="main-btn wow fadeInLeftBig" data-wow-duration="3s" data-wow-delay="0.8s">Download Now</a>
+
 </li>
 
             <li>
