@@ -46,7 +46,7 @@
                                     </tr>
                                     <tr>
                                         <th scope="row">Tempat, Tanggal Lahir:</th>
-                                        <td><?= $murid->ttl; ?></td>
+                                        <td><?= $murid->tanggal_lahir; ?></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Kelas:</th>
@@ -88,8 +88,8 @@
                             <td><strong>: <?= $murid->nama; ?></strong></td>
                         </tr>
                         <tr>
-                            <th><strong>TTL</strong></th>
-                            <td><strong>: <?= $murid->ttl; ?></strong></td>
+                            <th><strong>tanggal_lahir</strong></th>
+                            <td><strong>: <?= $murid->tanggal_lahir; ?></strong></td>
                         </tr>
                         <tr>
                             <th><strong>NIK</strong></th>

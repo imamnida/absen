@@ -152,7 +152,7 @@ if ($set == "siswa") {
 
                                         <div class="form-group">
                                             <label>Tempat, Tanggal Lahir</label>
-                                            <input type="text" name="ttl" class="form-control" placeholder="Tempat, Tanggal Lahir" value="<?php if (isset($ttl)) { echo $ttl; } ?>" required>
+                                            <input type="text" name="tanggal_lahir" class="form-control" placeholder="Tempat, Tanggal Lahir" value="<?php if (isset($tanggal_lahir)) { echo $tanggal_lahir; } ?>" required>
                                         </div>
 
                                         <div class="form-group">

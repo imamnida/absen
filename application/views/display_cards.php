@@ -119,8 +119,8 @@
                         <td><strong>: <?= $card['student']->nama; ?></strong></td>
                     </tr>
                     <tr>
-                        <th>TTL</th>
-                        <td><strong>: <?= $card['student']->ttl; ?></strong></td>
+                        <th>tanggal_lahir</th>
+                        <td><strong>: <?= $card['student']->tanggal_lahir; ?></strong></td>
                     </tr>
                     <tr>
                         <th>NIK</th>
