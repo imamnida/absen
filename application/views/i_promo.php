@@ -415,7 +415,7 @@
             </ul>
           </div>
           <div class="pricing-btn">
-            <a href="" class="main-btn main-btn-2">Hubungi Kami</a>
+            <a href="https://wa.me/6282295844039?text=Haloo%20Gisaka%20Media%2C%20saya%20ingin%20berkonsultasi%20terkait%20aplikasi%20absensi%20dengan%20paket%20Starter" class="main-btn main-btn-2" target="_blank">Hubungi Kami</a>
           </div>
         </div>
       </div>
@@ -440,7 +440,7 @@
             </ul>
           </div>
           <div class="pricing-btn">
-            <a href="" class="main-btn main-btn-2">Hubungi Kami</a>
+            <a href="https://wa.me/6282295844039?text=Haloo%20Gisaka%20Media%2C%20saya%20ingin%20berkonsultasi%20terkait%20aplikasi%20absensi%20dengan%20paket%20Basic" class="main-btn main-btn-2" target="_blank">Hubungi Kami</a>
           </div>
         </div>
       </div>
@@ -466,7 +466,7 @@
             </ul>
           </div>
           <div class="pricing-btn">
-            <a href="" class="main-btn main-btn-2">Hubungi Kami</a>
+            <a href="https://wa.me/6282295844039?text=Haloo%20Gisaka%20Media%2C%20saya%20ingin%20berkonsultasi%20terkait%20aplikasi%20absensi%20dengan%20paket%20Standard" class="main-btn main-btn-2" target="_blank">Hubungi Kami</a>
           </div>
         </div>
       </div>
@@ -490,7 +490,7 @@
             </ul>
           </div>
           <div class="pricing-btn">
-            <a href="" class="main-btn main-btn-2">Hubungi Kami</a>
+            <a href="https://wa.me/6282295844039?text=Haloo%20Gisaka%20Media%2C%20saya%20ingin%20berkonsultasi%20terkait%20aplikasi%20absensi%20dengan%20paket%20Professional" class="main-btn main-btn-2" target="_blank">Hubungi Kami</a>
           </div>
         </div>
       </div>
@@ -504,6 +504,7 @@
   </div>
 </div>
 <!-- --------------Pricing Section End ------------ -->
+
 
 
  <!-- ----------- FAQ Section Start --------- -->

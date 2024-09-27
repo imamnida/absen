@@ -11,9 +11,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
-        .bg-custom-purple { background-color: #098479; }
-        .text-custom-purple { color: #098479; }
-        .bg-custom-green { background-color: #098479; }
+        .bg-custom-purple { background-color: #252F75; }
+        .text-custom-purple { color: #252F75; }
+        .bg-custom-green { background-color: #252F75; }
         .dot {
             display: inline-block;
             height: 10px;
@@ -42,10 +42,10 @@
             flex-direction: column;
             align-items: center;
             padding: 10px;
-            color: #098479;
+            color: #252F75;
         }
         .menu-item.active {
-            color: #098479;
+            color: #252F75;
         }
         .page {
             display: none;
@@ -78,7 +78,7 @@
             right: -300px;
             width: 300px;
             height: 100%;
-            background-color: #098479;
+            background-color: #252F75;
             transition: right 0.3s ease-in-out;
             z-index: 1001;
             padding-top: 60px;
@@ -284,8 +284,7 @@
                 <h2 class="text-xl font-bold mt-6 mb-4">Profil Siswa</h2>
                 <p><strong>Nama:</strong> <?= $this->session->userdata('nama'); ?></p>
                 <p><strong>NISN:</strong> <?= $this->session->userdata('nisn'); ?></p>
-                <p><strong>Kelas:</strong> XII IPA 1</p>
-                <p><strong>Wali Kelas:</strong> Bpk. Contoh Guru</p>
+              
             </div>
         </div>
     </div>

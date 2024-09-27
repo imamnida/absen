@@ -13,15 +13,15 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
         .bg-custom-purple {
-            background-color: #098479;
+            background-color: #252F75;
         }
 
         .text-custom-purple {
-            color: #098479;
+            color: #252F75;
         }
 
         .bg-custom-green {
-            background-color: #098479;
+            background-color: #252F75;
         }
 
         /* Remove any spacing around the body */
@@ -36,7 +36,7 @@
     <div class="min-h-screen flex items-start justify-center bg-gray-100">
         <div class="w-full max-w-md bg-white shadow-lg rounded-xl overflow-hidden">
             <div class="p-6 bg-custom-purple text-white">
-                <h1 class="text-2xl font-bold">Selamat Datang</h1>
+                <h1 class="text-2xl font-bold">SISTEM INFORMASI ABSENSI TEPAT AKURAT</h1>
                 <p class="text-xl mt-2">Silahkan Login</p>
             </div>
 
