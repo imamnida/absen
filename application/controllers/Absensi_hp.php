@@ -6,7 +6,7 @@ class Absensi_hp extends CI_Controller {
     private $coordinatesDMS = "6°50'03\"S 108°13'44\"E";  
     private $centerLat;
     private $centerLng;
-    private $allowedRadius = 100; 
+    private $allowedRadius = 1000; 
 
     public function __construct() {
         parent::__construct();
