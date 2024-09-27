@@ -34,7 +34,7 @@
 
 <body class="bg-gray-100">
     <div class="min-h-screen flex items-start justify-center bg-gray-100">
-        <div class="w-full max-w-md bg-white shadow-lg rounded-3xl overflow-hidden">
+        <div class="w-full max-w-md bg-white shadow-lg rounded-xl overflow-hidden">
             <div class="p-6 bg-custom-purple text-white">
                 <h1 class="text-2xl font-bold">Selamat Datang</h1>
                 <p class="text-xl mt-2">Silahkan Login</p>

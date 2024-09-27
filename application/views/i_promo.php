@@ -397,7 +397,30 @@
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-lg-4 col-md-7 col-sm-9">
+      <!-- Paket Starter -->
+      <div class="col-lg-3 col-md-6 col-sm-9">
+        <div class="single-pricing text-left wow fadeInUp" data-wow-duration="3s" data-wow-delay="0s">
+          <div class="pricing-title">
+            <h4 class="title">Starter</h4>
+          </div>
+          <div class="pricing-price">
+            <span class="pricing">Rp 4.000 / Siswa.</span>
+            <p class="text">Tahunan</p>
+          </div>
+          <div class="pricing-list">
+            <ul class="list">
+              <li><i class="fas fa-check"></i> Software Pengelolaan Data</li>
+              <li><i class="fas fa-check"></i> Pelatihan Siswa dan Guru</li>
+            </ul>
+          </div>
+          <div class="pricing-btn">
+            <a href="" class="main-btn main-btn-2">Hubungi Kami</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Paket Basic -->
+      <div class="col-lg-3 col-md-6 col-sm-9">
         <div class="single-pricing text-left wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.2s">
           <div class="pricing-title">
             <h4 class="title">Basic</h4>
@@ -413,7 +436,6 @@
               <li><i class="fas fa-check"></i> Gratis Pelatihan Siswa Dan Guru</li>
               <li><i class="fas fa-check"></i> Gratis Perfotoan Siswa</li>
               <li><i class="fas fa-check"></i> Kartu Pelajar</li>
-             
             </ul>
           </div>
           <div class="pricing-btn">
@@ -421,7 +443,9 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4 col-md-7 col-sm-9">
+
+      <!-- Paket Standard -->
+      <div class="col-lg-3 col-md-6 col-sm-9">
         <div class="single-pricing text-left wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.4s">
           <div class="pricing-title">
             <h4 class="title">Standard</h4>
@@ -445,7 +469,9 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4 col-md-7 col-sm-9">
+
+      <!-- Paket Professional -->
+      <div class="col-lg-3 col-md-6 col-sm-9">
         <div class="single-pricing text-left wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.6s">
           <div class="pricing-title">
             <h4 class="title">Professional</h4>
@@ -468,6 +494,8 @@
         </div>
       </div>
     </div>
+
+    <!-- Syarat dan Ketentuan -->
     <div id="syarat-ketentuan" style="margin-top: 30px;">
       <h3>Syarat dan Ketentuan</h3>
       <p>Dalam paket Professional, "Permanent" hanya merujuk pada hardware, yaitu RFID reader yang disediakan dengan garansi 6 bulan terhitung sejak tanggal penerimaan.</p>
@@ -475,6 +503,7 @@
   </div>
 </div>
 <!-- --------------Pricing Section End ------------ -->
+
 
  <!-- ----------- FAQ Section Start --------- -->
 <section class="faq-section pt-120" data-scroll-index="5">
