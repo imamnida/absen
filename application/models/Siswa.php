@@ -1,5 +1,5 @@
 <?php
-class Siswa_model extends CI_Model {
+class Siswa extends CI_Model {
 
     public function get_kelas() {
         $query = $this->db->get('kelas');

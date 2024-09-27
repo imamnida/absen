@@ -5,14 +5,14 @@ class Register extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('Siswa_model');
+        $this->load->model('Siswa');
         $this->load->helper(array('form', 'url'));
         $this->load->library('upload');
     }
 
     public function index() {
-        $data['kelas'] = $this->Siswa_model->get_kelas();
-        $data['kampus'] = $this->Siswa_model->get_kampus();
+        $data['kelas'] = $this->Siswa->get_kelas();
+        $data['kampus'] = $this->Siswa->get_kampus();
         
         // Set default value for is_success
         $data['is_success'] = $this->session->flashdata('registered') ?? false;
@@ -50,8 +50,8 @@ class Register extends CI_Controller {
         }
     
         if ($upload_error) {
-            $data['kelas'] = $this->Siswa_model->get_kelas();
-            $data['kampus'] = $this->Siswa_model->get_kampus();
+            $data['kelas'] = $this->Siswa->get_kelas();
+            $data['kampus'] = $this->Siswa->get_kampus();
             $data['upload_error'] = $upload_error;
             $this->load->view('i_siswa_registration', $data);
         } else {
@@ -67,7 +67,7 @@ class Register extends CI_Controller {
                 'foto' => isset($file_name) ? $file_name : NULL,
             );
     
-            $this->Siswa_model->insert_siswa($data);
+            $this->Siswa->insert_siswa($data);
     
             // Set flash data to display success message
             $this->session->set_flashdata('registered', true);
