@@ -173,7 +173,7 @@
             <a href="#" class="sidebar-item" data-page="tutorial">Tutorial</a>
             <a href="#" class="sidebar-item" data-page="profile">Profile</a>
             <a href="#" class="sidebar-item">Settings</a>
-            <a href="<?= base_url(); ?>siswa/logout" class="nida">Logout</a>
+            <a href="<?= base_url(); ?>siswal/logout" class="nida">Logout</a>
         </div>
 
         <!-- Home Page -->
