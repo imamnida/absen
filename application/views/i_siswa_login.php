@@ -13,15 +13,15 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
         .bg-custom-purple {
-            background-color: #6A0DAD;
+            background-color: #11e9d5;
         }
 
         .text-custom-purple {
-            color: #6A0DAD;
+            color: #11e9d5;
         }
 
         .bg-custom-green {
-            background-color: #4CAF50;
+            background-color: #11e9d5;
         }
 
         /* Remove any spacing around the body */

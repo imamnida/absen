@@ -168,7 +168,7 @@
             <div class="sidebar-close" id="sidebar-close">
                 <i class="fas fa-times"></i>
             </div>
-            <img src="<?= base_url(); ?>assets/images/logo.png" alt="Logo" class="h-16 lg:h-24" style="position: relative; left:22px;">
+            <img src="<?= base_url(); ?>assets/images/gi.png" alt="Logo" class="h-16 lg:h-24" style="position: relative; left:22px;">
             <a href="#" class="sidebar-item" data-page="home">Home</a>
             <a href="#" class="sidebar-item" data-page="tutorial">Tutorial</a>
             <a href="#" class="sidebar-item" data-page="profile">Profile</a>
@@ -183,7 +183,7 @@
                     <h1 class="text-2xl lg:text-3xl font-bold">Selamat Siang</h1>
                     <p class="text-3xl lg:text-4xl font-bold mt-2"><?= $this->session->userdata('nama'); ?></p>
                 </div>
-                <img src="<?= base_url(); ?>assets/images/logo.png" alt="Logo" class="h-16 lg:h-24" style="position: relative; right: 15px;">
+                <img src="<?= base_url(); ?>assets/images/gi.png" alt="Logo" class="h-16 lg:h-24" style="position: relative; right: 15px;">
 
 
             </div>
