@@ -400,12 +400,12 @@
     <div class="row justify-content-center">
       <!-- Paket Starter -->
       <div class="col-lg-3 col-md-6 col-sm-9">
-        <div class="single-pricing text-left wow fadeInUp" data-wow-duration="3s" data-wow-delay="0s">
+        <div class="single-pricing text-left wow fadeInUp" data-wow-duration="3s" data-wow-delay="0s" style="min-height: 500px;">
           <div class="pricing-title">
             <h4 class="title">Starter</h4>
           </div>
           <div class="pricing-price">
-            <span class="pricing">Rp 4.000 / Siswa.</span>
+            <span class="pricing">Rp 6.000 / Siswa.</span>
             <p class="text">Tahunan</p>
           </div>
           <div class="pricing-list">
@@ -419,15 +419,15 @@
           </div>
         </div>
       </div>
-      
+
       <!-- Paket Basic -->
       <div class="col-lg-3 col-md-6 col-sm-9">
-        <div class="single-pricing text-left wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.2s">
+        <div class="single-pricing text-left wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.2s" style="min-height: 500px;">
           <div class="pricing-title">
             <h4 class="title">Basic</h4>
           </div>
           <div class="pricing-price">
-            <span class="pricing">Rp 8.500 / Siswa.</span>
+            <span class="pricing">Rp 10.000 / Siswa.</span>
             <p class="text">Tahunan</p>
           </div>
           <div class="pricing-list">
@@ -447,7 +447,7 @@
 
       <!-- Paket Standard -->
       <div class="col-lg-3 col-md-6 col-sm-9">
-        <div class="single-pricing text-left wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.4s">
+        <div class="single-pricing text-left wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.4s" style="min-height: 500px;">
           <div class="pricing-title">
             <h4 class="title">Standard</h4>
           </div>
@@ -473,7 +473,7 @@
 
       <!-- Paket Professional -->
       <div class="col-lg-3 col-md-6 col-sm-9">
-        <div class="single-pricing text-left wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.6s">
+        <div class="single-pricing text-left wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.6s" style="min-height: 500px;">
           <div class="pricing-title">
             <h4 class="title">Professional</h4>
           </div>
@@ -504,6 +504,7 @@
   </div>
 </div>
 <!-- --------------Pricing Section End ------------ -->
+
 
 
 

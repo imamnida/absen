@@ -143,12 +143,12 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
 
                                 </ul>
                             </li>
-                            <li>
+                            <!--li>
                                 <a href="<?=base_url();?>absensi_bc" class="waves-effect">
                                     <i class="mdi mdi-qrcode-scan"></i>
                                     <span>Absensi Barcode</span>
                                 </a>
-                            </li>
+                            </li-->
                             <li>
                                 
                            

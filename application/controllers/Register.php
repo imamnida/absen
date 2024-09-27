@@ -5,14 +5,14 @@ class Register extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('siswaModel');
+        $this->load->model('siswamodel');
         $this->load->helper(array('form', 'url'));
         $this->load->library('upload');
     }
 
     public function index() {
-        $data['kelas'] = $this->siswaModel->get_kelas();
-        $data['kampus'] = $this->siswaModel->get_kampus();
+        $data['kelas'] = $this->siswamodel->get_kelas();
+        $data['kampus'] = $this->siswamodel->get_kampus();
         
         // Set default value for is_success
         $data['is_success'] = $this->session->flashdata('registered') ?? false;
@@ -50,14 +50,16 @@ class Register extends CI_Controller {
         }
     
         if ($upload_error) {
-            $data['kelas'] = $this->siswaModel->get_kelas();
-            $data['kampus'] = $this->siswaModel->get_kampus();
+            $data['kelas'] = $this->siswamodel->get_kelas();
+            $data['kampus'] = $this->siswamodel->get_kampus();
             $data['upload_error'] = $upload_error;
             $this->load->view('i_siswa_registration', $data);
         } else {
+            // Process form data
             $data = array(
                 'nama' => $this->input->post('nama'),
-                'ttl' => $this->input->post('tempat_tanggal_lahir'),
+                'tempat_lahir' => $this->input->post('tempat'), // Tempat lahir dari input
+                'tanggal_lahir' => $this->input->post('tanggal_lahir'), // Tanggal lahir dari input
                 'id_kelas' => $this->input->post('id_kelas'),
                 'nisn' => $this->input->post('nisn'),
                 'nik' => $this->input->post('nik'),
@@ -65,13 +67,13 @@ class Register extends CI_Controller {
                 'foto' => isset($file_name) ? $file_name : NULL,
             );
     
-            $this->siswaModel->insert_siswa($data);
+            $this->siswamodel->insert_siswa($data);
     
-            // Set a flag in the session to indicate successful registration
+            // Set flash data to display success message
             $this->session->set_flashdata('registered', true);
-            $this->session->set_flashdata('success', 'Registration successful!');
+    
+            // Redirect back to the form
             redirect('register');
         }
     }
-    }
-?>
+}

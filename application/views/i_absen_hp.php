@@ -10,148 +10,7 @@
     <link rel="shortcut icon" href="<?= base_url(); ?>assets/images/gi.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <style>
-        .bg-custom-purple { background-color: #252F75; }
-        .text-custom-purple { color: #252F75; }
-        .bg-custom-green { background-color: #252F75; }
-        .dot {
-            display: inline-block;
-            height: 10px;
-            width: 10px;
-            border-radius: 0 0 10px 10px;
-
-            margin-right: 10px;
-        }
-        .dot-green { background-color: green; }
-        .dot-red { background-color: red; }
-        .clock {
-            font-size: 2.5rem;
-            font-weight: bold;
-            text-align: center;
-        }
-        .bottom-menu {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: white;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-        }
-        .menu-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 10px;
-            color: #252F75;
-        }
-        .menu-item.active {
-            color: #252F75;
-        }
-        .page {
-            display: none;
-        }
-        .page.active {
-            display: block;
-        }
-        .hamburger-menu {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-            color: white;
-            cursor: pointer;
-            z-index: 1000;
-        }
-        .back-arrow {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            font-size: 1.5rem;
-            color: white;
-            cursor: pointer;
-            z-index: 1000;
-            display: none;
-        }
-        .sidebar {
-            position: fixed;
-            top: 0;
-            right: -300px;
-            width: 300px;
-            height: 100%;
-            background-color: #252F75;
-            transition: right 0.3s ease-in-out;
-            z-index: 1001;
-            padding-top: 60px;
-        }
-        .sidebar.active {
-            right: 0;
-        }
-        .sidebar-item {
-            display: block;
-            padding: 1rem 2rem;
-            font-size: 1.2rem;
-            color: white;
-            text-decoration: none;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            transition: background-color 0.3s ease;
-        }
-        .nida {
-            display: block;
-            padding: 1rem 2rem;
-            font-size: 1.2rem;
-            color: white;
-            text-decoration: none;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            transition: background-color 0.3s ease;
-        }
-        .sidebar-item:hover {
-            background-color: rgba(255,255,255,0.1);
-        }
-        .sidebar-item:last-child {
-            border-bottom: none;
-        }
-        .sidebar-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-            color: white;
-            cursor: pointer;
-        }
-
-        /* Desktop styles */
-        @media (min-width: 1024px) {
-            .container {
-                max-width: 1200px;
-                margin: auto;
-            }
-            .bg-custom-purple {
-                padding: 20px;
-                border-radius: 10px;
-            }
-            .max-w-md {
-                max-width: 800px;
-            }
-            .grid-cols-2 {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .grid-cols-3 {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            .p-6 {
-                padding: 24px;
-            }
-            .clock {
-                font-size: 3rem;
-            }
-            button {
-                transition: all 0.3s ease;
-            }
-            button:hover {
-                transform: scale(1.05);
-            }
-        }
-    </style>
+    <link href="<?= base_url(); ?>promo/css/baru.css" rel="stylesheet">
 </head>
 
 <body class="bg-gray-100 h-screen flex items-start pb-16">
@@ -178,9 +37,9 @@
 
         <!-- Home Page -->
         <div id="home" class="page active">
-            <div class="p-6 bg-custom-purple text-white flex justify-between items-center">
+            <div class="p-6 bg-custom-hejo text-white flex justify-between items-center">
                 <div>
-                    <h1 class="text-2xl lg:text-3xl font-bold">Selamat Siang</h1>
+                    <h1 class="text-2xl lg:text-3xl font-bold">Selamat Absensi</h1>
                     <p class="text-3xl lg:text-4xl font-bold mt-2"><?= $this->session->userdata('nama'); ?></p>
                 </div>
                 <img src="<?= base_url(); ?>assets/images/gi.png" alt="Logo" class="h-16 lg:h-24" style="position: relative; right: 15px;">
@@ -217,7 +76,7 @@
                                 <button type="button" class="w-full bg-custom-green text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center" onclick="submitForm('masuk')">
                                     <i class="fas fa-arrow-left mr-2"></i> Absen Masuk
                                 </button>
-                                <button type="button" class="w-full bg-custom-purple text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center" onclick="submitForm('keluar')">
+                                <button type="button" class="w-full bg-custom-red text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center" onclick="submitForm('keluar')">
                                     Absen Pulang <i class="fas fa-arrow-right ml-2"></i>
                                 </button>
                             </div>
@@ -252,7 +111,7 @@
 
         <!-- Tutorial Page -->
         <div id="tutorial" class="page">
-            <div class="p-6 bg-custom-purple text-white">
+            <div class="p-6 bg-custom-hejo text-white">
                 <h1 class="text-2xl lg:text-3xl font-bold">Tutorial Absensi</h1>
             </div>
             <div class="p-6">
@@ -271,7 +130,7 @@
 
         <!-- Profile Page -->
         <div id="profile" class="page">
-            <div class="p-6 bg-custom-purple text-white">
+            <div class="p-6 bg-custom-hejo text-white">
                 <h1 class="text-2xl lg:text-3xl font-bold">Profil dan Info Sekolah</h1>
             </div>
             <div class="p-6">
@@ -400,7 +259,7 @@ function showPage(pageId) {
         });
         document.querySelector(`.menu-item[data-page="${pageId}"]`).classList.add('active');
 
-        // Close sidebar when a page is selected
+       
         toggleSidebar();
     }
 
