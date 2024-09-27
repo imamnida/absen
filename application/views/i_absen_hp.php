@@ -11,9 +11,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
-        .bg-custom-purple { background-color: #6A0DAD; }
-        .text-custom-purple { color: #6A0DAD; }
-        .bg-custom-green { background-color: #4CAF50; }
+        .bg-custom-purple { background-color: #11e9d5; }
+        .text-custom-purple { color: #11e9d5; }
+        .bg-custom-green { background-color: #11e9d5; }
         .dot {
             display: inline-block;
             height: 10px;
@@ -42,10 +42,10 @@
             flex-direction: column;
             align-items: center;
             padding: 10px;
-            color: #718096;
+            color: #11e9d5;
         }
         .menu-item.active {
-            color: #FF4D6D;
+            color: #11e9d5;
         }
         .page {
             display: none;
@@ -78,7 +78,7 @@
             right: -300px;
             width: 300px;
             height: 100%;
-            background-color: #6A0DAD;
+            background-color: #11e9d5;
             transition: right 0.3s ease-in-out;
             z-index: 1001;
             padding-top: 60px;
