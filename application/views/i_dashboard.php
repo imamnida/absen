@@ -32,7 +32,7 @@ if ($set == "dashboard") {
             <div class="col-sm-12">
                 <div class="card m-b-30">
                     <div class="card-body text-center">
-                        <img src="<?=base_url();?>assets/images/logogisaka.png" alt="School Logo" style="max-width: 400px; margin-bottom: 20px;">
+                        <img src="<?=base_url();?>assets/images/logogisaka.png" alt="School Logo" style="max-width: 320px; margin-bottom: 20px;">
                         <h1 class="card-title">SELAMAT DATANG DI SISTEM INFORMASI ABSENSI TEPAT AKURAT</h1>
                     </div>
                 </div>
