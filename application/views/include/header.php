@@ -44,6 +44,65 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap-material-design.min.css" />
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/icons.css" />
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/style.css" />
+   <style>
+.search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 300px;
+    margin-right: 25px; 
+    margin-bottom: 22px; 
+    margin-left: 20px;  
+}
+
+
+#nav-search {
+    width: 100%;
+    padding: 8px 3px 8px 10px;
+    border: none;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 14px;
+}
+
+#nav-search::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.search-button {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.search-results {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.search-result-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    color: #333;
+}
+
+.search-result-item:hover {
+    background-color: #f5f5f5;
+}
+</style>
 </head>
 
 
@@ -203,16 +262,19 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
 <nav class="navbar-custom">
     <div class="dropdown notification-list nav-pro-img">
         <div class="list-inline-item hide-phone app-search">
-            <form role="search" class="">
+            <div role="search" class="">
                 <div class="form-group pt-1">
-                    <input type="text" class="form-control" placeholder="Search..">
+                    <input type="text" id="nav-search" placeholder="Search..">
+                    <div id="search-results" class="search-results"></div>
                     <a href=""><i class="fa fa-search"></i></a>
                 </div>
-            </form>
+</div>
         </div>
     </div>
 
+
     <ul class="list-inline float-right mb-0 mr-3">
+   
         <!-- language-->
         <li class="list-inline-item dropdown notification-list">
             <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
