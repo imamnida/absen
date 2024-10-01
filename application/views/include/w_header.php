@@ -88,7 +88,7 @@ if($this->session->userdata('userlogin')) {
                         </li>
 
                         <li>
-                            <a href="<?=base_url();?>wad/kelas" class="waves-effect">
+                            <a href="<?=base_url();?>wad" class="waves-effect">
                                 <i class="mdi mdi-city"></i>
                                 <span> Daftar Kelas </span>
                             </a>

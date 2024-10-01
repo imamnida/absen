@@ -32,9 +32,9 @@
                                     <p>NISN : <?= $murid->nisn; ?></p>
                                     <p>Kelas : <?= $murid->kelas; ?></p>
                                     
-                                    <form id="absensiForm" action="<?php echo site_url('izin/absen'); ?>" method="post">
+                                    <form id="absensiForm" action="<?php echo site_url('wizin/absen'); ?>" method="post">
                                         <input type="hidden" name="nisn" value="<?= $murid->nisn ?>">
-                                        <input type="hidden" name="id_devices" value="3">
+                                        <input type="hidden" name="id_devices" value="7">
                                         <input type="hidden" name="id_kelas" value="<?= $id_kelas ?>">
                                         <select name="action" class="form-control">
                                             <option value="masuk">Tidak Membawa Kartu Masuk</option>

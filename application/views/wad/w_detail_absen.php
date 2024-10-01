@@ -100,50 +100,65 @@ if($this->session->userdata('userlogin')) {
 
         <!-- Start right Content here -->
         <div class="content-page">
-            <!-- Start content -->
-            <div class="content">
+                <!-- Start content -->
+                <div class="content">
 
-                <!-- Top Bar Start -->
-                <div class="topbar">
-                    <nav class="navbar-custom">
-                        <ul class="list-inline float-right mb-0">
-                            <li class="list-inline-item">
-                            <h5 style="color: #ffffff;">Welcome, <?=$nama;?></h5>
+                    <!-- Top Bar Start -->
+                    <div class="topbar">
 
-                            </li>
-                            <li class="list-inline-item dropdown notification-list">
-                                <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                    <img src="<?=base_url();?>assets/images/<?=$avatar;?>" alt="user">
-                                </a>
-                                
-                                <div class="dropdown-menu dropdown-menu-right profile-dropdown">
-                                    <div class="dropdown-item noti-title">
-                                        <h5><?=$nama;?></h5>
-                                    </div>
-                                    
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="<?=base_url();?>login/logout">
-                                        <i class="mdi mdi-logout m-r-5 text-muted"></i> Logout
-                                    </a>
+                        <nav class="navbar-custom">
+                            <div class="dropdown notification-list nav-pro-img">
+
+                                <div class="list-inline-item hide-phone app-search">
+                                    <form role="search" class="">
+                                        <div class="form-group pt-1">
+                                            <input type="text" class="form-control" placeholder="Search..">
+                                            <a href="">
+                                                <i class="fa fa-search"></i>
+                                            </a>
+                                        </div>
+                                    </form>
                                 </div>
-                            </li>
-                            
-                        </ul>
+                            </div>
 
-                        <ul class="list-inline menu-left mb-0">
-                            <li class="float-left">
-                                <button class="button-menu-mobile open-left waves-light waves-effect">
-                                    <i class="mdi mdi-menu"></i>
-                                </button>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                <!-- Top Bar End -->
+                            <ul class="list-inline float-right mb-0 mr-3">
+                                <!-- language-->
+                               
+                                   
 
-                <!-- Top Bar End -->
+                                <li class="list-inline-item dropdown notification-list">
+                                    <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
+                                        aria-expanded="false">
+                                        <img src="<?=base_url();?>assets/images/<?=$avatar;?>" alt="user" >
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                                        <!-- item-->
+                                        <div class="dropdown-item noti-title">
+                                            <h5><?=$this->session->userdata('userlogin');?></h5>
+                                        </div>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="<?=base_url();?>login/logout">
+                                            <i class="mdi mdi-logout m-r-5 text-muted"></i> Logout</a>
+                                    </div>
+                                </li>
+                            </ul>
 
-                <div class="page-content-wrapper">
+                            <ul class="list-inline menu-left mb-0">
+                                <li class="float-left">
+                                    <button class="button-menu-mobile open-left waves-light waves-effect">
+                                        <i class="mdi mdi-menu"></i>
+                                    </button>
+                                </li>
+                            </ul>
+
+                           
+
+                        </nav>
+
+                    </div>
+                    <!-- Top Bar End -->
+
+<div class="page-content-wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
@@ -228,16 +243,30 @@ if($this->session->userdata('userlogin')) {
     ?>
             <tr>
                 <td><?php echo $no; ?></td>
-               
                 <td><?php echo $row->nama; ?></td>
                 <?php
 
                 $date = strtotime($_GET['tanggalMulai']);
                 $end_date = strtotime($_GET['tanggalSelesai']);
                 while ($date <= $end_date) {
-                  
-                    if (date("D", $date) != "Sun") {
-                        $formatted_date = date('Y-m-d', $date);
+                    $formatted_date = date('Y-m-d', $date);
+                    
+                    // Check if it's a holiday
+                    $is_holiday = false;
+                    $holiday_keterangan = '';
+                    foreach ($holidays as $holiday) {
+                        if (date('Y-m-d', strtotime($holiday->tanggal)) == $formatted_date) {
+                            $is_holiday = true;
+                            $holiday_keterangan = $holiday->keterangan;
+                            break;
+                        }
+                    }
+                    
+                    if ($is_holiday) {
+                        echo '<td>Libur (' . $holiday_keterangan . ')</td>';
+                    } elseif (date("D", $date) == "Sun") {
+                        echo '<td>Libur (Minggu)</td>';
+                    } else {
                         $absen_found = false;
                         $tulisan_absen = "";
                         foreach ($row->absensi as $absen) {
@@ -258,8 +287,6 @@ if($this->session->userdata('userlogin')) {
                             $tulisan_absen = '-';
                         }
                         echo '<td>' . $tulisan_absen . '</td>';
-                    } else {
-                        echo '<td>Libur</td>';
                     }
                     $date = strtotime("+1 day", $date);
                 }
