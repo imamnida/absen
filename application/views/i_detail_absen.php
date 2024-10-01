@@ -1,11 +1,11 @@
 <?php
 
-if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
+if($this->session->userdata('userlogin'))   
 { 
   $users = $this->session->userdata('userlogin');
   $avatar = $this->session->userdata('avatar');
 }else{
-  //masuk tanpa login
+ 
   $this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-remove\"></i> Mohon Login terlebih dahulu</div>");
   redirect(base_url().'login');
 }
@@ -159,7 +159,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                 <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-cog"></i> <span> Pengaturan </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                                 <ul class="list-unstyled">
                             <li>
-                                <a href="<?=base_url();?>list_users" class="waves-effect">
+                                <a href="<?=base_url();?>users" class="waves-effect">
                                     <i class="mdi mdi-account-key"></i>
                                     <span> Admin </span>
                                 </a>
@@ -345,16 +345,30 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
     ?>
             <tr>
                 <td><?php echo $no; ?></td>
-               
                 <td><?php echo $row->nama; ?></td>
                 <?php
 
                 $date = strtotime($_GET['tanggalMulai']);
                 $end_date = strtotime($_GET['tanggalSelesai']);
                 while ($date <= $end_date) {
-                  
-                    if (date("D", $date) != "Sun") {
-                        $formatted_date = date('Y-m-d', $date);
+                    $formatted_date = date('Y-m-d', $date);
+                    
+                    // Check if it's a holiday
+                    $is_holiday = false;
+                    $holiday_keterangan = '';
+                    foreach ($holidays as $holiday) {
+                        if (date('Y-m-d', strtotime($holiday->tanggal)) == $formatted_date) {
+                            $is_holiday = true;
+                            $holiday_keterangan = $holiday->keterangan;
+                            break;
+                        }
+                    }
+                    
+                    if ($is_holiday) {
+                        echo '<td>Libur (' . $holiday_keterangan . ')</td>';
+                    } elseif (date("D", $date) == "Sun") {
+                        echo '<td>Libur (Minggu)</td>';
+                    } else {
                         $absen_found = false;
                         $tulisan_absen = "";
                         foreach ($row->absensi as $absen) {
@@ -375,8 +389,6 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                             $tulisan_absen = '-';
                         }
                         echo '<td>' . $tulisan_absen . '</td>';
-                    } else {
-                        echo '<td>Libur</td>';
                     }
                     $date = strtotime("+1 day", $date);
                 }

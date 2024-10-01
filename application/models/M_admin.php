@@ -362,7 +362,28 @@ class M_admin extends CI_Model {
     }
 
     
+    public function get_holidays($start_date, $end_date) {
+        $this->db->where('tanggal >=', date('Y-m-d', $start_date));
+        $this->db->where('tanggal <=', date('Y-m-d', $end_date));
+        return $this->db->get('libur')->result();
+    }
 
+    public function get_all_holidays() {
+        $this->db->order_by('tanggal', 'ASC');
+        return $this->db->get('libur')->result();
+    }
+
+    public function add_holiday($tanggal, $keterangan) {
+        $data = array(
+            'tanggal' => $tanggal,
+            'keterangan' => $keterangan
+        );
+        return $this->db->insert('libur', $data);
+    }
+
+    public function delete_holiday($id) {
+        return $this->db->delete('libur', array('id' => $id));
+    }
     public function rekap_absen($id_kelas, $tanggal_mulai, $tanggal_selesai) {
         // Mendapatkan data siswa dalam kelas
         $siswa_kelas = $this->db->where('id_kelas', $id_kelas)->get('siswa')->result();
@@ -378,6 +399,7 @@ class M_admin extends CI_Model {
             $this->db->where('created_at >=', $tanggal_mulai);
             $this->db->where('created_at <', $tanggal_selesai);
             $query = $this->db->get();
+            $holidays = $this->get_holidays($tanggal_mulai, $tanggal_selesai);
 
             // Menyimpan hasil query ke dalam array
             $absensi_siswa = $query->result();

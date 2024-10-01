@@ -230,6 +230,10 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                     <i class="mdi mdi-camera-timer"></i>
                                     <span> Waktu Oprasional </span>
                                 </a>
+                                <a href="<?=base_url();?>kelas/manage_holidays" class="waves-effect">
+                                    <i class="mdi mdi-calendar-remove"></i>
+                                    <span> Waktu Libur </span>
+                                </a>
                             </li>   
                             <li>
                                 <a href="<?=base_url();?>sql" class="waves-effect">

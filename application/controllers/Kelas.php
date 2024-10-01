@@ -140,11 +140,46 @@ class Kelas extends CI_Controller {
             $tanggal_selesai = strtotime($this->input->get('tanggalSelesai')) + 86400; // Tambah 1 hari
 
             $rekap_absen = $this->m_admin->rekap_absen($id_kelas, $tanggal_mulai, $tanggal_selesai);
+
+            // Fetch holidays
+            $holidays = $this->m_admin->get_holidays($tanggal_mulai, $tanggal_selesai);
         }
 
         $this->load->view('i_detail_absen', [
             "kelas" => $kelas,
             "rekap_absen" => $rekap_absen,
+            "holidays" => isset($holidays) ? $holidays : [],
         ]);
+    }
+    public function manage_holidays()
+    {
+        if(!$this->session->userdata('userlogin'))
+        {
+            return ;
+        }
+
+        if($this->input->post()) {
+            $tanggal = $this->input->post('tanggal');
+            $keterangan = $this->input->post('keterangan');
+            
+            $this->m_admin->add_holiday($tanggal, $keterangan);
+            $this->session->set_flashdata('success', 'Hari libur berhasil ditambahkan');
+            redirect('kelas/manage_holidays');
+        }
+
+        $holidays = $this->m_admin->get_all_holidays();
+        $this->load->view('i_manage_holidays', ['holidays' => $holidays]);
+    }
+
+    public function delete_holiday($id)
+    {
+        if(!$this->session->userdata('userlogin'))
+        {
+            return ;
+        }
+
+        $this->m_admin->delete_holiday($id);
+        $this->session->set_flashdata('success', 'Hari libur berhasil dihapus');
+        redirect('kelas/manage_holidays');
     }
 }
