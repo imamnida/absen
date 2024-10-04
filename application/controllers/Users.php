@@ -6,13 +6,13 @@ class Users extends CI_Controller {
 
 	public function __construct() {
         parent::__construct();
-        $this->load->model('m_admin');
+        $this->load->model('m_data');
         date_default_timezone_set("asia/jakarta");
     }
 
     public function index(){
 		$data['set'] = "list-users";
-		$data['data'] = $this->m_admin->get_users();
+		$data['data'] = $this->m_data->get_users();
 		$this->load->view('i_users', $data);
 	}
 	
@@ -45,7 +45,7 @@ class Users extends CI_Controller {
 								'password'=> $hash,
 								'avatar'  => $imgname,
 							);
-							$this->m_admin->insert_users($data);
+							$this->m_data->insert_users($data);
 							$this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil disimpan</div>");
 						}
 					}
@@ -60,7 +60,7 @@ class Users extends CI_Controller {
 	
 	public function hapus_users($id = null){
 		if($this->session->userdata('userlogin')){
-			$filename = $this->m_admin->get_user_byid($id);
+			$filename = $this->m_data->get_user_byid($id);
 			$file = isset($filename->avatar) ? $filename->avatar : null;
 			$path = "assets/images/" . $file;
 	
@@ -68,7 +68,7 @@ class Users extends CI_Controller {
 				unlink($path);
 			}
 	
-			if ($this->m_admin->users_del($id)) {
+			if ($this->m_data->users_del($id)) {
 				$this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil dihapus</div>");
 			} else {
 				$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data gagal dihapus</div>");
@@ -80,7 +80,7 @@ class Users extends CI_Controller {
 	
 	public function edit_users($id = null){
 		if($this->session->userdata('userlogin') && isset($id)){
-			$user = $this->m_admin->get_user_byid($id);
+			$user = $this->m_data->get_user_byid($id);
 	
 			if ($user) {
 				$data = array(
@@ -131,7 +131,7 @@ class Users extends CI_Controller {
 								'avatar'   => $imgname,
 							);
 	
-							$this->m_admin->updateUser($id, $data);
+							$this->m_data->updateUser($id, $data);
 							$this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil disimpan</div>");
 						}
 					}
@@ -155,7 +155,7 @@ class Users extends CI_Controller {
 				);
 			}
 	
-			if ($this->m_admin->updateUser($id, $data)) {
+			if ($this->m_data->updateUser($id, $data)) {
 				$this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil diupdate</div>");
 			} else {
 				$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data gagal diupdate</div>");

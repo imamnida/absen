@@ -5,7 +5,7 @@ class Api extends CI_Controller {
 
 	public function __construct() {
         parent::__construct();
-        $this->load->model('m_admin');
+        $this->load->model('m_data');
         $this->load->model('m_api');
         date_default_timezone_set("asia/jakarta");
     }

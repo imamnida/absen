@@ -74,7 +74,7 @@ if ($set == "dashboard") {
                             <div class="col-8 ml-auto align-self-center text-center">
                                 <div class="m-l-10 text-white float-right">
                                     <h5 class="mt-0 round-inner"><?= $jmlalat; ?></h5>
-                                    <p class="mb-0">siswa Scanner</p>
+                                    <p class="mb-0">Scanner</p>
                                 </div>
                             </div>
                         </div>

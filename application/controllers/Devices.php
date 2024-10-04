@@ -5,14 +5,14 @@ class Devices extends CI_Controller {
 
 	public function __construct() {
         parent::__construct();
-        $this->load->model('m_admin');
+        $this->load->model('m_data');
         date_default_timezone_set("asia/jakarta");
     }
    
    
     public function index(){
 		$data['set'] = "devices";
-		$data['devices'] = $this->m_admin->get_devices();
+		$data['devices'] = $this->m_data->get_devices();
 
 		$this->load->view('i_devices', $data);
 	}
@@ -51,7 +51,7 @@ class Devices extends CI_Controller {
 		                'nama_devices'  => $nama, 'mode'  => 'SCAN',
 		        );
 							
-				if($this->m_admin->insert_devices($data)){
+				if($this->m_data->insert_devices($data)){
 					$this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil di simpan</div>");
 
 				}else{
@@ -66,7 +66,7 @@ class Devices extends CI_Controller {
 	public function hapus_devices($id=null){
 		if($this->session->userdata('userlogin'))  
 		{ 
-			if($this->m_admin->devices_del($id)){
+			if($this->m_data->devices_del($id)){
 				$this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil di hapus</div>");
 			}else{
 				$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data gagal di hapus</div>");
@@ -80,7 +80,7 @@ class Devices extends CI_Controller {
 		if($this->session->userdata('userlogin')){    
 			if (isset($id)) {
 				
-				$devices = $this->m_admin->get_devices_byid($id);
+				$devices = $this->m_data->get_devices_byid($id);
 				if (isset($devices)) {
 					foreach ($devices as $key => $value) {
 						 
@@ -101,7 +101,7 @@ class Devices extends CI_Controller {
 		if($this->session->userdata('userlogin')){     
 			if (isset($id)) {
 				
-				$devices = $this->m_admin->get_devices_byid($id);
+				$devices = $this->m_data->get_devices_byid($id);
 				if (isset($devices)) {
 					foreach ($devices as $key => $value) {
 						 
@@ -127,7 +127,7 @@ class Devices extends CI_Controller {
 				$data = array('nama_devices' => $nama,
 			 				);
 
-				if ($this->m_admin->updateDevices($id,$data)) {
+				if ($this->m_data->updateDevices($id,$data)) {
 					$this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil di update</div>");
 				}else{
 					$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data gagal di update</div>");
@@ -149,7 +149,7 @@ class Devices extends CI_Controller {
 			}
 
 
-			if ($this->m_admin->updateDevices($id,$data)) {
+			if ($this->m_data->updateDevices($id,$data)) {
 				$this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Mode berhasil di update</div>");
 			}else{
 				$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Mode gagal di update</div>");

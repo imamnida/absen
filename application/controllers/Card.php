@@ -7,7 +7,7 @@ class Card extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('m_admin');
+        $this->load->model('m_data');
     }
 
     public function index() {
@@ -17,7 +17,7 @@ class Card extends CI_Controller {
         }
 
       
-        $data['murid'] = $this->m_admin->get_all_murid();
+        $data['murid'] = $this->m_data->get_all_murid();
 
       
         $this->load->view('i_kelas_detail', $data);
@@ -30,14 +30,14 @@ class Card extends CI_Controller {
         }
     
         if ($this->input->post('cetak_semua')) {
-            $students = $this->m_admin->get_all_murid();
+            $students = $this->m_data->get_all_murid();
         } else {
             $student_ids = $this->input->post('murid_ids');
             if (empty($student_ids)) {
                 echo "No students selected";
                 return;
             }
-            $students = $this->m_admin->find_students_by_ids($student_ids);
+            $students = $this->m_data->find_students_by_ids($student_ids);
         }
     
         if (empty($students)) {

@@ -7,14 +7,14 @@ class Setting extends CI_Controller {
 
 	public function __construct() {
         parent::__construct();
-        $this->load->model('m_admin');
+        $this->load->model('m_data');
         date_default_timezone_set("asia/jakarta");
     }
 
     public function index()
 	{
 		$data['set'] = "setting";
-		$data['waktuoperasional'] = $this->m_admin->waktuoperasional();
+		$data['waktuoperasional'] = $this->m_data->waktuoperasional();
 	
 		$this->load->view('i_setting', $data);
 	
@@ -28,7 +28,7 @@ class Setting extends CI_Controller {
 
         foreach ($masuk as $day => $waktu_masuk) {
             $waktu_keluar = isset($keluar[$day]) ? $keluar[$day] : ''; 
-            $this->m_admin->update_waktu_operasional($day, $waktu_masuk, $waktu_keluar);
+            $this->m_data->update_waktu_operasional($day, $waktu_masuk, $waktu_keluar);
         }
 
       

@@ -52,7 +52,7 @@ if ($set == "absensi") {
                                                 <td><b class="text-success"><?= $no; ?></b></td>
                                                 <td><?= $row->nama_devices; ?> (<?= $row->id_devices; ?>)</td>
                                                 <td><?= $row->nama; ?></td>
-                                                <td><?= ($row->id_kelas != null) ? $m_admin->find_kelas($row->id_kelas)->kelas : "-"; ?></td>
+                                                <td><?= ($row->id_kelas != null) ? $m_data->find_kelas($row->id_kelas)->kelas : "-"; ?></td>
                                                 <td><?= $row->keterangan; ?></td>
                                                 <td><?= date("H:i:s - d M Y", $row->created_at); ?></td>
                                             </tr>
@@ -96,7 +96,7 @@ if ($set == "absensi") {
                                                 <td><b class="text-success"><?= $no; ?></b></td>
                                                 <td><?= $row->nama_devices; ?> (<?= $row->id_devices; ?>)</td>
                                                 <td><?= $row->nama; ?></td>
-                                                <td><?= ($row->id_kelas != null) ? $m_admin->find_kelas($row->id_kelas)->kelas : "-"; ?></td>
+                                                <td><?= ($row->id_kelas != null) ? $m_data->find_kelas($row->id_kelas)->kelas : "-"; ?></td>
                                                 <td><?= $row->keterangan; ?></td>
                                                 <td><?= date("H:i:s - d M Y", $row->created_at); ?></td>
                                             </tr>

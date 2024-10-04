@@ -5,7 +5,7 @@ class Siswa extends CI_Controller {
 
 	public function __construct() {
         parent::__construct();
-        $this->load->model('m_admin');
+        $this->load->model('m_data');
 	
         date_default_timezone_set("asia/jakarta");
     }
@@ -13,8 +13,8 @@ class Siswa extends CI_Controller {
 	
     public function index(){
 		$data['set'] = "siswa";
-		$data['siswa'] = $this->m_admin->get_siswa();
-		$data['m_admin'] = $this->m_admin;
+		$data['siswa'] = $this->m_data->get_siswa();
+		$data['m_data'] = $this->m_data;
 		$this->load->view('i_siswa', $data);
 	}
 
@@ -36,8 +36,8 @@ class Siswa extends CI_Controller {
 
 	public function siswanew(){
 		$data['set'] = "new";
-		$data['siswa'] = $this->m_admin->get_siswa();
-		$data['m_admin'] = $this->m_admin;
+		$data['siswa'] = $this->m_data->get_siswa();
+		$data['m_data'] = $this->m_data;
 
 		$this->load->view('i_siswa', $data);
 	}
@@ -45,7 +45,7 @@ class Siswa extends CI_Controller {
 	public function edit_siswa($id = null) {
 		if ($this->session->userdata('userlogin')) { 
 			if (isset($id)) {
-				$siswa = $this->m_admin->get_siswa_byid($id);
+				$siswa = $this->m_data->get_siswa_byid($id);
 				if (isset($siswa)) {
 					foreach ($siswa as $key => $value) {
 						$data['id'] = $value->id_siswa;
@@ -53,12 +53,12 @@ class Siswa extends CI_Controller {
 						$data['nisn'] = $value->nisn;
 						$data['nik'] = $value->nik;
 						$data['ttl'] = $value->ttl;
-						$data['kelas'] = $value->id_kelas != null ? $this->m_admin->find_kelas($value->id_kelas) : null;
+						$data['kelas'] = $value->id_kelas != null ? $this->m_data->find_kelas($value->id_kelas) : null;
 						$data['alamat'] = $value->alamat;
 						$data['foto'] = $value->foto;
 					}
 	
-					$data['list_kelas'] = $this->m_admin->get_kelas();
+					$data['list_kelas'] = $this->m_data->get_kelas();
 					$data['set'] = "edit-siswa";
 	
 				
@@ -103,7 +103,7 @@ class Siswa extends CI_Controller {
 						);
 	
 					
-						$this->m_admin->update_siswa($id, $update_data);
+						$this->m_data->update_siswa($id, $update_data);
 	
 					
 						$this->session->set_flashdata('success', 'Data siswa berhasil diperbarui!');
@@ -146,7 +146,7 @@ class Siswa extends CI_Controller {
             );
 
            
-            if ($this->m_admin->updatesiswa($id, $update_data)) {
+            if ($this->m_data->updatesiswa($id, $update_data)) {
                 $this->session->set_flashdata('pesan', '<div class="alert alert-success" id="alert"><i class="glyphicon glyphicon-ok"></i> Data berhasil diupdate</div>');
             } else {
                 $this->session->set_flashdata('pesan', '<div class="alert alert-danger" id="alert"><i class="glyphicon glyphicon-remove"></i> Data gagal diupdate</div>');
@@ -167,7 +167,7 @@ class Siswa extends CI_Controller {
 	public function hapus_siswa($id=null){
 		if($this->session->userdata('userlogin'))    
 		{ 
-			if($this->m_admin->siswa_del($id)){
+			if($this->m_data->siswa_del($id)){
 				$this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil di hapus</div>");
 			}else{
 				$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data gagal di hapus</div>");
@@ -184,9 +184,9 @@ class Siswa extends CI_Controller {
     $tomorrow = strtotime("tomorrow");
 
   
-    $data['absensimasuk'] = $this->m_admin->get_absensi("masuk", $today, $tomorrow);
-    $data['absensikeluar'] = $this->m_admin->get_absensi("keluar", $today, $tomorrow);
-    $data['m_admin'] = $this->m_admin;
+    $data['absensimasuk'] = $this->m_data->get_absensi("masuk", $today, $tomorrow);
+    $data['absensikeluar'] = $this->m_data->get_absensi("keluar", $today, $tomorrow);
+    $data['m_data'] = $this->m_data;
 
    
     $this->load->view('i_absensi', $data);
@@ -197,8 +197,8 @@ public function fetch_data() {
     $tomorrow = strtotime("tomorrow");
 
    
-    $absensimasuk = $this->m_admin->get_absensi("masuk", $today, $tomorrow);
-    $absensikeluar = $this->m_admin->get_absensi("keluar", $today, $tomorrow);
+    $absensimasuk = $this->m_data->get_absensi("masuk", $today, $tomorrow);
+    $absensikeluar = $this->m_data->get_absensi("keluar", $today, $tomorrow);
 
   
     echo json_encode([
@@ -233,14 +233,14 @@ public function fetch_data() {
 			
 
 				if ($x==2) {
-					$data['datamasuk'] = $this->m_admin->get_absensi("masuk",$ts1,$ts2);
-					$data['datakeluar'] = $this->m_admin->get_absensi("keluar",$ts1,$ts2);
+					$data['datamasuk'] = $this->m_data->get_absensi("masuk",$ts1,$ts2);
+					$data['datakeluar'] = $this->m_data->get_absensi("keluar",$ts1,$ts2);
 					$data['tanggal'] = $tgl1 . " - " . $tgl2;
 					$data['waktuabsensi'] = $tgl1 . "_" . $tgl2;
 
 					$data['set'] = "last-absensi";
 					
-					$data['m_admin'] = $this->m_admin;
+					$data['m_data'] = $this->m_data;
 
 					$this->load->view('v_absensi', $data);
 				}else{

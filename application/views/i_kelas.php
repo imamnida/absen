@@ -68,7 +68,7 @@ $this->load->view('include/header.php');
                                         <tr>
                                             <td><?php echo $no++; ?></td>
                                             <td><b class="text-primary"><?php echo $row->kelas; ?></b></td>
-                                            <?php $jumlah_murid = $m_admin->count_murid($row->id); ?>
+                                            <?php $jumlah_murid = $m_data->count_murid($row->id); ?>
                                             <td><?php echo $jumlah_murid; ?></td>
                                             <td>
                                                 <a href="<?= base_url() ?>kelas/lihat_kelas?id_kelas=<?= $row->id; ?>" class="btn btn-primary">

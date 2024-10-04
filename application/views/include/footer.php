@@ -58,7 +58,9 @@ document.addEventListener('DOMContentLoaded', function() {
         { name: 'Menu Admin', url: '<?= base_url(); ?>users' },
         { name: 'Menu Device', url: '<?= base_url(); ?>devices' },
         { name: 'Menu Waktu Operasional', url: '<?= base_url(); ?>setting' },
-        { name: 'Menu SQL Command', url: '<?= base_url(); ?>sql' }
+        { name: 'Menu SQL Command', url: '<?= base_url(); ?>sql' },
+        { name: 'Menu Waktu Libur', url: '<?= base_url(); ?>kelas/manage_holidays' }
+        
     ];
 
     searchInput.addEventListener('input', function() {
@@ -91,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
         searchResults.style.display = 'block';
     }
 
-    // Close search results when clicking outside
+   
     document.addEventListener('click', function(event) {
         if (!searchResults.contains(event.target) && event.target !== searchInput) {
             searchResults.style.display = 'none';

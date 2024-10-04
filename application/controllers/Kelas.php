@@ -7,7 +7,7 @@ class Kelas extends CI_Controller {
 
 	public function __construct() {
         parent::__construct();
-        $this->load->model('m_admin');
+        $this->load->model('m_data');
         date_default_timezone_set("asia/jakarta");
     }
 
@@ -22,16 +22,16 @@ class Kelas extends CI_Controller {
 				'kelas' => $_POST['kelas']
 			];
 
-			$this->m_admin->insert_kelas($kelas);
+			$this->m_data->insert_kelas($kelas);
 			$id_kelas = $_GET['id_kelas'];
 
 			$data['message'] = "Berhasil menambahkan kelas"; 
 			
 		}
 
-		$data['kelas'] = $this->m_admin->get_kelas();
+		$data['kelas'] = $this->m_data->get_kelas();
 
-		$data['m_admin'] = $this->m_admin;
+		$data['m_data'] = $this->m_data;
 
 		$this->load->view('i_kelas', $data);
 
@@ -49,10 +49,10 @@ class Kelas extends CI_Controller {
         }
 
      
-        $this->load->model('m_admin');
+        $this->load->model('m_data');
 
       
-        $murid = $this->m_admin->find_murid($id_murid);
+        $murid = $this->m_data->find_murid($id_murid);
 
         if (!$murid) {
             echo "Murid tidak ditemukan";
@@ -89,8 +89,8 @@ class Kelas extends CI_Controller {
 
 		$id_kelas = $_GET['id_kelas'];
 
-		$kelas = $this->m_admin->find_kelas($id_kelas);
-		$murid = $this->m_admin->get_murid($id_kelas);
+		$kelas = $this->m_data->find_kelas($id_kelas);
+		$murid = $this->m_data->get_murid($id_kelas);
 		$data['kelas'] = $kelas;
 		$data['murid'] = $murid;
 		
@@ -109,7 +109,7 @@ class Kelas extends CI_Controller {
 
 		$id_kelas = $_GET['id_kelas'];
 
-		$kelas = $this->m_admin->hapus_kelas($id_kelas);
+		$kelas = $this->m_data->hapus_kelas($id_kelas);
 		
 		
 		redirect(base_url().'kelas');
@@ -127,7 +127,7 @@ class Kelas extends CI_Controller {
             return;
         }
 
-        $kelas = $this->m_admin->find_kelas($id_kelas);
+        $kelas = $this->m_data->find_kelas($id_kelas);
 
         if (!$kelas) {
             echo "kelas tidak ditemukan";
@@ -139,10 +139,10 @@ class Kelas extends CI_Controller {
             $tanggal_mulai = strtotime($this->input->get('tanggalMulai'));
             $tanggal_selesai = strtotime($this->input->get('tanggalSelesai')) + 86400; // Tambah 1 hari
 
-            $rekap_absen = $this->m_admin->rekap_absen($id_kelas, $tanggal_mulai, $tanggal_selesai);
+            $rekap_absen = $this->m_data->rekap_absen($id_kelas, $tanggal_mulai, $tanggal_selesai);
 
             // Fetch holidays
-            $holidays = $this->m_admin->get_holidays($tanggal_mulai, $tanggal_selesai);
+            $holidays = $this->m_data->get_holidays($tanggal_mulai, $tanggal_selesai);
         }
 
         $this->load->view('i_detail_absen', [
@@ -162,12 +162,12 @@ class Kelas extends CI_Controller {
             $tanggal = $this->input->post('tanggal');
             $keterangan = $this->input->post('keterangan');
             
-            $this->m_admin->add_holiday($tanggal, $keterangan);
+            $this->m_data->add_holiday($tanggal, $keterangan);
             $this->session->set_flashdata('success', 'Hari libur berhasil ditambahkan');
             redirect('kelas/manage_holidays');
         }
 
-        $holidays = $this->m_admin->get_all_holidays();
+        $holidays = $this->m_data->get_all_holidays();
         $this->load->view('i_manage_holidays', ['holidays' => $holidays]);
     }
 
@@ -178,7 +178,7 @@ class Kelas extends CI_Controller {
             return ;
         }
 
-        $this->m_admin->delete_holiday($id);
+        $this->m_data->delete_holiday($id);
         $this->session->set_flashdata('success', 'Hari libur berhasil dihapus');
         redirect('kelas/manage_holidays');
     }

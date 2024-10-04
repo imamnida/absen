@@ -1,5 +1,5 @@
 <?php
-class M_admin extends CI_Model {
+class M_data extends CI_Model {
 
     function get_users(){
         $this->db->select('*');
