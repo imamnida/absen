@@ -14,7 +14,7 @@ class Izin extends CI_Controller {
         $data['jumlah_tidak_absensi_per_kelas'] = $this->Izin_Model->get_jumlah_tidak_hadir_per_kelas();
         
         if ($this->agent->is_mobile()) {
-            $this->load->view('i_izin_mobile', $data);
+            $this->load->view('mobile/i_izin_mobile', $data);
         } else {
             $this->load->view('i_izin', $data);
         }
@@ -25,7 +25,7 @@ class Izin extends CI_Controller {
         $data['id_kelas'] = $id_kelas;
         
         if ($this->agent->is_mobile()) {
-            $this->load->view('i_izin_detail_mobile', $data);
+            $this->load->view('mobile/i_izin_detail_mobile', $data);
         } else {
             $this->load->view('i_izin_detail', $data);
         }
@@ -81,7 +81,7 @@ class Izin extends CI_Controller {
         $data['id_kelas'] = $id_kelas;
         
         if ($this->agent->is_mobile()) {
-            $this->load->view('i_izin_detail_mobile', $data);
+            $this->load->view('mobile/i_izin_detail_mobile', $data);
         } else {
             $this->load->view('i_izin_detail', $data);
         }
