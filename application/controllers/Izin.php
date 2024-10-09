@@ -7,6 +7,7 @@ class Izin extends CI_Controller {
         parent::__construct();
         $this->load->model('Izin_Model');
         $this->load->library('user_agent');
+        date_default_timezone_set("asia/jakarta");
     }
 
     public function index() {
@@ -56,7 +57,7 @@ class Izin extends CI_Controller {
             if ($is_already_absent) {
                 $data['notification'] = [
                     'type' => 'warning',
-                    'message' => 'Anda sudah melakukan absensi ' . $action . ' pada tanggal ' . $tanggal . '.',
+                    'message' => 'Siswa sudah melakukan absensi ' . $action . ' pada tanggal ' . $tanggal . '.',
                     'nisn' => $nisn
                 ];
             } else {

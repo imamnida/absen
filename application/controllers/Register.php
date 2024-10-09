@@ -8,6 +8,7 @@ class Register extends CI_Controller {
         $this->load->model('Siswa');
         $this->load->helper(array('form', 'url'));
         $this->load->library('upload');
+        date_default_timezone_set("Asia/Jakarta");
     }
 
     public function index() {
