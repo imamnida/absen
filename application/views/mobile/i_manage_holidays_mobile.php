@@ -24,13 +24,7 @@
             </div>
         </div>
 
-        <!-- Breadcrumb -->
-        <div class="text-white mb-4">
-            <a href="#" class="hover:underline">Home</a> &gt;
-            <a href="#" class="hover:underline">Kelas</a> &gt;
-            <span class="font-bold">WAKTU LIBUR</span>
-        </div>
-
+       
         <!-- Add Holiday Form -->
         <div class="bg-white rounded-lg p-5 mb-6">
             <h2 class="text-xl font-bold mb-4">TAMBAHKAN HARI LIBUR</h2>

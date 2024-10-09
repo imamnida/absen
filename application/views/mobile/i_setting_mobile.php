@@ -25,13 +25,7 @@
             </div>
         </div>
 
-        <!-- Breadcrumb -->
-        <div class="text-white mb-4">
-            <a href="#" class="hover:underline">Home</a> &gt;
-            <a href="#" class="hover:underline">Device</a> &gt;
-            <span class="font-bold">Setting Waktu Operasional</span>
-        </div>
-
+       
         <!-- Main Content -->
         <div class="bg-white rounded-lg p-5 mb-6">
             <h2 class="text-2xl font-bold mb-4">Setting Waktu Operasional</h2>
