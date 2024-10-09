@@ -35,7 +35,7 @@ class Dashboard extends CI_Controller {
         $data['jumlah_tidak_absensi'] = isset($data['jumlah_tidak_absensi']) ? $data['jumlah_tidak_absensi'] : 0;
 
         if ($this->agent->is_mobile()) {
-            $this->load->view('i_mobile_dashboard', $data);
+            $this->load->view('mobile/i_mobile_dashboard', $data);
         } else {
             $this->load->view('i_dashboard', $data);
         }

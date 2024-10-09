@@ -55,7 +55,7 @@ foreach ($days as $englishDay => $hari) {
                                 <!-- Loop untuk menampilkan form untuk setiap hari -->
                                 <?php foreach ($days as $englishDay => $hari): ?>
                                     <div class="day-section">
-                                        <h5>Waktu Operasional untuk Hari <?php echo $hari; ?></h5>
+                                        <h5> <?php echo $hari; ?></h5>
                                         
                                         <!-- Input Waktu Masuk -->
                                         <div class="row mb-3">

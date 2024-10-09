@@ -45,7 +45,7 @@ class Setting extends CI_Controller {
         }
     
         if ($this->agent->is_mobile()) {
-            $this->load->view('i_setting_mobile', $data);
+            $this->load->view('mobile/i_setting_mobile', $data);
         } else {
             $this->load->view('i_setting', $data);
         }

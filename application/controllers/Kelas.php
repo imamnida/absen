@@ -172,7 +172,7 @@ class Kelas extends CI_Controller {
 
         // Check if the user is on a mobile device
         if ($this->agent->is_mobile()) {
-            $this->load->view('i_manage_holidays_mobile', ['holidays' => $holidays]);
+            $this->load->view('mobile/i_manage_holidays_mobile', ['holidays' => $holidays]);
         } else {
             $this->load->view('i_manage_holidays', ['holidays' => $holidays]);
         }
