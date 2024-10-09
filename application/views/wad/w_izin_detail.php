@@ -1,13 +1,22 @@
 <?php $this->load->view('include/w_header.php'); ?>
 <div class="page-content-wrapper">
     <div class="container-fluid">
+        <?php if(isset($notification)): ?>
+            <div class="alert alert-<?php echo $notification['type']; ?> alert-dismissible fade show" role="alert">
+                <?php echo $notification['message']; ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php endif; ?>
+
         <div class="row">
             <div class="col-sm-12">
                 <div class="page-title-box">
                     <div class="btn-group float-right">
                         <ol class="breadcrumb hide-phone p-0 m-0">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="<?= base_url('izin') ?>">Daftar Kelas</a></li>
+                            <li class="breadcrumb-item"><a href="<?= base_url('wizin') ?>">Daftar Kelas</a></li>
                             <li class="breadcrumb-item active">Detail Izin</li>
                         </ol>
                     </div>
@@ -34,8 +43,9 @@
                                     
                                     <form id="absensiForm" action="<?php echo site_url('wizin/absen'); ?>" method="post">
                                         <input type="hidden" name="nisn" value="<?= $murid->nisn ?>">
-                                        <input type="hidden" name="id_devices" value="7">
+                                        <input type="hidden" name="id_devices" value="3">
                                         <input type="hidden" name="id_kelas" value="<?= $id_kelas ?>">
+                                        <input type="date" name="tanggal" class="form-control mb-2" required>
                                         <select name="action" class="form-control">
                                             <option value="masuk">Tidak Membawa Kartu Masuk</option>
                                             <option value="keluar">Tidak Membawa Kartu Keluar</option>

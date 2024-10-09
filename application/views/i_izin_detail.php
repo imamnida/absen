@@ -1,6 +1,15 @@
 <?php $this->load->view('include/header.php'); ?>
 <div class="page-content-wrapper">
     <div class="container-fluid">
+        <?php if(isset($notification)): ?>
+            <div class="alert alert-<?php echo $notification['type']; ?> alert-dismissible fade show" role="alert">
+                <?php echo $notification['message']; ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php endif; ?>
+
         <div class="row">
             <div class="col-sm-12">
                 <div class="page-title-box">
@@ -36,6 +45,7 @@
                                         <input type="hidden" name="nisn" value="<?= $murid->nisn ?>">
                                         <input type="hidden" name="id_devices" value="3">
                                         <input type="hidden" name="id_kelas" value="<?= $id_kelas ?>">
+                                        <input type="date" name="tanggal" class="form-control mb-2" required>
                                         <select name="action" class="form-control">
                                             <option value="masuk">Tidak Membawa Kartu Masuk</option>
                                             <option value="keluar">Tidak Membawa Kartu Keluar</option>

@@ -29,34 +29,42 @@ class Wizin extends CI_Controller {
     private function absen_process($action, $id_kelas) {
         $nisn = $this->input->post('nisn');
         $id_devices = $this->input->post('id_devices');
-
+        $tanggal = $this->input->post('tanggal');
+    
         $is_registered_nisn = $this->W_Izin_Model->is_registered_nisn($nisn);
-
+    
         if (!$is_registered_nisn) {
-            $data['message'] = 'NISN belum terdaftar. Silakan mendaftar terlebih dahulu.';
-            $data['siswa'] = $this->W_Izin_Model->get_siswa_by_kelas($id_kelas);
-            $data['id_kelas'] = $id_kelas;
-            $this->load->view('wad/w_izin_detail', $data);
-            return;
-        }
-
-        $is_already_absent = $this->W_Izin_Model->is_already_absent($nisn, $action);
-
-        if ($is_already_absent) {
-            $data['message'] = 'Anda sudah melakukan absensi ' . $action . ' sebelumnya hari ini.';
+            $data['notification'] = [
+                'type' => 'error',
+                'message' => 'NISN belum terdaftar. Silakan mendaftar terlebih dahulu.'
+            ];
         } else {
-            // Call the simpan_absensi method based on the action
-            if (in_array($action, ['masuk', 'keluar', 'izin', 'sakit'])) {
-                $this->W_Izin_Model->simpan_absensi($nisn, $id_devices, $action);
-                $data['message'] = 'Absensi ' . $action . ' berhasil.';
+            $is_already_absent = $this->W_Izin_Model->is_already_absent($nisn, $action, $tanggal);
+    
+            if ($is_already_absent) {
+                $data['notification'] = [
+                    'type' => 'warning',
+                    'message' => 'Anda sudah melakukan absensi ' . $action . ' pada tanggal ' . $tanggal . '.'
+                ];
             } else {
-                $data['message'] = 'Tindakan absensi tidak valid.';
+                if (in_array($action, ['masuk', 'keluar', 'izin', 'sakit'])) {
+                    $this->W_Izin_Model->simpan_absensi($nisn, $id_devices, $action, $tanggal);
+                    $data['notification'] = [
+                        'type' => 'success',
+                        'message' => 'Absensi ' . $action . ' berhasil untuk tanggal ' . $tanggal . '.'
+                    ];
+                } else {
+                    $data['notification'] = [
+                        'type' => 'error',
+                        'message' => 'Tindakan absensi tidak valid.'
+                    ];
+                }
             }
         }
-
+    
         $data['siswa'] = $this->W_Izin_Model->get_siswa_by_kelas($id_kelas);
         $data['id_kelas'] = $id_kelas;
-        $this->load->view('wad/w_izin_detail', $data);
+        $this->load->view('wad/W_izin_detail', $data);
     }
 }
 ?>

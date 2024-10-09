@@ -64,22 +64,21 @@ class Izin_Model extends CI_Model {
         return $query->num_rows() > 0;
     }
 
-    public function is_already_absent($nisn, $action) {
+    public function is_already_absent($nisn, $action, $tanggal) {
         $id_siswa = $this->get_id_siswa_by_nisn($nisn);
         if (!$id_siswa) {
             return false;
         }
-
-        $today = date("Y-m-d");
-        $beginning_of_today = strtotime('midnight', strtotime($today));
-        $beginning_of_tomorrow = strtotime('+1 day', $beginning_of_today);
-
+    
+        $start_of_day = strtotime($tanggal . ' 00:00:00');
+        $end_of_day = strtotime($tanggal . ' 23:59:59');
+    
         $this->db->where('id_siswa', $id_siswa);
         $this->db->where('keterangan', $action);
-        $this->db->where('created_at >=', $beginning_of_today);
-        $this->db->where('created_at <', $beginning_of_tomorrow);
+        $this->db->where('created_at >=', $start_of_day);
+        $this->db->where('created_at <=', $end_of_day);
         $query = $this->db->get('absensi');
-
+    
         return $query->num_rows() > 0;
     }
 
@@ -89,20 +88,20 @@ class Izin_Model extends CI_Model {
         return $result ? $result->id_siswa : null;
     }
 
-    public function simpan_absensi($nisn, $id_devices, $action) {
+    public function simpan_absensi($nisn, $id_devices, $action, $tanggal) {
         $id_siswa = $this->get_id_siswa_by_nisn($nisn);
         if (!$id_siswa) {
             return false;
         }
-
+    
         $data = array(
             'id_devices' => $id_devices,
             'id_siswa' => $id_siswa,
             'keterangan' => $action,
             'foto' => '',
-            'created_at' => time()
+            'created_at' => strtotime($tanggal)
         );
-
+    
         return $this->db->insert('absensi', $data);
     }
 }

@@ -26,37 +26,49 @@ class Izin extends CI_Controller {
         $this->absen_process($action, $id_kelas);
     }
 
-    private function absen_process($action, $id_kelas) {
-        $nisn = $this->input->post('nisn');
-        $id_devices = $this->input->post('id_devices');
+   private function absen_process($action, $id_kelas) {
+    $nisn = $this->input->post('nisn');
+    $id_devices = $this->input->post('id_devices');
+    $tanggal = $this->input->post('tanggal');
 
-        $is_registered_nisn = $this->Izin_Model->is_registered_nisn($nisn);
+    $is_registered_nisn = $this->Izin_Model->is_registered_nisn($nisn);
 
-        if (!$is_registered_nisn) {
-            $data['message'] = 'NISN belum terdaftar. Silakan mendaftar terlebih dahulu.';
-            $data['siswa'] = $this->Izin_Model->get_siswa_by_kelas($id_kelas);
-            $data['id_kelas'] = $id_kelas;
-            $this->load->view('i_izin_detail', $data);
-            return;
-        }
-
-        $is_already_absent = $this->Izin_Model->is_already_absent($nisn, $action);
+    if (!$is_registered_nisn) {
+        $data['notification'] = [
+            'type' => 'error',
+            'message' => 'NISN belum terdaftar. Silakan mendaftar terlebih dahulu.',
+            'nisn' => $nisn
+        ];
+    } else {
+        $is_already_absent = $this->Izin_Model->is_already_absent($nisn, $action, $tanggal);
 
         if ($is_already_absent) {
-            $data['message'] = 'Anda sudah melakukan absensi ' . $action . ' sebelumnya hari ini.';
+            $data['notification'] = [
+                'type' => 'warning',
+                'message' => 'Anda sudah melakukan absensi ' . $action . ' pada tanggal ' . $tanggal . '.',
+                'nisn' => $nisn
+            ];
         } else {
-
             if (in_array($action, ['masuk', 'keluar', 'izin', 'sakit'])) {
-                $this->Izin_Model->simpan_absensi($nisn, $id_devices, $action);
-                $data['message'] = 'Absensi ' . $action . ' berhasil.';
+                $this->Izin_Model->simpan_absensi($nisn, $id_devices, $action, $tanggal);
+                $data['notification'] = [
+                    'type' => 'success',
+                    'message' => 'Absensi ' . $action . ' berhasil untuk tanggal ' . $tanggal . '.',
+                    'nisn' => $nisn
+                ];
             } else {
-                $data['message'] = 'Tindakan absensi tidak valid.';
+                $data['notification'] = [
+                    'type' => 'error',
+                    'message' => 'Tindakan absensi tidak valid.',
+                    'nisn' => $nisn
+                ];
             }
         }
-
-        $data['siswa'] = $this->Izin_Model->get_siswa_by_kelas($id_kelas);
-        $data['id_kelas'] = $id_kelas;
-        $this->load->view('i_izin_detail', $data);
     }
+
+    $data['siswa'] = $this->Izin_Model->get_siswa_by_kelas($id_kelas);
+    $data['id_kelas'] = $id_kelas;
+    $this->load->view('i_izin_detail', $data);
+}
 }
 ?>
