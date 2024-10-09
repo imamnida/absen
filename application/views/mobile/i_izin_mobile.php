@@ -25,7 +25,7 @@
         </div>
 
 
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">Siswa Tidak Hadir Hari Ini</h2>
+        <h2 class="text-2xl font-bold text-white-800 mb-4">Siswa Tidak Hadir Hari Ini</h2>
 
         <div class="bg-white rounded-lg shadow-md p-4">
             <h3 class="text-xl font-bold text-gray-800 mb-4">Daftar Kelas</h3>
