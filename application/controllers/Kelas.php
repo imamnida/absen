@@ -8,6 +8,7 @@ class Kelas extends CI_Controller {
 	public function __construct() {
         parent::__construct();
         $this->load->model('m_data');
+        $this->load->library('user_agent');
         date_default_timezone_set("asia/jakarta");
     }
 
@@ -168,7 +169,13 @@ class Kelas extends CI_Controller {
         }
 
         $holidays = $this->m_data->get_all_holidays();
-        $this->load->view('i_manage_holidays', ['holidays' => $holidays]);
+
+        // Check if the user is on a mobile device
+        if ($this->agent->is_mobile()) {
+            $this->load->view('i_manage_holidays_mobile', ['holidays' => $holidays]);
+        } else {
+            $this->load->view('i_manage_holidays', ['holidays' => $holidays]);
+        }
     }
 
     public function delete_holiday($id)
