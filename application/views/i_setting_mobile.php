@@ -45,7 +45,7 @@
             <form action="<?= base_url(); ?>setting/updateWaktuOperasional" method="post" id="settingsForm" class="space-y-6">
                 <?php foreach ($days as $englishDay => $hari): ?>
                     <div class="border-b pb-4">
-                        <h3 class="text-lg font-semibold mb-2">Waktu Operasional untuk Hari <?php echo $hari; ?></h3>
+                        <h3 class="text-lg font-semibold mb-2"> <?php echo $hari; ?></h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label for="inputMasuk_<?php echo $englishDay; ?>" class="block text-sm font-medium text-gray-700 mb-1">Waktu Masuk (<?php echo $hari; ?>)</label>
