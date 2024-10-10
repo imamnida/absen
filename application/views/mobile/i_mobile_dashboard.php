@@ -136,10 +136,11 @@ if ($set == "dashboard")
             <i class="fas fa-cog text-gray-500"></i>
             <span class="text-xs">Hari Libur</span>
         </a>
-        <a href="<?=base_url();?>profil" class="flex flex-col items-center">
-            <i class="fas fa-user text-gray-500"></i>
-            <span class="text-xs">Profil</span>
-        </a>
+        <a href="<?=base_url();?>login/logout" class="flex flex-col items-center">
+    <i class="fas fa-sign-out-alt text-gray-500"></i> <!-- Change the icon to 'sign-out-alt' for logout -->
+    <span class="text-xs">Logout</span>
+</a>
+
     </div>
     </div>
 </body>

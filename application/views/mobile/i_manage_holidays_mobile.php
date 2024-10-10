@@ -74,10 +74,11 @@
                                     <td class="border px-4 py-2"><?php echo date('Y-m-d', strtotime($holiday->tanggal)); ?></td>
                                     <td class="border px-4 py-2"><?php echo $holiday->keterangan; ?></td>
                                     <td class="border px-4 py-2">
-                                        <a href="<?php echo base_url('kelas/delete_holiday/'.$holiday->id); ?>" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-4 rounded text-xs" onclick="return confirm('Are you sure?')">
-                                            <i class="fa fa-trash"></i> Hapus
-                                        </a>
-                                    </td>
+    <a href="<?php echo base_url('kelas/delete_holiday/'.$holiday->id); ?>" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-4 rounded text-xs" onclick="return confirm('Are you sure?')">
+        <i class="fa fa-trash"></i> <!-- Only the trash icon -->
+    </a>
+</td>
+
                                 </tr>
                             <?php endforeach; ?>
                         <?php endif; ?>
@@ -105,10 +106,12 @@
             <i class="fas fa-cog text-gray-500"></i>
             <span class="text-xs">Hari Libur</span>
         </a>
-        <a href="<?=base_url();?>profil" class="flex flex-col items-center">
-            <i class="fas fa-user text-gray-500"></i>
-            <span class="text-xs">Profil</span>
-        </a>
+        <a href="<?=base_url();?>login/logout" class="flex flex-col items-center">
+    <i class="fas fa-sign-out-alt text-gray-500"></i> <!-- Change the icon to 'sign-out-alt' for logout -->
+    <span class="text-xs">Logout</span>
+</a>
+
+    </div>
     </div>
 </body>
 </html>
