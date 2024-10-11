@@ -39,25 +39,20 @@ class W_Izin_Model extends CI_Model {
     
 
     public function get_siswa_by_kelas($id_kelas) {
-        $today = date("Y-m-d");
-        $beginning_of_today = strtotime('midnight', strtotime($today));
-        $beginning_of_tomorrow = strtotime('+1 day', $beginning_of_today);
-
         $this->db->select('siswa.*, kelas.kelas, kampus.kampus');
         $this->db->from('siswa');
         $this->db->join('kelas', 'siswa.id_kelas = kelas.id', 'left');
         $this->db->join('kampus', 'siswa.id_kampus = kampus.id', 'left');
-        $this->db->join('absensi', 'siswa.id_siswa = absensi.id_siswa AND absensi.created_at >= ' . $beginning_of_today . ' AND absensi.created_at < ' . $beginning_of_tomorrow, 'left');
         $this->db->where('siswa.id_kelas', $id_kelas);
-        $this->db->where('absensi.id_absensi IS NULL');
         $query = $this->db->get();
-
+    
         if ($query->num_rows() > 0) {
             return $query->result();
         }
-
+    
         return [];
     }
+    
 
     public function is_registered_nisn($nisn) {
         $query = $this->db->get_where('siswa', array('nisn' => $nisn));
