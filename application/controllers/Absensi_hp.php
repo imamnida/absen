@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Absensi_hp extends CI_Controller {
 
-    private $coordinatesDMS = "6°50'03\"S 108°13'44\"E";  
+    private $coordinatesDMS = "6°50'30\"S 108°14'22\"E";  
     private $centerLat;
     private $centerLng;
     private $allowedRadius = 1000; 
