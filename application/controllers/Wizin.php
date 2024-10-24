@@ -65,7 +65,7 @@ class Wizin extends CI_Controller {
     
         $data['siswa'] = $this->W_Izin_Model->get_siswa_by_kelas($id_kelas);
         $data['id_kelas'] = $id_kelas;
-        $this->load->view('wad/W_izin_detail', $data);
+        $this->load->view('wad/w_izin_detail', $data);
     }
 }
 ?>
