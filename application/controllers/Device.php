@@ -15,7 +15,7 @@ class Device extends CI_Controller {
         $data['devices'] = $this->DeviceModel->get_active_devices();
 
        
-        $this->load->view('device/index', $data);
+        $this->load->view('device', $data);
        
     }
 
