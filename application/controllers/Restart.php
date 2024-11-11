@@ -1,4 +1,4 @@
-// application/controllers/api/Restart.php
+
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -20,7 +20,7 @@ class Restart extends CI_Controller {
         }
         
         // Get device details
-        $device = $this->db->get_where('devices', ['id' => $iddev])->row();
+        $device = $this->db->get_where('devices', ['id_devices' => $iddev])->row();
         
         if (!$device) {
             $this->output

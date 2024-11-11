@@ -90,10 +90,8 @@ if ($set == "siswa") {
     </div><!-- container -->
 </div> <!-- Page content Wrapper -->
 
-
 <?php
-} else if ($set == "edit-siswa") {
-?>
+} else if ($set == "edit-siswa") { ?>
     <div class="page-content-wrapper">
         <div class="container-fluid">
             <div class="row">
@@ -111,12 +109,11 @@ if ($set == "siswa") {
                 </div>
                 <div class="clearfix"></div>
             </div>
-            <!-- end page title end breadcrumb -->
             <div class="row">
                 <div class="col-md-12 col-xl-12">
                     <div class="card m-b-30">
                         <div class="card-body">
-                            <h4 class="mt-0 header-title">General Form</h4>
+                            <h4 class="mt-0 header-title">Form Edit Siswa</h4>
                             <div class="general-label">
                                 <form role="form" action="<?= base_url(); ?>siswa/save_edit_siswa" method="post" enctype="multipart/form-data">
                                     <div class="box-body">
@@ -131,6 +128,7 @@ if ($set == "siswa") {
                                             <label>NISN</label>
                                             <input type="text" name="nisn" class="form-control" placeholder="NISN" value="<?php if (isset($nisn)) { echo $nisn; } ?>" required>
                                         </div>
+
                                         <div class="form-group">
                                             <label>NIK</label>
                                             <input type="number" name="nik" class="form-control" placeholder="NIK" value="<?php if (isset($nik)) { echo $nik; } ?>" required>
@@ -151,8 +149,13 @@ if ($set == "siswa") {
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Tempat, Tanggal Lahir</label>
-                                            <input type="text" name="tanggal_lahir" class="form-control" placeholder="Tempat, Tanggal Lahir" value="<?php if (isset($tanggal_lahir)) { echo $tanggal_lahir; } ?>" required>
+                                            <label>Tempat Lahir</label>
+                                            <input type="text" name="tempat_lahir" class="form-control" placeholder="Tempat Lahir" value="<?php if (isset($tempat_lahir)) { echo $tempat_lahir; } ?>" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Tanggal Lahir</label>
+                                            <input type="date" name="tanggal_lahir" class="form-control" value="<?php if (isset($tanggal_lahir)) { echo date('Y-m-d', strtotime($tanggal_lahir)); } ?>" required>
                                         </div>
 
                                         <div class="form-group">
@@ -171,10 +174,11 @@ if ($set == "siswa") {
                             </div>
                         </div>
                     </div>
-                </div> <!-- end col -->
-            </div> <!-- end row -->
-        </div><!-- container -->
+                </div>
+            </div>
+        </div>
     </div>
+
 <?php
 } else if ($set == "new") { ?>
     <div class="page-content-wrapper">
