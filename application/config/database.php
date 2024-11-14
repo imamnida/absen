@@ -80,9 +80,9 @@ $db['default'] = array(
 	  
 	
 
-	'username' => 'root',
-	'password' => '',
-	'database' => 'absensi',
+	'username' => 'u398357365_salma',
+	'password' => 'Imamdienul1!',
+	'database' => 'u398357365_absensi',
 
 	
 
