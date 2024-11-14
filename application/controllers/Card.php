@@ -2,21 +2,11 @@
 
 use Picqer\Barcode\BarcodeGeneratorPNG;
 
-
 class Card extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('m_data');
         date_default_timezone_set("Asia/Jakarta");
-    }
-
-    public function index() {
-        if (!$this->session->userdata('userlogin')) {
-            redirect('login');
-        }
-
-        $data['murid'] = $this->m_data->get_all_murid();
-        $this->load->view('i_kelas_detail', $data);
     }
 
     public function generate_cards() {
@@ -58,25 +48,25 @@ class Card extends CI_Controller {
         if (!$this->session->userdata('userlogin')) {
             redirect('login');
         }
-    
+
         $students = $this->m_data->get_all_murid();
         $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
-    
+
         $zip = new ZipArchive();
         $zip_filename = 'id_cards.zip';
         $zip->open($zip_filename, ZipArchive::CREATE | ZipArchive::OVERWRITE);
         
         // Directory for temporary PDF storage
         $temp_dir = sys_get_temp_dir();
-    
+
         foreach ($students as $student) {
             $barcode = base64_encode($generator->getBarcode($student->nisn, $generator::TYPE_CODE_128));
             $card_html = $this->load->view('display_cards', ['cards' => [['student' => $student, 'barcode' => $barcode]]], true);
-    
+
             $pdf = new \TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-            $pdf->AddPage('P', 'mm', array(85.6, 54));
+            $pdf->AddPage('P', 'mm', array(85.6, 54)); // Set the page size to match ID card
             $pdf->writeHTML($card_html, true, false, true, false, '');
-    
+
             // Save PDF to temporary directory
             $pdf_filename = $temp_dir . '/' . $student->nama . '.pdf';
             $pdf->Output($pdf_filename, 'F');
@@ -84,13 +74,13 @@ class Card extends CI_Controller {
             // Add the PDF file to the zip
             $zip->addFile($pdf_filename, $student->nama . '.pdf');
         }
-    
+
         $zip->close();
-    
+
         header('Content-Type: application/zip');
         header('Content-Disposition: attachment; filename="' . $zip_filename . '"');
         header('Content-Length: ' . filesize($zip_filename));
-    
+
         readfile($zip_filename);
         
         // Clean up temporary files

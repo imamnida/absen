@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -133,7 +132,7 @@
                     </tr>
                     <tr>
                         <th>TTL</th>
-                        <td><strong>: <?= $card['student']->tempat_lahir . $card['student']->tanggal_lahir; ?></strong></td>
+                        <td><strong>: <?= $card['student']->tempat_lahir . ' ' . $card['student']->tanggal_lahir; ?></strong></td>
                     </tr>
                     <tr>
                         <th>NIK</th>
@@ -144,15 +143,12 @@
                         <td><strong>: <?= $card['student']->nisn; ?></strong></td>
                     </tr>
                     <tr>
-                        <th>Alamat</th>
-                        <td><strong>: <?= $card['student']->alamat; ?></strong></td>
+                        <th>Kelas</th>
+                        <td><strong>: <?= $card['student']->kelas; ?></strong></td>
                     </tr>
                 </table>
             </div>
         </div>
     <?php } ?>
-
-    <a href="<?= base_url('card/download_cards'); ?>" class="btn">Download All Cards</a>
 </body>
 </html>
-```
