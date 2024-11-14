@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,6 +104,18 @@
                 height: 100vh;
             }
         }
+
+        .btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -119,8 +132,8 @@
                         <td><strong>: <?= $card['student']->nama; ?></strong></td>
                     </tr>
                     <tr>
-                        <th>tanggal_lahir</th>
-                        <td><strong>: <?= $card['student']->tanggal_lahir; ?></strong></td>
+                        <th>TTL</th>
+                        <td><strong>: <?= $card['student']->tempat_lahir . $card['student']->tanggal_lahir; ?></strong></td>
                     </tr>
                     <tr>
                         <th>NIK</th>
@@ -138,5 +151,8 @@
             </div>
         </div>
     <?php } ?>
+
+    <a href="<?= base_url('card/download_cards'); ?>" class="btn">Download All Cards</a>
 </body>
 </html>
+```

@@ -30,7 +30,7 @@
                                 <!-- Login Form -->
                                 <div class="text-center pt-3">
                                     <a href="index.html">
-                                        <img src="<?=base_url();?>assets/images/logogisaka.png" alt="logo" height="100" />
+                                        <img src="<?=base_url();?>assets/images/mts7.png" alt="logo" height="100" />
                                     </a>
                                 </div>
                                 <div class="px-3 pb-3">

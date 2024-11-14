@@ -46,7 +46,7 @@
                                     </tr>
                                     <tr>
                                         <th scope="row">Tempat, Tanggal Lahir:</th>
-                                        <td><?= $murid->tanggal_lahir; ?></td>
+                                        <td><?=$murid->tempat_lahir . ", " . $murid->tanggal_lahir; ?></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Kelas:</th>
@@ -88,8 +88,8 @@
                             <td><strong>: <?= $murid->nama; ?></strong></td>
                         </tr>
                         <tr>
-                            <th><strong>tanggal_lahir</strong></th>
-                            <td><strong>: <?= $murid->tanggal_lahir; ?></strong></td>
+                            <th><strong>TTL</strong></th>
+                            <td><strong>: <?= $murid->tempat_lahir . ", " . $murid->tanggal_lahir; ?></strong></td>
                         </tr>
                         <tr>
                             <th><strong>NIK</strong></th>
@@ -116,20 +116,20 @@
         max-height: 100vh;
         overflow-y: auto;
         padding: 10px;
-        margin-top: 70px; /* Adjust the value as needed to push content below the navbar */
+        margin-top: 70px;
     }
 
     .card.kartu-siswa {
         position: relative;
-        width: 85.6mm; /* Width of the card */
-        height: 54mm; /* Height of the card */
+        width: 85.6mm;
+        height: 54mm;
         background-image: url('<?= base_url('assets/images/template.png'); ?>');
         background-size: cover;
         background-position: center;
         border-radius: 8px;
         border: 2px solid #000;
         box-sizing: border-box;
-        margin: 0 auto; /* Center horizontally */
+        margin: 0 auto;
         page-break-inside: avoid;
     }
 

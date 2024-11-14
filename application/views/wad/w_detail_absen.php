@@ -20,7 +20,7 @@ if($this->session->userdata('userlogin')) {
     <meta content="Mannatthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <link rel="shortcut icon" href="<?=base_url();?>assets/images/logo.png">
+    <link rel="shortcut icon" href="<?=base_url();?>assets/images/mts7.png">
 
     <!--Morris Chart CSS -->
     <link rel="stylesheet" href="<?=base_url();?>assets/plugins/fullcalendar/vanillaCalendar.css"/>
