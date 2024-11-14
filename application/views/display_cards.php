@@ -142,10 +142,7 @@
                         <th>NISN</th>
                         <td><strong>: <?= $card['student']->nisn; ?></strong></td>
                     </tr>
-                    <tr>
-                        <th>Kelas</th>
-                        <td><strong>: <?= $card['student']->kelas; ?></strong></td>
-                    </tr>
+                    
                 </table>
             </div>
         </div>
