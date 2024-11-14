@@ -2,11 +2,11 @@
 
 use Picqer\Barcode\BarcodeGeneratorPNG;
 
+
 class Card extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('m_data');
-        $this->load->library('tcpdf');
         date_default_timezone_set("Asia/Jakarta");
     }
 
@@ -65,6 +65,9 @@ class Card extends CI_Controller {
         $zip = new ZipArchive();
         $zip_filename = 'id_cards.zip';
         $zip->open($zip_filename, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+        
+        // Directory for temporary PDF storage
+        $temp_dir = sys_get_temp_dir();
     
         foreach ($students as $student) {
             $barcode = base64_encode($generator->getBarcode($student->nisn, $generator::TYPE_CODE_128));
@@ -74,9 +77,12 @@ class Card extends CI_Controller {
             $pdf->AddPage('P', 'mm', array(85.6, 54));
             $pdf->writeHTML($card_html, true, false, true, false, '');
     
-            $filename = $student->nama . '.png';
-            $pdf->Output($filename, 'S');
-            $zip->addFromString($filename, $pdf->Output($filename, 'S'));
+            // Save PDF to temporary directory
+            $pdf_filename = $temp_dir . '/' . $student->nama . '.pdf';
+            $pdf->Output($pdf_filename, 'F');
+            
+            // Add the PDF file to the zip
+            $zip->addFile($pdf_filename, $student->nama . '.pdf');
         }
     
         $zip->close();
@@ -86,6 +92,11 @@ class Card extends CI_Controller {
         header('Content-Length: ' . filesize($zip_filename));
     
         readfile($zip_filename);
+        
+        // Clean up temporary files
+        foreach ($students as $student) {
+            unlink($temp_dir . '/' . $student->nama . '.pdf');
+        }
         unlink($zip_filename);
         exit;
     }
