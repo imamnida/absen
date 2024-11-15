@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,20 +8,28 @@
         body {
             margin: 0;
             padding: 0;
+            background: #f0f0f0;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
         }
 
         .card.kartu-siswa {
             position: relative;
             width: 85.6mm;
             height: 54mm;
-            background-image: url('<?= base_url('assets/images/template.png'); ?>');
+            background-image: url('<?= base_url("assets/images/template.png"); ?>');
             background-size: cover;
             background-position: center;
             border-radius: 8px;
             border: 2px solid #000;
             box-sizing: border-box;
-            page-break-inside: avoid; 
-            margin: 0 auto; /* Center the card */
+            page-break-inside: avoid;
+            margin: 0 auto;
         }
 
         .barcode {
@@ -48,6 +55,7 @@
             background-position: center;
             border-radius: 5px;
             border: 2px solid #fff;
+            overflow: hidden;
         }
 
         .details {
@@ -72,10 +80,29 @@
             font-size: 8px;
         }
 
+        .btn-download {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            text-align: center;
+            max-width: 200px;
+            font-family: Arial, sans-serif;
+        }
+
         @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                background: white;
+            }
+
             .card.kartu-siswa {
-                page-break-before: always; /* Ensure each card starts on a new page */
-                background-image: url('<?= base_url('assets/images/template.png'); ?>') !important;
+                page-break-before: always;
+                background-image: url('<?= base_url("assets/images/template.png"); ?>') !important;
                 background-size: cover;
                 background-position: center;
                 -webkit-print-color-adjust: exact;
@@ -83,75 +110,55 @@
             }
 
             .photo {
-                background-image: url('<?= base_url('uploads/'.$card['student']->foto); ?>') !important;
+                background-image: url('<?= base_url("uploads/".$card["student"]->foto); ?>') !important;
                 background-size: cover;
                 background-position: center;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
 
-            @page {
-                size: 85.6mm 54mm; /* Set page size to ID card dimensions */
-                margin: 0; /* No margin */
+            .btn-download {
+                display: none;
             }
-
-            body {
-                margin: 0;
-                padding: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-            }
-        }
-
-        .btn {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
         }
     </style>
 </head>
 <body>
-    <?php foreach ($cards as $card) { ?>
-        <div class="card kartu-siswa">
-            <div class="barcode">
-                <img src="data:image/png;base64,<?= $card['barcode']; ?>" alt="Barcode">
+    <div class="card-container">
+        <?php foreach ($cards as $card) : ?>
+            <div class="card kartu-siswa">
+                <div class="barcode">
+                    <img src="data:image/png;base64,<?= $card['barcode']; ?>" alt="Barcode">
+                </div>
+                <div class="photo" style="background-image: url('<?= base_url('uploads/'.$card['student']->foto); ?>');"></div>
+                <div class="details">
+                    <table>
+                        <tr>
+                            <th>Nama</th>
+                            <td><strong>: <?= $card['student']->nama; ?></strong></td>
+                        </tr>
+                        <tr>
+                            <th>TTL</th>
+                            <td><strong>: <?= $card['student']->tempat_lahir . $card['student']->tanggal_lahir; ?></strong></td>
+                        </tr>
+                        <tr>
+                            <th>NIK</th>
+                            <td><strong>: <?= $card['student']->nik; ?></strong></td>
+                        </tr>
+                        <tr>
+                            <th>NISN</th>
+                            <td><strong>: <?= $card['student']->nisn; ?></strong></td>
+                        </tr>
+                        <tr>
+                            <th>Alamat</th>
+                            <td><strong>: <?= $card['student']->alamat; ?></strong></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-            <div class="photo" style="background-image: url('<?= base_url('uploads/'.$card['student']->foto); ?>');"></div>
-            <div class="details">
-                <table>
-                    <tr>
-                        <th>Nama</th>
-                        <td><strong>: <?= $card['student']->nama; ?></strong></td>
-                    </tr>
-                    <tr>
-                        <th>TTL</th>
-                        <td><strong>: <?= $card['student']->tempat_lahir . $card['student']->tanggal_lahir; ?></strong></td>
-                    </tr>
-                    <tr>
-                        <th>NIK</th>
-                        <td><strong>: <?= $card['student']->nik; ?></strong></td>
-                    </tr>
-                    <tr>
-                        <th>NISN</th>
-                        <td><strong>: <?= $card['student']->nisn; ?></strong></td>
-                    </tr>
-                    <tr>
-                        <th>Alamat</th>
-                        <td><strong>: <?= $card['student']->alamat; ?></strong></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    <?php } ?>
+        <?php endforeach; ?>
+    </div>
 
-    <a href="<?= base_url('card/download_cards'); ?>" class="btn">Download All Cards</a>
+    <a href="<?= base_url('card/download_cards'); ?>" class="btn-download">Download Semua Kartu</a>
 </body>
 </html>

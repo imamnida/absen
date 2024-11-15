@@ -75,7 +75,7 @@ if($this->session->userdata('userlogin'))
 </div>
 
 
-                <div class="sidebar-inner slimscrollleft" id="sidebar-main">
+<div class="sidebar-inner slimscrollleft" id="sidebar-main">
 
                     <div id="sidebar-menu">
                         <ul>
@@ -112,7 +112,7 @@ if($this->session->userdata('userlogin'))
                                     <li>
                                         <a href="<?=base_url();?>siswa/siswanew" class="waves-effect">
                                             <i class="mdi mdi-access-point"></i>
-                                            <span>siswa</span>
+                                            <span>RFID</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -143,17 +143,14 @@ if($this->session->userdata('userlogin'))
 
                                 </ul>
                             </li>
-                            <li>
-                                <a href="<?=base_url();?>absensi" class="waves-effect">
+                            <!--li>
+                                <a href="<?=base_url();?>absensi_bc" class="waves-effect">
                                     <i class="mdi mdi-qrcode-scan"></i>
                                     <span>Absensi Barcode</span>
                                 </a>
-                            </li>
+                            </li-->
                             <li>
-                                <a href="<?=base_url();?>histori" class="waves-effect">
-                                    <i class="mdi mdi-history"></i>
-                                    <span> Histori Alat </span>
-                                </a>
+                                
                            
                             <li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-cog"></i> <span> Pengaturan </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
@@ -169,15 +166,14 @@ if($this->session->userdata('userlogin'))
                                     <i class="mdi mdi-xaml"></i>
                                     <span> Device </span>
                                 </a>
-                            <li>
-                                <a href="<?=base_url();?>kampus" class="waves-effect">
-                                    <i class="mdi mdi-access-point"></i>
-                                    <span> Access Point </span>
-                                </a>
-                            </li>
+                           
                                 <a href="<?=base_url();?>setting" class="waves-effect">
                                     <i class="mdi mdi-camera-timer"></i>
                                     <span> Waktu Oprasional </span>
+                                </a>
+                                <a href="<?=base_url();?>kelas/manage_holidays" class="waves-effect">
+                                    <i class="mdi mdi-calendar-remove"></i>
+                                    <span> Waktu Libur </span>
                                 </a>
                             </li>   
                             <li>
@@ -196,7 +192,6 @@ if($this->session->userdata('userlogin'))
                 </div>
                 <!-- end sidebarinner -->
             </div>
-            <!-- Left Sidebar End -->
             
 
             <!-- Start right Content here -->

@@ -25,7 +25,7 @@ if ($set == "dashboard") {
                 <div class="card m-b-30">
                     <div class="card-body text-center">
                         <img src="<?=base_url();?>assets/images/mts7.png" alt="School Logo" style="max-width: 220px; margin-bottom: 10px;">
-                        <h1 class="card-title">SELAMAT DATANG DI SISTEM INFORMASI ABSENSI TEPAT AKURAT</h1>
+                        <h1 class="card-title">SELAMAT DATANG DI SISTEM INFORMASI PRESENSI TEPAT AKURAT</h1>
                     </div>
                 </div>
             </div>
