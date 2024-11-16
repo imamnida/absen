@@ -26,11 +26,14 @@
                             <h4 class="mt-0 header-title">Data Murid Kelas: <?= $kelas->kelas; ?></h4>
                             <div>
                                 <a href="<?= base_url(); ?>/kelas/rekap_absen/<?= $kelas->id; ?>" class="btn btn-primary">Rekap Absen</a>
-                                <form method="post" action="<?= base_url('cardcontroller/generate_cards'); ?>" style="display:inline;">
-                                    <input type="hidden" name="cetak_semua" value="1">
-                                    <input type="hidden" name="kelas_id" value="<?= $kelas->id; ?>">
-                                    <button type="submit" class="btn btn-success">Cetak Semua Kartu</button>
-                                </form>
+                                <form method="post" action="<?= base_url('card/generate_cards'); ?>" style="display:inline;">
+                            <input type="hidden" name="cetak_semua" value="1">
+                            <!-- Check if $row is set before using it -->
+                            <?php if (isset($row)) { ?>
+                                <input type="hidden" name="kelas_id" value="<?= $row->kelas ?>">
+                            <?php } ?>
+                            <button type="submit" class="btn btn-success">Cetak Semua Kartu</button>
+                        </form>
                                
                             </div>
                         </div>
