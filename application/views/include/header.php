@@ -17,7 +17,7 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <title>SI ATA</title>
+    <title>Presensi MTsN 7 Majalengka</title>
     <meta name="description" content="SI ATA" />
     <meta name="author" content="Mannatthemes" />
 

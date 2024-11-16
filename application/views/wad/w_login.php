@@ -38,7 +38,7 @@
                                     <form class="form-horizontal m-t-20 mb-0" action="<?=base_url();?>log/logincheck" method="post">
                                         <div class="form-group row">
                                             <div class="col-12">
-                                                <input name="nuptk" type="text" class="form-control" placeholder="NUPTK">
+                                                <input name="nuptk" type="text" class="form-control" placeholder="NIP">
                                             </div>
                                         </div>
                                         <div class="form-group row">
