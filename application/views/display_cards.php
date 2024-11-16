@@ -124,7 +124,9 @@
     </style>
 </head>
 <body>
+<a href="<?= base_url('card/download_cards'); ?>" class="btn-download">Download Semua Kartu</a>
     <div class="card-container">
+        
         <?php foreach ($cards as $card) : ?>
             <div class="card kartu-siswa">
                 <div class="barcode">
@@ -159,6 +161,6 @@
         <?php endforeach; ?>
     </div>
 
-    <a href="<?= base_url('card/download_cards'); ?>" class="btn-download">Download Semua Kartu</a>
+  
 </body>
 </html>
