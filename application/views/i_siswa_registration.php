@@ -49,7 +49,7 @@
 
             <div class="p-6 sm:p-4">
                 <div class="text-center pt-3 pb-4">
-                    <img src="<?= base_url(); ?>assets/images/logogisaka.png" alt="logo" class="h-20 mx-auto">
+                    <img src="<?= base_url(); ?>assets/images/mts7.png" alt="logo" class="h-20 mx-auto">
                 </div>
 
                 <?php if ($is_success): ?>
