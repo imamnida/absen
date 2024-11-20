@@ -77,25 +77,37 @@ class Kelas extends CI_Controller {
 		}
 
 	}
-    public function lihat_kelas(){
-		if(!$this->session->userdata('userlogin'))   
-		{
-			return ;
-		}
-
-		if(!isset($_GET['id_kelas'])){
-			echo "insert id kelas";
+	public function lihat_kelas() {
+		if(!$this->session->userdata('userlogin')) {
+			redirect(base_url('login'));
 			return;
 		}
-
-		$id_kelas = $_GET['id_kelas'];
-
+	
+		// Validasi id_kelas
+		$id_kelas = $this->input->get('id_kelas');
+		if(!$id_kelas) {
+			$this->session->set_flashdata('error', 'ID Kelas tidak ditemukan');
+			redirect(base_url('kelas'));
+			return;
+		}
+	
+		// Ambil data kelas
 		$kelas = $this->m_data->find_kelas($id_kelas);
+		if(!$kelas) {
+			$this->session->set_flashdata('error', 'Data kelas tidak ditemukan');
+			redirect(base_url('kelas'));
+			return;
+		}
+	
+		// Ambil data murid
 		$murid = $this->m_data->get_murid($id_kelas);
-		$data['kelas'] = $kelas;
-		$data['murid'] = $murid;
 		
-		$this->load->view('i_kelas_detail',$data);
+		$data = [
+			'kelas' => $kelas,
+			'murid' => $murid
+		];
+	
+		$this->load->view('i_kelas_detail', $data);
 	}
 	public function hapus_kelas(){
 		if(!$this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
@@ -177,7 +189,17 @@ class Kelas extends CI_Controller {
             $this->load->view('i_manage_holidays', ['holidays' => $holidays]);
         }
     }
-
+    public function hapus_murid($id=null){
+		if($this->session->userdata('userlogin'))    
+		{ 
+			if($this->m_data->siswa_del($id)){
+				$this->session->set_flashdata("pesan", "<div class=\"alert alert-success\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data berhasil di hapus</div>");
+			}else{
+				$this->session->set_flashdata("pesan", "<div class=\"alert alert-danger\" id=\"alert\"><i class=\"glyphicon glyphicon-ok\"></i> Data gagal di hapus</div>");
+			}
+			redirect('kelas/lihat_kelas?id_kelas=' . $this->input->post('id_kelas'));
+		}
+	}
     public function delete_holiday($id)
     {
         if(!$this->session->userdata('userlogin'))
