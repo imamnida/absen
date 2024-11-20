@@ -91,10 +91,7 @@
                             <th><strong>TTL</strong></th>
                             <td><strong>: <?= $murid->tempat_lahir . ", " . $murid->tanggal_lahir; ?></strong></td>
                         </tr>
-                        <tr>
-                            <th><strong>NIK</strong></th>
-                            <td><strong>: <?= $murid->nik; ?></strong></td>
-                        </tr>
+                       
                         <tr>
                             <th><strong>NISN</strong></th>
                             <td><strong>: <?= $murid->nisn; ?></strong></td>

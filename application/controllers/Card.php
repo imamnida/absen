@@ -107,11 +107,11 @@ class Card extends CI_Controller {
             $startY = 25;
             $lineHeight = 4;
 
+            // Modified information layout without NIK
             $this->writeAlignedText($pdf, 'Nama', $student->nama, $startX, $startY);
             $this->writeAlignedText($pdf, 'TTL', $student->tempat_lahir . ',' . $student->tanggal_lahir, $startX, $startY + ($lineHeight * 1));
-            $this->writeAlignedText($pdf, 'NIK', $student->nik, $startX, $startY + ($lineHeight * 2));
-            $this->writeAlignedText($pdf, 'NISN', $student->nisn, $startX, $startY + ($lineHeight * 3));
-            $this->writeAlignedText($pdf, 'Alamat', $student->alamat, $startX, $startY + ($lineHeight * 4));
+            $this->writeAlignedText($pdf, 'NISN', $student->nisn, $startX, $startY + ($lineHeight * 2));
+            $this->writeAlignedText($pdf, 'Alamat', $student->alamat, $startX, $startY + ($lineHeight * 3));
 
             // Sanitize nama file
             $filename = $this->sanitize_filename($student->nama) . '.pdf';

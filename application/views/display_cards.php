@@ -143,10 +143,7 @@
                             <th>TTL</th>
                             <td><strong>: <?= $card['student']->tempat_lahir . $card['student']->tanggal_lahir; ?></strong></td>
                         </tr>
-                        <tr>
-                            <th>NIK</th>
-                            <td><strong>: <?= $card['student']->nik; ?></strong></td>
-                        </tr>
+                       
                         <tr>
                             <th>NISN</th>
                             <td><strong>: <?= $card['student']->nisn; ?></strong></td>

@@ -90,10 +90,7 @@
                                 <label for="nisn" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-1">NISN:</label>
                                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="nisn" id="nisn" required placeholder="Contoh: 1212838392">
                             </div>
-                            <div>
-                                <label for="nik" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-1">NIK:</label>
-                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" name="nik" id="nik" required placeholder="Contoh: 1212838392">
-                            </div>
+                            
                             <div>
                                 <label for="alamat" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-1">Alamat:</label>
                                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="alamat" id="alamat" required placeholder="Contoh: Desa Cibeureum, Kec. Talaga, Kab. Majalengka">
