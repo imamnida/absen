@@ -220,7 +220,7 @@ class Kelas extends CI_Controller {
 						$data['id'] = $value->id_siswa;
 						$data['nama'] = $value->nama;
 						$data['nisn'] = $value->nisn;
-						$data['nik'] = $value->nik;
+						
 						$data['tempat_lahir'] = $value->tempat_lahir;
 						$data['tanggal_lahir'] = $value->tanggal_lahir;
 						$data['kelas'] = $value->id_kelas != null ? $this->m_data->find_kelas($value->id_kelas) : null;
@@ -297,7 +297,7 @@ class Kelas extends CI_Controller {
 				$update_data = array(
 					'nama' => $this->input->post('nama'),
 					'nisn' => $this->input->post('nisn'),
-					'nik' => $this->input->post('nik'),
+					
 					'tempat_lahir' => $this->input->post('tempat_lahir'),
 					'tanggal_lahir' => $this->input->post('tanggal_lahir'),
 					'id_kelas' => $this->input->post('kelas_id'),

@@ -169,6 +169,12 @@ if($this->session->userdata('userlogin'))     // mencegah akses langsung tanpa l
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="<?=base_url();?>card/cetak_kartu" class="waves-effect">
+                                            <i class="mdi mdi-account-card-details"></i>
+                                            <span>Cetak Kartu</span>
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="<?=base_url();?>siswa/siswanew" class="waves-effect">
                                             <i class="mdi mdi-access-point"></i>
                                             <span>RFID</span>
