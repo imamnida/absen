@@ -48,6 +48,7 @@
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>Kelas</th>
+                                    <th>Kode Presensi Manual</th>
                                     <th>Foto</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -67,6 +68,7 @@
                                             <td><?= $no++ ?></td>
                                             <td><?= $row->nama; ?></td>
                                             <td><?= $row->kelas; ?></td>
+                                            <td><?= $row->id_siswa; ?></td>
                                             <td>
                                                 <img src="<?= base_url(); ?>uploads/<?= $row->foto; ?>" class="img-circle" width="auto" height="80px" alt="Foto Murid">
                                             </td>

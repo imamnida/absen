@@ -110,7 +110,7 @@ class Kelas extends CI_Controller {
 		$this->load->view('i_kelas_detail', $data);
 	}
 	public function hapus_kelas(){
-		if(!$this->session->userdata('userlogin'))     // mencegah akses langsung tanpa login
+		if(!$this->session->userdata('userlogin'))   
 		{
 			return ;
 		}

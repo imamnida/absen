@@ -212,7 +212,7 @@ class Card extends CI_Controller {
             // Student photo
             $photo_path = FCPATH . 'uploads/' . $student->foto;
             if (file_exists($photo_path)) {
-                $pdf->Image($photo_path, 5.75, 25, 15, 20, '', '', '', false, 300, '', false, false, 1);
+                $pdf->Image($photo_path, 5.75, 28, 15, 20, '', '', '', false, 300, '', false, false, 1);
             }
 
             // Student information
@@ -220,7 +220,7 @@ class Card extends CI_Controller {
             $pdf->SetTextColor(0, 0, 0);
 
             $startX = 25;
-            $startY = 25;
+            $startY = 28;
             $lineHeight = 4;
 
             $this->writeAlignedText($pdf, 'Nama', $student->nama, $startX, $startY);
