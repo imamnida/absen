@@ -41,7 +41,7 @@ if ($set == "siswa") {
                                 <tr>
                                     <th>No</th>
                                     <th>NISN</th>
-                                    <th>UID siswa</th>
+                                    <th>UID RFID</th>
                                     <th>NIK</th>
                                     <th>Nama</th>
                                     <th>Kelas</th>
