@@ -113,40 +113,6 @@ if ($set == "absensi") {
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script>
-// Function to update the table with new data
-function updateTable(tableId, data) {
-    var table = $(tableId + ' tbody');
-    table.empty();
-    if (data.length > 0) {
-        $.each(data, function (index, item) {
-            table.append('<tr>' +
-                '<td><b class="text-success">' + (index + 1) + '</b></td>' +
-                '<td>' + item.nama_devices + ' (' + item.id_devices + ')</td>' +
-                '<td>' + item.nama + '</td>' +
-                '<td>' + item.kelas + '</td>' +
-                '<td>' + item.keterangan + '</td>' +
-                '<td>' + new Date(item.created_at * 1000).toLocaleString() + '</td>' +
-                '</tr>');
-        });
-    } else {
-        table.append('<tr><td colspan="6">Data tidak ditemukan</td></tr>');
-    }
-}
-
-// Set up SSE
-var evtSource = new EventSource('<?= site_url("absensi/sse_updates"); ?>');
-
-evtSource.onmessage = function(event) {
-    var data = JSON.parse(event.data);
-    updateTable('#absensiMasukTable', data.absensimasuk);
-    updateTable('#absensiKeluarTable', data.absensikeluar);
-};
-
-evtSource.onerror = function(err) {
-    console.error("EventSource failed:", err);
-};
-</script>
 
 <?php
 $this->load->view('include/footer.php');
