@@ -129,10 +129,7 @@ if ($set == "siswa") {
                                             <input type="text" name="nisn" class="form-control" placeholder="NISN" value="<?php if (isset($nisn)) { echo $nisn; } ?>" required>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label>NIK</label>
-                                            <input type="number" name="nik" class="form-control" placeholder="NIK" value="<?php if (isset($nik)) { echo $nik; } ?>" required>
-                                        </div>
+                                       
 
                                         <div class="form-group">
                                             <label>Kelas</label>
