@@ -42,7 +42,7 @@ if ($set == "siswa") {
                                     <th>No</th>
                                     <th>NISN</th>
                                     <th>UID RFID</th>
-                                    <th>NIK</th>
+                                   
                                     <th>Nama</th>
                                     <th>Kelas</th>
                                     <th>Alamat</th>
@@ -65,7 +65,7 @@ if ($set == "siswa") {
                                                 <td><?php echo $no; ?></td>
                                                 <td><?php echo $item->nisn; ?></td>
                                                 <td><?php echo $item->uid; ?></td>
-                                                <td><?php echo $item->nik; ?></td>
+                                              
                                                 <td><?php echo $item->nama; ?></td>
                                                 <td><?php echo $item->kelas; ?></td>
                                                 <td><?php echo $item->alamat; ?></td>
