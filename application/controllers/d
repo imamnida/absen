@@ -40,7 +40,7 @@ struct WiFiCredentials {
 WiFiCredentials credentials;
 
 const String iddev = "5";
-const String baseURL = "http://192.168.1.7/absen/api/";
+const String baseURL = "http://absensi.imamdienul.com/api/";
 const String apiKey = "asdkjWEQEDasd12ksnd";
 const String hostMode = baseURL + "getmodejson?key=" + apiKey + "&iddev=" + iddev;
 const String hostSCAN = baseURL + "absensijson?key=" + apiKey + "&iddev=" + iddev;
@@ -54,6 +54,176 @@ const unsigned long siswaScanInterval = 500;
 unsigned long lastDisplayTime = 0;
 const unsigned long DisplayInterval = 1000;
 
+// Offline Attendance Management Structure
+struct AttendanceRecord {
+  String studentId;     // Student ID or RFID UID
+  unsigned long timestamp;  // Time of attendance
+  String mode;          // 'SCAN' or 'MANUAL'
+  bool synced;          // Whether record has been sent to server
+};
+
+class OfflineAttendanceManager {
+private:
+  const String ATTENDANCE_FILE = "/attendance_queue.json";
+  const int MAX_QUEUE_SIZE = 50;  // Limit number of stored records
+
+  // Convert record to JSON string for storage
+  String recordToJson(const AttendanceRecord& record) {
+    String json = "{";
+    json += "\"studentId\":\"" + record.studentId + "\",";
+    json += "\"timestamp\":" + String(record.timestamp) + ",";
+    json += "\"mode\":\"" + record.mode + "\",";
+    json += "\"synced\":" + String(record.synced);
+    json += "}";
+    return json;
+  }
+
+  // Parse JSON string back to record
+  AttendanceRecord jsonToRecord(const String& json) {
+    DynamicJsonDocument doc(256);
+    deserializeJson(doc, json);
+    
+    AttendanceRecord record;
+    record.studentId = doc["studentId"].as<String>();
+    record.timestamp = doc["timestamp"].as<unsigned long>();
+    record.mode = doc["mode"].as<String>();
+    record.synced = doc["synced"].as<bool>();
+    
+    return record;
+  }
+
+public:
+  void initialize() {
+    if (!SPIFFS.exists(ATTENDANCE_FILE)) {
+      File file = SPIFFS.open(ATTENDANCE_FILE, "w");
+      file.print("[]");
+      file.close();
+    }
+  }
+
+  // Add attendance record to queue
+  bool addAttendanceRecord(const String& studentId, const String& mode) {
+    // Read existing records
+    File file = SPIFFS.open(ATTENDANCE_FILE, "r");
+    DynamicJsonDocument doc(2048);
+    DeserializationError error = deserializeJson(doc, file);
+    file.close();
+
+    // Check if queue is full
+    if (doc.size() >= MAX_QUEUE_SIZE) {
+      // Remove oldest unsent record
+      for (int i = 0; i < doc.size(); i++) {
+        if (!doc[i]["synced"].as<bool>()) {
+          doc.remove(i);
+          break;
+        }
+      }
+    }
+
+    // Create new record
+    AttendanceRecord newRecord = {
+      studentId,
+      timeClient.getEpochTime(),
+      mode,
+      false
+    };
+
+    // Add new record to JSON array
+    JsonArray array = doc.as<JsonArray>();
+    JsonObject newObj = array.createNestedObject();
+    newObj["studentId"] = newRecord.studentId;
+    newObj["timestamp"] = newRecord.timestamp;
+    newObj["mode"] = newRecord.mode;
+    newObj["synced"] = newRecord.synced;
+
+    // Write back to file
+    file = SPIFFS.open(ATTENDANCE_FILE, "w");
+    if (serializeJson(doc, file) == 0) {
+      Serial.println("Failed to write to file");
+      file.close();
+      return false;
+    }
+    file.close();
+
+    return true;
+  }
+
+  // Attempt to sync records with server when online
+  bool syncRecordsToServer() {
+    // Check WiFi connection
+    if (WiFi.status() != WL_CONNECTED) {
+      return false;
+    }
+
+    // Read existing records
+    File file = SPIFFS.open(ATTENDANCE_FILE, "r");
+    DynamicJsonDocument doc(2048);
+    DeserializationError error = deserializeJson(doc, file);
+    file.close();
+
+    bool allSynced = true;
+    JsonArray array = doc.as<JsonArray>();
+
+    for (JsonVariant record : array) {
+      // Skip already synced records
+      if (record["synced"].as<bool>()) continue;
+
+      String studentId = record["studentId"].as<String>();
+      String mode = record["mode"].as<String>();
+
+      // Determine appropriate endpoint based on mode
+      String host = (mode == "SCAN") ? hostSCAN : hostSCAN;
+      host.replace("absensijson", "manualabsensijson");
+      host += "&id_siswa=" + studentId;
+
+      HTTPClient http;
+      http.begin(host);
+      int httpCode = http.GET();
+
+      if (httpCode == 200) {
+        // Mark as synced
+        record["synced"] = true;
+      } else {
+        allSynced = false;
+      }
+
+      http.end();
+    }
+
+    // Write updated records back to file
+    file = SPIFFS.open(ATTENDANCE_FILE, "w");
+    if (serializeJson(doc, file) == 0) {
+      Serial.println("Failed to update sync status");
+      file.close();
+      return false;
+    }
+    file.close();
+
+    return allSynced;
+  }
+
+  // Count unsynchronized records
+  int getUnsyncedRecordsCount() {
+    File file = SPIFFS.open(ATTENDANCE_FILE, "r");
+    DynamicJsonDocument doc(2048);
+    DeserializationError error = deserializeJson(doc, file);
+    file.close();
+
+    int unsyncedCount = 0;
+    JsonArray array = doc.as<JsonArray>();
+    for (JsonVariant record : array) {
+      if (!record["synced"].as<bool>()) {
+        unsyncedCount++;
+      }
+    }
+
+    return unsyncedCount;
+  }
+};
+
+// Global instance of OfflineAttendanceManager
+OfflineAttendanceManager offlineManager;
+
 // Global variables for keypad
 bool showKeypad = false;
 String inputBuffer = "";
@@ -66,7 +236,6 @@ struct ButtonLocation {
 
 // Global array to store button locations
 ButtonLocation keypadButtons[KEYPAD_ROWS * KEYPAD_COLS];
-
 
 int keypadStartX = 70;
 int keypadStartY = 20;
@@ -112,44 +281,62 @@ const char* html_page = R"(
 </body>
 </html>
 )";
-void setup() {
-  Serial.begin(115200);
-  
-  preferences.begin("wifi-config", false);
-  
-  if (preferences.getString("ssid", "").length() > 0) {
-    String saved_ssid = preferences.getString("ssid", "");
-    String saved_password = preferences.getString("password", "");
-    saved_ssid.toCharArray(credentials.ssid, 32);
-    saved_password.toCharArray(credentials.password, 32);
+
+// Function prototypes
+void ModeDevice() {
+  HTTPClient http;
+  Serial.print("Request Link:");
+  Serial.println(hostMode);
+  http.begin(hostMode);
+  int httpCode = http.GET();
+  String payload = http.getString();
+  Serial.print("Response Code:");
+  Serial.println(httpCode);
+  Serial.print("Returned data from Server:");
+  Serial.println(payload);
+
+  if (httpCode == 200) {
+    DynamicJsonDocument doc(1024);
+    auto error = deserializeJson(doc, payload);
+    if (error) {
+      Serial.print(F("deserializeJson() failed with code "));
+      Serial.println(error.c_str());
+      return;
+    }
+
+    String responMode = doc["mode"].as<String>();
+    String responKet = doc["ket"].as<String>();
+
+    Serial.print("mode : ");
+    Serial.println(responMode);
+    Serial.print("ket : ");
+    Serial.println(responKet);
+    Serial.println("-------------------");
+
+    tft.setTextSize(0);
+    tft.setTextColor(TFT_WHITE);
+    tft.setTextDatum(MC_DATUM);
+    drawSdJpeg("/2.jpg", 0, 0);
+    tft.drawString("SISTEM ABSENSI RFID", tft.width() / 2, 195);
+
+    if (responMode == "SCAN") {
+      ModeAlat = "SCAN";
+      tft.drawString("SILAHKAN TEMPELKAN KARTU", tft.width() / 2, 215);
+
+    } else if (responMode == "ADD") {
+      ModeAlat = "ADD";
+      tft.drawString("SILAHKAN TEMPELKAN KARTU", tft.width() / 2, 215);
+
+    } else {
+      ModeAlat = "";
+      tft.drawString(responKet, tft.width() / 2, 20);
+    }
+  } else {
+    Serial.println("Error in response");
   }
-
-  SPI.begin(TFT_SCLK, TFT_MISO, TFT_MOSI, TFT_CS);
-  tft.init();
-  tft.setRotation(1);
-  siswa.PCD_Init();
-  pinMode(Buzzer, OUTPUT);
-  
-  if (!SPIFFS.begin(true)) {
-    Serial.println("SPIFFS Mount Failed");
-    return;
-  }
-
-  tft.setTextSize(0);
-  tft.setTextColor(TFT_WHITE);
-  tft.setFreeFont(&FreeSans9pt7b);
-  
-  connectToWiFi();
-  server.on("/", HTTP_GET, handleRoot);
-  server.on("/save", HTTP_POST, handleSave);
-  server.begin();
-
-  tft.drawString("IP: " + WiFi.localIP().toString(), tft.width() / 2, 235);
-  timeClient.begin();
-  delay(1000);
-  ModeDevice();
+  http.end();
+  delay(100);
 }
-
 void drawKeypad() {
   tft.fillScreen(TFT_BLACK);
   
@@ -295,197 +482,6 @@ void handleTouch() {
 }
 
 
-void loop() {
-    server.handleClient();
-    timeClient.update();
-    unsigned long epochTime = timeClient.getEpochTime();
-  struct tm * timeinfo;
-  timeinfo = gmtime((const time_t*)&epochTime);
-
-  if (millis() - lastDisplayTime >= DisplayInterval && (ModeAlat == "SCAN" || ModeAlat == "ADD")) {
-    lastDisplayTime = millis();
-
-    tft.fillRect(0, 0, tft.width(), 30, TFT_GREEN);
-    int xPos = (tft.width() - tft.textWidth("00:00:00", 2)) / 2;
-    tft.setCursor(xPos, 20);
-    tft.setTextColor(TFT_BLACK);
-    tft.setTextSize(1);
-    tft.printf("%02d:%02d:%02d", timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
-  }
-
-    handleTouch(); // Handle keypad input
-
-    if (!showKeypad) {
-        if (ModeAlat == "SCAN" || ModeAlat == "ADD") {
-    if (millis() - lastsiswaScan >= siswaScanInterval) {
-      lastsiswaScan = millis();
-
-      if (siswa.PICC_IsNewCardPresent()) {
-        if (siswa.PICC_ReadCardSerial()) {
-          Serial.println("");
-          Serial.println("Card found");
-          String siswa = getsiswa();
-          Titit(2, 200, 200);
-          tft.setTextColor(TFT_WHITE);
-          tft.drawString(siswa + ".                             .", tft.width() / 2, 130);
-          sendsiswaData(siswa);
-        }
-      }
-      siswa.PICC_HaltA();
-    }
-  } else {
-    Serial.println("Tidak Mendapatkan MODE ALAT dari server");
-    Serial.println("Cek IP Server dan URL");
-    Serial.println("Restart ESP32");
-    
-    drawSdJpeg("/error.jpg", 0, 0);
-  }
-    }
-}
-
-void connectToWiFi() {
-  Serial.print("Connecting to ");
-  Serial.println(credentials.ssid);
-  
-  tft.setTextDatum(MC_DATUM);
-  drawSdJpeg("/1.jpg", 0, 0);
-  tft.drawString("Connecting to", tft.width() / 2, 200);
-  tft.drawString(credentials.ssid, tft.width() / 2, 215);
-  
-  WiFi.begin(credentials.ssid, credentials.password);
-  
-  int attempt = 0;
-  while (WiFi.status() != WL_CONNECTED && attempt < 20) {
-    delay(500);
-    Serial.print(".");
-    attempt++;
-  }
-  
-  if (WiFi.status() == WL_CONNECTED) {
-    Serial.println("\nWiFi connected");
-    Serial.println("IP address: ");
-    Serial.println(WiFi.localIP());
-  } else {
-    Serial.println("\nFailed to connect. Starting AP mode...");
-    WiFi.softAP("ESP32-Config", "12345678");
-    Serial.println("AP Started");
-    Serial.print("AP IP address: ");
-    Serial.println(WiFi.softAPIP());
-  }
-}
-void sendManualInput(String studentId) {
-    String host = hostSCAN;
-    host.replace("absensijson", "manualabsensijson");
-    host += "&id_siswa=" + studentId;
-
-    HTTPClient http;
-    Serial.print("Request Link:");
-    Serial.println(host);
-    http.begin(host);
-
-    int httpCode = http.GET();
-    String payload = http.getString();
-
-    if (httpCode == 200) {
-        DynamicJsonDocument doc(1024);
-        deserializeJson(doc, payload);
-
-        String responStatus = doc["status"].as<String>();
-        String responKet = doc["ket"].as<String>();
-
-        tft.fillScreen(TFT_BLACK);
-        tft.setTextColor(TFT_WHITE);
-        tft.drawString(responKet, tft.width() / 2, tft.height() / 2);
-        Titit(2, 200, 200);
-        delay(2000);
-    }
-
-    http.end();
-}
-
-void handleRoot() {
-  String html = String(html_page);
-  html.replace("%SSID%", String(credentials.ssid));
-  html.replace("%IP%", WiFi.localIP().toString());
-  server.send(200, "text/html", html);
-}
-
-void handleSave() {
-  String new_ssid = server.arg("ssid");
-  String new_password = server.arg("password");
-  
-  // Save to preferences
-  preferences.putString("ssid", new_ssid);
-  preferences.putString("password", new_password);
-  
-  // Update current credentials
-  new_ssid.toCharArray(credentials.ssid, 32);
-  new_password.toCharArray(credentials.password, 32);
-  
-  server.send(200, "text/html", "Settings saved. Device will restart in 5 seconds...");
-  delay(5000);
-  ESP.restart();
-}
-
-String getsiswa() {
-   String uid = "";
-    for (byte i = 0; i < siswa.uid.size; i++) {
-        uid += String(siswa.uid.uidByte[i] < 0x10 ? "0" : "");
-        uid += String(siswa.uid.uidByte[i], HEX);
-        if (i != siswa.uid.size - 1) {
-            uid += "-";
-        }
-    }
-    return uid;
-}
-
-void sendsiswaData(String siswa) {
-  String host = (ModeAlat == "SCAN") ? hostSCAN : hostADD;
-  host += "&siswa=" + siswa;
-  HTTPClient http;
-  Serial.print("Request Link:");
-  Serial.println(host);
-  http.begin(host);
-  int httpCode = http.GET();
-  String payload = http.getString();
-  Serial.print("Response Code:");
-  Serial.println(httpCode);
-  Serial.print("Returned data from Server:");
-  Serial.println(payload);
-  if (httpCode == 200) {
-    DynamicJsonDocument doc(1024);
-    auto error = deserializeJson(doc, payload);
-    if (error) {
-      Serial.print(F("deserializeJson() failed with code "));
-      Serial.println(error.c_str());
-      return;
-    }
-    String responStatus = doc["status"].as<String>();
-    String responKet = doc["ket"].as<String>();
-    Serial.print("status : ");
-    Serial.println(responStatus);
-    Serial.print("ket : ");
-    Serial.println(responKet);
-    tft.drawString(responKet, tft.width() / 2, 80);
-  }
-  delay(1000);
-  ModeDevice();
-}
-
-void Titit(byte c, int wait1, int wait2) {
-  for (byte b = 0; b < c; b++) {
-    digitalWrite(Buzzer, HIGH);
-    delay(50);
-    digitalWrite(Buzzer, LOW);
-    delay(50); 
-  }
-}
-
-void drawWifiStatus() {
-  int wifiStrength = map(WiFi.RSSI(), -100, -40, 0, 100);
-  tft.fillCircle(tft.width() - 15, 15, 5, wifiStrength > 30 ? TFT_GREEN : wifiStrength > 10 ? TFT_YELLOW : TFT_RED);
-}
-
 void drawSdJpeg(const char *filename, int xpos, int ypos) {
   File jpegFile = SPIFFS.open(filename, FILE_READ);
   if (!jpegFile) {
@@ -547,57 +543,208 @@ void jpegRender(int xpos, int ypos) {
 
   tft.setSwapBytes(swapBytes);
 }
-void ModeDevice() {
+
+void setup() {
+  Serial.begin(115200);
+  
+  preferences.begin("wifi-config", false);
+  
+  if (preferences.getString("ssid", "").length() > 0) {
+    String saved_ssid = preferences.getString("ssid", "");
+    String saved_password = preferences.getString("password", "");
+    saved_ssid.toCharArray(credentials.ssid, 32);
+    saved_password.toCharArray(credentials.password, 32);
+  }
+
+  SPI.begin(TFT_SCLK, TFT_MISO, TFT_MOSI, TFT_CS);
+  tft.init();
+  tft.setRotation(1);
+  siswa.PCD_Init();
+  pinMode(Buzzer, OUTPUT);
+  
+  if (!SPIFFS.begin(true)) {
+    Serial.println("SPIFFS Mount Failed");
+    return;
+  }
+
+  // Initialize offline attendance manager
+  offlineManager.initialize();
+
+  tft.setTextSize(0);
+  tft.setTextColor(TFT_WHITE);
+  tft.setFreeFont(&FreeSans9pt7b);
+  
+  connectToWiFi();
+  server.on("/", HTTP_GET, handleRoot);
+  server.on("/save", HTTP_POST, handleSave);
+  server.begin();
+
+  tft.drawString("IP: " + WiFi.localIP().toString(), tft.width() / 2, 235);
+  timeClient.begin();
+  delay(1000);
+  ModeDevice();
+}
+
+// Existing helper functions like connectToWiFi(), handleRoot(), handleSave(), drawSdJpeg() remain the same
+void connectToWiFi() {
+  Serial.print("Connecting to ");
+  Serial.println(credentials.ssid);
+  
+  tft.setTextDatum(MC_DATUM);
+  drawSdJpeg("/1.jpg", 0, 0);
+  tft.drawString("Connecting to", tft.width() / 2, 200);
+  tft.drawString(credentials.ssid, tft.width() / 2, 215);
+  
+  WiFi.begin(credentials.ssid, credentials.password);
+  
+  int attempt = 0;
+  while (WiFi.status() != WL_CONNECTED && attempt < 20) {
+    delay(500);
+    Serial.print(".");
+    attempt++;
+  }
+  
+  if (WiFi.status() == WL_CONNECTED) {
+    Serial.println("\nWiFi connected");
+    Serial.println("IP address: ");
+    Serial.println(WiFi.localIP());
+  } else {
+    Serial.println("\nFailed to connect. Starting AP mode...");
+    WiFi.softAP("ESP32-Config", "12345678");
+    Serial.println("AP Started");
+    Serial.print("AP IP address: ");
+    Serial.println(WiFi.softAPIP());
+  }
+}
+
+void handleRoot() {
+  String html = String(html_page);
+  html.replace("%SSID%", String(credentials.ssid));
+  html.replace("%IP%", WiFi.localIP().toString());
+  server.send(200, "text/html", html);
+}
+
+void handleSave() {
+  String new_ssid = server.arg("ssid");
+  String new_password = server.arg("password");
+  
+  // Save to preferences
+  preferences.putString("ssid", new_ssid);
+  preferences.putString("password", new_password);
+  
+  // Update current credentials
+  new_ssid.toCharArray(credentials.ssid, 32);
+  new_password.toCharArray(credentials.password, 32);
+  
+  server.send(200, "text/html", "Settings saved. Device will restart in 5 seconds...");
+  delay(5000);
+  ESP.restart();
+}
+
+String getsiswa() {
+   String uid = "";
+    for (byte i = 0; i < siswa.uid.size; i++) {
+        uid += String(siswa.uid.uidByte[i] < 0x10 ? "0" : "");
+        uid += String(siswa.uid.uidByte[i], HEX);
+        if (i != siswa.uid.size - 1) {
+            uid += "-";
+        }
+    }
+    return uid;
+}
+void sendsiswaData(String siswa) {
+  String host = (ModeAlat == "SCAN") ? hostSCAN : hostADD;
+  host += "&siswa=" + siswa;
+  
   HTTPClient http;
   Serial.print("Request Link:");
-  Serial.println(hostMode);
-  http.begin(hostMode);
+  Serial.println(host);
+  
+  http.begin(host);
   int httpCode = http.GET();
   String payload = http.getString();
+  
   Serial.print("Response Code:");
   Serial.println(httpCode);
-  Serial.print("Returned data from Server:");
-  Serial.println(payload);
-
+  
   if (httpCode == 200) {
+    // Online mode: Process server response as before
     DynamicJsonDocument doc(1024);
     auto error = deserializeJson(doc, payload);
     if (error) {
       Serial.print(F("deserializeJson() failed with code "));
       Serial.println(error.c_str());
+      
+      // Failed to parse, save to offline queue
+      offlineManager.addAttendanceRecord(siswa, ModeAlat);
       return;
     }
-
-    String responMode = doc["mode"].as<String>();
+    
+    String responStatus = doc["status"].as<String>();
     String responKet = doc["ket"].as<String>();
-
-    Serial.print("mode : ");
-    Serial.println(responMode);
+    
+    Serial.print("status : ");
+    Serial.println(responStatus);
     Serial.print("ket : ");
     Serial.println(responKet);
-    Serial.println("-------------------");
-
-    tft.setTextSize(0);
-    tft.setTextColor(TFT_WHITE);
-    tft.setTextDatum(MC_DATUM);
-    drawSdJpeg("/2.jpg", 0, 0);
-    tft.drawString("SISTEM ABSENSI RFID", tft.width() / 2, 195);
-
-    if (responMode == "SCAN") {
-      ModeAlat = "SCAN";
-      tft.drawString("SILAHKAN TEMPELKAN KARTU", tft.width() / 2, 215);
-
-    } else if (responMode == "ADD") {
-      ModeAlat = "ADD";
-      tft.drawString("SILAHKAN TEMPELKAN KARTU", tft.width() / 2, 215);
-
-    } else {
-      ModeAlat = "";
-      tft.drawString(responKet, tft.width() / 2, 20);
-    }
+    
+    tft.drawString(responKet, tft.width() / 2, 80);
   } else {
-    Serial.println("Error in response");
+    // Offline mode: Save to queue
+    offlineManager.addAttendanceRecord(siswa, ModeAlat);
+    
+    // Display offline message
+    tft.drawString("Offline: Record Saved", tft.width() / 2, 80);
   }
-  http.end();
-  delay(100);
+  
+  delay(500);
+  ModeDevice();
+}
+
+void sendManualInput(String studentId) {
+    // Similar modification as sendsiswaData
+    String host = hostSCAN;
+    host.replace("absensijson", "manualabsensijson");
+    host += "&id_siswa=" + studentId;
+
+    HTTPClient http;
+    Serial.print("Request Link:");
+    Serial.println(host);
+    http.begin(host);
+
+    int httpCode = http.GET();
+    String payload = http.getString();
+
+    if (httpCode == 200) {
+        DynamicJsonDocument doc(1024);
+        deserializeJson(doc, payload);
+
+        String responStatus = doc["status"].as<String>();
+        String responKet = doc["ket"].as<String>();
+
+        tft.fillScreen(TFT_BLACK);
+        tft.setTextColor(TFT_WHITE);
+        tft.drawString(responKet, tft.width() / 2, tft.height() / 2);
+        Titit(2, 200, 200);
+        delay(500);
+    } else {
+        // Offline mode: Save to queue
+        offlineManager.addAttendanceRecord(studentId, "MANUAL");
+        
+        tft.fillScreen(TFT_BLACK);
+        tft.setTextColor(TFT_WHITE);
+       tft.drawString("Offline: Record Saved", tft.width() / 2, 80);
+  }
+  
+  delay(500);
+  ModeDevice();
+}
+
+void Titit(byte c, int wait1, int wait2) {
+  for (byte b = 0; b < c; b++) {
+    digitalWrite(Buzzer, HIGH);
+    delay(50);
+    digitalWrite(Buzzer, LOW);
+    delay(50); 
+  }
 }
